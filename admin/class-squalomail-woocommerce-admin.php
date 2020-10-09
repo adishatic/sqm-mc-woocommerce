@@ -110,7 +110,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/squalomail-woocommerce-admin.css', array(), $this->version.'.21', 'all' );
 		wp_enqueue_style( $this->plugin_name . 'checkbox', plugin_dir_url( __FILE__ ) . 'css/checkbox.min.css', array(), $this->version, 'all' );
 
-		if ( strpos($hook, 'page_mailchimp-woocommerce') !== false ) {
+		if ( strpos($hook, 'page_squalomail-woocommerce') !== false ) {
 			if ( get_bloginfo( 'version' ) < '5.3') {
 				wp_enqueue_style( $this->plugin_name."-settings", plugin_dir_url( __FILE__ ) . 'css/squalomail-woocommerce-admin-settings-5.2.css', array(), $this->version, 'all' );
 			}	
@@ -125,7 +125,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts($hook) {
-		if ( strpos($hook, 'page_mailchimp-woocommerce') !== false ) {
+		if ( strpos($hook, 'page_squalomail-woocommerce') !== false ) {
 			wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/squalomail-woocommerce-admin.js', array( 'jquery', 'swal' ), $this->version.'.21', false );
 			wp_localize_script(
 				$this->plugin_name,
@@ -172,7 +172,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			wc_admin_connect_page(
 				array(
 					'id'        => $this->plugin_name,
-					'screen_id' => 'woocommerce_page_mailchimp-woocommerce',
+					'screen_id' => 'woocommerce_page_squalomail-woocommerce',
 					'title'     => __( 'SqualoMail for WooCommerce', 'squalomail-for-woocommerce' ),
 				)
 			);
@@ -1333,15 +1333,15 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 									
 									if (response.promo_rules_page == 'complete') {
 										promo_rulesProgress = 100;
-										jQuery('#squalomail_promo_rules_count').html(response.promo_rules_in_mailchimp.toLocaleString(undefined, {maximumFractionDigits: 0})).css('display', 'inline-block');
+										jQuery('#squalomail_promo_rules_count').html(response.promo_rules_in_squalomail.toLocaleString(undefined, {maximumFractionDigits: 0})).css('display', 'inline-block');
 										jQuery('.sync-stats-card.promo_rules .progress-bar-wrapper').hide();
 									} else {
-										if (response.promo_rules_in_mailchimp == 0) {
+										if (response.promo_rules_in_squalomail == 0) {
 											promo_rulesProgress = 0;
 											promo_rulesPartial = "0 / " + response.promo_rules_in_store;
 										} else {
-											promo_rulesProgress = response.promo_rules_in_mailchimp / response.promo_rules_in_store * 100
-											promo_rulesPartial = response.promo_rules_in_mailchimp + " / " + response.promo_rules_in_store;
+											promo_rulesProgress = response.promo_rules_in_squalomail / response.promo_rules_in_store * 100
+											promo_rulesPartial = response.promo_rules_in_squalomail + " / " + response.promo_rules_in_store;
 										}
 										if (promo_rulesProgress > 100) promo_rulesProgress = 100;
 										jQuery('.squalomail_promo_rules_count_partial').html(promo_rulesPartial);
@@ -1350,15 +1350,15 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 									if (response.products_page == 'complete') {
 										productsProgress = 100;
-										jQuery('#squalomail_product_count').html(response.products_in_mailchimp.toLocaleString(undefined, {maximumFractionDigits: 0})).css('display', 'inline-block');
+										jQuery('#squalomail_product_count').html(response.products_in_squalomail.toLocaleString(undefined, {maximumFractionDigits: 0})).css('display', 'inline-block');
 										jQuery('.sync-stats-card.products .progress-bar-wrapper').hide();
 									} else {
-										if (response.products_in_mailchimp == 0) {
+										if (response.products_in_squalomail == 0) {
 											productsProgress = 0;
 											productsPartial = "0 / " + response.products_in_store;
 										} else {
-											productsProgress = response.products_in_mailchimp / response.products_in_store * 100
-											productsPartial = response.products_in_mailchimp + " / " + response.products_in_store;
+											productsProgress = response.products_in_squalomail / response.products_in_store * 100
+											productsPartial = response.products_in_squalomail + " / " + response.products_in_store;
 										}
 										if (productsProgress > 100) productsProgress = 100;
 										jQuery('.squalomail_product_count_partial').html(productsPartial);
@@ -1367,15 +1367,15 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 									if (response.orders_page == 'complete') {
 										ordersProgress = 100;
-										jQuery('#squalomail_order_count').html(response.orders_in_mailchimp.toLocaleString(undefined, {maximumFractionDigits: 0})).css('display', 'inline-block');
+										jQuery('#squalomail_order_count').html(response.orders_in_squalomail.toLocaleString(undefined, {maximumFractionDigits: 0})).css('display', 'inline-block');
 										jQuery('.sync-stats-card.orders .progress-bar-wrapper').hide();
 									} else {
-										if (response.orders_in_mailchimp == 0) {
+										if (response.orders_in_squalomail == 0) {
 											ordersProgress = 0;
 											ordersPartial = "0 / " + response.orders_in_store;
 										} else {
-											ordersProgress = response.orders_in_mailchimp / response.orders_in_store * 100
-											ordersPartial = response.orders_in_mailchimp + " / " + response.orders_in_store;
+											ordersProgress = response.orders_in_squalomail / response.orders_in_store * 100
+											ordersPartial = response.orders_in_squalomail + " / " + response.orders_in_store;
 										}
 										if (ordersProgress > 100) ordersProgress = 100;
 										jQuery('.squalomail_order_count_partial').html(ordersPartial);

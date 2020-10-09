@@ -136,13 +136,13 @@ class SqualoMail_WooCommerce_Rest_Api
         return $this->squalomail_rest_response(array(
             'success' => true,
             'promo_rules_in_store' => $promo_rules_count,
-            'promo_rules_in_mailchimp' => $squalomail_total_promo_rules,
+            'promo_rules_in_squalomail' => $squalomail_total_promo_rules,
             
             'products_in_store' => $product_count,
-            'products_in_mailchimp' => $squalomail_total_products,
+            'products_in_squalomail' => $squalomail_total_products,
             
             'orders_in_store' => $order_count,
-            'orders_in_mailchimp' => $squalomail_total_orders,
+            'orders_in_squalomail' => $squalomail_total_orders,
             
             // 'promo_rules_page' => get_option('mailchimp-woocommerce-sync.coupons.current_page'),
             // 'products_page' => get_option('mailchimp-woocommerce-sync.products.current_page'),

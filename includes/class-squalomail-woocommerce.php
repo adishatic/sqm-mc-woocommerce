@@ -267,7 +267,7 @@ class SqualoMail_WooCommerce
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_support_form', $plugin_admin, 'squalomail_woocommerce_ajax_support_form' );
 
         // add Shop Manager capability to save options
-        $this->loader->add_action('option_page_capability_mailchimp-woocommerce', $plugin_admin, 'squalomail_woocommerce_option_page_capability');
+        $this->loader->add_action('option_page_capability_squalomail-woocommerce', $plugin_admin, 'squalomail_woocommerce_option_page_capability');
 
         // set communications box status
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_communication_status', $plugin_admin, 'squalomail_woocommerce_communication_status' );
