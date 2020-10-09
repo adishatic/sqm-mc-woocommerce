@@ -37,7 +37,7 @@ $list_is_configured = isset($options['squalomail_list']) && (!empty($options['sq
     </legend>
 
     <div class="box" >
-        <label for="<?php echo $this->plugin_name; ?>-mailchimp-list-label">
+        <label for="<?php echo $this->plugin_name; ?>-squalomail-list-label">
             <strong><?php esc_html_e('Sync audience with your store', 'squalomail-for-woocommerce'); ?></strong>
         </label>
         <div class="mailchimp-select-wrapper">

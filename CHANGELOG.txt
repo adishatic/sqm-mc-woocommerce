@@ -104,7 +104,7 @@
 * adds action scheduler queue system 
 * documentation for Custom Merge Tags 
 * adds more specific installation requirements 
-* fixes PHP Error in class-mailchimp-order.php
+* fixes PHP Error in class-squalomail-order.php
 * fixes pop up blocks on connection
 * fixes unable to sync without accepting to auto subscribe existing customers
 * documentation for wp-cli class queue-command

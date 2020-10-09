@@ -344,7 +344,7 @@
 										
 										// get access_token from finishResponse and fill api-key field value including data_center
 										var accessToken = JSON.parse(finishResponse.data.body).access_token + '-' + JSON.parse(finishResponse.data.body).data_center 
-										$('#mailchimp-woocommerce-mailchimp-api-key').val(accessToken);
+										$('#mailchimp-woocommerce-squalomail-api-key').val(accessToken);
 
 										// always go to next step on success, so change url of wp_http_referer
 										if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {
@@ -375,7 +375,7 @@
 		}
 
 		// Remove Initial Sync Banner oon dismiss
-		$('#setting-error-mailchimp-woocommerce-initial-sync-end .notice-dismiss').click(function(e){
+		$('#setting-error-squalomail-woocommerce-initial-sync-end .notice-dismiss').click(function(e){
 			$.get(phpVars.removeReviewBannerRestUrl, [], function(response){
 				console.log(response);
 			});
@@ -602,7 +602,7 @@
 						// get access_token and fill api-key field value including data_center
 						var accessToken = response.data.data.oauth_token + '-' + response.data.data.dc
 						
-						$('#mailchimp-woocommerce-mailchimp-api-key').val(accessToken);
+						$('#mailchimp-woocommerce-squalomail-api-key').val(accessToken);
 
 						// always go to next step on success, so change url of wp_http_referer
 						if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {

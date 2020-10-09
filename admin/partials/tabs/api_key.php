@@ -9,7 +9,7 @@
     
     <a id="mailchimp-oauth-connect" class="button button-primary tab-content-submit oauth-connect"><?php $has_valid_api_key ? esc_html_e('Reconnect', 'squalomail-for-woocommerce') : esc_html_e('Connect', 'squalomail-for-woocommerce');?></a>
     <h4><?php esc_html_e('Connect your store to Mailchimp', 'squalomail-for-woocommerce'); ?></h4>
-    <input type="hidden" id="<?php echo $this->plugin_name; ?>-mailchimp-api-key" name="<?php echo $this->plugin_name; ?>[squalomail_api_key]" value="<?php echo isset($options['squalomail_api_key']) ? $options['squalomail_api_key'] : '' ?>" required/>
+    <input type="hidden" id="<?php echo $this->plugin_name; ?>-squalomail-api-key" name="<?php echo $this->plugin_name; ?>[squalomail_api_key]" value="<?php echo isset($options['squalomail_api_key']) ? $options['squalomail_api_key'] : '' ?>" required/>
     <?php if ($has_valid_api_key) :?>
         <p id="mailchimp-oauth-api-key-valid"><?php esc_html_e('Already connected. You can reconnect with another Mailchimp account if you want.' , 'squalomail-for-woocommerce');?></p>
     <?php endif;?>

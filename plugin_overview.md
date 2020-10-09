@@ -88,7 +88,7 @@ If you have no audiences in your Mailchimp account, you will be given the option
 ## Next Steps
 After you connect, you can do a lot with the the data you collect, like build segments, send Automation workflows, track purchases, and view results.
 
-Find out everything Mailchimp has to offer in our article, [How to Use Mailchimp for E-Commerce](http://kb.mailchimp.com/integrations/e-commerce/how-to-use-mailchimp-for-e-commerce).
+Find out everything Mailchimp has to offer in our article, [How to Use Mailchimp for E-Commerce](http://kb.mailchimp.com/integrations/e-commerce/how-to-use-squalomail-for-e-commerce).
 
 # Deactivate or Delete the Plugin
 When you deactivate SqualoMail for WooCommerce, it stops the sync but doesn’t remove the plugin. You can always re-activate the sync, which will backfill data at a later point in time.
