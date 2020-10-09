@@ -238,7 +238,7 @@
 
 		});
 
-		// Squalomail OAuth connection (tab "connect")
+		// SqualoMail OAuth connection (tab "connect")
 		$('#squalomail_woocommerce_options #squalomail-oauth-connect').click(function(e){
 			var token = '';
 			var startData = {action:'squalomail_woocommerce_oauth_start'};
@@ -261,7 +261,7 @@
 			var domain = 'https://woocommerce.mailchimpapp.com';
 					var options = {
 						path: domain+'/auth/start/'+token,
-						windowName: 'Squalomail For WooCommerce OAuth',
+						windowName: 'SqualoMail For WooCommerce OAuth',
 						height: 800,
 						width: 1035,
 					};
@@ -273,7 +273,7 @@
 						', height=' + options.height + ', top=' + top + ', left=' + left +
 						', domain='+domain.replace('https://', '');
 
-			// open Squalomail OAuth popup
+			// open SqualoMail OAuth popup
 			var popup = window.open(options.path, options.windowName, window_options);
 					
 			if (popup == null) {

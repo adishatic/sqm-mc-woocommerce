@@ -8,7 +8,7 @@
  * Date: 7/14/16
  * Time: 11:54 AM
  */
-abstract class SqualoMail_WooCommerce_Abstract_Sync extends Squalomail_Woocommerce_Job
+abstract class SqualoMail_WooCommerce_Abstract_Sync extends SqualoMail_Woocommerce_Job
 {
     /**
      * @var SqualoMail_WooCommerce_Api
@@ -130,7 +130,7 @@ abstract class SqualoMail_WooCommerce_Abstract_Sync extends Squalomail_Woocommer
     public function handle()
     {
         if (!squalomail_is_configured()) {
-            squalomail_debug(get_called_class(), 'Squalomail is not configured properly');
+            squalomail_debug(get_called_class(), 'SqualoMail is not configured properly');
             return false;
         }
 

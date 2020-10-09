@@ -10,24 +10,24 @@ WC requires at least: 3.5
 WC tested up to: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Connect your store to your Squalomail audience to track sales, create targeted emails, send abandoned cart emails, and more.
+Connect your store to your SqualoMail audience to track sales, create targeted emails, send abandoned cart emails, and more.
 
 == Description ==
-Join the 17 million customers who use Squalomail, the world's largest marketing automation platform, to develop their e-commerce marketing strategy. With the official SqualoMail for WooCommerce integration, your customers and their purchase data are automatically synced with your Squalomail account, making it easy to send targeted campaigns, automatically follow up with customers post-purchase, recommend products, recover abandoned carts, and measure the ROI of your marketing efforts. And it's completely free.
+Join the 17 million customers who use SqualoMail, the world's largest marketing automation platform, to develop their e-commerce marketing strategy. With the official SqualoMail for WooCommerce integration, your customers and their purchase data are automatically synced with your SqualoMail account, making it easy to send targeted campaigns, automatically follow up with customers post-purchase, recommend products, recover abandoned carts, and measure the ROI of your marketing efforts. And it's completely free.
 ###What you can do with this plugin
-- Sync to your Audience in Squalomail with purchase data.
+- Sync to your Audience in SqualoMail with purchase data.
 - Sync new subscribers to your Audience when they create an account and opt-in.
 - Set up marketing automations to remind customers about items they left in their cart or viewed on your site, win back lapsed customers, and follow up post-purchase. (Now available for free accounts!)
 - Showcase product recommendations.
 - Track and segment customers based on purchase history and purchase frequency.
-- View detailed data on your marketing performance in your Squalomail Dashboard.
+- View detailed data on your marketing performance in your SqualoMail Dashboard.
 - Find new customers, connect with current ones, and drive them all to your website with [Facebook](https://mailchimp.com/features/facebook-ads/) and [Instagram](https://mailchimp.com/features/instagram-ads/) ads. Then, set up [Google remarketing](https://mailchimp.com/features/google-remarketing-ads/) ads to turn your site visitors into shoppers.
 - Automatically embed a pop-up form that converts your website visitors to subscribers.
 - Add discount codes created in WooCommerce to your emails and automations with a Promo Code content block
 - Create beautiful landing pages that make it easy to highlight your products, promote a sale or giveaway, and grow your audience.
 ###Important Notes
-This plugin supports our most powerful API 3.0 features, and is intended for users who have not yet integrated their WooCommerce stores with Squalomail.
-You can run this new integration at the same time as your current WooCommerce integration for Squalomail. However, data from the older integration will display separately in subscriber profiles, and can’t be used with e-commerce features that require API 3.0.
+This plugin supports our most powerful API 3.0 features, and is intended for users who have not yet integrated their WooCommerce stores with SqualoMail.
+You can run this new integration at the same time as your current WooCommerce integration for SqualoMail. However, data from the older integration will display separately in subscriber profiles, and can’t be used with e-commerce features that require API 3.0.
 WordPress.com compatibility is limited to Business tier users only.
 
 == Installation ==
@@ -41,10 +41,10 @@ Here are some things to know before you begin this process.
 - WooCommerce customers who haven't signed up for marketing emails will appear in the **Transactional** portion of your audience, and cannot be exported.
 
 ###Getting Started
-You’ll need to do a few things to connect your WooCommerce store to Squalomail.
+You’ll need to do a few things to connect your WooCommerce store to SqualoMail.
 - Download the plugin.
 - Install the plugin on your WordPress Admin site.
-- Connect securely to your Squalomail account via secure OAuth pop-up window.
+- Connect securely to your SqualoMail account via secure OAuth pop-up window.
 - Configure your Audience settings to complete the data sync process.
 - If you have more advanced configuration needs, please refer to our [GitHub wiki](https://github.com/mailchimp/mc-woocommerce/wiki)
 
@@ -58,14 +58,14 @@ You’ll need to do a few things to connect your WooCommerce store to Squalomail
 
 = What is the recommended way to sync larger stores? =
 
-To optimize the performance of your Squalomail integration we recommend running the queue in CLI mode. Please refer to [this guide](https://github.com/mailchimp/mc-woocommerce/wiki/Advanced-Queue-Setup-In-CLI-mode) in our Wiki.
+To optimize the performance of your SqualoMail integration we recommend running the queue in CLI mode. Please refer to [this guide](https://github.com/mailchimp/mc-woocommerce/wiki/Advanced-Queue-Setup-In-CLI-mode) in our Wiki.
 
 = Are multisite configurations supported?
 
 Multisites are supported, with a few caveats. Please refer to our [Wiki page](https://github.com/mailchimp/mc-woocommerce/wiki/Multisite-Setups) on this topic for more information.
 
-= Why aren't product categories being sent to Squalomail? =
-At this time, the synchronization of product categories from WooCommerce to Squalomail is not supported by the Squalomail API.
+= Why aren't product categories being sent to SqualoMail? =
+At this time, the synchronization of product categories from WooCommerce to SqualoMail is not supported by the SqualoMail API.
 
 = My sync is slow, or has stalled =
 - If you're using the current version of the plugin, it utilizes a queue system powered by [Action Scheduler](https://actionscheduler.org/). It depends on `WP_CRON` to be activated with your hosting provider. Please verify that it is enabled.
@@ -74,7 +74,7 @@ At this time, the synchronization of product categories from WooCommerce to Squa
 - If you have a large number of plugins being used, you may need to bump up your memory limit on your server (1GB for example) to accommodate the initial sync.
 
 = My question is not listed =
-If you are unable to sync or connect with Squalomail, you can open a ticket on our [Github plugin page](https://github.com/mailchimp/mc-woocommerce/issues). Please provide the version of the plugin and PHP you're using, any fatal errors in the WooCommerce logs (WooCommerce -> Status -> Logs) you're seeing, along with relevant information to the problem you're experiencing.
+If you are unable to sync or connect with SqualoMail, you can open a ticket on our [Github plugin page](https://github.com/mailchimp/mc-woocommerce/issues). Please provide the version of the plugin and PHP you're using, any fatal errors in the WooCommerce logs (WooCommerce -> Status -> Logs) you're seeing, along with relevant information to the problem you're experiencing.
 
 == Changelog ==
 = 2.4.7 =

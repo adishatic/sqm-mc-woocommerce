@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
+class SqualoMail_WooCommerce_Cart_Update extends SqualoMail_Woocommerce_Job
 {
     public $id;
     public $email;
@@ -84,7 +84,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
         try {
 
             if (!squalomail_is_configured() || !($api = squalomail_get_api())) {
-                squalomail_debug(get_called_class(), 'Squalomail is not configured properly');
+                squalomail_debug(get_called_class(), 'SqualoMail is not configured properly');
                 return false;
             }
 

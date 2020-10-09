@@ -69,13 +69,13 @@ else {
 
 <?php if (!defined('PHP_VERSION_ID') || (PHP_VERSION_ID < 70000)): ?>
     <div data-dismissible="notice-php-version" class="error notice notice-error">
-        <p><?php esc_html_e('Squalomail says: Please upgrade your PHP version to a minimum of 7.0', 'squalomail-for-woocommerce'); ?></p>
+        <p><?php esc_html_e('SqualoMail says: Please upgrade your PHP version to a minimum of 7.0', 'squalomail-for-woocommerce'); ?></p>
     </div>
 <?php endif; ?>
 
 <?php if (!empty($has_api_error)): ?>
     <div data-dismissible="notice-api-error" class="error notice notice-error is-dismissible">
-        <p><?php esc_html_e("Squalomail says: API Request Error - ".$has_api_error, 'squalomail-for-woocommerce'); ?></p>
+        <p><?php esc_html_e("SqualoMail says: API Request Error - ".$has_api_error, 'squalomail-for-woocommerce'); ?></p>
     </div>
 <?php endif; ?>
 
@@ -100,7 +100,7 @@ else {
         );
         
         if ($active_tab == 'api_key' ) {
-            wp_kses(_e('Add SqualoMail for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Squalomail', 'squalomail-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Add SqualoMail for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in SqualoMail', 'squalomail-for-woocommerce'), $allowed_html);
         }
  
         if ($active_tab == 'store_info' && $has_valid_api_key) {
@@ -122,15 +122,15 @@ else {
         }
         if ($active_tab == 'sync' && $show_sync_tab) {
             if (squalomail_is_done_syncing()) {
-                wp_kses(_e('Sweet! You\'re connected with<br/>Squalomail and syncing data', 'squalomail-for-woocommerce'), $allowed_html);
+                wp_kses(_e('Sweet! You\'re connected with<br/>SqualoMail and syncing data', 'squalomail-for-woocommerce'), $allowed_html);
             }
             else {
-                wp_kses(_e('Connect your WooCommerce store to a<br/>Squalomail audience in less than 60 seconds', 'squalomail-for-woocommerce'), $allowed_html);
+                wp_kses(_e('Connect your WooCommerce store to a<br/>SqualoMail audience in less than 60 seconds', 'squalomail-for-woocommerce'), $allowed_html);
             }
         }
  
         if ($active_tab == 'logs' && $show_sync_tab) {
-            wp_kses(_e('Log events from the <br/>Squalomail plugin', 'squalomail-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Log events from the <br/>SqualoMail plugin', 'squalomail-for-woocommerce'), $allowed_html);
         }
         ?>
     </p>

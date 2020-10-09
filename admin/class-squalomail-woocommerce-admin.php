@@ -137,7 +137,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 						'log_delete_subtitle' => __('You will not be able to revert.', 'squalomail-for-woocommerce'),
 						'log_delete_confirm' => __('Yes, delete it!', 'squalomail-for-woocommerce'),
 						'no_cancel' => __('No, cancel!', 'squalomail-for-woocommerce'),
-						'store_disconnect_subtitle' => __('You are about to disconnect your store from Squalomail.', 'squalomail-for-woocommerce'),
+						'store_disconnect_subtitle' => __('You are about to disconnect your store from SqualoMail.', 'squalomail-for-woocommerce'),
 						'store_disconnect_confirm' => __('Yes, disconnect.', 'squalomail-for-woocommerce'),
 					),
 				)
@@ -157,7 +157,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 		add_submenu_page( 
 			'woocommerce', 
 			__( 'SqualoMail for WooCommerce', 'squalomail-for-woocommerce'), 
-			__( 'Squalomail', 'squalomail-for-woocommerce' ),
+			__( 'SqualoMail', 'squalomail-for-woocommerce' ),
 			squalomail_get_allowed_capability(),
 			$this->plugin_name,
 			array($this, 'display_plugin_setup_page')
@@ -194,7 +194,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	public function setup_survey_form() {
 		if (is_admin()) {
             try {
-                new Squalomail_Woocommerce_Deactivation_Survey($this->plugin_name, 'squalomail-for-woocommerce');
+                new SqualoMail_Woocommerce_Deactivation_Survey($this->plugin_name, 'squalomail-for-woocommerce');
             } catch (\Throwable $e) {
                 squalomail_error('admin@setup_survey_form', $e->getCode() . ' :: ' . $e->getMessage() . ' on ' . $e->getLine() . ' in ' . $e->getFile());
                 return false;
@@ -254,7 +254,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 
 	/**
-	 * Displays notice when plugin is installed but not yet configured / connected to Squalomail.
+	 * Displays notice when plugin is installed but not yet configured / connected to SqualoMail.
 	 */
 	public function initial_notice() {
 		if (!squalomail_is_configured()) {
@@ -264,7 +264,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 				$message = sprintf(
 					/* translators: Placeholders %1$s - opening strong HTML tag, %2$s - closing strong HTML tag, %3$s - opening link HTML tag, %4$s - closing link HTML tag */
 					esc_html__(
-						'%1$sSqualomail for Woocommerce%2$s is not yet connected to a Squalomail account. To complete the connection, %3$svisit the plugin settings page%4$s.',
+						'%1$sSqualoMail for Woocommerce%2$s is not yet connected to a SqualoMail account. To complete the connection, %3$svisit the plugin settings page%4$s.',
 						'squalomail-for-woocommerce'
 					),
 					'<strong>',
@@ -296,10 +296,10 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 				$activated_time = current_time( 'timestamp', 0 );
 				$activated_time_formatted = date( 'F jS', $activated_time );
 				$note = new \Automattic\WooCommerce\Admin\Notes\WC_Admin_Note();
-				$note->set_title( __( 'Squalomail For WooCommerce', 'squalomail-for-woocommerce' ) );
+				$note->set_title( __( 'SqualoMail For WooCommerce', 'squalomail-for-woocommerce' ) );
 				$note->set_content(
 					esc_html__(
-						'Plugin is not yet connected to a Squalomail account. To complete the connection, open the settings page.',
+						'Plugin is not yet connected to a SqualoMail account. To complete the connection, open the settings page.',
 						'squalomail-for-woocommerce'
 					)
 				);
@@ -415,10 +415,10 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 				$constants_used[] = 'SQUALOMAIL_REST_IP';
 			}
 			
-			$text = __('Squalomail for Woocommerce','squalomail-for-woocommerce').'<br/>'.
+			$text = __('SqualoMail for Woocommerce','squalomail-for-woocommerce').'<br/>'.
 			'<p id="http-worker-deprecated-message">'.__('We dectected that this site has the following constants defined, likely at wp-config.php file' ,'squalomail-for-woocommerce').': '.
 			implode(' | ', $constants_used).'<br/>'.
-			__('These constants are deprecated since Squalomail for Woocommerce version 2.3. Please refer to the <a href="https://github.com/mailchimp/mc-woocommerce/wiki/">plugin official wiki</a> for further details.' ,'squalomail-for-woocommerce').'</p>';
+			__('These constants are deprecated since SqualoMail for Woocommerce version 2.3. Please refer to the <a href="https://github.com/mailchimp/mc-woocommerce/wiki/">plugin official wiki</a> for further details.' ,'squalomail-for-woocommerce').'</p>';
 			
 			// only print notice for deprecated constants, on mailchimp woocoomerce pages
 			if ($pagenow == 'admin.php' && 'squalomail-woocommerce' === $_GET['page']) {
@@ -693,7 +693,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	}
 
 	/**
-     * Squalomail OAuth connection start
+     * SqualoMail OAuth connection start
      */
     public function squalomail_woocommerce_ajax_oauth_start()
     {   
@@ -720,7 +720,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
     }
 
 	/**
-     * Squalomail OAuth connection finish
+     * SqualoMail OAuth connection finish
      */
     public function squalomail_woocommerce_ajax_oauth_finish()
     {   
@@ -897,7 +897,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			catch (Exception $e){
 				$this->setData('validation.store_info', false);
 				squalomail_log('errors.store_info', 'Store cannot be synced :: ' . $e->getMessage());
-				add_settings_error('squalomail_store_info', '', __('Cannot create or update Store at Squalomail.', 'squalomail-for-woocommerce') . ' Squalomail says: ' . $e->getMessage());
+				add_settings_error('squalomail_store_info', '', __('Cannot create or update Store at SqualoMail.', 'squalomail-for-woocommerce') . ' SqualoMail says: ' . $e->getMessage());
 				return $data;
 			}
 		}
@@ -991,7 +991,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
      */
 	protected function addInvalidAddressAlert()
     {
-        add_settings_error('squalomail_store_settings', '', __('As part of the Squalomail Terms of Use, we require a contact email and a physical mailing address.', 'squalomail-for-woocommerce'));
+        add_settings_error('squalomail_store_settings', '', __('As part of the SqualoMail Terms of Use, we require a contact email and a physical mailing address.', 'squalomail-for-woocommerce'));
     }
 
     /**
@@ -999,7 +999,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
      */
     protected function addInvalidPhoneAlert()
     {
-        add_settings_error('squalomail_store_settings', '', __('As part of the Squalomail Terms of Use, we require a valid phone number for your store.', 'squalomail-for-woocommerce'));
+        add_settings_error('squalomail_store_settings', '', __('As part of the SqualoMail Terms of Use, we require a valid phone number for your store.', 'squalomail-for-woocommerce'));
     }
 
     /**
@@ -1102,12 +1102,12 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			catch (Exception $e){
 				$this->setData('validation.newsletter_settings', false);
 				squalomail_log('errors.newsletter_settings', 'Store cannot be synced :: ' . $e->getMessage());
-				add_settings_error('squalomail_newsletter_settings', '', __('Cannot create or update Store at Squalomail.', 'squalomail-for-woocommerce') . ' Squalomail says: ' . $e->getMessage());
+				add_settings_error('squalomail_newsletter_settings', '', __('Cannot create or update Store at SqualoMail.', 'squalomail-for-woocommerce') . ' SqualoMail says: ' . $e->getMessage());
 				$data['active_tab'] = 'newsletter_settings';
 				return $data;
 			}
 
-			// if there was already a store in Squalomail, use the list ID from Squalomail
+			// if there was already a store in SqualoMail, use the list ID from SqualoMail
 			if ($this->swapped_list_id) {
 				$data['squalomail_list'] = $this->swapped_list_id;
 			}
@@ -1192,7 +1192,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	public function hasValidSqualoMailList()
 	{
 		if (!$this->hasValidApiKey()) {
-			add_settings_error('squalomail_api_key', '', __('You must supply your Squalomail API key to pull the audiences.', 'squalomail-for-woocommerce'));
+			add_settings_error('squalomail_api_key', '', __('You must supply your SqualoMail API key to pull the audiences.', 'squalomail-for-woocommerce'));
 			return false;
 		}
 
@@ -1461,7 +1461,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			$submission->setDoi(squalomail_list_has_double_optin(true));
 		}
 		catch (\Exception $e) {
-			add_settings_error('list_sync_error', '', __('Cannot create or update List at Squalomail.', 'squalomail-for-woocommerce') . ' ' . $e->getMessage() . ' ' . __('Please retry.', 'squalomail-for-woocommerce'));
+			add_settings_error('list_sync_error', '', __('Cannot create or update List at SqualoMail.', 'squalomail-for-woocommerce') . ' ' . $e->getMessage() . ' ' . __('Please retry.', 'squalomail-for-woocommerce'));
 			$this->setData('errors.squalomail_list', $e->getMessage());
 			return false;
 		}
@@ -1559,7 +1559,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 		} catch (\Exception $e) {
 			if (squalomail_string_contains($e->getMessage(),'woocommerce already exists in the account' )) {
-			    // retrieve Squalomail store using domain
+			    // retrieve SqualoMail store using domain
 				$stores = $this->api()->stores();
 				//iterate thru stores, find correct store ID and save it to db
 				foreach ($stores as $sqm_store) {
@@ -1658,17 +1658,17 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 		$full_sync = new SqualoMail_WooCommerce_Process_Full_Sync_Manager();
 		
-		// make sure the storeeId saved on DB is the same on Squalomail
+		// make sure the storeeId saved on DB is the same on SqualoMail
 		try {
 			$this->syncStore();
 		}
 		catch (\Exception $e) {
 			squalomail_log('error.sync', 'Store cannot be synced :: ' . $e->getMessage());
-			add_settings_error('squalomail_sync_error', '', __('Cannot create or update Store at Squalomail.', 'squalomail-for-woocommerce') . ' Squalomail says: ' . $e->getMessage());
+			add_settings_error('squalomail_sync_error', '', __('Cannot create or update Store at SqualoMail.', 'squalomail-for-woocommerce') . ' SqualoMail says: ' . $e->getMessage());
 			return false;
 		}
 
-        // tell Squalomail that we're syncing
+        // tell SqualoMail that we're syncing
 		$full_sync->start_sync();
 		
         // enqueue sync manager
@@ -1700,7 +1700,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	        $order_count = squalomail_get_order_count();
         }
 
-		$text = '<b>' . __('Your store is synced with Squalomail!', 'squalomail-for-woocommerce').'</b></br>'.
+		$text = '<b>' . __('Your store is synced with SqualoMail!', 'squalomail-for-woocommerce').'</b></br>'.
 		'<p id="sync-status-message">'.
 			/* translators: %1$s: Number of synced orders %2$s: Audience name */	
 			sprintf(__('We\'ve successfully synced %1$s orders to your Audience %2$s, that\'s awesome!', 'squalomail-for-woocommerce'),

@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
+class SqualoMail_WooCommerce_Single_Order extends SqualoMail_Woocommerce_Job
 {
     public $id;
     public $cart_session_id;
@@ -75,7 +75,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
     public function process()
     {
         if (!squalomail_is_configured() || !($api = squalomail_get_api())) {
-            squalomail_debug(get_called_class(), 'Squalomail is not configured properly');
+            squalomail_debug(get_called_class(), 'SqualoMail is not configured properly');
             return false;
         }
 
@@ -127,8 +127,8 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             $order = $job->transform($order_post);
 
             // if the order is new, and has been flagged as a status that should not be pushed over to
-            // Squalomail - just ignore it and log it.
-            if ($new_order && $order->shouldIgnoreIfNotInSqualomail()) {
+            // SqualoMail - just ignore it and log it.
+            if ($new_order && $order->shouldIgnoreIfNotInSqualoMail()) {
                 squalomail_log('system.debug', "order {$order->getId()} is in {$order->getOriginalWooStatus()} status, and is being skipped for now.");
                 return false;
             }
@@ -182,7 +182,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
 
             // if the campaign ID is empty, and we have a cart session id
             if (empty($campaign_id) && !empty($this->cart_session_id)) {
-                // pull the cart info from Squalomail
+                // pull the cart info from SqualoMail
                 if (($abandoned_cart_record = $api->getCart($store_id, $this->cart_session_id))) {
                     // set the campaign ID
                     $order->setCampaignId($this->campaign_id = $abandoned_cart_record->getCampaignID());
@@ -263,7 +263,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                 if (empty($line_items) || !count($line_items)) {
                     
                     // this will create an empty product placeholder, or return the pre populated version if already
-                    // sent to Squalomail.
+                    // sent to SqualoMail.
                     $product = $api->createEmptyLineItemProductPlaceholder();
                     
                     $line_item = new SqualoMail_WooCommerce_LineItem();

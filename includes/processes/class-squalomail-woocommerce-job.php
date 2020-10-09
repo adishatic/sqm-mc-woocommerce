@@ -1,7 +1,7 @@
 <?php
 
-if ( ! class_exists( 'Squalomail_Woocommerce_Job' ) ) {
-	abstract class Squalomail_Woocommerce_Job {
+if ( ! class_exists( 'SqualoMail_Woocommerce_Job' ) ) {
+	abstract class SqualoMail_Woocommerce_Job {
 
 		private $attempts = 0;
 

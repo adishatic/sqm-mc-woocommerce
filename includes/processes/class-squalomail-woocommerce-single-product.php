@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
+class SqualoMail_WooCommerce_Single_Product extends SqualoMail_Woocommerce_Job
 {
     public $id;
     public $fallback_title;
@@ -109,7 +109,7 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
         }
 
         if (!squalomail_is_configured()) {
-            squalomail_debug(get_called_class(), 'Squalomail is not configured properly');
+            squalomail_debug(get_called_class(), 'SqualoMail is not configured properly');
             return false;
         }
 
@@ -122,7 +122,7 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
             }
 
             try {
-                // pull the product from Squalomail first to see what method we need to call next.
+                // pull the product from SqualoMail first to see what method we need to call next.
                 $squalomail_product = $this->api()->getStoreProduct($this->store_id, $this->id, true);
             } catch (\Exception $e) {
                 if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
@@ -134,12 +134,12 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
             // depending on if it's existing or not - we change the method call
             $method = $squalomail_product ? 'updateStoreProduct' : 'addStoreProduct';
 
-            // if the mode set is "create" and the product is in Squalomail - just return the product.
+            // if the mode set is "create" and the product is in SqualoMail - just return the product.
             if ($this->mode === 'create' && !empty($squalomail_product)) {
                 return $squalomail_product;
             }
 
-            // if the mode is set to "update" and the product is not currently in Squalomail - skip it.
+            // if the mode is set to "update" and the product is not currently in SqualoMail - skip it.
             if ($this->mode === 'update' && empty($squalomail_product)) {
                 return false;
             }

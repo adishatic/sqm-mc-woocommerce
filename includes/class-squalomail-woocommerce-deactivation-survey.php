@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( 'Squalomail_Woocommerce_Deactivation_Survey', false ) ) {
+if ( ! class_exists( 'SqualoMail_Woocommerce_Deactivation_Survey', false ) ) {
 	/**
 	 * Awesome Motive Deactivation Survey.
 	 *
@@ -11,7 +11,7 @@ if ( ! class_exists( 'Squalomail_Woocommerce_Deactivation_Survey', false ) ) {
 	 * @license    GPL-2.0+
 	 * @copyright  Copyright (c) 2018
 	 */
-	class Squalomail_Woocommerce_Deactivation_Survey {
+	class SqualoMail_Woocommerce_Deactivation_Survey {
 
 		/**
 		 * The API URL we are calling.
@@ -344,8 +344,8 @@ if ( ! class_exists( 'Squalomail_Woocommerce_Deactivation_Survey', false ) ) {
 					'reason'   => 'I\'m trying to troubleshoot the integration.'
 				),
 				6 => array(
-					'title'   => esc_html__( 'I was instructed to disconnect by Squalomail Support.', 'squalomail-for-woocommerce' ),
-					'reason'   => 'I was instructed to disconnect by Squalomail Support.'
+					'title'   => esc_html__( 'I was instructed to disconnect by SqualoMail Support.', 'squalomail-for-woocommerce' ),
+					'reason'   => 'I was instructed to disconnect by SqualoMail Support.'
 				),
 				7 => array(
 					'title'   => esc_html__( 'I no longer use this integration.', 'squalomail-for-woocommerce' ),
@@ -376,7 +376,7 @@ if ( ! class_exists( 'Squalomail_Woocommerce_Deactivation_Survey', false ) ) {
 							printf(
 								/* translators: %s - plugin name. */
 								esc_html__( 'If you have a moment, please share why you are deactivating %s:', 'squalomail-for-woocommerce' ),
-								esc_html__( 'Squalomail for Woocommerce', 'squalomail-for-woocommerce')
+								esc_html__( 'SqualoMail for Woocommerce', 'squalomail-for-woocommerce')
 							);
 							?>
 						</span>

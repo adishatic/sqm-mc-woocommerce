@@ -474,7 +474,7 @@ class SqualoMail_Service extends SqualoMail_WooCommerce_Options
     }
 
     /**
-     * Set the cookie of the Squalomail campaigns if we have one.
+     * Set the cookie of the SqualoMail campaigns if we have one.
      */
     public function handleCampaignTracking()
     {

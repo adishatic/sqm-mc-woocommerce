@@ -8,7 +8,7 @@
  * Date: 10/6/17
  * Time: 11:14 AM
  */
-class SqualoMail_WooCommerce_SingleCoupon extends Squalomail_Woocommerce_Job
+class SqualoMail_WooCommerce_SingleCoupon extends SqualoMail_Woocommerce_Job
 {
     public $coupon_data;
     public $id;
@@ -41,7 +41,7 @@ class SqualoMail_WooCommerce_SingleCoupon extends Squalomail_Woocommerce_Job
         try {
 
             if (!squalomail_is_configured()) {
-                squalomail_debug(get_called_class(), 'Squalomail is not configured properly');
+                squalomail_debug(get_called_class(), 'SqualoMail is not configured properly');
                 return false;
             }
 
