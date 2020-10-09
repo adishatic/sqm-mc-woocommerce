@@ -723,7 +723,7 @@ function squalomail_update_connected_site_script() {
     if ($store_id && ($api = squalomail_get_api())) {
         // if we have a store
         if (($store = $api->getStore($store_id))) {
-            return mailchimpi_refresh_connected_site_script($store);
+            return squalomaili_refresh_connected_site_script($store);
         }
     }
     return false;
@@ -767,7 +767,7 @@ function squalomail_update_connected_site_script_from_cdn() {
     if (squalomail_is_configured() && squalomail_should_update_connected_site_script() && ($store_id = squalomail_get_store_id())) {
         try {
             // pull the store, refresh the connected site url
-            mailchimpi_refresh_connected_site_script(squalomail_get_api()->getStore($store_id));
+            squalomaili_refresh_connected_site_script(squalomail_get_api()->getStore($store_id));
         } catch (\Exception $e) {
             squalomail_error("admin.update_connected_site_script", $e->getMessage());
         }
@@ -778,7 +778,7 @@ function squalomail_update_connected_site_script_from_cdn() {
  * @param SqualoMail_WooCommerce_Store $store
  * @return bool
  */
-function mailchimpi_refresh_connected_site_script(SqualoMail_WooCommerce_Store $store) {
+function squalomaili_refresh_connected_site_script(SqualoMail_WooCommerce_Store $store) {
 
     $api = squalomail_get_api();
 
