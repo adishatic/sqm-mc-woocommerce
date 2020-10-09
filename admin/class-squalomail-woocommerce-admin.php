@@ -392,27 +392,27 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			SqualoMail_WooCommerce_Activator::migrate_jobs();
 		}
 
-		if (defined( 'DISABLE_WP_HTTP_WORKER' ) || defined( 'MAILCHIMP_USE_CURL' ) || defined( 'MAILCHIMP_REST_LOCALHOST' ) || defined( 'MAILCHIMP_REST_IP' ) || defined( 'MAILCHIMP_DISABLE_QUEUE') && true === MAILCHIMP_DISABLE_QUEUE) {
+		if (defined( 'DISABLE_WP_HTTP_WORKER' ) || defined( 'SQUALOMAIL_USE_CURL' ) || defined( 'SQUALOMAIL_REST_LOCALHOST' ) || defined( 'SQUALOMAIL_REST_IP' ) || defined( 'SQUALOMAIL_DISABLE_QUEUE') && true === SQUALOMAIL_DISABLE_QUEUE) {
 			$constants_used = array();
 			
 			if (defined( 'DISABLE_WP_HTTP_WORKER')) {
 				$constants_used[] = 'DISABLE_WP_HTTP_WORKER';
 			}
 
-			if (defined( 'MAILCHIMP_DISABLE_QUEUE')) {
-				$constants_used[] = 'MAILCHIMP_DISABLE_QUEUE';
+			if (defined( 'SQUALOMAIL_DISABLE_QUEUE')) {
+				$constants_used[] = 'SQUALOMAIL_DISABLE_QUEUE';
 			}
 
-			if (defined( 'MAILCHIMP_USE_CURL')) {
-				$constants_used[] = 'MAILCHIMP_USE_CURL';
+			if (defined( 'SQUALOMAIL_USE_CURL')) {
+				$constants_used[] = 'SQUALOMAIL_USE_CURL';
 			}
 
-			if (defined( 'MAILCHIMP_REST_LOCALHOST')) {
-				$constants_used[] = 'MAILCHIMP_REST_LOCALHOST';
+			if (defined( 'SQUALOMAIL_REST_LOCALHOST')) {
+				$constants_used[] = 'SQUALOMAIL_REST_LOCALHOST';
 			}
 
-			if (defined( 'MAILCHIMP_REST_IP')) {
-				$constants_used[] = 'MAILCHIMP_REST_IP';
+			if (defined( 'SQUALOMAIL_REST_IP')) {
+				$constants_used[] = 'SQUALOMAIL_REST_IP';
 			}
 			
 			$text = __('Mailchimp for Woocommerce','squalomail-for-woocommerce').'<br/>'.

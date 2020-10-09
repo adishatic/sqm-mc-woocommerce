@@ -1792,13 +1792,13 @@ class SqualoMail_WooCommerce_SqualoMailApi
         );
 
         // if we have a dedicated IP address, and have set a configuration for it, we'll use it here.
-        if (defined('MAILCHIMP_USE_OUTBOUND_IP')) {
-            $curl_options[CURLOPT_INTERFACE] = MAILCHIMP_USE_OUTBOUND_IP;
+        if (defined('SQUALOMAIL_USE_OUTBOUND_IP')) {
+            $curl_options[CURLOPT_INTERFACE] = SQUALOMAIL_USE_OUTBOUND_IP;
         }
 
         // if we need to define a specific http version being used for curl requests, we can override this here.
-        if (defined('MAILCHIMP_USE_HTTP_VERSION')) {
-            $curl_options[CURLOPT_HTTP_VERSION] = MAILCHIMP_USE_HTTP_VERSION;
+        if (defined('SQUALOMAIL_USE_HTTP_VERSION')) {
+            $curl_options[CURLOPT_HTTP_VERSION] = SQUALOMAIL_USE_HTTP_VERSION;
         }
 
         return $curl_options;
