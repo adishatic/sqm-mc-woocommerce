@@ -59,7 +59,7 @@ class MailChimp_WooCommerce_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_register_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mailchimp-woocommerce-public.min.js', array(), $this->version, false);
+		wp_register_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/squalomail-woocommerce-public.min.js', array(), $this->version, false);
 		wp_localize_script($this->plugin_name, 'mailchimp_public_data', array(
 			'site_url' => site_url(),
 			'ajax_url' => admin_url('admin-ajax.php'),
@@ -93,7 +93,7 @@ class MailChimp_WooCommerce_Public {
 	 */
 	public function add_JS_checkout()
 	{
-		wp_enqueue_script($this->plugin_name. '_gdpr', plugin_dir_url( __FILE__ ) .'js/mailchimp-woocommerce-checkout-gdpr.min.js', array(), $this->version, true);
+		wp_enqueue_script($this->plugin_name. '_gdpr', plugin_dir_url( __FILE__ ) .'js/squalomail-woocommerce-checkout-gdpr.min.js', array(), $this->version, true);
 	}
 	
 	

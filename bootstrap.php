@@ -10,63 +10,63 @@ $mailchimp_woocommerce_spl_autoloader = true;
 spl_autoload_register(function($class) {
     $classes = array(
         // includes root
-        'MailChimp_Service' => 'includes/class-mailchimp-woocommerce-service.php',
-        'MailChimp_WooCommerce_Options' => 'includes/class-mailchimp-woocommerce-options.php',
-        'MailChimp_Newsletter' => 'includes/class-mailchimp-woocommerce-newsletter.php',
-        'MailChimp_WooCommerce_Loader' => 'includes/class-mailchimp-woocommerce-loader.php',
-        'MailChimp_WooCommerce_i18n' => 'includes/class-mailchimp-woocommerce-i18n.php',
-        'MailChimp_WooCommerce_Deactivator' => 'includes/class-mailchimp-woocommerce-deactivator.php',
-        'MailChimp_WooCommerce_Activator' => 'includes/class-mailchimp-woocommerce-activator.php',
-        'MailChimp_WooCommerce' => 'includes/class-mailchimp-woocommerce.php',
-        'MailChimp_WooCommerce_Privacy' => 'includes/class-mailchimp-woocommerce-privacy.php',
-        'Mailchimp_Woocommerce_Deactivation_Survey' => 'includes/class-mailchimp-woocommerce-deactivation-survey.php',
-        'MailChimp_WooCommerce_Rest_Api' => 'includes/class-mailchimp-woocommerce-rest-api.php',
-        'Mailchimp_Wocoomerce_CLI' => 'includes/class-mailchimp-woocommerce-cli.php',
+        'MailChimp_Service' => 'includes/class-squalomail-woocommerce-service.php',
+        'MailChimp_WooCommerce_Options' => 'includes/class-squalomail-woocommerce-options.php',
+        'MailChimp_Newsletter' => 'includes/class-squalomail-woocommerce-newsletter.php',
+        'MailChimp_WooCommerce_Loader' => 'includes/class-squalomail-woocommerce-loader.php',
+        'MailChimp_WooCommerce_i18n' => 'includes/class-squalomail-woocommerce-i18n.php',
+        'MailChimp_WooCommerce_Deactivator' => 'includes/class-squalomail-woocommerce-deactivator.php',
+        'MailChimp_WooCommerce_Activator' => 'includes/class-squalomail-woocommerce-activator.php',
+        'MailChimp_WooCommerce' => 'includes/class-squalomail-woocommerce.php',
+        'MailChimp_WooCommerce_Privacy' => 'includes/class-squalomail-woocommerce-privacy.php',
+        'Mailchimp_Woocommerce_Deactivation_Survey' => 'includes/class-squalomail-woocommerce-deactivation-survey.php',
+        'MailChimp_WooCommerce_Rest_Api' => 'includes/class-squalomail-woocommerce-rest-api.php',
+        'Mailchimp_Wocoomerce_CLI' => 'includes/class-squalomail-woocommerce-cli.php',
         
         // includes/api/assets
-        'MailChimp_WooCommerce_Address' => 'includes/api/assets/class-mailchimp-address.php',
-        'MailChimp_WooCommerce_Cart' => 'includes/api/assets/class-mailchimp-cart.php',
-        'MailChimp_WooCommerce_Customer' => 'includes/api/assets/class-mailchimp-customer.php',
-        'MailChimp_WooCommerce_LineItem' => 'includes/api/assets/class-mailchimp-line-item.php',
-        'MailChimp_WooCommerce_Order' => 'includes/api/assets/class-mailchimp-order.php',
-        'MailChimp_WooCommerce_Product' => 'includes/api/assets/class-mailchimp-product.php',
-        'MailChimp_WooCommerce_ProductVariation' => 'includes/api/assets/class-mailchimp-product-variation.php',
-        'MailChimp_WooCommerce_PromoCode' => 'includes/api/assets/class-mailchimp-promo-code.php',
-        'MailChimp_WooCommerce_PromoRule' => 'includes/api/assets/class-mailchimp-promo-rule.php',
-        'MailChimp_WooCommerce_Store' => 'includes/api/assets/class-mailchimp-store.php',
+        'MailChimp_WooCommerce_Address' => 'includes/api/assets/class-squalomail-address.php',
+        'MailChimp_WooCommerce_Cart' => 'includes/api/assets/class-squalomail-cart.php',
+        'MailChimp_WooCommerce_Customer' => 'includes/api/assets/class-squalomail-customer.php',
+        'MailChimp_WooCommerce_LineItem' => 'includes/api/assets/class-squalomail-line-item.php',
+        'MailChimp_WooCommerce_Order' => 'includes/api/assets/class-squalomail-order.php',
+        'MailChimp_WooCommerce_Product' => 'includes/api/assets/class-squalomail-product.php',
+        'MailChimp_WooCommerce_ProductVariation' => 'includes/api/assets/class-squalomail-product-variation.php',
+        'MailChimp_WooCommerce_PromoCode' => 'includes/api/assets/class-squalomail-promo-code.php',
+        'MailChimp_WooCommerce_PromoRule' => 'includes/api/assets/class-squalomail-promo-rule.php',
+        'MailChimp_WooCommerce_Store' => 'includes/api/assets/class-squalomail-store.php',
 
         // includes/api/errors
-        'MailChimp_WooCommerce_Error' => 'includes/api/errors/class-mailchimp-error.php',
-        'MailChimp_WooCommerce_RateLimitError' => 'includes/api/errors/class-mailchimp-rate-limit-error.php',
-        'MailChimp_WooCommerce_ServerError' => 'includes/api/errors/class-mailchimp-server-error.php',
+        'MailChimp_WooCommerce_Error' => 'includes/api/errors/class-squalomail-error.php',
+        'MailChimp_WooCommerce_RateLimitError' => 'includes/api/errors/class-squalomail-rate-limit-error.php',
+        'MailChimp_WooCommerce_ServerError' => 'includes/api/errors/class-squalomail-server-error.php',
 
         // includes/api/helpers
-        'MailChimp_WooCommerce_CurrencyCodes' => 'includes/api/helpers/class-mailchimp-woocommerce-api-currency-codes.php',
-        'MailChimp_Api_Locales' => 'includes/api/helpers/class-mailchimp-woocommerce-api-locales.php',
+        'MailChimp_WooCommerce_CurrencyCodes' => 'includes/api/helpers/class-squalomail-woocommerce-api-currency-codes.php',
+        'MailChimp_Api_Locales' => 'includes/api/helpers/class-squalomail-woocommerce-api-locales.php',
 
         // includes/api
-        'MailChimp_WooCommerce_MailChimpApi' => 'includes/api/class-mailchimp-api.php',
-        'MailChimp_WooCommerce_Api' => 'includes/api/class-mailchimp-woocommerce-api.php',
-        'MailChimp_WooCommerce_CreateListSubmission' => 'includes/api/class-mailchimp-woocommerce-create-list-submission.php',
-        'MailChimp_WooCommerce_Transform_Coupons' => 'includes/api/class-mailchimp-woocommerce-transform-coupons.php',
-        'MailChimp_WooCommerce_Transform_Orders' => 'includes/api/class-mailchimp-woocommerce-transform-orders-wc3.php',
-        'MailChimp_WooCommerce_Transform_Products' => 'includes/api/class-mailchimp-woocommerce-transform-products.php',
+        'MailChimp_WooCommerce_MailChimpApi' => 'includes/api/class-squalomail-api.php',
+        'MailChimp_WooCommerce_Api' => 'includes/api/class-squalomail-woocommerce-api.php',
+        'MailChimp_WooCommerce_CreateListSubmission' => 'includes/api/class-squalomail-woocommerce-create-list-submission.php',
+        'MailChimp_WooCommerce_Transform_Coupons' => 'includes/api/class-squalomail-woocommerce-transform-coupons.php',
+        'MailChimp_WooCommerce_Transform_Orders' => 'includes/api/class-squalomail-woocommerce-transform-orders-wc3.php',
+        'MailChimp_WooCommerce_Transform_Products' => 'includes/api/class-squalomail-woocommerce-transform-products.php',
 
         // includes/processes
-        'Mailchimp_Woocommerce_Job' => 'includes/processes/class-mailchimp-woocommerce-job.php',
-        'MailChimp_WooCommerce_Abstract_Sync' => 'includes/processes/class-mailchimp-woocommerce-abstract-sync.php',
-        'MailChimp_WooCommerce_Cart_Update' => 'includes/processes/class-mailchimp-woocommerce-cart-update.php',
-        'MailChimp_WooCommerce_Process_Coupons' => 'includes/processes/class-mailchimp-woocommerce-process-coupons.php',
-        'MailChimp_WooCommerce_Process_Orders' => 'includes/processes/class-mailchimp-woocommerce-process-orders.php',
-        'MailChimp_WooCommerce_Process_Products' => 'includes/processes/class-mailchimp-woocommerce-process-products.php',
-        'MailChimp_WooCommerce_SingleCoupon' => 'includes/processes/class-mailchimp-woocommerce-single-coupon.php',
-        'MailChimp_WooCommerce_Single_Order' => 'includes/processes/class-mailchimp-woocommerce-single-order.php',
-        'MailChimp_WooCommerce_Single_Product' => 'includes/processes/class-mailchimp-woocommerce-single-product.php',
-        'MailChimp_WooCommerce_User_Submit' => 'includes/processes/class-mailchimp-woocommerce-user-submit.php',
-        'MailChimp_WooCommerce_Process_Full_Sync_Manager' => 'includes/processes/class-mailchimp-woocommerce-full-sync-manager.php',
+        'Mailchimp_Woocommerce_Job' => 'includes/processes/class-squalomail-woocommerce-job.php',
+        'MailChimp_WooCommerce_Abstract_Sync' => 'includes/processes/class-squalomail-woocommerce-abstract-sync.php',
+        'MailChimp_WooCommerce_Cart_Update' => 'includes/processes/class-squalomail-woocommerce-cart-update.php',
+        'MailChimp_WooCommerce_Process_Coupons' => 'includes/processes/class-squalomail-woocommerce-process-coupons.php',
+        'MailChimp_WooCommerce_Process_Orders' => 'includes/processes/class-squalomail-woocommerce-process-orders.php',
+        'MailChimp_WooCommerce_Process_Products' => 'includes/processes/class-squalomail-woocommerce-process-products.php',
+        'MailChimp_WooCommerce_SingleCoupon' => 'includes/processes/class-squalomail-woocommerce-single-coupon.php',
+        'MailChimp_WooCommerce_Single_Order' => 'includes/processes/class-squalomail-woocommerce-single-order.php',
+        'MailChimp_WooCommerce_Single_Product' => 'includes/processes/class-squalomail-woocommerce-single-product.php',
+        'MailChimp_WooCommerce_User_Submit' => 'includes/processes/class-squalomail-woocommerce-user-submit.php',
+        'MailChimp_WooCommerce_Process_Full_Sync_Manager' => 'includes/processes/class-squalomail-woocommerce-full-sync-manager.php',
         
-        'MailChimp_WooCommerce_Public' => 'public/class-mailchimp-woocommerce-public.php',
-        'MailChimp_WooCommerce_Admin' => 'admin/class-mailchimp-woocommerce-admin.php',
+        'MailChimp_WooCommerce_Public' => 'public/class-squalomail-woocommerce-public.php',
+        'MailChimp_WooCommerce_Admin' => 'admin/class-squalomail-woocommerce-admin.php',
     );
 
     // if the file exists, require it
@@ -551,7 +551,7 @@ function mailchimp_woocommerce_get_all_image_sizes_list() {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-mailchimp-woocommerce-activator.php
+ * This action is documented in includes/class-squalomail-woocommerce-activator.php
  */
 function activate_mailchimp_woocommerce() {
     // if we don't have woocommerce we need to display a horrible error message before the plugin is installed.
@@ -573,7 +573,7 @@ function install_mailchimp_queue() {
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-mailchimp-woocommerce-deactivator.php
+ * This action is documented in includes/class-squalomail-woocommerce-deactivator.php
  */
 function deactivate_mailchimp_woocommerce() {
     MailChimp_WooCommerce_Deactivator::deactivate();

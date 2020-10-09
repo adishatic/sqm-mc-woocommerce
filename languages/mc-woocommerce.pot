@@ -15,8 +15,8 @@ msgstr ""
 "X-Domain: squalomail-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: admin/class-mailchimp-woocommerce-admin.php:158
-#: admin/class-mailchimp-woocommerce-admin.php:175
+#: admin/class-squalomail-woocommerce-admin.php:158
+#: admin/class-squalomail-woocommerce-admin.php:175
 msgid "SqualoMail for WooCommerce"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgid "Connects WooCommerce to Mailchimp to sync your store data, send targeted 
 msgstr ""
 
 #. Author of the plugin
-#: admin/class-mailchimp-woocommerce-admin.php:159
+#: admin/class-squalomail-woocommerce-admin.php:159
 msgid "Mailchimp"
 msgstr ""
 
@@ -37,242 +37,242 @@ msgstr ""
 msgid "https://mailchimp.com"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:179
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:179
 msgid "Please select an option"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:182
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:182
 msgid "Sending Feedback"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:327
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:327
 msgid "I want to change the audience associated with this integration."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:331
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:331
 msgid "I want to change the site or store connected through this integration."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:335
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:335
 msgid "The order data isn't syncing."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:339
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:339
 msgid "The promo codes aren't showing up."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:343
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:343
 msgid "I'm trying to troubleshoot the integration."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:347
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:347
 msgid "I was instructed to disconnect by Mailchimp Support."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:351
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:351
 msgid "I no longer use this integration."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:355
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:355
 msgid "It's a temporary deactivation."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:359
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:359
 msgid "Other"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:361
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:361
 msgid "Please share the reason"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:370
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:370
 msgid "Quick Feedback"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:371
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:371
 msgid "Close"
 msgstr ""
 
 #. translators: %s - plugin name.
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:378
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:378
 msgid "If you have a moment, please share why you are deactivating %s:"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:379
-#: admin/class-mailchimp-woocommerce-admin.php:369
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:379
+#: admin/class-squalomail-woocommerce-admin.php:369
 msgid "Mailchimp for Woocommerce"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:398
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:398
 msgid "Submit & Deactivate"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-deactivation-survey.php:399
+#: includes/class-squalomail-woocommerce-deactivation-survey.php:399
 msgid "Skip & Deactivate"
 msgstr ""
 
 #. translators: %s - Mailchimp Privacy Policy URL.
-#: includes/class-mailchimp-woocommerce-privacy.php:12
+#: includes/class-squalomail-woocommerce-privacy.php:12
 msgid "When shopping, we keep a record of your email and the cart contents for up to 30 days on our server. This record is kept to repopulate the contents of your cart if you switch devices or needed to come back another day. Read our privacy policy <a href=\"%s\">here</a>."
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-privacy.php:78
+#: includes/class-squalomail-woocommerce-privacy.php:78
 msgid "MailChimp Shopping Cart Data"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-privacy.php:82
+#: includes/class-squalomail-woocommerce-privacy.php:82
 msgid "User ID"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-newsletter.php:45
-#: admin/class-mailchimp-woocommerce-admin.php:1031
+#: includes/class-squalomail-woocommerce-newsletter.php:45
+#: admin/class-squalomail-woocommerce-admin.php:1031
 #: admin/partials/tabs/newsletter_settings.php:97
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-newsletter.php:73
+#: includes/class-squalomail-woocommerce-newsletter.php:73
 msgid "Please select all the ways you would like to hear from us"
 msgstr ""
 
-#: includes/class-mailchimp-woocommerce-rest-api.php:151
+#: includes/class-squalomail-woocommerce-rest-api.php:151
 #: admin/partials/tabs/store_sync.php:161
 msgid "D, M j, Y g:i A"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:135
+#: admin/class-squalomail-woocommerce-admin.php:135
 msgid "Are you sure?"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:136
+#: admin/class-squalomail-woocommerce-admin.php:136
 msgid "You will not be able to revert."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:137
+#: admin/class-squalomail-woocommerce-admin.php:137
 msgid "Yes, delete it!"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:138
+#: admin/class-squalomail-woocommerce-admin.php:138
 msgid "No, cancel!"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:139
+#: admin/class-squalomail-woocommerce-admin.php:139
 msgid "You are about to disconnect your store from Mailchimp."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:140
+#: admin/class-squalomail-woocommerce-admin.php:140
 msgid "Yes, disconnect."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:249
+#: admin/class-squalomail-woocommerce-admin.php:249
 msgid "Log file deleted."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:370
+#: admin/class-squalomail-woocommerce-admin.php:370
 msgid "We dectected that this site has the following constants defined, likely at wp-config.php file"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:372
+#: admin/class-squalomail-woocommerce-admin.php:372
 msgid "These constants are deprecated since Mailchimp for Woocommerce version 2.3. Please refer to the <a href=\"https://github.com/mailchimp/mc-woocommerce/wiki/\">plugin official wiki</a> for further details."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:554
+#: admin/class-squalomail-woocommerce-admin.php:554
 msgid "Store Disconnected"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:557
+#: admin/class-squalomail-woocommerce-admin.php:557
 msgid "Store Disconnect Failed"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:851
-#: admin/class-mailchimp-woocommerce-admin.php:1056
-#: admin/class-mailchimp-woocommerce-admin.php:1618
+#: admin/class-squalomail-woocommerce-admin.php:851
+#: admin/class-squalomail-woocommerce-admin.php:1056
+#: admin/class-squalomail-woocommerce-admin.php:1618
 msgid "Cannot create or update Store at Mailchimp."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:945
+#: admin/class-squalomail-woocommerce-admin.php:945
 msgid "As part of the Mailchimp Terms of Use, we require a contact email and a physical mailing address."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:953
+#: admin/class-squalomail-woocommerce-admin.php:953
 msgid "As part of the Mailchimp Terms of Use, we require a valid phone number for your store."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:961
+#: admin/class-squalomail-woocommerce-admin.php:961
 msgid "SqualoMail for WooCommerce requires a Store Name to connect your store."
 msgstr ""
 
 #. translators: %s - plugin name.
-#: admin/class-mailchimp-woocommerce-admin.php:979
+#: admin/class-squalomail-woocommerce-admin.php:979
 #: admin/partials/tabs/campaign_defaults.php:73
 msgid "You were subscribed to the newsletter from %s"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:984
-#: admin/class-mailchimp-woocommerce-admin.php:1081
+#: admin/class-squalomail-woocommerce-admin.php:984
+#: admin/class-squalomail-woocommerce-admin.php:1081
 msgid "One or more fields were not updated"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1146
+#: admin/class-squalomail-woocommerce-admin.php:1146
 msgid "You must supply your Mailchimp API key to pull the audiences."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1415
+#: admin/class-squalomail-woocommerce-admin.php:1415
 msgid "Cannot create or update List at Mailchimp."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1415
+#: admin/class-squalomail-woocommerce-admin.php:1415
 msgid "Please retry."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1634
+#: admin/class-squalomail-woocommerce-admin.php:1634
 msgid "Starting the sync process..."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1636
+#: admin/class-squalomail-woocommerce-admin.php:1636
 msgid "The plugin has started the initial sync with your store, and the process will work in the background automatically."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1638
+#: admin/class-squalomail-woocommerce-admin.php:1638
 msgid "Sometimes the sync can take a while, especially on sites with lots of orders and/or products. It is safe to navigate away from this screen while it is running."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1654
+#: admin/class-squalomail-woocommerce-admin.php:1654
 msgid "Your store is synced with Mailchimp!"
 msgstr ""
 
 #. translators: %1$s: Number of synced orders %2$s: Audience name
-#: admin/class-mailchimp-woocommerce-admin.php:1657
+#: admin/class-squalomail-woocommerce-admin.php:1657
 msgid "We've successfully synced %1$s orders to your Audience %2$s, that's awesome!"
 msgstr ""
 
 #. translators: %s - Wordpress.org plugin review URL.
-#: admin/class-mailchimp-woocommerce-admin.php:1665
+#: admin/class-squalomail-woocommerce-admin.php:1665
 msgid "Could you please do us a favor and leave the plugin a 5-star <a href=%s target='_blank'>rating on Wordpress.org</a>? It helps our community know that we're working hard to make it better each day."
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1668
+#: admin/class-squalomail-woocommerce-admin.php:1668
 msgid "Leave a Review"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1693
+#: admin/class-squalomail-woocommerce-admin.php:1693
 msgid "Saved"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1698
+#: admin/class-squalomail-woocommerce-admin.php:1698
 msgid "Error setting communications status"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1744
+#: admin/class-squalomail-woocommerce-admin.php:1744
 msgid "No log file provided"
 msgstr ""
 
-#: admin/class-mailchimp-woocommerce-admin.php:1763
+#: admin/class-squalomail-woocommerce-admin.php:1763
 msgid "Error loading log file contents"
 msgstr ""
 
 #: admin/partials/tabs/newsletter_settings.php:36
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:181
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:206
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:181
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:206
 msgid "Audience Settings"
 msgstr ""
 
@@ -534,8 +534,8 @@ msgid "Mailchimp says: Your re-sync has been started!"
 msgstr ""
 
 #: admin/partials/tabs/campaign_defaults.php:19
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:166
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:203
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:166
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:203
 msgid "Audience Defaults"
 msgstr ""
 
@@ -736,8 +736,8 @@ msgid "Reconnect"
 msgstr ""
 
 #: admin/partials/tabs/api_key.php:10
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:141
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:197
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:141
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:197
 msgid "Connect"
 msgstr ""
 
@@ -762,8 +762,8 @@ msgid "Connected! Please wait while loading next step"
 msgstr ""
 
 #: admin/partials/tabs/store_info.php:21
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:151
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:200
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:151
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:200
 msgid "Store Settings"
 msgstr ""
 
@@ -824,59 +824,59 @@ msgstr ""
 msgid "Shop Managers and Administrators"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:72
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:72
 msgid "Mailchimp says: Please upgrade your PHP version to a minimum of 7.0"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:78
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:78
 msgid "Mailchimp says: API Request Error - "
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:103
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:103
 msgid "Add SqualoMail for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:107
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:107
 msgid "Please provide a bit of information<br/>about your WooCommerce store"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:111
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:111
 msgid "Please review the audience default<br/>campaign information"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:116
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:116
 msgid "Please apply your <br/>audience settings."
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:119
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:119
 msgid "Please apply your audience settings. "
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:120
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:120
 msgid "If you don’t<br/>have an audience, you can choose to create one"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:125
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:125
 msgid "Sweet! You're connected with<br/>Mailchimp and syncing data"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:128
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:128
 msgid "Connect your WooCommerce store to a<br/>Mailchimp audience in less than 60 seconds"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:133
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:133
 msgid "Log events from the <br/>Mailchimp plugin"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:199
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:199
 msgid "Overview"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:209
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:209
 msgid "Logs"
 msgstr ""
 
-#: admin/partials/mailchimp-woocommerce-admin-tabs.php:270
+#: admin/partials/squalomail-woocommerce-admin-tabs.php:270
 msgid "Start sync"
 msgstr ""
 
