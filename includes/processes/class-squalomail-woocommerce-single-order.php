@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
 {
     public $id;
     public $cart_session_id;
@@ -25,7 +25,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
     protected $is_privacy_restricted = false;
 
     /**
-     * MailChimp_WooCommerce_Single_Order constructor.
+     * SqualoMail_WooCommerce_Single_Order constructor.
      * @param null $id
      * @param null $cart_session_id
      * @param null $campaign_id
@@ -43,7 +43,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_Single_Order
+     * @return SqualoMail_WooCommerce_Single_Order
      */
     public function setId($id)
     {
@@ -54,7 +54,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_Single_Order
+     * @return SqualoMail_WooCommerce_Single_Order
      */
     public function set_full_sync($is_full_sync)
     {
@@ -86,7 +86,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
             return false;
         }
 
-        $job = new MailChimp_WooCommerce_Transform_Orders();
+        $job = new SqualoMail_WooCommerce_Transform_Orders();
 
         // set the campaign ID
         $job->campaign_id = $this->campaign_id;
@@ -94,7 +94,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
         try {
             $call = ($api_response = $api->getStoreOrder($store_id, $woo_order_number, true)) ? 'updateStoreOrder' : 'addStoreOrder';
         } catch (\Exception $e) {
-            if ($e instanceof MailChimp_WooCommerce_RateLimitError) {
+            if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
                 sleep(2);
                 mailchimp_error('order_submit.error', mailchimp_error_trace($e, "RateLimited :: #{$this->id}"));
                 $this->retry();
@@ -156,7 +156,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
                             $order->getCustomer()->setOptInStatus($status);
                         }
                     } catch (\Exception $e) {
-                        if ($e instanceof MailChimp_WooCommerce_RateLimitError) {
+                        if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
                             mailchimp_error('order_sync.error', mailchimp_error_trace($e, "GET subscriber :: {$order->getId()}"));
                             throw $e;
                         }
@@ -266,7 +266,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
                     // sent to Mailchimp.
                     $product = $api->createEmptyLineItemProductPlaceholder();
                     
-                    $line_item = new MailChimp_WooCommerce_LineItem();
+                    $line_item = new SqualoMail_WooCommerce_LineItem();
                     $line_item->setId($product->getId());
                     $line_item->setPrice(1);
                     $line_item->setProductId($product->getId());
@@ -333,15 +333,15 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
             }
 
             return $api_response;
-        } catch (MailChimp_WooCommerce_RateLimitError $e) {
+        } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
             mailchimp_error('order_submit.error', mailchimp_error_trace($e, "RateLimited :: #{$this->id}"));
             $this->applyRateLimitedScenario();
             throw $e;
-        } catch (MailChimp_WooCommerce_ServerError $e) {
+        } catch (SqualoMail_WooCommerce_ServerError $e) {
             mailchimp_error('order_submit.error', mailchimp_error_trace($e, "{$call} :: #{$this->id}"));
             throw $e;
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             mailchimp_error('order_submit.error', mailchimp_error_trace($e, "{$call} :: #{$this->id}"));
             throw $e;
         } catch (\Exception $e) {
@@ -375,7 +375,7 @@ class MailChimp_WooCommerce_Single_Order extends Mailchimp_Woocommerce_Job
                 }
             }
             throw $e;
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             mailchimp_error('order_submit.error', mailchimp_error_trace($e, "{$call} :: #{$this->id}"));
             throw $e;
         }

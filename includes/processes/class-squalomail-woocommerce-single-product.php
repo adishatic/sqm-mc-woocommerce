@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
 {
     public $id;
     public $fallback_title;
@@ -19,7 +19,7 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
     protected $order_item = null;
 
     /**
-     * MailChimp_WooCommerce_Single_product constructor.
+     * SqualoMail_WooCommerce_Single_product constructor.
      * @param null|int $id
      */
     public function __construct($id = null, $fallback_title = null)
@@ -30,7 +30,7 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_Single_Product
+     * @return SqualoMail_WooCommerce_Single_Product
      */
     public function setId($id)
     {
@@ -80,10 +80,10 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
     }
 
     /**
-     * @param MailChimp_WooCommerce_LineItem $item
+     * @param SqualoMail_WooCommerce_LineItem $item
      * @return $this
      */
-    public function fromOrderItem(MailChimp_WooCommerce_LineItem $item)
+    public function fromOrderItem(SqualoMail_WooCommerce_LineItem $item)
     {
         $this->order_item = $item;
         return $this;
@@ -100,7 +100,7 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
     }
 
     /**
-     * @return bool|MailChimp_WooCommerce_Product
+     * @return bool|SqualoMail_WooCommerce_Product
      */
     public function process()
     {
@@ -125,7 +125,7 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
                 // pull the product from Mailchimp first to see what method we need to call next.
                 $mailchimp_product = $this->api()->getStoreProduct($this->store_id, $this->id, true);
             } catch (\Exception $e) {
-                if ($e instanceof MailChimp_WooCommerce_RateLimitError) {
+                if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
                     throw $e;
                 }
                 $mailchimp_product = false;
@@ -172,15 +172,15 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
 
             return $product;
 
-        } catch (MailChimp_WooCommerce_RateLimitError $e) {
+        } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
             mailchimp_error('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
             $this->applyRateLimitedScenario();
             throw $e;
-        } catch (MailChimp_WooCommerce_ServerError $e) {
+        } catch (SqualoMail_WooCommerce_ServerError $e) {
             mailchimp_error('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
             throw $e;
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             mailchimp_log('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
             throw $e;
         } catch (Exception $e) {
@@ -196,7 +196,7 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
     }
 
     /**
-     * @return MailChimp_WooCommerce_MailChimpApi
+     * @return SqualoMail_WooCommerce_MailChimpApi
      */
     public function api()
     {
@@ -206,7 +206,7 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
             $options = get_option('mailchimp-woocommerce', array());
 
             if (!empty($this->store_id) && is_array($options) && isset($options['mailchimp_api_key'])) {
-                return $this->api = new MailChimp_WooCommerce_MailChimpApi($options['mailchimp_api_key']);
+                return $this->api = new SqualoMail_WooCommerce_MailChimpApi($options['mailchimp_api_key']);
             }
 
             throw new \RuntimeException('The MailChimp API is not currently configured!');
@@ -216,12 +216,12 @@ class MailChimp_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
     }
 
     /**
-     * @return MailChimp_WooCommerce_Transform_Products
+     * @return SqualoMail_WooCommerce_Transform_Products
      */
     public function transformer()
     {
         if (is_null($this->service)) {
-            return $this->service = new MailChimp_WooCommerce_Transform_Products();
+            return $this->service = new SqualoMail_WooCommerce_Transform_Products();
         }
 
         return $this->service;

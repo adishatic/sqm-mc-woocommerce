@@ -1,6 +1,6 @@
 <?php
 
-class MailChimp_WooCommerce_Privacy
+class SqualoMail_WooCommerce_Privacy
 {
     /**
      * Privacy policy

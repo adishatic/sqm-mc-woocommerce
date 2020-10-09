@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class MailChimp_WooCommerce_Error
+ * Class SqualoMail_WooCommerce_Error
  */
-class MailChimp_WooCommerce_Error extends \Exception
+class SqualoMail_WooCommerce_Error extends \Exception
 {
 
 }

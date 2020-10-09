@@ -6,8 +6,8 @@
  * @link       https://mailchimp.com
  * @since      1.0.1
  *
- * @package    MailChimp_WooCommerce
- * @subpackage MailChimp_WooCommerce/admin
+ * @package    SqualoMail_WooCommerce
+ * @subpackage SqualoMail_WooCommerce/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    MailChimp_WooCommerce
- * @subpackage MailChimp_WooCommerce/admin
+ * @package    SqualoMail_WooCommerce
+ * @subpackage SqualoMail_WooCommerce/admin
  * @author     Ryan Hungate <ryan@vextras.com>
  */
-class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
+class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 	protected $swapped_list_id = null;
 	protected $swapped_store_id = null;
@@ -29,7 +29,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
     protected static $_instance = null;
 
     /**
-     * @return MailChimp_WooCommerce_Admin
+     * @return SqualoMail_WooCommerce_Admin
      */
     public static function instance()
     {
@@ -37,13 +37,13 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
             return static::$_instance;
         }
         $env = mailchimp_environment_variables();
-        static::$_instance = new MailChimp_WooCommerce_Admin();
+        static::$_instance = new SqualoMail_WooCommerce_Admin();
         static::$_instance->setVersion($env->version);
         return static::$_instance;
     }
 
 	/**
-	 * @return MailChimp_WooCommerce_Admin|MailChimp_WooCommerce_Options
+	 * @return SqualoMail_WooCommerce_Admin|SqualoMail_WooCommerce_Options
 	 */
 	public static function connect()
 	{
@@ -131,7 +131,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 				$this->plugin_name,
 				'phpVars',
 				array( 
-					'removeReviewBannerRestUrl' => MailChimp_WooCommerce_Rest_Api::url('review-banner'),
+					'removeReviewBannerRestUrl' => SqualoMail_WooCommerce_Rest_Api::url('review-banner'),
 					'l10n' => array(
 						'are_you_sure' => __('Are you sure?', 'squalomail-for-woocommerce'),
 						'log_delete_subtitle' => __('You will not be able to revert.', 'squalomail-for-woocommerce'),
@@ -388,8 +388,8 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 		}
 		
 		if($wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}mailchimp_jobs';") != $wpdb->prefix.'mailchimp_jobs') {
-			MailChimp_WooCommerce_Activator::create_queue_tables();
-			MailChimp_WooCommerce_Activator::migrate_jobs();
+			SqualoMail_WooCommerce_Activator::create_queue_tables();
+			SqualoMail_WooCommerce_Activator::migrate_jobs();
 		}
 
 		if (defined( 'DISABLE_WP_HTTP_WORKER' ) || defined( 'MAILCHIMP_USE_CURL' ) || defined( 'MAILCHIMP_REST_LOCALHOST' ) || defined( 'MAILCHIMP_REST_IP' ) || defined( 'MAILCHIMP_DISABLE_QUEUE') && true === MAILCHIMP_DISABLE_QUEUE) {
@@ -668,7 +668,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 			'mailchimp_account_info_username' => null,
 		);
 
-		$api = new MailChimp_WooCommerce_MailChimpApi($data['mailchimp_api_key']);
+		$api = new SqualoMail_WooCommerce_MailChimpApi($data['mailchimp_api_key']);
 
 		try {
 		    $profile = $api->ping(true, true);
@@ -1186,8 +1186,8 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
     /**
      * @return array|bool|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
 	public function hasValidMailChimpList()
 	{
@@ -1303,7 +1303,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
     public function inject_sync_ajax_call() { global $wp; ?>
         <script type="text/javascript" >
             jQuery(document).ready(function($) {
-                var endpoint = '<?php echo MailChimp_WooCommerce_Rest_Api::url('sync/stats'); ?>';
+                var endpoint = '<?php echo SqualoMail_WooCommerce_Rest_Api::url('sync/stats'); ?>';
                 var on_sync_tab = '<?php echo (mailchimp_check_if_on_sync_tab() ? 'yes' : 'no')?>';
                 var sync_status = '<?php echo ((mailchimp_has_started_syncing() && !mailchimp_is_done_syncing()) ? 'historical' : 'current') ?>';
 				
@@ -1430,7 +1430,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 			}
 		}
 
-		$submission = new MailChimp_WooCommerce_CreateListSubmission();
+		$submission = new SqualoMail_WooCommerce_CreateListSubmission();
 
 		// allow the subscribers to choose preferred email type (html or text).
 		$submission->setEmailTypeOption(true);
@@ -1482,7 +1482,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 
 			return $list_id;
 
-		} catch (MailChimp_WooCommerce_Error $e) {
+		} catch (SqualoMail_WooCommerce_Error $e) {
             mailchimp_error('admin', $e->getMessage());
 			$this->setData('errors.mailchimp_list', $e->getMessage());
 			return false;
@@ -1510,7 +1510,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 
 		if (!($store = $this->api()->getStore($site_url))) {
 			$new = true;
-			$store = new MailChimp_WooCommerce_Store();
+			$store = new SqualoMail_WooCommerce_Store();
 		}
 
 		$call = $new ? 'addStore' : 'updateStore';
@@ -1590,11 +1590,11 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 
 	/**
 	 * @param array $data
-	 * @return MailChimp_WooCommerce_Address
+	 * @return SqualoMail_WooCommerce_Address
 	 */
 	private function address(array $data)
 	{
-		$address = new MailChimp_WooCommerce_Address();
+		$address = new SqualoMail_WooCommerce_Address();
 
 		if (isset($data['store_street']) && $data['store_street']) {
 			$address->setAddress1($data['store_street']);
@@ -1656,7 +1656,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 	    // delete the transient so this only happens one time.
 	    delete_site_transient('mailchimp_woocommerce_start_sync');
 
-		$full_sync = new MailChimp_WooCommerce_Process_Full_Sync_Manager();
+		$full_sync = new SqualoMail_WooCommerce_Process_Full_Sync_Manager();
 		
 		// make sure the storeeId saved on DB is the same on Mailchimp
 		try {
@@ -1672,7 +1672,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 		$full_sync->start_sync();
 		
         // enqueue sync manager
-		as_enqueue_async_action( 'MailChimp_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );
+		as_enqueue_async_action( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );
 	}
 
 	/**

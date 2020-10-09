@@ -8,7 +8,7 @@
  * Date: 3/8/16
  * Time: 2:16 PM
  */
-class MailChimp_WooCommerce_Customer
+class SqualoMail_WooCommerce_Customer
 {
     protected $id = null;
     protected $email_address = null;
@@ -50,7 +50,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setId($id)
     {
@@ -69,7 +69,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $email_address
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setEmailAddress($email_address)
     {
@@ -88,7 +88,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $opt_in_status
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setOptInStatus($opt_in_status)
     {
@@ -107,7 +107,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $company
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setCompany($company)
     {
@@ -126,7 +126,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $first_name
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setFirstName($first_name)
     {
@@ -145,7 +145,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $last_name
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setLastName($last_name)
     {
@@ -164,7 +164,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $orders_count
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setOrdersCount($orders_count)
     {
@@ -183,7 +183,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param null $total_spent
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function setTotalSpent($total_spent)
     {
@@ -193,21 +193,21 @@ class MailChimp_WooCommerce_Customer
     }
 
     /**
-     * @return MailChimp_WooCommerce_Address
+     * @return SqualoMail_WooCommerce_Address
      */
     public function getAddress()
     {
         if (empty($this->address)) {
-            $this->address = new MailChimp_WooCommerce_Address();
+            $this->address = new SqualoMail_WooCommerce_Address();
         }
         return $this->address;
     }
 
     /**
-     * @param MailChimp_WooCommerce_Address $address
-     * @return MailChimp_WooCommerce_Customer
+     * @param SqualoMail_WooCommerce_Address $address
+     * @return SqualoMail_WooCommerce_Customer
      */
-    public function setAddress(MailChimp_WooCommerce_Address $address)
+    public function setAddress(SqualoMail_WooCommerce_Address $address)
     {
         $this->address = $address;
 
@@ -314,7 +314,7 @@ class MailChimp_WooCommerce_Customer
 
     /**
      * @param array $data
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function fromArray(array $data)
     {
@@ -330,7 +330,7 @@ class MailChimp_WooCommerce_Customer
         }
 
         if (array_key_exists('address', $data) && is_array($data['address'])) {
-            $address = new MailChimp_WooCommerce_Address();
+            $address = new SqualoMail_WooCommerce_Address();
             $this->address = $address->fromArray($data['address']);
         }
 

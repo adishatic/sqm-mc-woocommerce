@@ -7,8 +7,8 @@
  * Date: 04/07/2020
  */
 
-if ( ! class_exists( 'MailChimp_WooCommerce_Process_Full_Sync_Manager' ) ) {
-	class MailChimp_WooCommerce_Process_Full_Sync_Manager {
+if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
+	class SqualoMail_WooCommerce_Process_Full_Sync_Manager {
 		/**
 		 * @var string
 		 */
@@ -21,7 +21,7 @@ if ( ! class_exists( 'MailChimp_WooCommerce_Process_Full_Sync_Manager' ) ) {
 			
 			$this->flag_start_sync();
 			
-			$coupons_sync = new MailChimp_WooCommerce_Process_Coupons();
+			$coupons_sync = new SqualoMail_WooCommerce_Process_Coupons();
 		
 			// start sync processes creation
 			$coupons_sync->createSyncManagers();
@@ -115,7 +115,7 @@ if ( ! class_exists( 'MailChimp_WooCommerce_Process_Full_Sync_Manager' ) ) {
 			if ($started['coupons'] && !$started['products']) {
 				mailchimp_log('sync.full_sync_manager.queue', 'Starting PRODUCTS queueing.');
 				//create Product Sync object
-				$product_sync = new MailChimp_WooCommerce_Process_Products();
+				$product_sync = new SqualoMail_WooCommerce_Process_Products();
 	
 				// queue first job
 				//mailchimp_handle_or_queue($product_sync);
@@ -127,14 +127,14 @@ if ( ! class_exists( 'MailChimp_WooCommerce_Process_Full_Sync_Manager' ) ) {
 			// Only start orders when product jobs are all finished
 			if ($completed['products'] && !$started['orders'] ) {
 				// check if we have products still to be synced
-				if (mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_Single_Product') == 0 && mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_Process_Products') <= 0) {
+				if (mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Product') == 0 && mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Process_Products') <= 0) {
 					
 					$prevent_order_sync = get_option('mailchimp-woocommerce-sync.orders.prevent', false);
 
 					// only do this if we're not strictly syncing products ( which is the default ).
 					if (!$prevent_order_sync) {
 						// since the products are all good, let's sync up the orders now.
-						$order_sync = new MailChimp_WooCommerce_Process_Orders();
+						$order_sync = new SqualoMail_WooCommerce_Process_Orders();
 						// // queue first job
 						//mailchimp_handle_or_queue($order_sync);
 						// //trigger subsequent jobs creation
@@ -148,9 +148,9 @@ if ( ! class_exists( 'MailChimp_WooCommerce_Process_Full_Sync_Manager' ) ) {
 			}
 
 			if ($completed['orders']) {
-				if (mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_Single_Order') <= 0 && mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_Process_Orders') <= 0) {
+				if (mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Order') <= 0 && mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Process_Orders') <= 0) {
 					$this->flag_stop_sync();
-					as_unschedule_action('MailChimp_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );		
+					as_unschedule_action('SqualoMail_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );		
 				}	
 			}
 		}
@@ -160,7 +160,7 @@ if ( ! class_exists( 'MailChimp_WooCommerce_Process_Full_Sync_Manager' ) ) {
 		 */
 		protected function recreate()
 		{
-			as_schedule_single_action(strtotime( '+10 seconds' ), 'MailChimp_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );	
+			as_schedule_single_action(strtotime( '+10 seconds' ), 'SqualoMail_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );	
 		}
 	}
 }

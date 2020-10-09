@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
 {
     public $id;
     public $email;
@@ -20,7 +20,7 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
 
 
     /**
-     * MailChimp_WooCommerce_Cart_Update constructor.
+     * SqualoMail_WooCommerce_Cart_Update constructor.
      * @param null $uid
      * @param null $email
      * @param null $campaign_id
@@ -77,7 +77,7 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
     }
 
     /**
-     * @return bool|MailChimp_WooCommerce_Cart
+     * @return bool|SqualoMail_WooCommerce_Cart
      */
     public function process()
     {
@@ -109,12 +109,12 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
                 $checkout_url .= '?mc_cart_id='.$this->id;
             }
 
-            $customer = new MailChimp_WooCommerce_Customer();
+            $customer = new SqualoMail_WooCommerce_Customer();
             $customer->setId($this->id);
             $customer->setEmailAddress($this->email);
             $customer->setOptInStatus(false);
 
-            $cart = new MailChimp_WooCommerce_Cart();
+            $cart = new SqualoMail_WooCommerce_Cart();
             $cart->setId($this->id);
 
             // if we have a campaign id let's set it now.
@@ -178,8 +178,8 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
                 // let's loop through each item, verify that we have the product or not.
                 // if not, we will add it.
                 foreach ($products as $item) {
-                    /** @var MailChimp_WooCommerce_LineItem $item */
-                    $transformer = new MailChimp_WooCommerce_Single_Product($item->getProductID());
+                    /** @var SqualoMail_WooCommerce_LineItem $item */
+                    $transformer = new SqualoMail_WooCommerce_Single_Product($item->getProductID());
                     if (!$transformer->api()->getStoreProduct($store_id, $item->getProductId())) {
                         $transformer->handle();
                     }
@@ -194,7 +194,7 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
             // Maybe sync subscriber to set correct member.language
             mailchimp_member_data_update($this->email, $this->user_language, 'cart');
 
-        } catch (MailChimp_WooCommerce_RateLimitError $e) {
+        } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
             mailchimp_error('cart.error', mailchimp_error_trace($e, "RateLimited :: email {$this->email}"));
             $this->retry();
@@ -209,7 +209,7 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
     /**
      * @param string $hash
      * @param $item
-     * @return MailChimp_WooCommerce_LineItem
+     * @return SqualoMail_WooCommerce_LineItem
      */
     protected function transformLineItem($hash, $item)
     {
@@ -237,7 +237,7 @@ class MailChimp_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
             $price = $product ? $product->get_price() : 0;
         }
 
-        $line = new MailChimp_WooCommerce_LineItem();
+        $line = new SqualoMail_WooCommerce_LineItem();
         $line->setId($hash);
         $line->setProductId($product_id);
         $line->setProductVariantId((!empty($variant_id) ? $variant_id : $product_id));

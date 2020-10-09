@@ -8,7 +8,7 @@
  * Date: 3/8/16
  * Time: 2:16 PM
  */
-class MailChimp_WooCommerce_Order
+class SqualoMail_WooCommerce_Order
 {
     protected $id = null;
     protected $landing_site = null;
@@ -134,7 +134,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param $id
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setId($id)
     {
@@ -171,10 +171,10 @@ class MailChimp_WooCommerce_Order
     }
 
     /**
-     * @param MailChimp_WooCommerce_Customer $customer
-     * @return MailChimp_WooCommerce_Order
+     * @param SqualoMail_WooCommerce_Customer $customer
+     * @return SqualoMail_WooCommerce_Order
      */
-    public function setCustomer(MailChimp_WooCommerce_Customer $customer)
+    public function setCustomer(SqualoMail_WooCommerce_Customer $customer)
     {
         $this->customer = $customer;
 
@@ -182,21 +182,21 @@ class MailChimp_WooCommerce_Order
     }
 
     /**
-     * @return null|MailChimp_WooCommerce_Customer
+     * @return null|SqualoMail_WooCommerce_Customer
      */
     public function getCustomer()
     {
         if (empty($this->customer)) {
-            $this->customer = new MailChimp_WooCommerce_Customer();
+            $this->customer = new SqualoMail_WooCommerce_Customer();
         }
         return $this->customer;
     }
 
     /**
-     * @param MailChimp_WooCommerce_LineItem $item
+     * @param SqualoMail_WooCommerce_LineItem $item
      * @return $this
      */
-    public function addItem(MailChimp_WooCommerce_LineItem $item)
+    public function addItem(SqualoMail_WooCommerce_LineItem $item)
     {
         $this->lines[] = $item;
         return $this;
@@ -245,11 +245,11 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param null $campaign_id
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setCampaignId($id)
     {
-        $api = MailChimp_WooCommerce_MailChimpApi::getInstance();
+        $api = SqualoMail_WooCommerce_MailChimpApi::getInstance();
         $cid = trim($id);
         if (!empty($cid) && $campaign = $api->getCampaign($cid, false)) {
             $this->campaign_id = $campaign['id'];
@@ -267,7 +267,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param null $financial_status
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setFinancialStatus($financial_status)
     {
@@ -286,7 +286,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param null $fulfillment_status
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setFulfillmentStatus($fulfillment_status)
     {
@@ -305,7 +305,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param null $code
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setCurrencyCode($code = null)
     {
@@ -334,7 +334,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param mixed $order_total
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setOrderTotal($order_total)
     {
@@ -374,7 +374,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param mixed $tax_total
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setTaxTotal($tax_total)
     {
@@ -393,7 +393,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param mixed $shipping_total
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setShippingTotal($shipping_total)
     {
@@ -412,7 +412,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param mixed $discount_total
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function setDiscountTotal($discount_total)
     {
@@ -510,10 +510,10 @@ class MailChimp_WooCommerce_Order
     }
 
     /**
-     * @param MailChimp_WooCommerce_Address $address
+     * @param SqualoMail_WooCommerce_Address $address
      * @return $this
      */
-    public function setShippingAddress(MailChimp_WooCommerce_Address $address)
+    public function setShippingAddress(SqualoMail_WooCommerce_Address $address)
     {
         $this->shipping_address = $address;
 
@@ -521,21 +521,21 @@ class MailChimp_WooCommerce_Order
     }
 
     /**
-     * @return MailChimp_WooCommerce_Address
+     * @return SqualoMail_WooCommerce_Address
      */
     public function getShippingAddress()
     {
         if (empty($this->shipping_address)) {
-            $this->shipping_address = new MailChimp_WooCommerce_Address();
+            $this->shipping_address = new SqualoMail_WooCommerce_Address();
         }
         return $this->shipping_address;
     }
 
     /**
-     * @param MailChimp_WooCommerce_Address $address
+     * @param SqualoMail_WooCommerce_Address $address
      * @return $this
      */
-    public function setBillingAddress(MailChimp_WooCommerce_Address $address)
+    public function setBillingAddress(SqualoMail_WooCommerce_Address $address)
     {
         $this->billing_address = $address;
 
@@ -543,12 +543,12 @@ class MailChimp_WooCommerce_Order
     }
 
     /**
-     * @return MailChimp_WooCommerce_Address
+     * @return SqualoMail_WooCommerce_Address
      */
     public function getBillingAddress()
     {
         if (empty($this->billing_address)) {
-            $this->billing_address = new MailChimp_WooCommerce_Address();
+            $this->billing_address = new SqualoMail_WooCommerce_Address();
         }
         return $this->billing_address;
     }
@@ -581,7 +581,7 @@ class MailChimp_WooCommerce_Order
             'billing_address' => $this->getBillingAddress()->toArray(),
             'promos' => !empty($this->promos) ? $this->promos : null,
             'lines' => array_map(function ($item) {
-                /** @var MailChimp_WooCommerce_LineItem $item */
+                /** @var SqualoMail_WooCommerce_LineItem $item */
                 return $item->toArray();
             }, $this->items()),
         ));
@@ -589,7 +589,7 @@ class MailChimp_WooCommerce_Order
 
     /**
      * @param array $data
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      */
     public function fromArray(array $data)
     {
@@ -606,12 +606,12 @@ class MailChimp_WooCommerce_Order
         }
 
         if (array_key_exists('shipping_address', $data) && is_array($data['shipping_address'])) {
-            $shipping = new MailChimp_WooCommerce_Address();
+            $shipping = new SqualoMail_WooCommerce_Address();
             $this->shipping_address = $shipping->fromArray($data['shipping_address']);
         }
 
         if (array_key_exists('billing_address', $data) && is_array($data['billing_address'])) {
-            $billing = new MailChimp_WooCommerce_Address();
+            $billing = new SqualoMail_WooCommerce_Address();
             $this->billing_address = $billing->fromArray($data['billing_address']);
         }
 
@@ -622,7 +622,7 @@ class MailChimp_WooCommerce_Order
         if (array_key_exists('lines', $data) && is_array($data['lines'])) {
             $this->lines = array();
             foreach ($data['lines'] as $line_item) {
-                $item = new MailChimp_WooCommerce_LineItem();
+                $item = new SqualoMail_WooCommerce_LineItem();
                 $this->lines[] = $item->fromArray($line_item);
             }
         }

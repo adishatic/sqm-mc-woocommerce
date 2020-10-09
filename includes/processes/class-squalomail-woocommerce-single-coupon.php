@@ -8,13 +8,13 @@
  * Date: 10/6/17
  * Time: 11:14 AM
  */
-class MailChimp_WooCommerce_SingleCoupon extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_SingleCoupon extends Mailchimp_Woocommerce_Job
 {
     public $coupon_data;
     public $id;
 
     /**
-     * MailChimp_WooCommerce_Coupon_Sync constructor.
+     * SqualoMail_WooCommerce_Coupon_Sync constructor.
      * @param $id
      */
     public function __construct($id = null)
@@ -24,7 +24,7 @@ class MailChimp_WooCommerce_SingleCoupon extends Mailchimp_Woocommerce_Job
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_SingleCoupon
+     * @return SqualoMail_WooCommerce_SingleCoupon
      */
     public function setId($id)
     {
@@ -53,23 +53,23 @@ class MailChimp_WooCommerce_SingleCoupon extends Mailchimp_Woocommerce_Job
             $api = mailchimp_get_api();
             $store_id = mailchimp_get_store_id();
 
-            $transformer = new MailChimp_WooCommerce_Transform_Coupons();
+            $transformer = new SqualoMail_WooCommerce_Transform_Coupons();
             $code = $transformer->transform($this->id);
 
             $api->addPromoRule($store_id, $code->getAttachedPromoRule(), true);
             $api->addPromoCodeForRule($store_id, $code->getAttachedPromoRule(), $code, true);
 
             mailchimp_log('promo_code_submit.success', "#{$this->id} :: code: {$code->getCode()}");
-        } catch (MailChimp_WooCommerce_RateLimitError $e) {
+        } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
             $promo_code = isset($code) ? "code {$code->getCode()}" : "id {$this->id}";
             mailchimp_error('promo_code_submit.error', mailchimp_error_trace($e, "RateLimited :: #{$promo_code}"));
             $this->applyRateLimitedScenario();
             throw $e;
-        } catch (MailChimp_WooCommerce_ServerError $e) {
+        } catch (SqualoMail_WooCommerce_ServerError $e) {
             mailchimp_error('promo_code_submit.error', mailchimp_error_trace($e, "error updating promo rule #{$this->id} :: {$code->getCode()}"));
             throw $e;
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             mailchimp_error('promo_code_submit.error', mailchimp_error_trace($e, "error updating promo rule #{$this->id} :: {$code->getCode()}"));
             throw $e;
         } catch (\Exception $e) {

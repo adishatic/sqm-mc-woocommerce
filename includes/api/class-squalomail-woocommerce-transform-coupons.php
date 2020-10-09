@@ -8,7 +8,7 @@
  * Date: 10/06/17
  * Time: 8:29 AM
  */
-class MailChimp_WooCommerce_Transform_Coupons
+class SqualoMail_WooCommerce_Transform_Coupons
 {
     /**
      * @param int $page
@@ -40,7 +40,7 @@ class MailChimp_WooCommerce_Transform_Coupons
 
     /**
      * @param int $post_id
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function transform($post_id)
     {
@@ -51,7 +51,7 @@ class MailChimp_WooCommerce_Transform_Coupons
             $valid = false;
         }
 
-        $rule = new MailChimp_WooCommerce_PromoRule();
+        $rule = new SqualoMail_WooCommerce_PromoRule();
 
         $rule->setId($resource->get_id());
         $rule->setTitle($resource->get_code());
@@ -87,7 +87,7 @@ class MailChimp_WooCommerce_Transform_Coupons
             $rule->setEndsAt($exp);
         }
 
-        $code = new MailChimp_WooCommerce_PromoCode();
+        $code = new SqualoMail_WooCommerce_PromoCode();
 
         $code->setId($resource->get_id());
         $code->setCode($resource->get_code());

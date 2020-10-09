@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 1:26 PM
  */
-class MailChimp_WooCommerce_Cart
+class SqualoMail_WooCommerce_Cart
 {
     protected $store_id;
     protected $id;
@@ -63,10 +63,10 @@ class MailChimp_WooCommerce_Cart
     }
 
     /**
-     * @param MailChimp_WooCommerce_Customer $customer
+     * @param SqualoMail_WooCommerce_Customer $customer
      * @return $this
      */
-    public function setCustomer(MailChimp_WooCommerce_Customer $customer)
+    public function setCustomer(SqualoMail_WooCommerce_Customer $customer)
     {
         $this->customer = $customer;
 
@@ -74,12 +74,12 @@ class MailChimp_WooCommerce_Cart
     }
 
     /**
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      */
     public function getCustomer()
     {
         if (empty($this->customer)) {
-            $this->customer = new MailChimp_WooCommerce_Customer();
+            $this->customer = new SqualoMail_WooCommerce_Customer();
         }
 
         return $this->customer;
@@ -93,7 +93,7 @@ class MailChimp_WooCommerce_Cart
      */
     public function setCampaignID($id, $throw_if_invalid = false)
     {   
-        $api = MailChimp_WooCommerce_MailChimpApi::getInstance();
+        $api = SqualoMail_WooCommerce_MailChimpApi::getInstance();
         $cid = trim($id);
         if (!empty($cid) && ($campaign = $api->getCampaign($cid, $throw_if_invalid))) {
             $this->campaign_id = $campaign['id'];
@@ -203,10 +203,10 @@ class MailChimp_WooCommerce_Cart
     }
 
     /**
-     * @param MailChimp_WooCommerce_LineItem $item
+     * @param SqualoMail_WooCommerce_LineItem $item
      * @return $this
      */
-    public function addItem(MailChimp_WooCommerce_LineItem $item)
+    public function addItem(SqualoMail_WooCommerce_LineItem $item)
     {
         $this->lines[] = $item;
         return $this;
@@ -258,7 +258,7 @@ class MailChimp_WooCommerce_Cart
 
     /**
      * @param array $data
-     * @return MailChimp_WooCommerce_Cart
+     * @return SqualoMail_WooCommerce_Cart
      */
     public function fromArray(array $data)
     {
@@ -274,13 +274,13 @@ class MailChimp_WooCommerce_Cart
         }
 
         if (array_key_exists('customer', $data) && is_array($data['customer'])) {
-            $customer = new MailChimp_WooCommerce_Customer();
+            $customer = new SqualoMail_WooCommerce_Customer();
             $this->customer = $customer->fromArray($data['customer']);
         }
 
         if (array_key_exists('lines', $data) && is_array($data['lines'])) {
             foreach ($data['lines'] as $line_item) {
-                $item = new MailChimp_WooCommerce_LineItem();
+                $item = new SqualoMail_WooCommerce_LineItem();
                 $this->lines[] = $item->fromArray($line_item);
             }
         }

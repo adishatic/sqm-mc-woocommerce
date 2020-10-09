@@ -8,7 +8,7 @@
  * Date: 2/17/16
  * Time: 12:03 PM
  */
-class MailChimp_Service extends MailChimp_WooCommerce_Options
+class MailChimp_Service extends SqualoMail_WooCommerce_Options
 {
     protected $user_email = null;
     protected $previous_email = null;
@@ -158,7 +158,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
             update_post_meta($order_id, 'mailchimp_woocommerce_landing_site', $landing_site);
         }
 
-        $handler = new MailChimp_WooCommerce_Single_Order($order_id, null, $campaign_id, $landing_site, $language, $gdpr_fields);
+        $handler = new SqualoMail_WooCommerce_Single_Order($order_id, null, $campaign_id, $landing_site, $language, $gdpr_fields);
         $handler->is_update = $newOrder ? !$newOrder : null;
         $handler->is_admin_save = is_admin();
         
@@ -172,7 +172,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
     {
         if (!mailchimp_is_configured()) return;
 
-        $handler = new MailChimp_WooCommerce_Single_Order($order_id, null, null, null);
+        $handler = new SqualoMail_WooCommerce_Single_Order($order_id, null, null, null);
         $handler->partially_refunded = true;
         mailchimp_handle_or_queue($handler);
     }
@@ -242,7 +242,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
                 $language = $this->user_language ?: substr( get_locale(), 0, 2 ); 
                 
                 // fire up the job handler
-                $handler = new MailChimp_WooCommerce_Cart_Update($uid, $user_email, $campaign, $this->cart, $language);
+                $handler = new SqualoMail_WooCommerce_Cart_Update($uid, $user_email, $campaign, $this->cart, $language);
                 mailchimp_handle_or_queue($handler);
             }
 
@@ -269,7 +269,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
         if (!mailchimp_is_configured()) return;
 
         if ($coupon instanceof WC_Coupon) {
-            mailchimp_handle_or_queue(new MailChimp_WooCommerce_SingleCoupon($post_id));
+            mailchimp_handle_or_queue(new SqualoMail_WooCommerce_SingleCoupon($post_id));
         }
     }
 
@@ -311,7 +311,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
         // don't handle any of these statuses because they're not ready for the show
         if (!in_array($post->post_status, array('trash', 'auto-draft', 'draft', 'pending'))) {
             if ('product' == $post->post_type) {
-                mailchimp_handle_or_queue(new MailChimp_WooCommerce_Single_Product($post_id), 5);
+                mailchimp_handle_or_queue(new SqualoMail_WooCommerce_Single_Product($post_id), 5);
             } elseif ('shop_order' == $post->post_type) {
                 $tracking = $this->onNewOrder($post_id);
                 $this->onOrderSave($post_id, $tracking, !$update);
@@ -366,7 +366,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
                 break;
 
             case 'product':
-                mailchimp_handle_or_queue(new MailChimp_WooCommerce_Single_Product($post_id), 5);
+                mailchimp_handle_or_queue(new SqualoMail_WooCommerce_Single_Product($post_id), 5);
                 break;
         }
     }
@@ -389,7 +389,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
         update_user_meta($user_id, 'mailchimp_woocommerce_is_subscribed', $subscribed);
 
         if ($subscribed) {
-            $job = new MailChimp_WooCommerce_User_Submit($user_id, $subscribed, null, null, $gdpr_fields);
+            $job = new SqualoMail_WooCommerce_User_Submit($user_id, $subscribed, null, null, $gdpr_fields);
             mailchimp_handle_or_queue($job);
         }
     }
@@ -409,7 +409,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
         if ($is_subscribed === '' || $is_subscribed === null) return;
 
         // only send this update if the user actually has a boolean value.
-        mailchimp_handle_or_queue(new MailChimp_WooCommerce_User_Submit($user_id, (bool) $is_subscribed, $old_user_data));
+        mailchimp_handle_or_queue(new SqualoMail_WooCommerce_User_Submit($user_id, (bool) $is_subscribed, $old_user_data));
     }
 
     /**
@@ -422,7 +422,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
         if (!$this->isAdmin()) return false;
         $this->removePointers(true, ($only_products ? false : true));
         update_option('mailchimp-woocommerce-sync.orders.prevent', $only_products);
-        MailChimp_WooCommerce_Process_Products::push();
+        SqualoMail_WooCommerce_Process_Products::push();
         return true;
     }
 
@@ -435,7 +435,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
         if (!$this->isAdmin()) return false;
         $this->removePointers(false, true);
         // since the products are all good, let's sync up the orders now.
-        mailchimp_handle_or_queue(new MailChimp_WooCommerce_Process_Orders());
+        mailchimp_handle_or_queue(new SqualoMail_WooCommerce_Process_Orders());
         return true;
     }
 
@@ -932,7 +932,7 @@ class MailChimp_Service extends MailChimp_WooCommerce_Options
     }
 
     public function mailchimp_process_sync_manager () {
-        $sync_stats_manager = new MailChimp_WooCommerce_Process_Full_Sync_Manager();
+        $sync_stats_manager = new SqualoMail_WooCommerce_Process_Full_Sync_Manager();
         $sync_stats_manager->handle();
     }
 }

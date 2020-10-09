@@ -9,8 +9,8 @@
  * @link       https://mailchimp.com
  * @since      1.0.1
  *
- * @package    MailChimp_WooCommerce
- * @subpackage MailChimp_WooCommerce/includes
+ * @package    SqualoMail_WooCommerce
+ * @subpackage SqualoMail_WooCommerce/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    MailChimp_WooCommerce
- * @subpackage MailChimp_WooCommerce/includes
+ * @package    SqualoMail_WooCommerce
+ * @subpackage SqualoMail_WooCommerce/includes
  * @author     Ryan Hungate <ryan@vextras.com>
  */
-class MailChimp_WooCommerce
+class SqualoMail_WooCommerce
 {
 
     /**
@@ -36,7 +36,7 @@ class MailChimp_WooCommerce
      *
      * @since    1.0.0
      * @access   protected
-     * @var      MailChimp_WooCommerce_Loader $loader Maintains and registers all hooks for the plugin.
+     * @var      SqualoMail_WooCommerce_Loader $loader Maintains and registers all hooks for the plugin.
      */
     protected $loader;
 
@@ -166,10 +166,10 @@ class MailChimp_WooCommerce
      *
      * Include the following files that make up the plugin:
      *
-     * - MailChimp_WooCommerce_Loader. Orchestrates the hooks of the plugin.
-     * - MailChimp_WooCommerce_i18n. Defines internationalization functionality.
-     * - MailChimp_WooCommerce_Admin. Defines all hooks for the admin area.
-     * - MailChimp_WooCommerce_Public. Defines all hooks for the public side of the site.
+     * - SqualoMail_WooCommerce_Loader. Orchestrates the hooks of the plugin.
+     * - SqualoMail_WooCommerce_i18n. Defines internationalization functionality.
+     * - SqualoMail_WooCommerce_Admin. Defines all hooks for the admin area.
+     * - SqualoMail_WooCommerce_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -180,17 +180,17 @@ class MailChimp_WooCommerce
     private function load_dependencies()
     {
         // fire up the loader
-        $this->loader = new MailChimp_WooCommerce_Loader();
+        $this->loader = new SqualoMail_WooCommerce_Loader();
 
         // change up the queue to use the new rest api version
-        $service = new MailChimp_WooCommerce_Rest_Api();
+        $service = new SqualoMail_WooCommerce_Rest_Api();
         $this->loader->add_action( 'rest_api_init', $service, 'register_routes');
     }
 
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the MailChimp_WooCommerce_i18n class in order to set the domain and to register the hook
+     * Uses the SqualoMail_WooCommerce_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -198,7 +198,7 @@ class MailChimp_WooCommerce
      */
     private function set_locale()
     {
-        $plugin_i18n = new MailChimp_WooCommerce_i18n();
+        $plugin_i18n = new SqualoMail_WooCommerce_i18n();
         $this->loader->add_action('init', $plugin_i18n, 'load_plugin_textdomain');
     }
 
@@ -207,7 +207,7 @@ class MailChimp_WooCommerce
      */
     private function define_gdpr_hooks()
     {
-        $gdpr = new MailChimp_WooCommerce_Privacy();
+        $gdpr = new SqualoMail_WooCommerce_Privacy();
 
         $this->loader->add_action('admin_init', $gdpr, 'privacy_policy');
         $this->loader->add_filter('wp_privacy_personal_data_exporters', $gdpr, 'register_exporter', 10);
@@ -223,7 +223,7 @@ class MailChimp_WooCommerce
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = MailChimp_WooCommerce_Admin::instance();
+		$plugin_admin = SqualoMail_WooCommerce_Admin::instance();
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
@@ -285,7 +285,7 @@ class MailChimp_WooCommerce
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new MailChimp_WooCommerce_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new SqualoMail_WooCommerce_Public( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
         $this->loader->add_action('wp_footer', $plugin_public, 'add_inline_footer_script');
 
@@ -381,20 +381,20 @@ class MailChimp_WooCommerce
             $this->loader->add_action('wp_ajax_nopriv_mailchimp_set_user_by_email', $service, 'set_user_by_email');
 
             $jobs_classes = array(
-                "MailChimp_WooCommerce_Single_Order",
-                "MailChimp_WooCommerce_SingleCoupon",
-                "MailChimp_WooCommerce_Single_Product",
-                "MailChimp_WooCommerce_Cart_Update",
-                "MailChimp_WooCommerce_User_Submit",
-                "MailChimp_WooCommerce_Process_Coupons",
-                "MailChimp_WooCommerce_Process_Orders",
-                "MailChimp_WooCommerce_Process_Products"
+                "SqualoMail_WooCommerce_Single_Order",
+                "SqualoMail_WooCommerce_SingleCoupon",
+                "SqualoMail_WooCommerce_Single_Product",
+                "SqualoMail_WooCommerce_Cart_Update",
+                "SqualoMail_WooCommerce_User_Submit",
+                "SqualoMail_WooCommerce_Process_Coupons",
+                "SqualoMail_WooCommerce_Process_Orders",
+                "SqualoMail_WooCommerce_Process_Products"
             );
             foreach ($jobs_classes as $job_class) {
                 $this->loader->add_action($job_class, $service, 'mailchimp_process_single_job', 10, 1);
             }
             // sync stats manager
-            $this->loader->add_action('MailChimp_WooCommerce_Process_Full_Sync_Manager', $service, 'mailchimp_process_sync_manager', 10, 1);
+            $this->loader->add_action('SqualoMail_WooCommerce_Process_Full_Sync_Manager', $service, 'mailchimp_process_sync_manager', 10, 1);
 		}
 	}
 
@@ -422,7 +422,7 @@ class MailChimp_WooCommerce
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.1
-	 * @return    MailChimp_WooCommerce_Loader    Orchestrates the hooks of the plugin.
+	 * @return    SqualoMail_WooCommerce_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

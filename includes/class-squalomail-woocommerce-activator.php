@@ -5,11 +5,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.1
- * @package    MailChimp_WooCommerce
- * @subpackage MailChimp_WooCommerce/includes
+ * @package    SqualoMail_WooCommerce
+ * @subpackage SqualoMail_WooCommerce/includes
  * @author     Ryan Hungate <ryan@vextras.com>
  */
-class MailChimp_WooCommerce_Activator {
+class SqualoMail_WooCommerce_Activator {
 
 	/**
 	 * Short Description. (use period)
@@ -46,7 +46,7 @@ class MailChimp_WooCommerce_Activator {
             update_option('mailchimp-woocommerce-store_id', uniqid(), 'yes');
         }
 
-        if (class_exists('MailChimp_WooCommerce_MailChimpApi')) {
+        if (class_exists('SqualoMail_WooCommerce_MailChimpApi')) {
             // try this now for existing stores on an update.
             mailchimp_update_connected_site_script();
 		}

@@ -8,7 +8,7 @@
  * Date: 6/13/17
  * Time: 1:19 PM
  */
-class MailChimp_WooCommerce_PromoCode
+class SqualoMail_WooCommerce_PromoCode
 {
     /**
      * @var string
@@ -66,7 +66,7 @@ class MailChimp_WooCommerce_PromoCode
     protected $updated_at_foreign;
 
     /**
-     * @var MailChimp_WooCommerce_PromoRule|null
+     * @var SqualoMail_WooCommerce_PromoRule|null
      */
     protected $promo_rule;
 
@@ -86,17 +86,17 @@ class MailChimp_WooCommerce_PromoCode
     }
 
     /**
-     * @param MailChimp_WooCommerce_PromoRule $promo
-     * @return MailChimp_WooCommerce_PromoCode
+     * @param SqualoMail_WooCommerce_PromoRule $promo
+     * @return SqualoMail_WooCommerce_PromoCode
      */
-    public function attachPromoRule(MailChimp_WooCommerce_PromoRule $promo)
+    public function attachPromoRule(SqualoMail_WooCommerce_PromoRule $promo)
     {
         $this->promo_rule = $promo;
         return $this;
     }
 
     /**
-     * @return MailChimp_WooCommerce_PromoRule|null
+     * @return SqualoMail_WooCommerce_PromoRule|null
      */
     public function getAttachedPromoRule()
     {
@@ -113,7 +113,7 @@ class MailChimp_WooCommerce_PromoCode
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function setId($id)
     {
@@ -132,7 +132,7 @@ class MailChimp_WooCommerce_PromoCode
 
     /**
      * @param string $code
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function setCode($code)
     {
@@ -151,7 +151,7 @@ class MailChimp_WooCommerce_PromoCode
 
     /**
      * @param string $url
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function setRedemptionURL($url)
     {
@@ -167,7 +167,7 @@ class MailChimp_WooCommerce_PromoCode
 
     /**
      * @param $count
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function setUsageCount($count)
     {
@@ -178,7 +178,7 @@ class MailChimp_WooCommerce_PromoCode
 
     /**
      * @param $enabled
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function setEnabled($enabled)
     {
@@ -210,7 +210,7 @@ class MailChimp_WooCommerce_PromoCode
 
     /**
      * @param array $data
-     * @return MailChimp_WooCommerce_PromoCode
+     * @return SqualoMail_WooCommerce_PromoCode
      */
     public function fromArray(array $data)
     {

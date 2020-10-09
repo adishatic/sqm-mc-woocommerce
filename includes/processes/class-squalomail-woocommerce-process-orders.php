@@ -8,7 +8,7 @@
  * Date: 7/14/16
  * Time: 10:57 AM
  */
-class MailChimp_WooCommerce_Process_Orders extends MailChimp_WooCommerce_Abstract_Sync
+class SqualoMail_WooCommerce_Process_Orders extends SqualoMail_WooCommerce_Abstract_Sync
 {
     /**
      * @var string

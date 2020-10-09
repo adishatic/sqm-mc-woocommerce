@@ -9,7 +9,7 @@
  * Time: 1:38 PM
  * Updated with last ISO 4217 version 2015 @ Mar 21st, 2019
  */
-class MailChimp_WooCommerce_CurrencyCodes
+class SqualoMail_WooCommerce_CurrencyCodes
 {
     static function currencies() {
         return [

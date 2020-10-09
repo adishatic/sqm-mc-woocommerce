@@ -8,7 +8,7 @@
  * Date: 7/13/16
  * Time: 8:29 AM
  */
-class MailChimp_WooCommerce_Transform_Products
+class SqualoMail_WooCommerce_Transform_Products
 {
     /**
      * @param int $page
@@ -39,12 +39,12 @@ class MailChimp_WooCommerce_Transform_Products
     }
 
     /**
-     * @param MailChimp_WooCommerce_LineItem $item
-     * @return MailChimp_WooCommerce_Product
+     * @param SqualoMail_WooCommerce_LineItem $item
+     * @return SqualoMail_WooCommerce_Product
      */
-    public function fromOrderItem(MailChimp_WooCommerce_LineItem $item)
+    public function fromOrderItem(SqualoMail_WooCommerce_LineItem $item)
     {
-        $product = new MailChimp_WooCommerce_Product();
+        $product = new SqualoMail_WooCommerce_Product();
 
         $fallback_title = $item->getFallbackTitle();
         if (empty($fallback_title)) $fallback_title = "deleted_{$item->getProductId()}";
@@ -52,7 +52,7 @@ class MailChimp_WooCommerce_Transform_Products
         $product->setId($item->getProductId());
         $product->setTitle($fallback_title);
 
-        $variant = new MailChimp_WooCommerce_ProductVariation();
+        $variant = new SqualoMail_WooCommerce_ProductVariation();
         $variant->setId($item->getProductId());
         $variant->setTitle($fallback_title);
         $variant->setInventoryQuantity(0);
@@ -66,7 +66,7 @@ class MailChimp_WooCommerce_Transform_Products
 
     /**
      * @param WP_Post $post
-     * @return MailChimp_WooCommerce_Product
+     * @return SqualoMail_WooCommerce_Product
      */
     public function transform(WP_Post $post, $fallback_title = null)
     {
@@ -80,7 +80,7 @@ class MailChimp_WooCommerce_Transform_Products
 
         $is_variant = count($variants) > 1;
 
-        $product = new MailChimp_WooCommerce_Product();
+        $product = new SqualoMail_WooCommerce_Product();
 
         $product->setId($woo->get_id());
         $product->setHandle($post->post_name);
@@ -130,7 +130,7 @@ class MailChimp_WooCommerce_Transform_Products
     /**
      * @param WP_Post $post
      * @param string $fallback_title
-     * @return MailChimp_WooCommerce_ProductVariation
+     * @return SqualoMail_WooCommerce_ProductVariation
      */
     public function variant($post, $fallback_title = null)
     {
@@ -144,7 +144,7 @@ class MailChimp_WooCommerce_Transform_Products
             }
         }
 
-        $variant = new MailChimp_WooCommerce_ProductVariation();
+        $variant = new SqualoMail_WooCommerce_ProductVariation();
 
         if (!$woo) {
             //mailchimp_error("products.transform", "could not load product variant", array('post' => print_r($post, true)));
@@ -285,7 +285,7 @@ class MailChimp_WooCommerce_Transform_Products
 
     /**
      * @param $id
-     * @return bool|MailChimp_WooCommerce_Product
+     * @return bool|SqualoMail_WooCommerce_Product
      * @throws Exception
      */
     public static function deleted($id, $title)
@@ -294,12 +294,12 @@ class MailChimp_WooCommerce_Transform_Products
         $api = mailchimp_get_api();
 
         if (!($product = $api->getStoreProduct($store_id, "deleted_{$id}"))) {
-            $product = new MailChimp_WooCommerce_Product();
+            $product = new SqualoMail_WooCommerce_Product();
 
             $product->setId("deleted_{$id}");
             $product->setTitle($title);
 
-            $variant = new MailChimp_WooCommerce_ProductVariation();
+            $variant = new SqualoMail_WooCommerce_ProductVariation();
             $variant->setId($product->getId());
             $variant->setTitle($title);
             $variant->setInventoryQuantity(0);
@@ -315,7 +315,7 @@ class MailChimp_WooCommerce_Transform_Products
 
     /**
      * @param $id
-     * @return bool|MailChimp_WooCommerce_Product
+     * @return bool|SqualoMail_WooCommerce_Product
      * @throws Exception
      */
     public static function missing_order_item($item)
@@ -338,12 +338,12 @@ class MailChimp_WooCommerce_Transform_Products
 
         // only do this if we haven't pushed this product ID up yet to Mailchimp
         if (!($product = $api->getStoreProduct($store_id, "deleted_{$id}"))) {
-            $product = new MailChimp_WooCommerce_Product();
+            $product = new SqualoMail_WooCommerce_Product();
 
             $product->setId("deleted_{$id}");
             $product->setTitle($title);
 
-            $variant = new MailChimp_WooCommerce_ProductVariation();
+            $variant = new SqualoMail_WooCommerce_ProductVariation();
             $variant->setId($product->getId());
             $variant->setTitle($title);
             $variant->setInventoryQuantity(0);
@@ -360,11 +360,11 @@ class MailChimp_WooCommerce_Transform_Products
     /**
      * @param \WP_Post $post
      * @param string|null $fallback_title
-     * @return MailChimp_WooCommerce_Product
+     * @return SqualoMail_WooCommerce_Product
      */
     protected function wooProductNotLoadedCorrectly($post, $fallback_title = null)
     {
-        $product = new MailChimp_WooCommerce_Product();
+        $product = new SqualoMail_WooCommerce_Product();
         $product->setId($post->ID);
         $product->setHandle($post->post_name);
         $product->setDescription($post->post_content);

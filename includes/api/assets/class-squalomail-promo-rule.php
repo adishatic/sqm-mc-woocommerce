@@ -8,7 +8,7 @@
  * Date: 6/13/17
  * Time: 1:19 PM
  */
-class MailChimp_WooCommerce_PromoRule
+class SqualoMail_WooCommerce_PromoRule
 {
     /**
      * @var string
@@ -129,7 +129,7 @@ class MailChimp_WooCommerce_PromoRule
 
     /**
      * @param null $id
-     * @return MailChimp_WooCommerce_PromoRule
+     * @return SqualoMail_WooCommerce_PromoRule
      */
     public function setId($id)
     {
@@ -148,7 +148,7 @@ class MailChimp_WooCommerce_PromoRule
 
     /**
      * @param string $name
-     * @return MailChimp_WooCommerce_PromoRule
+     * @return SqualoMail_WooCommerce_PromoRule
      */
     public function setTitle($name)
     {
@@ -167,7 +167,7 @@ class MailChimp_WooCommerce_PromoRule
 
     /**
      * @param string $description
-     * @return MailChimp_WooCommerce_PromoRule
+     * @return SqualoMail_WooCommerce_PromoRule
      */
     public function setDescription($description)
     {
@@ -242,7 +242,7 @@ class MailChimp_WooCommerce_PromoRule
 
     /**
      * @param int $amount
-     * @return MailChimp_WooCommerce_PromoRule
+     * @return SqualoMail_WooCommerce_PromoRule
      */
     public function setAmount($amount)
     {
@@ -376,7 +376,7 @@ class MailChimp_WooCommerce_PromoRule
 
     /**
      * @param array $data
-     * @return MailChimp_WooCommerce_PromoRule
+     * @return SqualoMail_WooCommerce_PromoRule
      */
     public function fromArray(array $data)
     {

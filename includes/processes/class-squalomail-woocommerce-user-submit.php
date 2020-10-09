@@ -8,7 +8,7 @@
  * Date: 11/14/16
  * Time: 9:38 AM
  */
-class MailChimp_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
 {
     public static $handling_for = null;
 
@@ -20,7 +20,7 @@ class MailChimp_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
     public $should_ignore = false;
 
     /**
-     * MailChimp_WooCommerce_User_Submit constructor.
+     * SqualoMail_WooCommerce_User_Submit constructor.
      * @param null $id
      * @param null $subscribed
      * @param WP_User|null $updated_data
@@ -138,7 +138,7 @@ class MailChimp_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
             return false;
         }
 
-        $api = new MailChimp_WooCommerce_MailChimpApi($api_key);
+        $api = new SqualoMail_WooCommerce_MailChimpApi($api_key);
 
         $merge_fields_system = array();
 
@@ -248,7 +248,7 @@ class MailChimp_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
             }
 
             static::$handling_for = null;
-        } catch (MailChimp_WooCommerce_RateLimitError $e) {
+        } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
             mailchimp_error('member.sync.error', mailchimp_error_trace($e, "RateLimited :: user #{$this->id}"));
             $this->retry();

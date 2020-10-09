@@ -1,6 +1,6 @@
 <?php
 
-class MailChimp_WooCommerce_Rest_Api
+class SqualoMail_WooCommerce_Rest_Api
 {
     protected static $namespace = 'squalomail-for-woocommerce/v1';
 
@@ -111,9 +111,9 @@ class MailChimp_WooCommerce_Rest_Api
         $product_count = mailchimp_get_product_count();
         $order_count = mailchimp_get_order_count();
 
-        $mailchimp_total_promo_rules = $complete['coupons'] ? $promo_rules_count - mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_SingleCoupon') : 0;
-        $mailchimp_total_products = $complete['products'] ? $product_count - mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_Single_Product') : 0;
-        $mailchimp_total_orders = $complete['orders'] ? $order_count - mailchimp_get_remaining_jobs_count('MailChimp_WooCommerce_Single_Order') : 0;
+        $mailchimp_total_promo_rules = $complete['coupons'] ? $promo_rules_count - mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_SingleCoupon') : 0;
+        $mailchimp_total_products = $complete['products'] ? $product_count - mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Product') : 0;
+        $mailchimp_total_orders = $complete['orders'] ? $order_count - mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Order') : 0;
         // try {
         //     $promo_rules = $api->getPromoRules($store_id, 1, 1, 1);
         //     $mailchimp_total_promo_rules = $promo_rules['total_items'];

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class MailChimp_WooCommerce_Transform_Orders
+ * Class SqualoMail_WooCommerce_Transform_Orders
  */
-class MailChimp_WooCommerce_Transform_Orders
+class SqualoMail_WooCommerce_Transform_Orders
 {
     public $campaign_id = null;
     protected $is_syncing = false;
@@ -44,14 +44,14 @@ class MailChimp_WooCommerce_Transform_Orders
 
     /**
      * @param WP_Post $post
-     * @return MailChimp_WooCommerce_Order
+     * @return SqualoMail_WooCommerce_Order
      * @throws Exception
      */
     public function transform(WP_Post $post)
     {
         $woo = wc_get_order($post);
 
-        $order = new MailChimp_WooCommerce_Order();
+        $order = new SqualoMail_WooCommerce_Order();
 
         // if the woo get order returns an empty value, we need to skip the whole thing.
         if (empty($woo)) {
@@ -65,7 +65,7 @@ class MailChimp_WooCommerce_Transform_Orders
         if (!method_exists($woo, 'get_billing_email')) {
             $message = "Post ID {$post->ID} was an order refund. Skipping this.";
             if ($this->is_syncing) {
-                throw new MailChimp_WooCommerce_Error($message);
+                throw new SqualoMail_WooCommerce_Error($message);
             }
             mailchimp_error('initial_sync', $message, array('post' => $post, 'order_class' => get_class($woo)));
             return $order;
@@ -176,7 +176,7 @@ class MailChimp_WooCommerce_Transform_Orders
 
             // if we can't find the product, we need to populate this
             if (empty($product)) {
-                if (($empty_order_item = MailChimp_WooCommerce_Transform_Products::missing_order_item($order_detail))) {
+                if (($empty_order_item = SqualoMail_WooCommerce_Transform_Products::missing_order_item($order_detail))) {
                     $item->setFallbackTitle($empty_order_item->getTitle());
                     $item->setProductId($empty_order_item->getId());
                     $item->setProductVariantId($empty_order_item->getId());
@@ -192,7 +192,7 @@ class MailChimp_WooCommerce_Transform_Orders
                 $title = $order_detail->get_name();
                 
                 try {
-                    $deleted_product = MailChimp_WooCommerce_Transform_Products::deleted($pid, $title);
+                    $deleted_product = SqualoMail_WooCommerce_Transform_Products::deleted($pid, $title);
                 } catch (\Exception $e) {
                     mailchimp_log('order.items.error', "Order #{$woo->get_id()} :: Product {$pid} does not exist!");
                     continue;
@@ -222,12 +222,12 @@ class MailChimp_WooCommerce_Transform_Orders
 
     /**
      * @param WC_Abstract_Order $order
-     * @return MailChimp_WooCommerce_Customer
+     * @return SqualoMail_WooCommerce_Customer
      * @throws Exception
      */
     public function buildCustomerFromOrder($order)
     {
-        $customer = new MailChimp_WooCommerce_Customer();
+        $customer = new SqualoMail_WooCommerce_Customer();
 
         // attach the wordpress user to the Mailchimp customer object.
         $customer->setWordpressUser($order->get_user());
@@ -296,12 +296,12 @@ class MailChimp_WooCommerce_Transform_Orders
     /**
      * @param $key
      * @param WC_Order_Item_Product $order_detail
-     * @return MailChimp_WooCommerce_LineItem
+     * @return SqualoMail_WooCommerce_LineItem
      */
     protected function transformLineItem($key, $order_detail)
     {
         // fire up a new MC line item
-        $item = new MailChimp_WooCommerce_LineItem();
+        $item = new SqualoMail_WooCommerce_LineItem();
         $item->setId($key);
 
         // set the fallback title for the order detail name just in case we need to create a product
@@ -326,12 +326,12 @@ class MailChimp_WooCommerce_Transform_Orders
 
     /**
      * @param WC_Abstract_Order $order
-     * @return MailChimp_WooCommerce_Address
+     * @return SqualoMail_WooCommerce_Address
      */
     public function transformBillingAddress(WC_Abstract_Order $order)
     {
         // use the info from the order to compile an address.
-        $address = new MailChimp_WooCommerce_Address();
+        $address = new SqualoMail_WooCommerce_Address();
         $address->setAddress1($order->get_billing_address_1());
         $address->setAddress2($order->get_billing_address_2());
         $address->setCity($order->get_billing_city());
@@ -353,11 +353,11 @@ class MailChimp_WooCommerce_Transform_Orders
 
     /**
      * @param WC_Abstract_Order $order
-     * @return MailChimp_WooCommerce_Address
+     * @return SqualoMail_WooCommerce_Address
      */
     public function transformShippingAddress(WC_Abstract_Order $order)
     {
-        $address = new MailChimp_WooCommerce_Address();
+        $address = new SqualoMail_WooCommerce_Address();
 
         $address->setAddress1($order->get_shipping_address_1());
         $address->setAddress2($order->get_shipping_address_2());

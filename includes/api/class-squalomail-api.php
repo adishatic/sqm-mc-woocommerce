@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class MailChimp_WooCommerce_MailChimpApi
+ * Class SqualoMail_WooCommerce_MailChimpApi
  */
-class MailChimp_WooCommerce_MailChimpApi
+class SqualoMail_WooCommerce_MailChimpApi
 {
     protected $version = '3.0';
     protected $data_center = 'us2';
@@ -13,7 +13,7 @@ class MailChimp_WooCommerce_MailChimpApi
     protected static $instance = null;
 
     /**
-     * @return null|MailChimp_WooCommerce_MailChimpApi
+     * @return null|SqualoMail_WooCommerce_MailChimpApi
      */
     public static function getInstance()
     {
@@ -22,11 +22,11 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $api_key
-     * @return MailChimp_WooCommerce_MailChimpApi
+     * @return SqualoMail_WooCommerce_MailChimpApi
      */
     public static function constructInstance($api_key)
     {
-        return static::$instance = new MailChimp_WooCommerce_MailChimpApi($api_key);
+        return static::$instance = new SqualoMail_WooCommerce_MailChimpApi($api_key);
     }
 
     /**
@@ -90,7 +90,7 @@ class MailChimp_WooCommerce_MailChimpApi
         try {
             $profile = $this->get('/');
             return $return_profile ? $profile : true;
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw_error) {
                 throw $e;
             }
@@ -101,8 +101,8 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getProfile()
     {
@@ -112,8 +112,8 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getAuthorizedApps()
     {
@@ -124,8 +124,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getAuthorizedAppDetails($id)
     {
@@ -137,8 +137,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $client_secret
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function linkAuthorizedApp($client_id, $client_secret)
     {
@@ -150,8 +150,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $email
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function member($list_id, $email)
     {
@@ -163,8 +163,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $list_id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function members($list_id)
     {
@@ -176,8 +176,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $email
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function deleteMember($list_id, $email)
     {
@@ -193,8 +193,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param array $list_interests
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function subscribe($list_id, $email, $subscribed = true, $merge_fields = array(), $list_interests = array(), $language = null, $gdpr_fields = null)
     {
@@ -248,7 +248,7 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param array $list_interests
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
     public function update($list_id, $email, $subscribed = true, $merge_fields = array(), $list_interests = array(), $language = null, $gdpr_fields = null)
     {
@@ -339,7 +339,7 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $email
      * @param bool $fail_silently
      * @return array|bool|mixed|object|null
-     * @throws MailChimp_WooCommerce_Error|\Exception
+     * @throws SqualoMail_WooCommerce_Error|\Exception
      */
     public function updateMemberTags($list_id, $email, $fail_silently = false)
     {
@@ -371,8 +371,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param array $list_interests
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function updateOrCreate($list_id, $email, $subscribed = true, $merge_fields = array(), $list_interests = array(), $language = null)
     {
@@ -419,26 +419,26 @@ class MailChimp_WooCommerce_MailChimpApi
     }
 
     /**
-     * @param MailChimp_WooCommerce_CreateListSubmission $submission
+     * @param SqualoMail_WooCommerce_CreateListSubmission $submission
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
-    public function createList(MailChimp_WooCommerce_CreateListSubmission $submission)
+    public function createList(SqualoMail_WooCommerce_CreateListSubmission $submission)
     {
         return $this->post('lists', $submission->getSubmission());
     }
 
     /**
      * @param string $list_id
-     * @param MailChimp_WooCommerce_CreateListSubmission $submission
+     * @param SqualoMail_WooCommerce_CreateListSubmission $submission
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
-    public function updateList($list_id, MailChimp_WooCommerce_CreateListSubmission $submission)
+    public function updateList($list_id, SqualoMail_WooCommerce_CreateListSubmission $submission)
     {
         return $this->patch("lists/{$list_id}", $submission->getSubmission());
     }
@@ -448,15 +448,15 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param int $count
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getLists($as_list = false, $count = 100)
     {
         $result = $this->get('lists', array('count' => $count));
 
         if (!is_array($result)) {
-            throw new MailChimp_WooCommerce_RateLimitError('getting lists api failure, retry again.');
+            throw new SqualoMail_WooCommerce_RateLimitError('getting lists api failure, retry again.');
         }
 
         if ($as_list) {
@@ -494,14 +494,14 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getList($id)
     {
         $result = $this->get('lists/' . $id);
         if (!is_array($result)) {
-            throw new MailChimp_WooCommerce_RateLimitError('getting list api failure, retry again.');
+            throw new SqualoMail_WooCommerce_RateLimitError('getting list api failure, retry again.');
         }
         return $result;
     }
@@ -510,8 +510,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function deleteList($id)
     {
@@ -521,8 +521,8 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @return array|mixed
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getListsWithMergeFields()
     {
@@ -540,15 +540,15 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param int $count
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function mergeFields($list_id, $count = 10)
     {
         $result = $this->get("lists/$list_id/merge-fields", array('count' => $count,));
 
         if (!is_array($result)) {
-            throw new MailChimp_WooCommerce_RateLimitError('getting merge field api failure, retry again.');
+            throw new SqualoMail_WooCommerce_RateLimitError('getting merge field api failure, retry again.');
         }
 
         return $result;
@@ -558,8 +558,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $list_id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getInterestGroups($list_id)
     {
@@ -576,8 +576,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $group_id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getInterestGroupOptions($list_id, $group_id)
     {
@@ -597,8 +597,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param null $campaign_id
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function orders($store_id, $page = 1, $count = 10, \DateTime $since = null, $campaign_id = null)
     {
@@ -616,8 +616,8 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @param $store_id
      * @return int|mixed
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getOrderCount($store_id)
     {
@@ -631,22 +631,22 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @param $store_id
      * @param bool $throw
-     * @return bool|MailChimp_WooCommerce_Store
-     * @throws MailChimp_WooCommerce_Error
+     * @return bool|SqualoMail_WooCommerce_Store
+     * @throws SqualoMail_WooCommerce_Error
      */
     public function getStore($store_id, $throw = false)
     {
         try {
             $data = $this->get("ecommerce/stores/$store_id");
             if (!is_array($data)) {
-                throw new MailChimp_WooCommerce_RateLimitError('getting store api failure, retry again.');
+                throw new SqualoMail_WooCommerce_RateLimitError('getting store api failure, retry again.');
             }
             if (!isset($data['id']) || !isset($data['name'])) {
                 return false;
             }
-            $store = new MailChimp_WooCommerce_Store();
+            $store = new SqualoMail_WooCommerce_Store();
             return $store->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         } catch (\Exception $e) {
@@ -697,7 +697,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
              return $this->get("connected-sites/{$store_id}");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         } catch (\Exception $e) {
             return false;
@@ -712,7 +712,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return $this->post("connected-sites/{$store_id}/actions/verify-script-installation", array());
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         } catch (\Exception $e) {
             return false;
@@ -734,12 +734,12 @@ class MailChimp_WooCommerce_MailChimpApi
             $response = array();
 
             foreach ($data['stores'] as $store_data) {
-                $store = new MailChimp_WooCommerce_Store();
+                $store = new SqualoMail_WooCommerce_Store();
                 $response[] = $store->fromArray($store_data);
             }
 
             return $response;
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         } catch (\Exception $e) {
             return false;
@@ -772,17 +772,17 @@ class MailChimp_WooCommerce_MailChimpApi
     }
 
     /**
-     * @param MailChimp_WooCommerce_Store $store
+     * @param SqualoMail_WooCommerce_Store $store
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Store
+     * @return bool|SqualoMail_WooCommerce_Store
      * @throws Exception
      */
-    public function addStore(MailChimp_WooCommerce_Store $store, $silent = true)
+    public function addStore(SqualoMail_WooCommerce_Store $store, $silent = true)
     {
         try {
             $this->validateStoreSubmission($store);
             $data = $this->post("ecommerce/stores", $store->toArray());
-            $store = new MailChimp_WooCommerce_Store();
+            $store = new SqualoMail_WooCommerce_Store();
             return $store->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -791,17 +791,17 @@ class MailChimp_WooCommerce_MailChimpApi
     }
 
     /**
-     * @param MailChimp_WooCommerce_Store $store
+     * @param SqualoMail_WooCommerce_Store $store
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Store
+     * @return bool|SqualoMail_WooCommerce_Store
      * @throws Exception
      */
-    public function updateStore(MailChimp_WooCommerce_Store $store, $silent = true)
+    public function updateStore(SqualoMail_WooCommerce_Store $store, $silent = true)
     {
         try {
             $this->validateStoreSubmission($store);
             $data = $this->patch("ecommerce/stores/{$store->getId()}", $store->toArray());
-            $store = new MailChimp_WooCommerce_Store();
+            $store = new SqualoMail_WooCommerce_Store();
             return $store->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -817,7 +817,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/$store_id");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             mailchimp_error("delete_store {$store_id}", $e->getMessage());
             return false;
         } catch (\Exception $e) {
@@ -830,7 +830,7 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $store_id
      * @param $customer_id
      * @param boolean $throw
-     * @return bool|MailChimp_WooCommerce_Customer
+     * @return bool|SqualoMail_WooCommerce_Customer
      * @throws Exception
      */
     public function getCustomer($store_id, $customer_id, $throw = false)
@@ -838,33 +838,33 @@ class MailChimp_WooCommerce_MailChimpApi
         try {
             $data = $this->get("ecommerce/stores/$store_id/customers/$customer_id");
             if (!is_array($data)) {
-                throw new MailChimp_WooCommerce_RateLimitError('getting customer api failure, retry again.');
+                throw new SqualoMail_WooCommerce_RateLimitError('getting customer api failure, retry again.');
             }
-            $customer = new MailChimp_WooCommerce_Customer();
+            $customer = new SqualoMail_WooCommerce_Customer();
             return $customer->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
     }
 
     /**
-     * @param MailChimp_WooCommerce_Customer $customer
-     * @return bool|MailChimp_WooCommerce_Customer
+     * @param SqualoMail_WooCommerce_Customer $customer
+     * @return bool|SqualoMail_WooCommerce_Customer
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
-    public function addCustomer(MailChimp_WooCommerce_Customer $customer)
+    public function addCustomer(SqualoMail_WooCommerce_Customer $customer)
     {
         if (!($this->validateStoreSubmission($customer))) {
             return false;
         }
         $data = $this->post("ecommerce/stores", $customer->toArray());
         if (!is_array($data)) {
-            throw new MailChimp_WooCommerce_RateLimitError('adding customer api failure, retry again.');
+            throw new SqualoMail_WooCommerce_RateLimitError('adding customer api failure, retry again.');
         }
-        $customer = new MailChimp_WooCommerce_Customer();
+        $customer = new SqualoMail_WooCommerce_Customer();
         return $customer->fromArray($data);
     }
 
@@ -874,8 +874,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param int $count
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function carts($store_id, $page = 1, $count = 10)
     {
@@ -890,13 +890,13 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Cart $cart
+     * @param SqualoMail_WooCommerce_Cart $cart
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Cart
+     * @return bool|SqualoMail_WooCommerce_Cart
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function addCart($store_id, MailChimp_WooCommerce_Cart $cart, $silent = true)
+    public function addCart($store_id, SqualoMail_WooCommerce_Cart $cart, $silent = true)
     {
         try {
             $email = $cart->getCustomer()->getEmailAddress();
@@ -908,9 +908,9 @@ class MailChimp_WooCommerce_MailChimpApi
             mailchimp_debug('api.addCart', "Adding Cart :: {$email}", $data = $cart->toArray());
 
             $data = $this->post("ecommerce/stores/$store_id/carts", $data);
-            $cart = new MailChimp_WooCommerce_Cart();
+            $cart = new SqualoMail_WooCommerce_Cart();
             return $cart->setStoreID($store_id)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if (!$silent) throw $e;
             mailchimp_log('api.addCart', $e->getMessage());
             return false;
@@ -922,13 +922,13 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Cart $cart
+     * @param SqualoMail_WooCommerce_Cart $cart
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Cart
+     * @return bool|SqualoMail_WooCommerce_Cart
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function updateCart($store_id, MailChimp_WooCommerce_Cart $cart, $silent = true)
+    public function updateCart($store_id, SqualoMail_WooCommerce_Cart $cart, $silent = true)
     {
         try {
             $email = $cart->getCustomer()->getEmailAddress();
@@ -940,9 +940,9 @@ class MailChimp_WooCommerce_MailChimpApi
             mailchimp_debug('api.updateCart', "Updating Cart :: {$email}", $data = $cart->toArrayForUpdate());
 
             $data = $this->patch("ecommerce/stores/$store_id/carts/{$cart->getId()}", $data);
-            $cart = new MailChimp_WooCommerce_Cart();
+            $cart = new SqualoMail_WooCommerce_Cart();
             return $cart->setStoreID($store_id)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if (!$silent) throw $e;
             mailchimp_log('api.updateCart', $e->getMessage());
             return false;
@@ -955,15 +955,15 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @param $store_id
      * @param $id
-     * @return bool|MailChimp_WooCommerce_Cart
+     * @return bool|SqualoMail_WooCommerce_Cart
      */
     public function getCart($store_id, $id)
     {
         try {
             $data = $this->get("ecommerce/stores/$store_id/carts/$id");
-            $cart = new MailChimp_WooCommerce_Cart();
+            $cart = new SqualoMail_WooCommerce_Cart();
             return $cart->setStoreID($store_id)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         } catch (\Exception $e) {
             return false;
@@ -979,7 +979,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/$store_id/carts/$id");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         } catch (\Exception $e) {
             return false;
@@ -988,22 +988,22 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Customer $customer
+     * @param SqualoMail_WooCommerce_Customer $customer
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Customer
+     * @return bool|SqualoMail_WooCommerce_Customer
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function updateCustomer($store_id, MailChimp_WooCommerce_Customer $customer, $silent = true)
+    public function updateCustomer($store_id, SqualoMail_WooCommerce_Customer $customer, $silent = true)
     {
         try {
             if (!$this->validateStoreSubmission($customer)) {
                 return false;
             }
             $data = $this->patch("ecommerce/stores/$store_id/customers/{$customer->getId()}", $customer->toArray());
-            $customer = new MailChimp_WooCommerce_Customer();
+            $customer = new SqualoMail_WooCommerce_Customer();
             return $customer->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if (!$silent) throw $e;
             return false;
         }
@@ -1019,19 +1019,19 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/$store_id/customers/$customer_id");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         }
     }
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Order $order
+     * @param SqualoMail_WooCommerce_Order $order
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Order
+     * @return bool|SqualoMail_WooCommerce_Order
      * @throws Exception
      */
-    public function addStoreOrder($store_id, MailChimp_WooCommerce_Order $order, $silent = true)
+    public function addStoreOrder($store_id, SqualoMail_WooCommerce_Order $order, $silent = true)
     {
         try {
             if (!$this->validateStoreSubmission($order)) {
@@ -1053,7 +1053,7 @@ class MailChimp_WooCommerce_MailChimpApi
             $this->updateMemberTags(mailchimp_get_list_id(), $email_address, true);
 
             update_option('mailchimp-woocommerce-resource-last-updated', time());
-            $order = new MailChimp_WooCommerce_Order();
+            $order = new SqualoMail_WooCommerce_Order();
             return $order->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -1064,12 +1064,12 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Order $order
+     * @param SqualoMail_WooCommerce_Order $order
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Order
+     * @return bool|SqualoMail_WooCommerce_Order
      * @throws Exception
      */
-    public function updateStoreOrder($store_id, MailChimp_WooCommerce_Order $order, $silent = true)
+    public function updateStoreOrder($store_id, SqualoMail_WooCommerce_Order $order, $silent = true)
     {
         try {
             if (!$this->validateStoreSubmission($order)) {
@@ -1099,7 +1099,7 @@ class MailChimp_WooCommerce_MailChimpApi
             // update the member tags but fail silently just in case.
             $this->updateMemberTags(mailchimp_get_list_id(), $email_address, true);
 
-            $order = new MailChimp_WooCommerce_Order();
+            $order = new SqualoMail_WooCommerce_Order();
             return $order->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -1112,7 +1112,7 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $store_id
      * @param $order_id
      * @param boolean $throw
-     * @return bool|MailChimp_WooCommerce_Order
+     * @return bool|SqualoMail_WooCommerce_Order
      * @throws Exception
      */
     public function getStoreOrder($store_id, $order_id, $throw = false)
@@ -1120,11 +1120,11 @@ class MailChimp_WooCommerce_MailChimpApi
         try {
             $data = $this->get("ecommerce/stores/$store_id/orders/$order_id");
             if (!is_array($data)) {
-                throw new MailChimp_WooCommerce_RateLimitError('getting order api failure, retry again.');
+                throw new SqualoMail_WooCommerce_RateLimitError('getting order api failure, retry again.');
             }
-            $order = new MailChimp_WooCommerce_Order();
+            $order = new SqualoMail_WooCommerce_Order();
             return $order->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
@@ -1140,7 +1140,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/$store_id/orders/$order_id");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         }
     }
@@ -1156,7 +1156,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/{$store_id}/orders/{$order_id}/lines/{$line_id}");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         }
     }
@@ -1165,7 +1165,7 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $store_id
      * @param $product_id
      * @param boolean $throw
-     * @return bool|MailChimp_WooCommerce_Product
+     * @return bool|SqualoMail_WooCommerce_Product
      * @throws Exception
      */
     public function getStoreProduct($store_id, $product_id, $throw = false)
@@ -1173,11 +1173,11 @@ class MailChimp_WooCommerce_MailChimpApi
         try {
             $data = $this->get("ecommerce/stores/$store_id/products/$product_id");
             if (!is_array($data)) {
-                throw new MailChimp_WooCommerce_RateLimitError('getting product api failure, retry again.');
+                throw new SqualoMail_WooCommerce_RateLimitError('getting product api failure, retry again.');
             }
-            $product = new MailChimp_WooCommerce_Product();
+            $product = new SqualoMail_WooCommerce_Product();
             return $product->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
@@ -1189,8 +1189,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param int $count
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function products($store_id, $page = 1, $count = 10)
     {
@@ -1205,12 +1205,12 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Product $product
+     * @param SqualoMail_WooCommerce_Product $product
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Product
+     * @return bool|SqualoMail_WooCommerce_Product
      * @throws Exception
      */
-    public function addStoreProduct($store_id, MailChimp_WooCommerce_Product $product, $silent = true)
+    public function addStoreProduct($store_id, SqualoMail_WooCommerce_Product $product, $silent = true)
     {
         try {
             if (!$this->validateStoreSubmission($product)) {
@@ -1218,7 +1218,7 @@ class MailChimp_WooCommerce_MailChimpApi
             }
             $data = $this->post("ecommerce/stores/$store_id/products", $product->toArray());
             update_option('mailchimp-woocommerce-resource-last-updated', time());
-            $product = new MailChimp_WooCommerce_Product();
+            $product = new SqualoMail_WooCommerce_Product();
             return $product->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -1229,12 +1229,12 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_Product $product
+     * @param SqualoMail_WooCommerce_Product $product
      * @param bool $silent
-     * @return bool|MailChimp_WooCommerce_Product
+     * @return bool|SqualoMail_WooCommerce_Product
      * @throws Exception
      */
-    public function updateStoreProduct($store_id, MailChimp_WooCommerce_Product $product, $silent = true)
+    public function updateStoreProduct($store_id, SqualoMail_WooCommerce_Product $product, $silent = true)
     {
         try {
             if (!$this->validateStoreSubmission($product)) {
@@ -1242,7 +1242,7 @@ class MailChimp_WooCommerce_MailChimpApi
             }
             $data = $this->patch("ecommerce/stores/$store_id/products/{$product->getId()}", $product->toArray());
             update_option('mailchimp-woocommerce-resource-last-updated', time());
-            $product = new MailChimp_WooCommerce_Product();
+            $product = new SqualoMail_WooCommerce_Product();
             return $product->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -1252,16 +1252,16 @@ class MailChimp_WooCommerce_MailChimpApi
     }
 
     /**
-     * @param MailChimp_WooCommerce_Order $order
+     * @param SqualoMail_WooCommerce_Order $order
      * @return array
      */
-    public function handleProductsMissingFromAPI(MailChimp_WooCommerce_Order $order)
+    public function handleProductsMissingFromAPI(SqualoMail_WooCommerce_Order $order)
     {
         $missing_products = array();
         foreach ($order->items() as $order_item) {
-            /** @var \MailChimp_WooCommerce_LineItem $order_item */
+            /** @var \SqualoMail_WooCommerce_LineItem $order_item */
             // get the line item name from the order detail just in case we need that title for the product.
-            $job = new MailChimp_WooCommerce_Single_Product($order_item->getProductId(), $order_item->getFallbackTitle());
+            $job = new SqualoMail_WooCommerce_Single_Product($order_item->getProductId(), $order_item->getFallbackTitle());
             if ($missing_products[$order_item->getId()] = $job->createModeOnly()->fromOrderItem($order_item)->handle()) {
                 mailchimp_debug("missing_products.fallback", "Product {$order_item->getId()} had to be re-pushed into Mailchimp");
             }
@@ -1270,16 +1270,16 @@ class MailChimp_WooCommerce_MailChimpApi
     }
 
     /**
-     * @return MailChimp_WooCommerce_Product
+     * @return SqualoMail_WooCommerce_Product
      */
     public function createEmptyLineItemProductPlaceholder()
     {
-        $product = new MailChimp_WooCommerce_Product();
+        $product = new SqualoMail_WooCommerce_Product();
         $product->setId('empty_line_item_placeholder');
         $product->setTitle('Empty Line Item Placeholder');
         $product->setVendor('deleted');
 
-        $variation = new MailChimp_WooCommerce_ProductVariation();
+        $variation = new SqualoMail_WooCommerce_ProductVariation();
         $variation->setId($product->getId());
         $variation->setTitle($product->getTitle());
         $variation->setInventoryQuantity(0);
@@ -1314,28 +1314,28 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/$store_id/products/$product_id");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         }
     }
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_PromoRule $rule
+     * @param SqualoMail_WooCommerce_PromoRule $rule
      * @param bool $throw
-     * @return bool|MailChimp_WooCommerce_PromoRule
+     * @return bool|SqualoMail_WooCommerce_PromoRule
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function addPromoRule($store_id, MailChimp_WooCommerce_PromoRule $rule, $throw = true)
+    public function addPromoRule($store_id, SqualoMail_WooCommerce_PromoRule $rule, $throw = true)
     {
         try {
             if (($response = $this->updatePromoRule($store_id, $rule, false))) {
                 return $response;
             }
             $data = $this->post("ecommerce/stores/{$store_id}/promo-rules", $rule->toArray());
-            return (new MailChimp_WooCommerce_PromoRule)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+            return (new SqualoMail_WooCommerce_PromoRule)->fromArray($data);
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
@@ -1343,18 +1343,18 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_PromoRule $rule
+     * @param SqualoMail_WooCommerce_PromoRule $rule
      * @param bool $throw
-     * @return bool|MailChimp_WooCommerce_PromoRule
+     * @return bool|SqualoMail_WooCommerce_PromoRule
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function updatePromoRule($store_id, MailChimp_WooCommerce_PromoRule $rule, $throw = true)
+    public function updatePromoRule($store_id, SqualoMail_WooCommerce_PromoRule $rule, $throw = true)
     {
         try {
             $data = $this->patch("ecommerce/stores/{$store_id}/promo-rules/{$rule->getId()}", $rule->toArray());
-            return (new MailChimp_WooCommerce_PromoRule)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+            return (new SqualoMail_WooCommerce_PromoRule)->fromArray($data);
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
@@ -1369,10 +1369,10 @@ class MailChimp_WooCommerce_MailChimpApi
     public function deletePromoRule($store_id, $rule)
     {
         try {
-            $id = $rule instanceof MailChimp_WooCommerce_PromoRule ? $rule->getId() : $rule;
+            $id = $rule instanceof SqualoMail_WooCommerce_PromoRule ? $rule->getId() : $rule;
             //print_r(array('id' => $id, 'store' => $store_id));die();
             return (bool) $this->delete("ecommerce/stores/{$store_id}/promo-rules/{$id}");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             //\Log::error("MC::deletePromoRule :: {$rule->getId()} :: {$e->getMessage()} on {$e->getLine()} in {$e->getFile()}");
             return false;
         }
@@ -1384,8 +1384,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param int $count
      * @return array
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getPromoRuleIds($store_id, $page = 1, $count = 10)
     {
@@ -1411,8 +1411,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param bool $return_original
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getPromoRules($store_id, $page = 1, $count = 10, $return_original = false)
     {
@@ -1428,7 +1428,7 @@ class MailChimp_WooCommerce_MailChimpApi
 
         $rules = array();
         foreach ($result['promo_rules'] as $rule_data) {
-            $rule = new MailChimp_WooCommerce_PromoRule();
+            $rule = new SqualoMail_WooCommerce_PromoRule();
             $rule->fromArray($rule_data);
             $rules[] = $rule;
         }
@@ -1443,8 +1443,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param bool $return_original
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     public function getPromoCodesForRule($store_id, $rule_id, $page = 1, $count = 10, $return_original = false)
     {
@@ -1460,7 +1460,7 @@ class MailChimp_WooCommerce_MailChimpApi
 
         $rules = array();
         foreach ($result as $rule_data) {
-            $rule = new MailChimp_WooCommerce_PromoCode();
+            $rule = new SqualoMail_WooCommerce_PromoCode();
             $rule->fromArray($rule_data);
             $rules[] = $rule;
         }
@@ -1471,37 +1471,37 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $store_id
      * @param $rule_id
      * @param $code_id
-     * @return bool|MailChimp_WooCommerce_PromoCode
+     * @return bool|SqualoMail_WooCommerce_PromoCode
      * @throws Exception
      */
     public function getPromoCodeForRule($store_id, $rule_id, $code_id)
     {
         try {
             $data = $this->get("ecommerce/stores/{$store_id}/promo-rules/{$rule_id}/promo-codes/{$code_id}");
-            return (new MailChimp_WooCommerce_PromoCode)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+            return (new SqualoMail_WooCommerce_PromoCode)->fromArray($data);
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         }
     }
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_PromoRule $rule
-     * @param MailChimp_WooCommerce_PromoCode $code
+     * @param SqualoMail_WooCommerce_PromoRule $rule
+     * @param SqualoMail_WooCommerce_PromoCode $code
      * @param bool $throw
-     * @return bool|MailChimp_WooCommerce_PromoCode
+     * @return bool|SqualoMail_WooCommerce_PromoCode
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function addPromoCodeForRule($store_id, MailChimp_WooCommerce_PromoRule $rule, MailChimp_WooCommerce_PromoCode $code, $throw = true)
+    public function addPromoCodeForRule($store_id, SqualoMail_WooCommerce_PromoRule $rule, SqualoMail_WooCommerce_PromoCode $code, $throw = true)
     {
         try {
             if (($result = $this->updatePromoCodeForRule($store_id, $rule, $code, false))) {
                 return $result;
             }
             $data = $this->post("ecommerce/stores/{$store_id}/promo-rules/{$rule->getId()}/promo-codes", $code->toArray());
-            return (new MailChimp_WooCommerce_PromoCode)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+            return (new SqualoMail_WooCommerce_PromoCode)->fromArray($data);
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
@@ -1509,19 +1509,19 @@ class MailChimp_WooCommerce_MailChimpApi
 
     /**
      * @param $store_id
-     * @param MailChimp_WooCommerce_PromoRule $rule
-     * @param MailChimp_WooCommerce_PromoCode $code
+     * @param SqualoMail_WooCommerce_PromoRule $rule
+     * @param SqualoMail_WooCommerce_PromoCode $code
      * @param bool $throw
-     * @return bool|MailChimp_WooCommerce_PromoCode
+     * @return bool|SqualoMail_WooCommerce_PromoCode
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
-    public function updatePromoCodeForRule($store_id, MailChimp_WooCommerce_PromoRule $rule, MailChimp_WooCommerce_PromoCode $code, $throw = true)
+    public function updatePromoCodeForRule($store_id, SqualoMail_WooCommerce_PromoRule $rule, SqualoMail_WooCommerce_PromoCode $code, $throw = true)
     {
         try {
             $data = $this->patch("ecommerce/stores/{$store_id}/promo-rules/{$rule->getId()}/promo-codes/{$code->getId()}", $code->toArray());
-            return (new MailChimp_WooCommerce_PromoCode)->fromArray($data);
-        } catch (MailChimp_WooCommerce_Error $e) {
+            return (new SqualoMail_WooCommerce_PromoCode)->fromArray($data);
+        } catch (SqualoMail_WooCommerce_Error $e) {
             if ($throw) throw $e;
             return false;
         }
@@ -1537,7 +1537,7 @@ class MailChimp_WooCommerce_MailChimpApi
     {
         try {
             return (bool) $this->delete("ecommerce/stores/{$store_id}/promo-rules/{$rule_id}/promo-codes/{$code_id}");
-        } catch (MailChimp_WooCommerce_Error $e) {
+        } catch (SqualoMail_WooCommerce_Error $e) {
             return false;
         } catch (\Exception $e) {
             return false;
@@ -1550,19 +1550,19 @@ class MailChimp_WooCommerce_MailChimpApi
      */
     protected function validateStoreSubmission($target)
     {
-        if ($target instanceof MailChimp_WooCommerce_Order) {
+        if ($target instanceof SqualoMail_WooCommerce_Order) {
             return $this->validateStoreOrder($target);
-        } else if ($target instanceof MailChimp_WooCommerce_Customer) {
+        } else if ($target instanceof SqualoMail_WooCommerce_Customer) {
             return $this->validateStoreCustomer($target);
         }
         return true;
     }
 
     /**
-     * @param MailChimp_WooCommerce_Order $order
+     * @param SqualoMail_WooCommerce_Order $order
      * @return bool
      */
-    protected function validateStoreOrder(MailChimp_WooCommerce_Order $order)
+    protected function validateStoreOrder(SqualoMail_WooCommerce_Order $order)
     {
         if (!$this->validateStoreCustomer($order->getCustomer())) {
             return false;
@@ -1571,10 +1571,10 @@ class MailChimp_WooCommerce_MailChimpApi
     }
 
     /**
-     * @param MailChimp_WooCommerce_Customer $customer
+     * @param SqualoMail_WooCommerce_Customer $customer
      * @return bool
      */
-    protected function validateStoreCustomer(MailChimp_WooCommerce_Customer $customer)
+    protected function validateStoreCustomer(SqualoMail_WooCommerce_Customer $customer)
     {
         $email = $customer->getEmailAddress();
 
@@ -1632,8 +1632,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param null $params
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     protected function delete($url, $params = null)
     {
@@ -1651,8 +1651,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param null $params
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     protected function get($url, $params = null)
     {
@@ -1670,7 +1670,7 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $body
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
     protected function patch($url, $body)
     {
@@ -1696,8 +1696,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $body
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     protected function post($url, $body)
     {
@@ -1722,8 +1722,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $body
      * @return array|mixed|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     protected function put($url, $body)
     {
@@ -1808,8 +1808,8 @@ class MailChimp_WooCommerce_MailChimpApi
      * @param $curl
      * @return array|mixed|bool|null|object
      * @throws Exception
-     * @throws MailChimp_WooCommerce_Error
-     * @throws MailChimp_WooCommerce_ServerError
+     * @throws SqualoMail_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_ServerError
      */
     protected function processCurlResponse($curl)
     {
@@ -1820,7 +1820,7 @@ class MailChimp_WooCommerce_MailChimpApi
         curl_close($curl);
 
         if ($err) {
-            throw new MailChimp_WooCommerce_Error('CURL error :: '.$err, '500');
+            throw new SqualoMail_WooCommerce_Error('CURL error :: '.$err, '500');
         }
 
         $data = json_decode($response, true);
@@ -1830,7 +1830,7 @@ class MailChimp_WooCommerce_MailChimpApi
 
         // let's block these from doing anything below because the API seems to be having trouble.
         if ($http_code <= 99) {
-            throw new MailChimp_WooCommerce_RateLimitError('API is failing - try again.');
+            throw new SqualoMail_WooCommerce_RateLimitError('API is failing - try again.');
         }
 
         // possibily a successful DELETE operation
@@ -1851,19 +1851,19 @@ class MailChimp_WooCommerce_MailChimpApi
 
         if ($http_code >= 400 && $http_code <= 500) {
             if ($http_code == 403) {
-                throw new MailChimp_WooCommerce_RateLimitError();
+                throw new SqualoMail_WooCommerce_RateLimitError();
             }
 
-            throw new MailChimp_WooCommerce_Error($data['title'] .' :: '.$data['detail'], $data['status']);
+            throw new SqualoMail_WooCommerce_Error($data['title'] .' :: '.$data['detail'], $data['status']);
         }
 
         if ($http_code >= 500) {
-            throw new MailChimp_WooCommerce_ServerError($data['detail'], $data['status']);
+            throw new SqualoMail_WooCommerce_ServerError($data['detail'], $data['status']);
         }
 
         if (!is_array($data)) {
             mailchimp_error("api.debug", 'fallback when data is empty from API', array('url' => $called_url, 'response' => $response));
-            throw new MailChimp_WooCommerce_ServerError('API response could not be decoded.');
+            throw new SqualoMail_WooCommerce_ServerError('API response could not be decoded.');
         }
 
         return null;
@@ -1872,7 +1872,7 @@ class MailChimp_WooCommerce_MailChimpApi
     /**
      * @param array $data
      * @return bool
-     * @throws MailChimp_WooCommerce_Error
+     * @throws SqualoMail_WooCommerce_Error
      */
     protected function checkForErrors(array $data)
     {
@@ -1882,15 +1882,15 @@ class MailChimp_WooCommerce_MailChimpApi
             foreach ($data['errors'] as $error) {
                 $message .= '<p>'.$error['field'].': '.$error['message'].'</p>';
             }
-            throw new MailChimp_WooCommerce_Error($message, $data['status']);
+            throw new SqualoMail_WooCommerce_Error($message, $data['status']);
         }
 
         // make sure the response is correct from the data in the response array
         if (isset($data['status']) && $data['status'] >= 400) {
             if (isset($data['http_code']) && $data['http_code'] == 403) {
-                throw new MailChimp_WooCommerce_RateLimitError();
+                throw new SqualoMail_WooCommerce_RateLimitError();
             }
-            throw new MailChimp_WooCommerce_Error($data['detail'], $data['status']);
+            throw new SqualoMail_WooCommerce_Error($data['detail'], $data['status']);
         }
 
         return false;

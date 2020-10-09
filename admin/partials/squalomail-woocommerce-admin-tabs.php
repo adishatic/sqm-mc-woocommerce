@@ -1,6 +1,6 @@
 <?php
 // Grab plugin admin object
-$handler = MailChimp_WooCommerce_Admin::connect();
+$handler = SqualoMail_WooCommerce_Admin::connect();
 
 // Grab all options for this particular tab we're viewing.
 $options = get_option($this->plugin_name, array());

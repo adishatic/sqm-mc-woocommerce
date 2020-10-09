@@ -8,7 +8,7 @@
  * Date: 7/13/16
  * Time: 2:32 PM
  */
-class MailChimp_WooCommerce_Api
+class SqualoMail_WooCommerce_Api
 {
     protected static $filterable_actions = array(
         'paginate-resource',
@@ -81,19 +81,19 @@ class MailChimp_WooCommerce_Api
 
     /**
      * @param $resource
-     * @return bool|MailChimp_WooCommerce_Transform_Orders|MailChimp_WooCommerce_Transform_Products|MailChimp_WooCommerce_Transform_Coupons
+     * @return bool|SqualoMail_WooCommerce_Transform_Orders|SqualoMail_WooCommerce_Transform_Products|SqualoMail_WooCommerce_Transform_Coupons
      */
     public function engine($resource)
     {
         switch ($resource) {
             case 'products' :
-                return new MailChimp_WooCommerce_Transform_Products();
+                return new SqualoMail_WooCommerce_Transform_Products();
                 break;
             case 'orders' :
-                return new MailChimp_WooCommerce_Transform_Orders();
+                return new SqualoMail_WooCommerce_Transform_Orders();
                 break;
             case 'coupons':
-                return new MailChimp_WooCommerce_Transform_Coupons();
+                return new SqualoMail_WooCommerce_Transform_Coupons();
             default:
                 return false;
         }

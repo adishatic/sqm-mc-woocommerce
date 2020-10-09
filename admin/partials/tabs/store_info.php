@@ -1,6 +1,6 @@
 <?php
 
-$handler = MailChimp_WooCommerce_Admin::connect();
+$handler = SqualoMail_WooCommerce_Admin::connect();
 
 // if we don't have valid campaign defaults we need to redirect back to the 'campaign_defaults' tab.
 if (!$handler->hasValidApiKey()) {
@@ -12,7 +12,7 @@ if (!$handler->hasValidApiKey()) {
     <input type="hidden" name="mailchimp_active_settings_tab" value="store_info"/>
     <?php 
         $current_currency = isset($options['store_currency_code']) ? $options['store_currency_code'] : get_woocommerce_currency();
-        $current_currency_data = MailChimp_WooCommerce_CurrencyCodes::getCurrency($current_currency);
+        $current_currency_data = SqualoMail_WooCommerce_CurrencyCodes::getCurrency($current_currency);
     ?>
     <input type="hidden" value="<?php echo isset($current_currency_data) ? $current_currency . ' | ' .  $current_currency_data['name']: $current_currency ?>" disabled/>
     <input type="hidden" value="<?php echo mailchimp_get_timezone(true)?>" disabled/>

@@ -10,7 +10,7 @@
  *
  * @link              https://mailchimp.com
  * @since             1.0.0
- * @package           MailChimp_WooCommerce
+ * @package           SqualoMail_WooCommerce
  *
  * @wordpress-plugin
  * Plugin Name:       SqualoMail for WooCommerce
