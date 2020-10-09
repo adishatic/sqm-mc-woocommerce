@@ -11,7 +11,7 @@ if (!$handler->hasValidStoreInfo()) {
 }
 ?>
 
-<input type="hidden" name="mailchimp_active_settings_tab" value="campaign_defaults"/>
+<input type="hidden" name="squalomail_active_settings_tab" value="campaign_defaults"/>
 
 <fieldset class="">
     <legend>

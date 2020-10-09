@@ -1,19 +1,19 @@
 var mailchimp,
-    mailchimp_cart,
-    mailchimp_billing_email,
-    mailchimp_username_email,
-    mailchimp_registration_email,
-    mailchimp_submitted_email = false,
+    squalomail_cart,
+    squalomail_billing_email,
+    squalomail_username_email,
+    squalomail_registration_email,
+    squalomail_submitted_email = false,
     mailchimpReady = function (a) { /in/.test(document.readyState) ? setTimeout("mailchimpReady(" + a + ")", 9) : a(); };
 
 function mailchimpGetCurrentUserByHash(a) {
     try {
-        var b = mailchimp_public_data.ajax_url + "?action=mailchimp_get_user_by_hash&hash=" + a, c = new XMLHttpRequest;
+        var b = squalomail_public_data.ajax_url + "?action=squalomail_get_user_by_hash&hash=" + a, c = new XMLHttpRequest;
         c.open("POST", b, !0), c.onload = function () {
             if (c.status >= 200 && c.status < 400) {
                 var a = JSON.parse(c.responseText);
                 if (!a) return;
-                mailchimp_cart.valueEmail(a.email) && mailchimp_cart.setEmail(a.email);
+                squalomail_cart.valueEmail(a.email) && squalomail_cart.setEmail(a.email);
             }
         };
         c.onerror = function () {
@@ -31,16 +31,16 @@ function mailchimpHandleBillingEmail(selector) {
         if (!selector) selector = "#billing_email";
         var a = document.querySelector(selector);
         var b = void 0 !== a ? a.value : "";
-        if (!mailchimp_cart.valueEmail(b) || mailchimp_submitted_email === b) { return false; }
-        mailchimp_cart.setEmail(b);
-        var c = mailchimp_public_data.ajax_url + "?action=mailchimp_set_user_by_email&email=" + b + "&mc_language=" + mailchimp_public_data.language;
+        if (!squalomail_cart.valueEmail(b) || squalomail_submitted_email === b) { return false; }
+        squalomail_cart.setEmail(b);
+        var c = squalomail_public_data.ajax_url + "?action=squalomail_set_user_by_email&email=" + b + "&mc_language=" + squalomail_public_data.language;
         var d = new XMLHttpRequest;
         d.open("POST", c, !0);
         d.onload = function () {
             var successful = d.status >= 200 && d.status < 400;
             var msg = successful ? "mailchimp.handle_billing_email.request.success" : "mailchimp.handle_billing_email.request.error";
             if (successful) {
-                mailchimp_submitted_email = b;
+                squalomail_submitted_email = b;
             }
             console.log(msg, d.responseText);
         };
@@ -52,7 +52,7 @@ function mailchimpHandleBillingEmail(selector) {
         d.send();
         return true;
     } catch (a) {
-        console.log("mailchimp.handle_billing_email.error", a); mailchimp_submitted_email = !1
+        console.log("mailchimp.handle_billing_email.error", a); squalomail_submitted_email = !1
     }
 }
 
@@ -168,7 +168,7 @@ function mailchimpHandleBillingEmail(selector) {
     }(document);
 
     mailchimp = {storage: h, utils: g};
-    mailchimp_cart = new mailchimpCart;
+    squalomail_cart = new mailchimpCart;
 }();
 
 mailchimpReady(function () {
@@ -181,23 +181,23 @@ mailchimpReady(function () {
         var b = mailchimp.utils.getQueryStringVars();
         void 0 !== b.mc_cart_id && mailchimpGetCurrentUserByHash(b.mc_cart_id);
 
-        mailchimp_username_email = document.querySelector("#username");
-        mailchimp_billing_email = document.querySelector("#billing_email");
-        mailchimp_registration_email = document.querySelector("#reg_email");
+        squalomail_username_email = document.querySelector("#username");
+        squalomail_billing_email = document.querySelector("#billing_email");
+        squalomail_registration_email = document.querySelector("#reg_email");
 
-        if (mailchimp_billing_email) {
-            mailchimp_billing_email.onblur = function () { mailchimpHandleBillingEmail('#billing_email'); };
-            mailchimp_billing_email.onfocus = function () { mailchimpHandleBillingEmail('#billing_email'); }
+        if (squalomail_billing_email) {
+            squalomail_billing_email.onblur = function () { mailchimpHandleBillingEmail('#billing_email'); };
+            squalomail_billing_email.onfocus = function () { mailchimpHandleBillingEmail('#billing_email'); }
         }
 
-        if (mailchimp_username_email) {
-            mailchimp_username_email.onblur = function () { mailchimpHandleBillingEmail('#username'); };
-            mailchimp_username_email.onfocus = function () { mailchimpHandleBillingEmail('#username'); }
+        if (squalomail_username_email) {
+            squalomail_username_email.onblur = function () { mailchimpHandleBillingEmail('#username'); };
+            squalomail_username_email.onfocus = function () { mailchimpHandleBillingEmail('#username'); }
         }
 
-        if (mailchimp_registration_email) {
-            mailchimp_registration_email.onblur = function () { mailchimpHandleBillingEmail('#reg_email'); };
-            mailchimp_registration_email.onfocus = function () { mailchimpHandleBillingEmail('#reg_email'); }
+        if (squalomail_registration_email) {
+            squalomail_registration_email.onblur = function () { mailchimpHandleBillingEmail('#reg_email'); };
+            squalomail_registration_email.onfocus = function () { mailchimpHandleBillingEmail('#reg_email'); }
         }
 
     } catch (e) {

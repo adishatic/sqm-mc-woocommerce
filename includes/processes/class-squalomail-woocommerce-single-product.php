@@ -108,8 +108,8 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
             return false;
         }
 
-        if (!mailchimp_is_configured()) {
-            mailchimp_debug(get_called_class(), 'Mailchimp is not configured properly');
+        if (!squalomail_is_configured()) {
+            squalomail_debug(get_called_class(), 'Mailchimp is not configured properly');
             return false;
         }
 
@@ -123,30 +123,30 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
 
             try {
                 // pull the product from Mailchimp first to see what method we need to call next.
-                $mailchimp_product = $this->api()->getStoreProduct($this->store_id, $this->id, true);
+                $squalomail_product = $this->api()->getStoreProduct($this->store_id, $this->id, true);
             } catch (\Exception $e) {
                 if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
                     throw $e;
                 }
-                $mailchimp_product = false;
+                $squalomail_product = false;
             }
 
             // depending on if it's existing or not - we change the method call
-            $method = $mailchimp_product ? 'updateStoreProduct' : 'addStoreProduct';
+            $method = $squalomail_product ? 'updateStoreProduct' : 'addStoreProduct';
 
             // if the mode set is "create" and the product is in Mailchimp - just return the product.
-            if ($this->mode === 'create' && !empty($mailchimp_product)) {
-                return $mailchimp_product;
+            if ($this->mode === 'create' && !empty($squalomail_product)) {
+                return $squalomail_product;
             }
 
             // if the mode is set to "update" and the product is not currently in Mailchimp - skip it.
-            if ($this->mode === 'update' && empty($mailchimp_product)) {
+            if ($this->mode === 'update' && empty($squalomail_product)) {
                 return false;
             }
 
             // if qe instructed this job to build from the order item, let's do that instead of the product post.
             if ($this->order_item) {
-                mailchimp_debug('product_submit.debug', 'using order item', array('item' => $this->order_item));
+                squalomail_debug('product_submit.debug', 'using order item', array('item' => $this->order_item));
                 $product = $this->transformer()->fromOrderItem($this->order_item);
             } else {
                 $product = $this->transformer()->transform($product_post, $this->fallback_title);
@@ -156,17 +156,17 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
                 $product->setTitle($this->fallback_title);
             }
 
-            mailchimp_debug('product_submit.debug', "#{$this->id}", $product->toArray());
+            squalomail_debug('product_submit.debug', "#{$this->id}", $product->toArray());
 
             if (!$product->getId() || !$product->getTitle()) {
-                mailchimp_log('product_submit.warning', "{$method} :: post #{$this->id} was invalid.");
+                squalomail_log('product_submit.warning', "{$method} :: post #{$this->id} was invalid.");
                 return false;
             }
 
             // either updating or creating the product
             $this->api()->{$method}($this->store_id, $product, false);
 
-            mailchimp_log('product_submit.success', "{$method} :: #{$product->getId()}");
+            squalomail_log('product_submit.success', "{$method} :: #{$product->getId()}");
 
             update_option('mailchimp-woocommerce-last_product_updated', $product->getId());
 
@@ -174,21 +174,21 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
 
         } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
-            mailchimp_error('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
+            squalomail_error('product_submit.error', squalomail_error_trace($e, "{$method} :: #{$this->id}"));
             $this->applyRateLimitedScenario();
             throw $e;
         } catch (SqualoMail_WooCommerce_ServerError $e) {
-            mailchimp_error('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
+            squalomail_error('product_submit.error', squalomail_error_trace($e, "{$method} :: #{$this->id}"));
             throw $e;
         } catch (SqualoMail_WooCommerce_Error $e) {
-            mailchimp_log('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
+            squalomail_log('product_submit.error', squalomail_error_trace($e, "{$method} :: #{$this->id}"));
             throw $e;
         } catch (Exception $e) {
-            mailchimp_log('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
+            squalomail_log('product_submit.error', squalomail_error_trace($e, "{$method} :: #{$this->id}"));
             throw $e;
         }
         catch (\Error $e) {
-            mailchimp_log('product_submit.error', mailchimp_error_trace($e, "{$method} :: #{$this->id}"));
+            squalomail_log('product_submit.error', squalomail_error_trace($e, "{$method} :: #{$this->id}"));
             throw $e;
         }
 
@@ -202,11 +202,11 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
     {
         if (is_null($this->api)) {
 
-            $this->store_id = mailchimp_get_store_id();
+            $this->store_id = squalomail_get_store_id();
             $options = get_option('mailchimp-woocommerce', array());
 
-            if (!empty($this->store_id) && is_array($options) && isset($options['mailchimp_api_key'])) {
-                return $this->api = new SqualoMail_WooCommerce_SqualoMailApi($options['mailchimp_api_key']);
+            if (!empty($this->store_id) && is_array($options) && isset($options['squalomail_api_key'])) {
+                return $this->api = new SqualoMail_WooCommerce_SqualoMailApi($options['squalomail_api_key']);
             }
 
             throw new \RuntimeException('The MailChimp API is not currently configured!');

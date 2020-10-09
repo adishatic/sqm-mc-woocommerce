@@ -347,7 +347,7 @@ class SqualoMail_WooCommerce_Store
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'id' => $this->getId(),
             'is_syncing' => $this->isSyncing(),
             'platform' => $this->getPlatform(),

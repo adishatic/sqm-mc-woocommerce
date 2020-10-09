@@ -11,26 +11,26 @@ if (!$handler->hasValidStoreInfo()) {
 }
 
 // if we don't have a valid api key we need to redirect back to the 'api_key' tab.
-if (!isset($mailchimp_lists) && ($mailchimp_lists = $handler->getMailChimpLists()) === false) {
+if (!isset($squalomail_lists) && ($squalomail_lists = $handler->getMailChimpLists()) === false) {
     wp_redirect('admin.php?page=mailchimp-woocommerce&tab=api_key&error_notice=missing_api_key');
 }
 
 // if we don't have valid campaign defaults we need to redirect back to the 'campaign_defaults' tab.
-if (empty($mailchimp_lists) && !$handler->hasValidCampaignDefaults()) {
+if (empty($squalomail_lists) && !$handler->hasValidCampaignDefaults()) {
     wp_redirect('admin.php?page=mailchimp-woocommerce&tab=campaign_defaults&error_notice=missing_campaign_defaults');
 }
 
-$list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mailchimp_list'])) && array_key_exists($options['mailchimp_list'], $mailchimp_lists);
+$list_is_configured = isset($options['squalomail_list']) && (!empty($options['squalomail_list'])) && array_key_exists($options['squalomail_list'], $squalomail_lists);
 
 ?>
 
-<?php if(($newsletter_settings_error = $this->getData('errors.mailchimp_list', false))) : ?>
+<?php if(($newsletter_settings_error = $this->getData('errors.squalomail_list', false))) : ?>
     <div class="error notice is-dismissable">
         <p><?php echo $newsletter_settings_error; ?></p>
     </div>
 <?php endif; ?>
 
-<input type="hidden" name="mailchimp_active_settings_tab" value="newsletter_settings"/>
+<input type="hidden" name="squalomail_active_settings_tab" value="newsletter_settings"/>
 <fieldset>
     <legend class="screen-reader-text">
         <span><?php esc_html_e('Audience Settings', 'squalomail-for-woocommerce');?></span>
@@ -41,7 +41,7 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
             <strong><?php esc_html_e('Sync audience with your store', 'squalomail-for-woocommerce'); ?></strong>
         </label>
         <div class="mailchimp-select-wrapper">
-            <select name="<?php echo $this->plugin_name; ?>[mailchimp_list]" required <?php echo ($list_is_configured || $only_one_list) ? 'disabled' : '' ?>>
+            <select name="<?php echo $this->plugin_name; ?>[squalomail_list]" required <?php echo ($list_is_configured || $only_one_list) ? 'disabled' : '' ?>>
 
                 <?php if(!isset($allow_new_list) || $allow_new_list === true): ?>
                     <option value="create_new"><?php esc_html_e('Create New Audience', 'squalomail-for-woocommerce');?></option>
@@ -52,9 +52,9 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
                 <?php endif; ?>
 
                 <?php
-                if (is_array($mailchimp_lists)) {
-                    $selected_list = isset($options['mailchimp_list']) ? $options['mailchimp_list'] : null;
-                    foreach ($mailchimp_lists as $key => $value ) {
+                if (is_array($squalomail_lists)) {
+                    $selected_list = isset($options['squalomail_list']) ? $options['squalomail_list'] : null;
+                    foreach ($squalomail_lists as $key => $value ) {
                         echo '<option value="' . esc_attr( $key ) . '" ' . selected(((string) $key === (string) $selected_list || $only_one_list), true, false) . '>' . esc_html( $value ) . '</option>';
                     }
                 }
@@ -64,12 +64,12 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
     </div>
 
     <div class="box" >
-        <?php $enable_auto_subscribe = (array_key_exists('mailchimp_auto_subscribe', $options) && !is_null($options['mailchimp_auto_subscribe'])) ? $options['mailchimp_auto_subscribe'] : '1'; ?>
+        <?php $enable_auto_subscribe = (array_key_exists('squalomail_auto_subscribe', $options) && !is_null($options['squalomail_auto_subscribe'])) ? $options['squalomail_auto_subscribe'] : '1'; ?>
         <label>
             <input
                     type="checkbox"
-                    name="<?php echo $this->plugin_name; ?>[mailchimp_auto_subscribe]"
-                    id="<?php echo $this->plugin_name; ?>[mailchimp_auto_subscribe]"
+                    name="<?php echo $this->plugin_name; ?>[squalomail_auto_subscribe]"
+                    id="<?php echo $this->plugin_name; ?>[squalomail_auto_subscribe]"
                 <?= $list_is_configured ? 'disabled': '' ?>
                     value=1
                 <?= $enable_auto_subscribe ? 'checked' : ''?>>
@@ -107,15 +107,15 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
 
 
         <div class="box box-half margin-large">
-            <?php $checkbox_default_settings = (array_key_exists('mailchimp_checkbox_defaults', $options) && !is_null($options['mailchimp_checkbox_defaults'])) ? $options['mailchimp_checkbox_defaults'] : 'check'; ?>
+            <?php $checkbox_default_settings = (array_key_exists('squalomail_checkbox_defaults', $options) && !is_null($options['squalomail_checkbox_defaults'])) ? $options['squalomail_checkbox_defaults'] : 'check'; ?>
             <label class="radio-label">
-                <input type="radio" name="<?php echo $this->plugin_name; ?>[mailchimp_checkbox_defaults]" value="check"<?php if($checkbox_default_settings === 'check') echo ' checked="checked" '; ?>><?php esc_html_e('Visible, checked by default', 'squalomail-for-woocommerce');?><br>
+                <input type="radio" name="<?php echo $this->plugin_name; ?>[squalomail_checkbox_defaults]" value="check"<?php if($checkbox_default_settings === 'check') echo ' checked="checked" '; ?>><?php esc_html_e('Visible, checked by default', 'squalomail-for-woocommerce');?><br>
             </label>
             <label class="radio-label">
-                <input type="radio" name="<?php echo $this->plugin_name; ?>[mailchimp_checkbox_defaults]" value="uncheck"<?php if($checkbox_default_settings === 'uncheck') echo ' checked="checked" '; ?>><?php esc_html_e('Visible, unchecked by default', 'squalomail-for-woocommerce');?><br/>
+                <input type="radio" name="<?php echo $this->plugin_name; ?>[squalomail_checkbox_defaults]" value="uncheck"<?php if($checkbox_default_settings === 'uncheck') echo ' checked="checked" '; ?>><?php esc_html_e('Visible, unchecked by default', 'squalomail-for-woocommerce');?><br/>
             </label>
             <label class="radio-label">
-                <input type="radio" name="<?php echo $this->plugin_name; ?>[mailchimp_checkbox_defaults]" value="hide"<?php if($checkbox_default_settings === 'hide') echo ' checked="checked" '; ?>><?php esc_html_e('Hidden, unchecked by default', 'squalomail-for-woocommerce');?><br/>
+                <input type="radio" name="<?php echo $this->plugin_name; ?>[squalomail_checkbox_defaults]" value="hide"<?php if($checkbox_default_settings === 'hide') echo ' checked="checked" '; ?>><?php esc_html_e('Hidden, unchecked by default', 'squalomail-for-woocommerce');?><br/>
             </label>
         </div>
 
@@ -128,7 +128,7 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
         </div>
 
         <div class="box box-half margin-large">
-            <input type="text" id="<?php echo $this->plugin_name; ?>-newsletter-checkbox-action" name="<?php echo $this->plugin_name; ?>[mailchimp_checkbox_action]" value="<?php echo isset($options['mailchimp_checkbox_action']) ? $options['mailchimp_checkbox_action'] : 'woocommerce_after_checkout_billing_form' ?>" />
+            <input type="text" id="<?php echo $this->plugin_name; ?>-newsletter-checkbox-action" name="<?php echo $this->plugin_name; ?>[squalomail_checkbox_action]" value="<?php echo isset($options['squalomail_checkbox_action']) ? $options['squalomail_checkbox_action'] : 'woocommerce_after_checkout_billing_form' ?>" />
             <p class="description"><?php esc_html_e('Enter a WooCommerce form action', 'squalomail-for-woocommerce'); ?></p>
         </div>
 
@@ -144,7 +144,7 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
         </div>
 
         <div class="box box-half" >
-            <input type="text" id="<?php echo $this->plugin_name; ?>-user-tags" name="<?php echo $this->plugin_name; ?>[mailchimp_user_tags]" value="<?php echo isset($options['mailchimp_user_tags']) ? str_replace(',',', ',$options['mailchimp_user_tags']) : '' ?>" />   
+            <input type="text" id="<?php echo $this->plugin_name; ?>-user-tags" name="<?php echo $this->plugin_name; ?>[squalomail_user_tags]" value="<?php echo isset($options['squalomail_user_tags']) ? str_replace(',',', ',$options['squalomail_user_tags']) : '' ?>" />   
         </div>
 
         <div class="box fieldset-header" >
@@ -153,7 +153,7 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
 
 
         <div class="box box-half">
-            <label for="<?php echo $this->plugin_name; ?>[mailchimp_product_image_key]">
+            <label for="<?php echo $this->plugin_name; ?>[squalomail_product_image_key]">
                 <h4><?php esc_html_e('Product Image Size', 'squalomail-for-woocommerce');?></h4>
                 <p><?= __( 'Define the product image size used by abandoned carts, order notifications, and product recommendations.', 'squalomail-for-woocommerce' ); ?></p>
             </label>
@@ -161,10 +161,10 @@ $list_is_configured = isset($options['mailchimp_list']) && (!empty($options['mai
 
         <div class="box box-half" >
             <div class="mailchimp-select-wrapper">
-                <select name="<?php echo $this->plugin_name; ?>[mailchimp_product_image_key]">
+                <select name="<?php echo $this->plugin_name; ?>[squalomail_product_image_key]">
                     <?php
-                    $enable_auto_subscribe = (array_key_exists('mailchimp_product_image_key', $options) && !is_null($options['mailchimp_product_image_key'])) ? $options['mailchimp_product_image_key'] : 'medium';
-                    foreach (mailchimp_woocommerce_get_all_image_sizes_list() as $key => $value ) {
+                    $enable_auto_subscribe = (array_key_exists('squalomail_product_image_key', $options) && !is_null($options['squalomail_product_image_key'])) ? $options['squalomail_product_image_key'] : 'medium';
+                    foreach (squalomail_woocommerce_get_all_image_sizes_list() as $key => $value ) {
                         echo '<option value="' . esc_attr( $key ) . '" ' . selected($key == $enable_auto_subscribe, true, false ) . '>' . esc_html( $value ) . '</option>';
                     }
                     ?>

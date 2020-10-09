@@ -188,7 +188,7 @@ class SqualoMail_WooCommerce_LineItem
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'id' => (string) $this->id,
             'product_id' => (string) $this->product_id,
             'product_variant_id' => (string) $this->product_variant_id,

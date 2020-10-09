@@ -74,15 +74,15 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
 
     public function process()
     {
-        if (!mailchimp_is_configured() || !($api = mailchimp_get_api())) {
-            mailchimp_debug(get_called_class(), 'Mailchimp is not configured properly');
+        if (!squalomail_is_configured() || !($api = squalomail_get_api())) {
+            squalomail_debug(get_called_class(), 'Mailchimp is not configured properly');
             return false;
         }
 
-        $store_id = mailchimp_get_store_id();
+        $store_id = squalomail_get_store_id();
 
         if (!($woo_order_number = $this->getRealOrderNumber())) {
-            mailchimp_log('order_submit.failure', "There is no real order number to use.");
+            squalomail_log('order_submit.failure', "There is no real order number to use.");
             return false;
         }
 
@@ -96,7 +96,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
         } catch (\Exception $e) {
             if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
                 sleep(2);
-                mailchimp_error('order_submit.error', mailchimp_error_trace($e, "RateLimited :: #{$this->id}"));
+                squalomail_error('order_submit.error', squalomail_error_trace($e, "RateLimited :: #{$this->id}"));
                 $this->retry();
             }
             $call = 'addStoreOrder';
@@ -129,7 +129,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             // if the order is new, and has been flagged as a status that should not be pushed over to
             // Mailchimp - just ignore it and log it.
             if ($new_order && $order->shouldIgnoreIfNotInMailchimp()) {
-                mailchimp_log('system.debug', "order {$order->getId()} is in {$order->getOriginalWooStatus()} status, and is being skipped for now.");
+                squalomail_log('system.debug', "order {$order->getId()} is in {$order->getOriginalWooStatus()} status, and is being skipped for now.");
                 return false;
             }
             
@@ -144,26 +144,26 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             if ($this->is_full_sync) {
                 // see if this store has the auto subscribe setting enabled on initial sync
                 $plugin_options = get_option('mailchimp-woocommerce');
-                $should_auto_subscribe = (bool) $plugin_options['mailchimp_auto_subscribe'];
+                $should_auto_subscribe = (bool) $plugin_options['squalomail_auto_subscribe'];
 
                 // since we're syncing the customer for the first time, this is where we need to add the override
                 // for subscriber status. We don't get the checkbox until this plugin is actually installed and working!
                 if (!($status = $order->getCustomer()->getOptInStatus())) {
                     try {
-                        $subscriber = $api->member(mailchimp_get_list_id(), $order->getCustomer()->getEmailAddress());
+                        $subscriber = $api->member(squalomail_get_list_id(), $order->getCustomer()->getEmailAddress());
                         if ($subscriber['status'] != 'archived') {
                             $status = !in_array($subscriber['status'], array('unsubscribed', 'transactional'));
                             $order->getCustomer()->setOptInStatus($status);
                         }
                     } catch (\Exception $e) {
                         if ($e instanceof SqualoMail_WooCommerce_RateLimitError) {
-                            mailchimp_error('order_sync.error', mailchimp_error_trace($e, "GET subscriber :: {$order->getId()}"));
+                            squalomail_error('order_sync.error', squalomail_error_trace($e, "GET subscriber :: {$order->getId()}"));
                             throw $e;
                         }
                         
                         // if they are using double opt in, we need to pass this in as false here so it doesn't auto subscribe.
                         try {
-                            $doi = mailchimp_list_has_double_optin(true);
+                            $doi = squalomail_list_has_double_optin(true);
                         } catch (\Exception $e_doi) {
                             throw $e_doi;
                         }
@@ -196,10 +196,10 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
 
             // skip amazon orders and skip privacy protected orders.
             if ($order->isFlaggedAsAmazonOrder()) {
-                mailchimp_log('validation.amazon', "Order #{$woo_order_number} was placed through Amazon. Skipping!");
+                squalomail_log('validation.amazon', "Order #{$woo_order_number} was placed through Amazon. Skipping!");
                 return false;
             } elseif ($order->isFlaggedAsPrivacyProtected()) {
-                mailchimp_log('validation.gdpr', "Order #{$woo_order_number} is GDPR restricted. Skipping!");
+                squalomail_log('validation.gdpr', "Order #{$woo_order_number} is GDPR restricted. Skipping!");
                 return false;
             }
             
@@ -207,7 +207,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                 // if single sync and
                 // if the order is in failed or cancelled status - and it's brand new, we shouldn't submit it.
                 if (!$this->is_full_sync && in_array($order->getFinancialStatus(), array('failed', 'cancelled')) || $order->getOriginalWooStatus() === 'pending') {
-                    mailchimp_log('order_sumbit', "#{$order->getId()} has a financial status of {$order->getFinancialStatus()} and was skipped.");
+                    squalomail_log('order_sumbit', "#{$order->getId()} has a financial status of {$order->getFinancialStatus()} and was skipped.");
                     return false;
                 }
                 // if full sync and
@@ -215,7 +215,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                 // it is probably happening due to 3rd party payment processing and it's still pending. These orders
                 // don't always make it over because someone could be cancelling out of the payment there.
                 if ($this->is_full_sync && !in_array(strtolower($order->getFinancialStatus()), array('processing', 'completed', 'paid'))) {
-                    mailchimp_log('order_sumbit', "#{$order->getId()} has a financial status of {$order->getFinancialStatus()} and was skipped.");
+                    squalomail_log('order_sumbit', "#{$order->getId()} has a financial status of {$order->getFinancialStatus()} and was skipped.");
                     return false;
                 }
 
@@ -244,7 +244,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                         $log .= ' :: campaign id ' . $this->campaign_id;
                     }
                     catch (\Exception $e) {
-                        mailchimp_log('single_order_set_campaign_id.error', 'No campaign added to order, with provided ID: '. $this->campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
+                        squalomail_log('single_order_set_campaign_id.error', 'No campaign added to order, with provided ID: '. $this->campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
                     }
                 }
 
@@ -275,11 +275,11 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                     
                     $order->addItem($line_item);
                     
-                    mailchimp_log('order_sumbit.error', "Order {$order->getId()} does not have any line items, so we are using 'empty_line_item_placeholder' instead.");
+                    squalomail_log('order_sumbit.error', "Order {$order->getId()} does not have any line items, so we are using 'empty_line_item_placeholder' instead.");
                 }
             }
             
-            mailchimp_debug('order_submit', "#{$woo_order_number}", $order->toArray());
+            squalomail_debug('order_submit', "#{$woo_order_number}", $order->toArray());
 
             try {
                 // update or create
@@ -288,11 +288,11 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                 // if for whatever reason we get a product not found error, we need to iterate
                 // through the order items, and use a "create mode only" on each product
                 // then re-submit the order once they're in the database again.
-                if (mailchimp_string_contains($e->getMessage(), 'product with the provided ID')) {
+                if (squalomail_string_contains($e->getMessage(), 'product with the provided ID')) {
                     $api->handleProductsMissingFromAPI($order);
                     // make another attempt again to add the order.
                     $api_response = $api->$call($store_id, $order, false);
-                } elseif (mailchimp_string_contains($e->getMessage(), 'campaign with the provided ID')) {
+                } elseif (squalomail_string_contains($e->getMessage(), 'campaign with the provided ID')) {
                     // the campaign was invalid, we need to remove it and re-submit
                     $order->setCampaignId(null);
                     // make another attempt again to add the order.
@@ -303,7 +303,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             }
 
             if (empty($api_response)) {
-                mailchimp_error('order_submit.failure', "$call :: #{$order->getId()} :: email: {$email} produced a blank response from MailChimp");
+                squalomail_error('order_submit.failure', "$call :: #{$order->getId()} :: email: {$email} produced a blank response from MailChimp");
                 return $api_response;
             }
 
@@ -313,7 +313,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
 
             // if we require double opt in on the list, and the customer requires double opt in,
             // we should mark them as pending so they get the opt in email now.
-            if (mailchimp_list_has_double_optin()) {
+            if (squalomail_list_has_double_optin()) {
                 $status_if_new = $order->getCustomer()->getOriginalSubscriberStatus() ? 'pending' : 'transactional';
             } else {
                 // if true, subscribed - otherwise transactional
@@ -321,32 +321,32 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             }
 
             // Maybe sync subscriber to set correct member.language
-            mailchimp_member_data_update($email, $this->user_language, 'order', $status_if_new, $order, $this->gdpr_fields);
+            squalomail_member_data_update($email, $this->user_language, 'order', $status_if_new, $order, $this->gdpr_fields);
 
-            mailchimp_log('order_submit.success', $log);
+            squalomail_log('order_submit.success', $log);
 
             if ($this->is_full_sync && $new_order) {
                 // if the customer has a flag to double opt in - we need to push this data over to MailChimp as pending
                 //TODO: RYAN: this is the only place getOriginalSubscriberStatus() is called, but the iterate method uses another way. 
-                // mailchimp_update_member_with_double_opt_in($order, ($should_auto_subscribe || $status));
-                mailchimp_update_member_with_double_opt_in($order, ($should_auto_subscribe || $order->getCustomer()->getOriginalSubscriberStatus()));
+                // squalomail_update_member_with_double_opt_in($order, ($should_auto_subscribe || $status));
+                squalomail_update_member_with_double_opt_in($order, ($should_auto_subscribe || $order->getCustomer()->getOriginalSubscriberStatus()));
             }
 
             return $api_response;
         } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
-            mailchimp_error('order_submit.error', mailchimp_error_trace($e, "RateLimited :: #{$this->id}"));
+            squalomail_error('order_submit.error', squalomail_error_trace($e, "RateLimited :: #{$this->id}"));
             $this->applyRateLimitedScenario();
             throw $e;
         } catch (SqualoMail_WooCommerce_ServerError $e) {
-            mailchimp_error('order_submit.error', mailchimp_error_trace($e, "{$call} :: #{$this->id}"));
+            squalomail_error('order_submit.error', squalomail_error_trace($e, "{$call} :: #{$this->id}"));
             throw $e;
         } catch (SqualoMail_WooCommerce_Error $e) {
-            mailchimp_error('order_submit.error', mailchimp_error_trace($e, "{$call} :: #{$this->id}"));
+            squalomail_error('order_submit.error', squalomail_error_trace($e, "{$call} :: #{$this->id}"));
             throw $e;
         } catch (\Exception $e) {
             $message = strtolower($e->getMessage());
-            mailchimp_error('order_submit.tracing_error', $e);
+            squalomail_error('order_submit.tracing_error', $e);
             if (!isset($order)) {
                 // transform the order
                 $order = $job->transform(get_post($this->id));
@@ -355,7 +355,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             // this can happen when a customer changes their email.
             if (isset($order) && strpos($message, 'not be changed')) {
                 try {
-                    mailchimp_log('order_submit.deleting_customer', "#{$order->getId()} :: email: {$email}");
+                    squalomail_log('order_submit.deleting_customer', "#{$order->getId()} :: email: {$email}");
                     // delete the customer before adding it again.
                     $api->deleteCustomer($store_id, $order->getCustomer()->getId());
                     // update or create
@@ -364,22 +364,22 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
                     if (!empty($job->campaign_id)) {
                         $log .= ' :: campaign id '.$job->campaign_id;
                     }
-                    mailchimp_log('order_submit.success', $log);
+                    squalomail_log('order_submit.success', $log);
                     // if we're adding a new order and the session id is here, we need to delete the AC cart record.
                     if (!empty($this->cart_session_id)) {
                         $api->deleteCartByID($store_id, $this->cart_session_id);
                     }
                     return $api_response;
                 } catch (\Exception $e) {
-                    mailchimp_error('order_submit.error', mailchimp_error_trace($e, 'deleting-customer-re-add :: #'.$this->id));
+                    squalomail_error('order_submit.error', squalomail_error_trace($e, 'deleting-customer-re-add :: #'.$this->id));
                 }
             }
             throw $e;
         } catch (SqualoMail_WooCommerce_Error $e) {
-            mailchimp_error('order_submit.error', mailchimp_error_trace($e, "{$call} :: #{$this->id}"));
+            squalomail_error('order_submit.error', squalomail_error_trace($e, "{$call} :: #{$this->id}"));
             throw $e;
         }
-        mailchimp_debug('order_submit', 'no order found', $order);
+        squalomail_debug('order_submit', 'no order found', $order);
         return false;
     }
 
@@ -396,7 +396,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
             return $this->woo_order_number = $woo->get_order_number();
         } catch (\Exception $e) {
             $this->woo_order_number = false;
-            mailchimp_error('order_sync.failure', mailchimp_error_trace($e, "{$this->id} could not be loaded"));
+            squalomail_error('order_sync.failure', squalomail_error_trace($e, "{$this->id} could not be loaded"));
             return false;
         }
     }
@@ -409,18 +409,18 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
     protected function shouldSkipOrder($email, $order_id)
     {
         if (!is_email($email)) {
-            mailchimp_log('validation.bad_email', "Order #{$order_id} has an invalid email address. Skipping!");
+            squalomail_log('validation.bad_email', "Order #{$order_id} has an invalid email address. Skipping!");
             return true;
         }
 
         // make sure we can submit this order to MailChimp or skip it.
-        if (mailchimp_email_is_amazon($email)) {
-            mailchimp_log('validation.amazon', "Order #{$order_id} was placed through Amazon. Skipping!");
+        if (squalomail_email_is_amazon($email)) {
+            squalomail_log('validation.amazon', "Order #{$order_id} was placed through Amazon. Skipping!");
             return true;
         }
 
-        if (mailchimp_email_is_privacy_protected($email)) {
-            mailchimp_log('validation.gdpr', "Order #{$order_id} is GDPR restricted. Skipping!");
+        if (squalomail_email_is_privacy_protected($email)) {
+            squalomail_log('validation.gdpr', "Order #{$order_id} is GDPR restricted. Skipping!");
             return true;
         }
 

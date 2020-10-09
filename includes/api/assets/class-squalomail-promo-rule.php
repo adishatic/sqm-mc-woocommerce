@@ -359,7 +359,7 @@ class SqualoMail_WooCommerce_PromoRule
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty([
+        return squalomail_array_remove_empty([
             'id' => (string) $this->getId(),
             'title' => (string) $this->getTitle(),
             'description' => (string) $this->getDescription(),

@@ -30,8 +30,8 @@
 		});
 		
 		// re-enable disable select input on audience settings submit
-		$('#mailchimp_woocommerce_options').on('submit', function() {
-			$('select[name="mailchimp-woocommerce[mailchimp_list]"]').prop('disabled', false);
+		$('#squalomail_woocommerce_options').on('submit', function() {
+			$('select[name="mailchimp-woocommerce[squalomail_list]"]').prop('disabled', false);
 		});
 
 		// load new log file on log select change
@@ -41,7 +41,7 @@
 			removeLogDeletedParamFromFormHttpRef();
 			
 			var data = {
-				action:'mailchimp_woocommerce_load_log_file',
+				action:'squalomail_woocommerce_load_log_file',
 				log_file: $('#log_file').val()
 			};
 			
@@ -68,7 +68,7 @@
 			// prevents Log Deleted notification to show up
 			removeLogDeletedParamFromFormHttpRef();
 
-			$('#mailchimp_woocommerce_options').submit();
+			$('#squalomail_woocommerce_options').submit();
 		});
 
 		// Remove log_deleted param from _wp_http_referer hidden input
@@ -97,10 +97,10 @@
 		});
 
 		// delete log button
-		var mailchimp_woocommerce_delete_log = false;
+		var squalomail_woocommerce_delete_log = false;
 		$('.delete-log-button').click(function (e) {
-			if (mailchimp_woocommerce_delete_log) {
-				mailchimp_woocommerce_delete_log = false; // reset flag
+			if (squalomail_woocommerce_delete_log) {
+				squalomail_woocommerce_delete_log = false; // reset flag
 				return; // let the event bubble away
 			}
 			e.preventDefault();
@@ -124,7 +124,7 @@
 
 			}).then((result) => {
 				if (result.value) {
-					mailchimp_woocommerce_delete_log = true;
+					squalomail_woocommerce_delete_log = true;
 					me.click();
 				}
 			})
@@ -138,9 +138,9 @@
 					Swal.showLoading()
 				}
 			});
-			var form = $('#mailchimp_woocommerce_options');
+			var form = $('#squalomail_woocommerce_options');
 			var data = form.serialize();
-			data+="&mailchimp_woocommerce_resync=1"
+			data+="&squalomail_woocommerce_resync=1"
 			return $.ajax({type: "POST", url: form.attr('action'), data: data}).done(function(data) {
 				window.location.reload();
 			}).fail(function(xhr) {
@@ -153,13 +153,13 @@
 		* Shows dialog on store disconnect
 		* Change wp_http_referer URL in case of store disconnect
 		*/ 
-		var mailchimp_woocommerce_disconnect_done = false;
-		$('#mailchimp_woocommerce_disconnect').click(function (e){
+		var squalomail_woocommerce_disconnect_done = false;
+		$('#squalomail_woocommerce_disconnect').click(function (e){
 			var me = $(this);
 
 			// this is to trigger the event even after preventDefault() is issued.
-			if (mailchimp_woocommerce_disconnect_done) {
-				mailchimp_woocommerce_disconnect_done = false; // reset flag
+			if (squalomail_woocommerce_disconnect_done) {
+				squalomail_woocommerce_disconnect_done = false; // reset flag
 				return; // let the event bubble away
 			}
 
@@ -189,10 +189,10 @@
 						$('input[name=_wp_http_referer]').val(query[1]);
 					}
 					try {
-						mailchimp_woocommerce_disconnect_done = true;
-						var form = $('#mailchimp_woocommerce_options');
+						squalomail_woocommerce_disconnect_done = true;
+						var form = $('#squalomail_woocommerce_options');
 						var data = form.serialize();
-						data+="&mailchimp_woocommerce_disconnect_store=1"
+						data+="&squalomail_woocommerce_disconnect_store=1"
 
 						Swal.fire({
 							title: 'Disconnecting Store In Progress',
@@ -217,31 +217,31 @@
 		/* 
 		* Change wp_http_referer URL in case of in-wizard tab change
 		*/ 
-		var mailchimp_woocommerce_submit_done = false;
-		$('#mailchimp_woocommerce_options .tab-content-submit:not(.oauth-connect):not(#sqm-mc-woocommerce-support-form-submit)').click(function(e){
+		var squalomail_woocommerce_submit_done = false;
+		$('#squalomail_woocommerce_options .tab-content-submit:not(.oauth-connect):not(#sqm-mc-woocommerce-support-form-submit)').click(function(e){
 			// this is to trigger the event even after preventDefault() is issued.
-			if (mailchimp_woocommerce_submit_done) {
-				mailchimp_woocommerce_submit_done = false; // reset flag
+			if (squalomail_woocommerce_submit_done) {
+				squalomail_woocommerce_submit_done = false; // reset flag
 				return; // let the event bubble away
 			}
 			e.preventDefault();
 
-			if ($('input[name=mailchimp_woocommerce_wizard_on]').val() == 1) {
+			if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {
 				var query = window.location.href.match(/^(.*)\&/);
 				if (query){
 					history.replaceState({}, "", query[1]);
 					$('input[name=_wp_http_referer]').val(query[1]);		
 				}
 			}
-			mailchimp_woocommerce_submit_done = true;
+			squalomail_woocommerce_submit_done = true;
 			e.target.click();
 
 		});
 
 		// Mailchimp OAuth connection (tab "connect")
-		$('#mailchimp_woocommerce_options #mailchimp-oauth-connect').click(function(e){
+		$('#squalomail_woocommerce_options #mailchimp-oauth-connect').click(function(e){
 			var token = '';
-			var startData = {action:'mailchimp_woocommerce_oauth_start'};
+			var startData = {action:'squalomail_woocommerce_oauth_start'};
 			$('#mailchimp-oauth-api-key-valid').hide();
 			$('#mailchimp-oauth-error').hide();
 			$('#mailchimp-oauth-waiting').show();
@@ -332,7 +332,7 @@
 							if (statusData.status == "accepted") {
 								// call for finish endpoint to retrieve access_token
 								var finishData = {
-									action: 'mailchimp_woocommerce_oauth_finish', 
+									action: 'squalomail_woocommerce_oauth_finish', 
 									token: token
 								}
 								$.post(ajaxurl, finishData, function(finishResponse) {
@@ -347,7 +347,7 @@
 										$('#mailchimp-woocommerce-mailchimp-api-key').val(accessToken);
 
 										// always go to next step on success, so change url of wp_http_referer
-										if ($('input[name=mailchimp_woocommerce_wizard_on]').val() == 1) {
+										if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {
 											var query = window.location.href.match(/^(.*)\&/);
 											if (query){
 												history.replaceState({}, "", query[1]);
@@ -355,7 +355,7 @@
 											}
 										}
 										// submit api_key/access_token form 
-										$('#mailchimp_woocommerce_options').submit();
+										$('#squalomail_woocommerce_options').submit();
 									}
 									else {
 										console.log('Error calling OAuth finish endpoint. Data:', finishResponse);
@@ -386,7 +386,7 @@
 			var opt = this.checked ? 1 : 0;
 			
 			var data = {
-				action: 'mailchimp_woocommerce_communication_status', 
+				action: 'squalomail_woocommerce_communication_status', 
 				opt: opt
 			}
 
@@ -411,7 +411,7 @@
 		// communications box radio ajax call
 		$('input.comm-box-input').change(function(e){
 			var data = {
-				action: 'mailchimp_woocommerce_communication_status', 
+				action: 'squalomail_woocommerce_communication_status', 
 				opt: this.value
 			}
 			var opt = this.value;
@@ -459,7 +459,7 @@
 			else {
 				$('#username_invalid_error').hide();
 				var data = {
-					action:'mailchimp_woocommerce_create_account_check_username',
+					action:'squalomail_woocommerce_create_account_check_username',
 					username: username.val(),
 				};
 
@@ -571,7 +571,7 @@
 
 			if (isValid) {
 				var data = {
-					action:'mailchimp_woocommerce_create_account_signup',
+					action:'squalomail_woocommerce_create_account_signup',
 					data: {
 						email: email.val(),
 						first_name: firstName.val(),
@@ -605,7 +605,7 @@
 						$('#mailchimp-woocommerce-mailchimp-api-key').val(accessToken);
 
 						// always go to next step on success, so change url of wp_http_referer
-						if ($('input[name=mailchimp_woocommerce_wizard_on]').val() == 1) {
+						if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {
 							var query = window.location.href.match(/^(.*)\&/);
 							if (query){
 								history.replaceState({}, "", query[1]);
@@ -613,7 +613,7 @@
 							}
 						}
 						// submit api_key/access_token form 
-						$('#mailchimp_woocommerce_options').submit();
+						$('#squalomail_woocommerce_options').submit();
 					}
 				}).fail(function (err) {
 					console.log('FAIL:' , err);
@@ -702,7 +702,7 @@
 
 			if (isValid) {
 				var data = {
-					action:'mailchimp_woocommerce_support_form',
+					action:'squalomail_woocommerce_support_form',
 					data: {
 						email: email.val(),
 						first_name: firstName.val(),

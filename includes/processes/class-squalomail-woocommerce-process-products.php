@@ -13,13 +13,13 @@ class SqualoMail_WooCommerce_Process_Products extends SqualoMail_WooCommerce_Abs
     /**
      * @var string
      */
-    protected $action = 'mailchimp_woocommerce_process_products';
+    protected $action = 'squalomail_woocommerce_process_products';
 
     public static function push()
     {
         $job = new SqualoMail_WooCommerce_Process_Products();
         $job->flagStartSync();
-        mailchimp_handle_or_queue($job, 0);
+        squalomail_handle_or_queue($job, 0);
     }
 
 
@@ -36,7 +36,7 @@ class SqualoMail_WooCommerce_Process_Products extends SqualoMail_WooCommerce_Abs
      */
     protected function complete()
     {
-        mailchimp_log('product_sync.completed', 'Done with the product queuing');
+        squalomail_log('product_sync.completed', 'Done with the product queuing');
 
         // add a timestamp for the product sync completion
         $this->setResourceCompleteTime();

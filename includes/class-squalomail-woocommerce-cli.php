@@ -30,9 +30,9 @@ class Squalomail_Wocoomerce_CLI extends WP_CLI_Command {
     public function flush($args, $assoc_args = array())
     {
         global $wpdb;
-        WP_CLI::confirm( "This will delete all current queued sync jobs, and entries from {$wpdb->prefix}mailchimp_jobs table. Are you sure?", $assoc_args );
-        mailchimp_delete_as_jobs();
-        $wpdb->query("DELETE FROM {$wpdb->prefix}mailchimp_jobs");
+        WP_CLI::confirm( "This will delete all current queued sync jobs, and entries from {$wpdb->prefix}squalomail_jobs table. Are you sure?", $assoc_args );
+        squalomail_delete_as_jobs();
+        $wpdb->query("DELETE FROM {$wpdb->prefix}squalomail_jobs");
     }
 
     /**
@@ -41,8 +41,8 @@ class Squalomail_Wocoomerce_CLI extends WP_CLI_Command {
     public function show()
     {
         global $wpdb;
-        WP_CLI::log("Showing contents of {$wpdb->prefix}mailchimp_jobs"); 
-        print_r($wpdb->get_results("SELECT * FROM {$wpdb->prefix}mailchimp_jobs"));
+        WP_CLI::log("Showing contents of {$wpdb->prefix}squalomail_jobs"); 
+        print_r($wpdb->get_results("SELECT * FROM {$wpdb->prefix}squalomail_jobs"));
         exit;
     }
 
@@ -52,7 +52,7 @@ class Squalomail_Wocoomerce_CLI extends WP_CLI_Command {
 	 * @subcommand create-tables
 	 */
 	public function create_tables( $args, $assoc_args = array() ) {
-        install_mailchimp_queue();
+        install_squalomail_queue();
 		WP_CLI::success( "Table {$wpdb->prefix}queue created." );
 	}
 
@@ -77,7 +77,7 @@ class Squalomail_Wocoomerce_CLI extends WP_CLI_Command {
      * @param array $assoc_args
      */
 	public function listen( $args, $assoc_args = array() ) {
-        mailchimp_debug('cli.queue.listen.process','Starting command `action-scheduler run`'); 
+        squalomail_debug('cli.queue.listen.process','Starting command `action-scheduler run`'); 
         WP_CLI::warning(WP_CLI::colorize('%Wqueue listen%n').' command is deprecated since Mailchimp for Woocommerce version 2.3. Please use '.WP_CLI::colorize('%ywp action-scheduler run --group="sqm-mc-woocommerce%n"').' instead'); 
         WP_CLI::log('Starting sync'); 
         

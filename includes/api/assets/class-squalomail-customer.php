@@ -247,7 +247,7 @@ class SqualoMail_WooCommerce_Customer
     public function wasSubscribedOnOrder($id)
     {
         // we are saving the post meta for subscribers on each order... so if they have subscribed on checkout
-        $subscriber_meta = get_post_meta($id, 'mailchimp_woocommerce_is_subscribed', true);
+        $subscriber_meta = get_post_meta($id, 'squalomail_woocommerce_is_subscribed', true);
         $subscribed = $subscriber_meta === '' ? false : (bool) $subscriber_meta;
 
         return $this->original_subscriber_status = $subscribed;
@@ -299,7 +299,7 @@ class SqualoMail_WooCommerce_Customer
     {
         $address = $this->getAddress()->toArray();
 
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'id' => (string) $this->getId(),
             'email_address' => (string) $this->getEmailAddress(),
             'opt_in_status' => $this->getOptInStatus(),

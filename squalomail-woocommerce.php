@@ -34,14 +34,14 @@ if (!defined( 'WPINC')) {
     die;
 }
 
-if (!isset($mailchimp_woocommerce_spl_autoloader) || $mailchimp_woocommerce_spl_autoloader === false) {
+if (!isset($squalomail_woocommerce_spl_autoloader) || $squalomail_woocommerce_spl_autoloader === false) {
     // require Action Scheduler
     include_once "includes/vendor/action-scheduler/action-scheduler.php";
     // bootstrapper
     include_once "bootstrap.php";
 }
 
-register_activation_hook( __FILE__, 'activate_mailchimp_woocommerce');
+register_activation_hook( __FILE__, 'activate_squalomail_woocommerce');
 
 // plugins loaded callback
-add_action('plugins_loaded', 'mailchimp_on_all_plugins_loaded', 12);
+add_action('plugins_loaded', 'squalomail_on_all_plugins_loaded', 12);

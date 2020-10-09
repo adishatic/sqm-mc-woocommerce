@@ -86,7 +86,7 @@ class SqualoMail_WooCommerce_Transform_Products
         $product->setHandle($post->post_name);
         $product->setImageUrl($this->getProductImage($post));
         $product->setDescription($post->post_content);
-        $product->setPublishedAtForeign(mailchimp_date_utc($post->post_date));
+        $product->setPublishedAtForeign(squalomail_date_utc($post->post_date));
         $product->setTitle($woo->get_title());
         $product->setUrl($woo->get_permalink());
         
@@ -96,7 +96,7 @@ class SqualoMail_WooCommerce_Transform_Products
             $vendor_data = WC_Product_Vendors_Utils::get_vendor_data_by_id( $vendor_id );
             $original_vendor = $vendor_data['name'];
         }
-        $vendor_filter = apply_filters('mailchimp_sync_product_vendor', $original_vendor, $product);
+        $vendor_filter = apply_filters('squalomail_sync_product_vendor', $original_vendor, $product);
         if ($original_vendor != '' && is_string($vendor_filter)) {
             $product->setVendor($vendor_filter);
         } else if ($original_vendor != '' && is_string($original_vendor)) {
@@ -147,7 +147,7 @@ class SqualoMail_WooCommerce_Transform_Products
         $variant = new SqualoMail_WooCommerce_ProductVariation();
 
         if (!$woo) {
-            //mailchimp_error("products.transform", "could not load product variant", array('post' => print_r($post, true)));
+            //squalomail_error("products.transform", "could not load product variant", array('post' => print_r($post, true)));
             return $variant;
         }
 
@@ -280,7 +280,7 @@ class SqualoMail_WooCommerce_Transform_Products
      */
     public function getProductImageKey()
     {
-        return mailchimp_get_option('mailchimp_product_image_key', 'medium');
+        return squalomail_get_option('squalomail_product_image_key', 'medium');
     }
 
     /**
@@ -290,8 +290,8 @@ class SqualoMail_WooCommerce_Transform_Products
      */
     public static function deleted($id, $title)
     {
-        $store_id = mailchimp_get_store_id();
-        $api = mailchimp_get_api();
+        $store_id = squalomail_get_store_id();
+        $api = squalomail_get_api();
 
         if (!($product = $api->getStoreProduct($store_id, "deleted_{$id}"))) {
             $product = new SqualoMail_WooCommerce_Product();
@@ -323,8 +323,8 @@ class SqualoMail_WooCommerce_Transform_Products
         // we can only do this with an order item
         if (!$item instanceof WC_Order_Item_Product) return false;
 
-        $store_id = mailchimp_get_store_id();
-        $api = mailchimp_get_api();
+        $store_id = squalomail_get_store_id();
+        $api = squalomail_get_api();
 
         // If the $item->get_product_id() is null or 0, we can try to retrieve the id directly from "wc_order_product_lookup" table
         if (!$id = $item->get_product_id()) {

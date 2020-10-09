@@ -9,13 +9,13 @@ if (!$handler->hasValidApiKey()) {
 
 ?>
 <fieldset class="">  
-    <input type="hidden" name="mailchimp_active_settings_tab" value="store_info"/>
+    <input type="hidden" name="squalomail_active_settings_tab" value="store_info"/>
     <?php 
         $current_currency = isset($options['store_currency_code']) ? $options['store_currency_code'] : get_woocommerce_currency();
         $current_currency_data = SqualoMail_WooCommerce_CurrencyCodes::getCurrency($current_currency);
     ?>
     <input type="hidden" value="<?php echo isset($current_currency_data) ? $current_currency . ' | ' .  $current_currency_data['name']: $current_currency ?>" disabled/>
-    <input type="hidden" value="<?php echo mailchimp_get_timezone(true)?>" disabled/>
+    <input type="hidden" value="<?php echo squalomail_get_timezone(true)?>" disabled/>
   
     <legend class="screen-reader-text">
         <span><?php esc_html_e('Store Settings', 'squalomail-for-woocommerce');?></span>
@@ -115,7 +115,7 @@ if (!$handler->hasValidApiKey()) {
                     /* translators: %1$s - The Currency name and format (ex: USD | US Dollar) %2$s - Timezone name or offset (ex: America/New_York or UTC-4:00) %3$s and %5$s- <a> tag open %4$s - </a> tag close*/
                     __('We\'ve detected that your WooCommerce store\'s currency is <b>%1$s</b> (%3$schange%4$s), and the WordPress timezone is <b>%2$s</b> (%5$schange%4$s). <br/>.', 'squalomail-for-woocommerce'),
                     isset($current_currency_data) ? $current_currency . ' | ' .  $current_currency_data['name']: $current_currency,
-                    mailchimp_get_timezone(true),
+                    squalomail_get_timezone(true),
                     '<a href="' . admin_url( 'options-general.php') .'" title="'.__( 'WooCommerce Settings' ).'">',
                     '</a>',
                     '<a href="' . admin_url( 'admin.php/?page=wc-settings') .'" title="'.__( 'General Settings' ).'">'
@@ -151,7 +151,7 @@ if (!$handler->hasValidApiKey()) {
         
     </div>
     <?php 
-        // Only admins should see mailchimp_permission_cap radio buttons
+        // Only admins should see squalomail_permission_cap radio buttons
         if (current_user_can('manage_options')) : ?>
         
         <div class="box optional-settings-label" >
@@ -167,12 +167,12 @@ if (!$handler->hasValidApiKey()) {
             </div>
 
             <div class="box box-half margin-large">
-                <?php $checkbox_default_settings = (array_key_exists('mailchimp_permission_cap', $options) && !is_null($options['mailchimp_permission_cap'])) ? $options['mailchimp_permission_cap'] : 'manage_options'; ?>
+                <?php $checkbox_default_settings = (array_key_exists('squalomail_permission_cap', $options) && !is_null($options['squalomail_permission_cap'])) ? $options['squalomail_permission_cap'] : 'manage_options'; ?>
                 <label class="radio-label">
-                    <input type="radio" name="<?php echo $this->plugin_name; ?>[mailchimp_permission_cap]" value="manage_options"<?php if($checkbox_default_settings === 'manage_options') echo ' checked="checked" '; ?>><?php esc_html_e('Administrators Only', 'squalomail-for-woocommerce');?><br>
+                    <input type="radio" name="<?php echo $this->plugin_name; ?>[squalomail_permission_cap]" value="manage_options"<?php if($checkbox_default_settings === 'manage_options') echo ' checked="checked" '; ?>><?php esc_html_e('Administrators Only', 'squalomail-for-woocommerce');?><br>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" name="<?php echo $this->plugin_name; ?>[mailchimp_permission_cap]" value="manage_woocommerce"<?php if($checkbox_default_settings === 'manage_woocommerce') echo ' checked="checked" '; ?>><?php esc_html_e('Shop Managers and Administrators', 'squalomail-for-woocommerce');?><br/>
+                    <input type="radio" name="<?php echo $this->plugin_name; ?>[squalomail_permission_cap]" value="manage_woocommerce"<?php if($checkbox_default_settings === 'manage_woocommerce') echo ' checked="checked" '; ?>><?php esc_html_e('Shop Managers and Administrators', 'squalomail-for-woocommerce');?><br/>
                 </label>
             </div>
         </div>

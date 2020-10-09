@@ -60,7 +60,7 @@ class SqualoMail_WooCommerce_Public {
 	 */
 	public function enqueue_scripts() {
 		wp_register_script($this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/squalomail-woocommerce-public.min.js', array(), $this->version, false);
-		wp_localize_script($this->plugin_name, 'mailchimp_public_data', array(
+		wp_localize_script($this->plugin_name, 'squalomail_public_data', array(
 			'site_url' => site_url(),
 			'ajax_url' => admin_url('admin-ajax.php'),
 			'language' => substr( get_locale(), 0, 2 )
@@ -71,7 +71,7 @@ class SqualoMail_WooCommerce_Public {
 
         // if we have the "fragment" we can just inject this vs. loading the file
         // otherwise, if we have the connected_site script url saved, we need to inject it and load from the CDN.
-        //if (($site = mailchimp_get_connected_site_script_url()) && !empty($site)) {
+        //if (($site = squalomail_get_connected_site_script_url()) && !empty($site)) {
         //   wp_enqueue_script($this->plugin_name.'_connected_site', $site, array(), $this->version, true);
         //}
 	}
@@ -81,8 +81,8 @@ class SqualoMail_WooCommerce_Public {
      */
     public function add_inline_footer_script()
     {
-        if (apply_filters( 'mailchimp_add_inline_footer_script', true)) {
-            if (($fragment = mailchimp_get_connected_site_script_fragment()) && !empty($fragment)) {
+        if (apply_filters( 'squalomail_add_inline_footer_script', true)) {
+            if (($fragment = squalomail_get_connected_site_script_fragment()) && !empty($fragment)) {
                 echo $fragment;
             }
         }

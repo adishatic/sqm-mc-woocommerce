@@ -52,12 +52,12 @@ class SqualoMail_WooCommerce_Privacy
     {
         global $wpdb;
 
-        $uid = mailchimp_hash_trim_lower($email_address);
+        $uid = squalomail_hash_trim_lower($email_address);
 
         $data = array();
 
-        if (get_site_option('mailchimp_woocommerce_db_mailchimp_carts', false)) {
-            $table = "{$wpdb->prefix}mailchimp_carts";
+        if (get_site_option('squalomail_woocommerce_db_squalomail_carts', false)) {
+            $table = "{$wpdb->prefix}squalomail_carts";
             $statement = "SELECT * FROM $table WHERE id = %s";
             $sql = $wpdb->prepare($statement, $uid);
 
@@ -74,7 +74,7 @@ class SqualoMail_WooCommerce_Privacy
         return array(
             'data' => array(
                 array(
-                    'group_id'    => 'mailchimp_cart',
+                    'group_id'    => 'squalomail_cart',
                     'group_label' => __( 'MailChimp Shopping Cart Data', 'squalomail-for-woocommerce' ),
                     'item_id'     => 'mailing-shopping-cart-1',
                     'data'        => array(
@@ -94,11 +94,11 @@ class SqualoMail_WooCommerce_Privacy
     {
         global $wpdb;
 
-        $uid = mailchimp_hash_trim_lower($email_address);
+        $uid = squalomail_hash_trim_lower($email_address);
         $count = 0;
 
-        if (get_site_option('mailchimp_woocommerce_db_mailchimp_carts', false)) {
-            $table = "{$wpdb->prefix}mailchimp_carts";
+        if (get_site_option('squalomail_woocommerce_db_squalomail_carts', false)) {
+            $table = "{$wpdb->prefix}squalomail_carts";
             $sql = $wpdb->prepare("DELETE FROM $table WHERE id = %s", $uid);
             $count = $wpdb->query($sql);
         }

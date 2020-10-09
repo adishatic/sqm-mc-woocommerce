@@ -51,7 +51,7 @@ class SqualoMail_WooCommerce_Rest_Api
      */
     public function permission_callback()
     {
-        $cap = mailchimp_get_allowed_capability();
+        $cap = squalomail_get_allowed_capability();
         return ($cap === 'manage_woocommerce' || $cap === 'manage_options' );
     }
 
@@ -61,7 +61,7 @@ class SqualoMail_WooCommerce_Rest_Api
      */
     public function ping(WP_REST_Request $request)
     {
-        return $this->mailchimp_rest_response(array('success' => true));
+        return $this->squalomail_rest_response(array('success' => true));
     }
 
     /**
@@ -71,7 +71,7 @@ class SqualoMail_WooCommerce_Rest_Api
     public function post_disconnect_survey(WP_REST_Request $request)
     {
         // need to send a post request to
-        $host = mailchimp_environment_variables()->environment === 'staging' ?
+        $host = squalomail_environment_variables()->environment === 'staging' ?
             'https://staging.conduit.vextras.com' : 'https://conduit.mailchimpapp.com';
 
         $route = "{$host}/survey/woocommerce";
@@ -85,7 +85,7 @@ class SqualoMail_WooCommerce_Rest_Api
             'body'        => json_encode($request->get_params()),
         ));
 
-        return $this->mailchimp_rest_response($result);
+        return $this->squalomail_rest_response($result);
     }
 
     /**
@@ -95,11 +95,11 @@ class SqualoMail_WooCommerce_Rest_Api
     public function get_sync_stats(WP_REST_Request $request)
     {
         // if the queue is running in the console - we need to say tell the response why it's not going to fire this way.
-        if (!mailchimp_is_configured() || !($api = mailchimp_get_api())) {
-            return $this->mailchimp_rest_response(array('success' => false, 'reason' => 'not configured'));
+        if (!squalomail_is_configured() || !($api = squalomail_get_api())) {
+            return $this->squalomail_rest_response(array('success' => false, 'reason' => 'not configured'));
         }
 
-        $store_id = mailchimp_get_store_id();
+        $store_id = squalomail_get_store_id();
         
         $complete = array(
             'coupons' => get_option('mailchimp-woocommerce-sync.coupons.completed_at'),
@@ -107,50 +107,50 @@ class SqualoMail_WooCommerce_Rest_Api
             'orders' => get_option('mailchimp-woocommerce-sync.orders.completed_at')
         );
 
-        $promo_rules_count = mailchimp_get_coupons_count();
-        $product_count = mailchimp_get_product_count();
-        $order_count = mailchimp_get_order_count();
+        $promo_rules_count = squalomail_get_coupons_count();
+        $product_count = squalomail_get_product_count();
+        $order_count = squalomail_get_order_count();
 
-        $mailchimp_total_promo_rules = $complete['coupons'] ? $promo_rules_count - mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_SingleCoupon') : 0;
-        $mailchimp_total_products = $complete['products'] ? $product_count - mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Product') : 0;
-        $mailchimp_total_orders = $complete['orders'] ? $order_count - mailchimp_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Order') : 0;
+        $squalomail_total_promo_rules = $complete['coupons'] ? $promo_rules_count - squalomail_get_remaining_jobs_count('SqualoMail_WooCommerce_SingleCoupon') : 0;
+        $squalomail_total_products = $complete['products'] ? $product_count - squalomail_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Product') : 0;
+        $squalomail_total_orders = $complete['orders'] ? $order_count - squalomail_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Order') : 0;
         // try {
         //     $promo_rules = $api->getPromoRules($store_id, 1, 1, 1);
-        //     $mailchimp_total_promo_rules = $promo_rules['total_items'];
-        //     if (isset($promo_rules_count['publish']) && $mailchimp_total_promo_rules > $promo_rules_count['publish']) $mailchimp_total_promo_rules = $promo_rules_count['publish'];
-        // } catch (\Exception $e) { $mailchimp_total_promo_rules = 0; }
+        //     $squalomail_total_promo_rules = $promo_rules['total_items'];
+        //     if (isset($promo_rules_count['publish']) && $squalomail_total_promo_rules > $promo_rules_count['publish']) $squalomail_total_promo_rules = $promo_rules_count['publish'];
+        // } catch (\Exception $e) { $squalomail_total_promo_rules = 0; }
         // try {
         //     $products = $api->products($store_id, 1, 1);
-        //     $mailchimp_total_products = $products['total_items'];
-        //     if ($mailchimp_total_products > $product_count) $mailchimp_total_products = $product_count;
-        // } catch (\Exception $e) { $mailchimp_total_products = 0; }
+        //     $squalomail_total_products = $products['total_items'];
+        //     if ($squalomail_total_products > $product_count) $squalomail_total_products = $product_count;
+        // } catch (\Exception $e) { $squalomail_total_products = 0; }
         // try {
         //     $orders = $api->orders($store_id, 1, 1);
-        //     $mailchimp_total_orders = $orders['total_items'];
-        //     if ($mailchimp_total_orders > $order_count) $mailchimp_total_orders = $order_count;
-        // } catch (\Exception $e) { $mailchimp_total_orders = 0; }
+        //     $squalomail_total_orders = $orders['total_items'];
+        //     if ($squalomail_total_orders > $order_count) $squalomail_total_orders = $order_count;
+        // } catch (\Exception $e) { $squalomail_total_orders = 0; }
 
-        $date = mailchimp_date_local('now');
+        $date = squalomail_date_local('now');
 
         // but we need to do it just in case.
-        return $this->mailchimp_rest_response(array(
+        return $this->squalomail_rest_response(array(
             'success' => true,
             'promo_rules_in_store' => $promo_rules_count,
-            'promo_rules_in_mailchimp' => $mailchimp_total_promo_rules,
+            'promo_rules_in_mailchimp' => $squalomail_total_promo_rules,
             
             'products_in_store' => $product_count,
-            'products_in_mailchimp' => $mailchimp_total_products,
+            'products_in_mailchimp' => $squalomail_total_products,
             
             'orders_in_store' => $order_count,
-            'orders_in_mailchimp' => $mailchimp_total_orders,
+            'orders_in_mailchimp' => $squalomail_total_orders,
             
             // 'promo_rules_page' => get_option('mailchimp-woocommerce-sync.coupons.current_page'),
             // 'products_page' => get_option('mailchimp-woocommerce-sync.products.current_page'),
             // 'orders_page' => get_option('mailchimp-woocommerce-sync.orders.current_page'),
             
             'date' => $date->format( __('D, M j, Y g:i A', 'squalomail-for-woocommerce')),
-            'has_started' => mailchimp_has_started_syncing() || ($order_count != $mailchimp_total_orders),
-            'has_finished' => mailchimp_is_done_syncing() && ($order_count == $mailchimp_total_orders),
+            'has_started' => squalomail_has_started_syncing() || ($order_count != $squalomail_total_orders),
+            'has_finished' => squalomail_is_done_syncing() && ($order_count == $squalomail_total_orders),
         ));
     }
     
@@ -160,7 +160,7 @@ class SqualoMail_WooCommerce_Rest_Api
      */
     public function dismiss_review_banner(WP_REST_Request $request)
     {
-        return $this->mailchimp_rest_response(array('success' => delete_option('mailchimp-woocommerce-sync.initial_sync')));
+        return $this->squalomail_rest_response(array('success' => delete_option('mailchimp-woocommerce-sync.initial_sync')));
     }
 
 
@@ -169,7 +169,7 @@ class SqualoMail_WooCommerce_Rest_Api
      * @param int $status
      * @return WP_REST_Response
      */
-    private function mailchimp_rest_response($data, $status = 200) {
+    private function squalomail_rest_response($data, $status = 200) {
         if (!is_array($data)) $data = array();
         $response = new WP_REST_Response($data);
         $response->set_status($status);

@@ -235,7 +235,7 @@ class SqualoMail_WooCommerce_Product
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'id' => (string) $this->getId(),
             'title' => $this->getTitle(),
             'handle' => (string) $this->getHandle(),

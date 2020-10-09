@@ -138,7 +138,7 @@
                         <select id="timezone" name="timezone" required>
                             <?php $selected_timezone = isset($options['store_timezone']) && !empty($options['store_timezone']) ? $options['store_timezone'] : get_option('timezone_string'); ?>
                             <?php
-                                foreach(mailchimp_get_timezone_list() as $t) {
+                                foreach(squalomail_get_timezone_list() as $t) {
                                 echo '<option value="' . esc_attr( $t['zone'] ) . '" ' . selected($t['zone'] === $selected_timezone, true, false ) . '>' . esc_html( $t['diff_from_GMT'] . ' - ' . $t['zone'] ) . '</option>';
                                 }
                             ?>

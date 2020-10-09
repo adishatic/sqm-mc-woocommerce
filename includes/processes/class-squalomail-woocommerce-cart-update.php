@@ -70,7 +70,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
     public function handle()
     {
         if (($result = $this->process())) {
-            mailchimp_log('ac.success', 'Added', array('api_response' => $result->toArray()));
+            squalomail_log('ac.success', 'Added', array('api_response' => $result->toArray()));
         }
 
         return false;
@@ -83,13 +83,13 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
     {
         try {
 
-            if (!mailchimp_is_configured() || !($api = mailchimp_get_api())) {
-                mailchimp_debug(get_called_class(), 'Mailchimp is not configured properly');
+            if (!squalomail_is_configured() || !($api = squalomail_get_api())) {
+                squalomail_debug(get_called_class(), 'Mailchimp is not configured properly');
                 return false;
             }
 
             $options = get_option('mailchimp-woocommerce', array());
-            $store_id = mailchimp_get_store_id();
+            $store_id = squalomail_get_store_id();
 
             $this->cart_data = json_decode($this->cart_data, true);
 
@@ -103,7 +103,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
 
             $checkout_url = wc_get_checkout_url();
 
-            if (mailchimp_string_contains($checkout_url, '?')) {
+            if (squalomail_string_contains($checkout_url, '?')) {
                 $checkout_url .= '&mc_cart_id='.$this->id;
             } else {
                 $checkout_url .= '?mc_cart_id='.$this->id;
@@ -122,7 +122,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
                 try {
                     $cart->setCampaignID($this->campaign_id, true);
                 } catch (\Exception $e) {
-                    mailchimp_log('cart_set_campaign_id.error', 'No campaign added to abandoned cart, with provided ID: '. $this->campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
+                    squalomail_log('cart_set_campaign_id.error', 'No campaign added to abandoned cart, with provided ID: '. $this->campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
                 }
             }
 
@@ -155,16 +155,16 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
                 try {
                     // if the post is successful we're all good.
                     if ($api->addCart($store_id, $cart, false) !== false) {
-                        mailchimp_log('abandoned_cart.success', "email: {$customer->getEmailAddress()} :: checkout_url: $checkout_url");
+                        squalomail_log('abandoned_cart.success', "email: {$customer->getEmailAddress()} :: checkout_url: $checkout_url");
                     }
                 } catch (\Exception $e) {
                     // for some reason this happens on carts and we need to make sure that this doesn't prevent
                     // the submission from going through.
-                    if (mailchimp_string_contains($e->getMessage(), 'campaign with the')) {
+                    if (squalomail_string_contains($e->getMessage(), 'campaign with the')) {
                         // remove the campaign ID and re-submit
                         $cart->removeCampaignID();
                         if ($api->addCart($store_id, $cart, false) !== false) {
-                            mailchimp_log('abandoned_cart.success', "email: {$customer->getEmailAddress()} :: checkout_url: $checkout_url");
+                            squalomail_log('abandoned_cart.success', "email: {$customer->getEmailAddress()} :: checkout_url: $checkout_url");
                         }
                     } else {
                         throw $e;
@@ -172,7 +172,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
                 }
             } catch (\Exception $e) {
 
-                mailchimp_error('abandoned_cart.error', "email: {$customer->getEmailAddress()} :: attempting product update :: {$e->getMessage()}");
+                squalomail_error('abandoned_cart.error', "email: {$customer->getEmailAddress()} :: attempting product update :: {$e->getMessage()}");
 
                 // if we have an error it's most likely due to a product not being found.
                 // let's loop through each item, verify that we have the product or not.
@@ -188,19 +188,19 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
                 // if the post is successful we're all good.
                 $api->addCart($store_id, $cart, false);
 
-                mailchimp_log('abandoned_cart.success', "email: {$customer->getEmailAddress()}");
+                squalomail_log('abandoned_cart.success', "email: {$customer->getEmailAddress()}");
             }
 
             // Maybe sync subscriber to set correct member.language
-            mailchimp_member_data_update($this->email, $this->user_language, 'cart');
+            squalomail_member_data_update($this->email, $this->user_language, 'cart');
 
         } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
-            mailchimp_error('cart.error', mailchimp_error_trace($e, "RateLimited :: email {$this->email}"));
+            squalomail_error('cart.error', squalomail_error_trace($e, "RateLimited :: email {$this->email}"));
             $this->retry();
         } catch (\Exception $e) {
             update_option('mailchimp-woocommerce-cart-error', $e->getMessage());
-            mailchimp_error('abandoned_cart.error', $e);
+            squalomail_error('abandoned_cart.error', $e);
         }
 
         return false;

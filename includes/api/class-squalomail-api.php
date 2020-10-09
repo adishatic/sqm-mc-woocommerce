@@ -235,7 +235,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             unset($data['marketing_permissions']);
         }
 
-        mailchimp_debug('api.subscribe', "Subscribing {$email}", $data);
+        squalomail_debug('api.subscribe', "Subscribing {$email}", $data);
 
         return $this->post("lists/$list_id/members?skip_merge_validation=true", $data);
     }
@@ -289,7 +289,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             unset($data['marketing_permissions']);
         }
 
-        mailchimp_debug('api.update_member', "Updating {$email}", $data);
+        squalomail_debug('api.update_member', "Updating {$email}", $data);
 
         return $this->patch("lists/$list_id/members/$hash?skip_merge_validation=true", $data);
     }
@@ -344,7 +344,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
     public function updateMemberTags($list_id, $email, $fail_silently = false)
     {
         $hash = md5(strtolower(trim($email)));
-        $tags = mailchimp_get_user_tags_to_update($email);
+        $tags = squalomail_get_user_tags_to_update($email);
 
         if (empty($tags)) return false;
 
@@ -352,7 +352,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             'tags' => $tags
         );
 
-        mailchimp_debug('api.update_member_tags', "Updating {$email}", $data);
+        squalomail_debug('api.update_member_tags', "Updating {$email}", $data);
 
         try {
             return $this->post("lists/$list_id/members/$hash/tags", $data);
@@ -413,7 +413,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             unset($data['language']);
         }
         
-        mailchimp_debug('api.update_or_create', "Update Or Create {$email}", $data);
+        squalomail_debug('api.update_or_create', "Update Or Create {$email}", $data);
 
         return $this->put("lists/$list_id/members/$hash", $data);
     }
@@ -679,7 +679,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             set_site_transient('mailchimp-woocommerce-has-campaign-id-'.$campaign_id, $data, 60 * 30);
             return $data;
         } catch (\Exception $e) {
-            mailchimp_debug('campaign_get.error', 'No campaign with provided ID: '. $campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
+            squalomail_debug('campaign_get.error', 'No campaign with provided ID: '. $campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
             set_site_transient('mailchimp-woocommerce-no-campaign-id-'.$campaign_id, true, 60 * 30);
 
             if (!$throw_if_invalid) {
@@ -766,7 +766,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             return $this->patch("ecommerce/stores/{$store_id}", $store->toArray());
 
         } catch (\Exception $e) {
-            mailchimp_log('flag.store_sync', $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
+            squalomail_log('flag.store_sync', $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
         }
         return false;
     }
@@ -818,10 +818,10 @@ class SqualoMail_WooCommerce_SqualoMailApi
         try {
             return (bool) $this->delete("ecommerce/stores/$store_id");
         } catch (SqualoMail_WooCommerce_Error $e) {
-            mailchimp_error("delete_store {$store_id}", $e->getMessage());
+            squalomail_error("delete_store {$store_id}", $e->getMessage());
             return false;
         } catch (\Exception $e) {
-            mailchimp_error("delete_store {$store_id}", $e->getMessage());
+            squalomail_error("delete_store {$store_id}", $e->getMessage());
             return false;
         }
     }
@@ -901,18 +901,18 @@ class SqualoMail_WooCommerce_SqualoMailApi
         try {
             $email = $cart->getCustomer()->getEmailAddress();
 
-            if (mailchimp_email_is_privacy_protected($email) || mailchimp_email_is_amazon($email)) {
+            if (squalomail_email_is_privacy_protected($email) || squalomail_email_is_amazon($email)) {
                 return false;
             }
 
-            mailchimp_debug('api.addCart', "Adding Cart :: {$email}", $data = $cart->toArray());
+            squalomail_debug('api.addCart', "Adding Cart :: {$email}", $data = $cart->toArray());
 
             $data = $this->post("ecommerce/stores/$store_id/carts", $data);
             $cart = new SqualoMail_WooCommerce_Cart();
             return $cart->setStoreID($store_id)->fromArray($data);
         } catch (SqualoMail_WooCommerce_Error $e) {
             if (!$silent) throw $e;
-            mailchimp_log('api.addCart', $e->getMessage());
+            squalomail_log('api.addCart', $e->getMessage());
             return false;
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -933,18 +933,18 @@ class SqualoMail_WooCommerce_SqualoMailApi
         try {
             $email = $cart->getCustomer()->getEmailAddress();
 
-            if (mailchimp_email_is_privacy_protected($email) || mailchimp_email_is_amazon($email)) {
+            if (squalomail_email_is_privacy_protected($email) || squalomail_email_is_amazon($email)) {
                 return false;
             }
 
-            mailchimp_debug('api.updateCart', "Updating Cart :: {$email}", $data = $cart->toArrayForUpdate());
+            squalomail_debug('api.updateCart', "Updating Cart :: {$email}", $data = $cart->toArrayForUpdate());
 
             $data = $this->patch("ecommerce/stores/$store_id/carts/{$cart->getId()}", $data);
             $cart = new SqualoMail_WooCommerce_Cart();
             return $cart->setStoreID($store_id)->fromArray($data);
         } catch (SqualoMail_WooCommerce_Error $e) {
             if (!$silent) throw $e;
-            mailchimp_log('api.updateCart', $e->getMessage());
+            squalomail_log('api.updateCart', $e->getMessage());
             return false;
         } catch (\Exception $e) {
             if (!$silent) throw $e;
@@ -1050,14 +1050,14 @@ class SqualoMail_WooCommerce_SqualoMailApi
             }
 
             // update the member tags but fail silently just in case.
-            $this->updateMemberTags(mailchimp_get_list_id(), $email_address, true);
+            $this->updateMemberTags(squalomail_get_list_id(), $email_address, true);
 
             update_option('mailchimp-woocommerce-resource-last-updated', time());
             $order = new SqualoMail_WooCommerce_Order();
             return $order->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
-            mailchimp_log('api.add_order.error', $e->getMessage(), array('submission' => $order->toArray()));
+            squalomail_log('api.add_order.error', $e->getMessage(), array('submission' => $order->toArray()));
             return false;
         }
     }
@@ -1097,13 +1097,13 @@ class SqualoMail_WooCommerce_SqualoMailApi
             }
 
             // update the member tags but fail silently just in case.
-            $this->updateMemberTags(mailchimp_get_list_id(), $email_address, true);
+            $this->updateMemberTags(squalomail_get_list_id(), $email_address, true);
 
             $order = new SqualoMail_WooCommerce_Order();
             return $order->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
-            mailchimp_log('api.update_order.error', $e->getMessage(), array('submission' => $order->toArray()));
+            squalomail_log('api.update_order.error', $e->getMessage(), array('submission' => $order->toArray()));
             return false;
         }
     }
@@ -1222,7 +1222,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             return $product->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
-            mailchimp_log('api.add_product.error', $e->getMessage(), array('submission' => $product->toArray()));
+            squalomail_log('api.add_product.error', $e->getMessage(), array('submission' => $product->toArray()));
             return false;
         }
     }
@@ -1246,7 +1246,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             return $product->fromArray($data);
         } catch (\Exception $e) {
             if (!$silent) throw $e;
-            mailchimp_log('api.update_product.error', $e->getMessage(), array('submission' => $product->toArray()));
+            squalomail_log('api.update_product.error', $e->getMessage(), array('submission' => $product->toArray()));
             return false;
         }
     }
@@ -1263,7 +1263,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             // get the line item name from the order detail just in case we need that title for the product.
             $job = new SqualoMail_WooCommerce_Single_Product($order_item->getProductId(), $order_item->getFallbackTitle());
             if ($missing_products[$order_item->getId()] = $job->createModeOnly()->fromOrderItem($order_item)->handle()) {
-                mailchimp_debug("missing_products.fallback", "Product {$order_item->getId()} had to be re-pushed into Mailchimp");
+                squalomail_debug("missing_products.fallback", "Product {$order_item->getId()} had to be re-pushed into Mailchimp");
             }
         }
         return $missing_products;
@@ -1288,16 +1288,16 @@ class SqualoMail_WooCommerce_SqualoMailApi
 
         $product->addVariant($variation);
 
-        if ((bool) mailchimp_get_data('empty_line_item_placeholder', false)) {
+        if ((bool) squalomail_get_data('empty_line_item_placeholder', false)) {
             return $product;
         }
 
-        $store_id = mailchimp_get_store_id();
-        $api = mailchimp_get_api();
+        $store_id = squalomail_get_store_id();
+        $api = squalomail_get_api();
 
         try {
             $response = $api->addStoreProduct($store_id, $product);
-            mailchimp_set_data('empty_line_item_placeholder', true, 'yes');
+            squalomail_set_data('empty_line_item_placeholder', true, 'yes');
             return $response;
         } catch (\Exception $e) {
             return $product;
@@ -1578,7 +1578,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
     {
         $email = $customer->getEmailAddress();
 
-        if (!is_email($email) || mailchimp_email_is_amazon($email) || mailchimp_email_is_privacy_protected($email)) {
+        if (!is_email($email) || squalomail_email_is_amazon($email) || squalomail_email_is_privacy_protected($email)) {
             return false;
         }
 
@@ -1772,7 +1772,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
      */
     protected function applyCurlOptions($method, $url, $params = array(), $headers = array())
     {
-        $env = mailchimp_environment_variables();
+        $env = squalomail_environment_variables();
 
         $curl_options = array(
             CURLOPT_USERPWD => "mailchimp:{$this->api_key}",
@@ -1862,7 +1862,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
         }
 
         if (!is_array($data)) {
-            mailchimp_error("api.debug", 'fallback when data is empty from API', array('url' => $called_url, 'response' => $response));
+            squalomail_error("api.debug", 'fallback when data is empty from API', array('url' => $called_url, 'response' => $response));
             throw new SqualoMail_WooCommerce_ServerError('API response could not be decoded.');
         }
 

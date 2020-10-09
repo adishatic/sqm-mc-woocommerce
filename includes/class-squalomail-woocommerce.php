@@ -79,18 +79,18 @@ class SqualoMail_WooCommerce
         $plugin_options = get_option('mailchimp-woocommerce');
         $is_options = is_array($plugin_options);
 
-        $api_key = $is_options && array_key_exists('mailchimp_api_key', $plugin_options) ?
-            $plugin_options['mailchimp_api_key'] : false;
+        $api_key = $is_options && array_key_exists('squalomail_api_key', $plugin_options) ?
+            $plugin_options['squalomail_api_key'] : false;
 
         $enable_logging = $is_options &&
-            array_key_exists('mailchimp_debugging', $plugin_options) &&
-            $plugin_options['mailchimp_debugging'];
+            array_key_exists('squalomail_debugging', $plugin_options) &&
+            $plugin_options['squalomail_debugging'];
 
-        $account_id = $is_options && array_key_exists('mailchimp_account_info_id', $plugin_options) ?
-            $plugin_options['mailchimp_account_info_id'] : false;
+        $account_id = $is_options && array_key_exists('squalomail_account_info_id', $plugin_options) ?
+            $plugin_options['squalomail_account_info_id'] : false;
 
-        $username = $is_options && array_key_exists('mailchimp_account_info_username', $plugin_options) ?
-            $plugin_options['mailchimp_account_info_username'] : false;
+        $username = $is_options && array_key_exists('squalomail_account_info_username', $plugin_options) ?
+            $plugin_options['squalomail_account_info_username'] : false;
 
         $api_key_parts = str_getcsv($api_key, '-');
         $data_center = isset($api_key_parts[1]) ? $api_key_parts[1] : 'us1';
@@ -121,7 +121,7 @@ class SqualoMail_WooCommerce
         $this->plugin_name = 'mailchimp-woocommerce';
         $this->version = $version;
         $this->environment = $environment;
-        $this->is_configured = mailchimp_is_configured();
+        $this->is_configured = squalomail_is_configured();
 
         $this->load_dependencies();
         $this->set_locale();
@@ -142,12 +142,12 @@ class SqualoMail_WooCommerce
         // if we need to refresh the double opt in for any reason - just do it here.
         if ($this->queryStringEquals('mc_doi_refresh', '1')) {
             try {
-                $enabled_doi = mailchimp_list_has_double_optin(true);
+                $enabled_doi = squalomail_list_has_double_optin(true);
             } catch (\Exception $e) {
-                mailchimp_error('mc.utils.doi_refresh', 'failed updating doi transient');
+                squalomail_error('mc.utils.doi_refresh', 'failed updating doi transient');
                 return false;
             }
-            mailchimp_log('mc.utils.doi_refresh', ($enabled_doi ? 'turned ON' : 'turned OFF'));
+            squalomail_log('mc.utils.doi_refresh', ($enabled_doi ? 'turned ON' : 'turned OFF'));
         }
     }
 
@@ -250,30 +250,30 @@ class SqualoMail_WooCommerce
         $this->loader->add_action('admin_footer', $plugin_admin, 'inject_sync_ajax_call');
 
         // update MC store information when woocommerce general settings are saved
-        $this->loader->add_action('woocommerce_settings_save_general', $plugin_admin, 'mailchimp_update_woo_settings');
+        $this->loader->add_action('woocommerce_settings_save_general', $plugin_admin, 'squalomail_update_woo_settings');
         
         // update MC store information if "WooCommerce Multi-Currency Extension" settings are saved
         if ( class_exists( 'WOOMULTI_CURRENCY_F' ) ) {
-            $this->loader->add_action('villatheme_support_woo-multi-currency', $plugin_admin, 'mailchimp_update_woo_settings');
+            $this->loader->add_action('villatheme_support_woo-multi-currency', $plugin_admin, 'squalomail_update_woo_settings');
         }
 
         // Mailchimp oAuth
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_oauth_start', $plugin_admin, 'mailchimp_woocommerce_ajax_oauth_start' );
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_oauth_finish', $plugin_admin, 'mailchimp_woocommerce_ajax_oauth_finish' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_start', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_start' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_finish', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_finish' );
 
         // Create new mailchimp Account methods
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_create_account_check_username', $plugin_admin, 'mailchimp_woocommerce_ajax_create_account_check_username' );
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_create_account_signup', $plugin_admin, 'mailchimp_woocommerce_ajax_create_account_signup' );
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_support_form', $plugin_admin, 'mailchimp_woocommerce_ajax_support_form' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_create_account_check_username', $plugin_admin, 'squalomail_woocommerce_ajax_create_account_check_username' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_create_account_signup', $plugin_admin, 'squalomail_woocommerce_ajax_create_account_signup' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_support_form', $plugin_admin, 'squalomail_woocommerce_ajax_support_form' );
 
         // add Shop Manager capability to save options
-        $this->loader->add_action('option_page_capability_mailchimp-woocommerce', $plugin_admin, 'mailchimp_woocommerce_option_page_capability');
+        $this->loader->add_action('option_page_capability_mailchimp-woocommerce', $plugin_admin, 'squalomail_woocommerce_option_page_capability');
 
         // set communications box status
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_communication_status', $plugin_admin, 'mailchimp_woocommerce_communication_status' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_communication_status', $plugin_admin, 'squalomail_woocommerce_communication_status' );
 
         // Load log file via ajax
-        $this->loader->add_action( 'wp_ajax_mailchimp_woocommerce_load_log_file', $plugin_admin, 'mailchimp_woocommerce_ajax_load_log_file' );
+        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_load_log_file', $plugin_admin, 'squalomail_woocommerce_ajax_load_log_file' );
     }
 
 	/**
@@ -306,7 +306,7 @@ class SqualoMail_WooCommerce
 			$service->setVersion($this->version);
 
 			// adding the ability to render the checkbox on another screen of the checkout page.
-			$render_on = $service->getOption('mailchimp_checkbox_action', 'woocommerce_after_checkout_billing_form');
+			$render_on = $service->getOption('squalomail_checkbox_action', 'woocommerce_after_checkout_billing_form');
 
 			$this->loader->add_action($render_on, $service, 'applyNewsletterField', 10);
 
@@ -373,12 +373,12 @@ class SqualoMail_WooCommerce
 			$this->loader->add_action('profile_update', $service, 'handleUserUpdated', 10, 2);
 
 			// get user by hash ( public and private )
-            $this->loader->add_action('wp_ajax_mailchimp_get_user_by_hash', $service, 'get_user_by_hash');
-            $this->loader->add_action('wp_ajax_nopriv_mailchimp_get_user_by_hash', $service, 'get_user_by_hash');
+            $this->loader->add_action('wp_ajax_squalomail_get_user_by_hash', $service, 'get_user_by_hash');
+            $this->loader->add_action('wp_ajax_nopriv_squalomail_get_user_by_hash', $service, 'get_user_by_hash');
 
             // set user by email hash ( public and private )
-            $this->loader->add_action('wp_ajax_mailchimp_set_user_by_email', $service, 'set_user_by_email');
-            $this->loader->add_action('wp_ajax_nopriv_mailchimp_set_user_by_email', $service, 'set_user_by_email');
+            $this->loader->add_action('wp_ajax_squalomail_set_user_by_email', $service, 'set_user_by_email');
+            $this->loader->add_action('wp_ajax_nopriv_squalomail_set_user_by_email', $service, 'set_user_by_email');
 
             $jobs_classes = array(
                 "SqualoMail_WooCommerce_Single_Order",
@@ -391,10 +391,10 @@ class SqualoMail_WooCommerce
                 "SqualoMail_WooCommerce_Process_Products"
             );
             foreach ($jobs_classes as $job_class) {
-                $this->loader->add_action($job_class, $service, 'mailchimp_process_single_job', 10, 1);
+                $this->loader->add_action($job_class, $service, 'squalomail_process_single_job', 10, 1);
             }
             // sync stats manager
-            $this->loader->add_action('SqualoMail_WooCommerce_Process_Full_Sync_Manager', $service, 'mailchimp_process_sync_manager', 10, 1);
+            $this->loader->add_action('SqualoMail_WooCommerce_Process_Full_Sync_Manager', $service, 'squalomail_process_sync_manager', 10, 1);
 		}
 	}
 

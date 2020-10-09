@@ -25,9 +25,9 @@ abstract class SqualoMail_WooCommerce_Options
      */
     public function adminReady()
     {
-        $this->is_admin = current_user_can(mailchimp_get_allowed_capability());
-        if (get_option('mailchimp_woocommerce_plugin_do_activation_redirect', false)) {
-            delete_option('mailchimp_woocommerce_plugin_do_activation_redirect');
+        $this->is_admin = current_user_can(squalomail_get_allowed_capability());
+        if (get_option('squalomail_woocommerce_plugin_do_activation_redirect', false)) {
+            delete_option('squalomail_woocommerce_plugin_do_activation_redirect');
 
             // don't do the redirect while activating the plugin through the rest API. ( Bartosz from Woo asked for this )
             if ((defined( 'REST_REQUEST' ) && REST_REQUEST)) {
@@ -82,7 +82,7 @@ abstract class SqualoMail_WooCommerce_Options
      */
     public function getUniqueStoreID()
     {
-        return mailchimp_get_store_id();
+        return squalomail_get_store_id();
     }
 
     /**
@@ -250,7 +250,7 @@ abstract class SqualoMail_WooCommerce_Options
     public function api()
     {
         if (empty($this->api)) {
-            $this->api = new SqualoMail_WooCommerce_SqualoMailApi($this->getOption('mailchimp_api_key', false));
+            $this->api = new SqualoMail_WooCommerce_SqualoMailApi($this->getOption('squalomail_api_key', false));
         }
 
         return $this->api;
@@ -308,7 +308,7 @@ abstract class SqualoMail_WooCommerce_Options
 
     public function removeSyncPointers()
     {
-        mailchimp_flush_sync_pointers();
+        squalomail_flush_sync_pointers();
     }
 
     public function removeMiscPointers()

@@ -64,20 +64,20 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
      */
     public function handle()
     {
-        if (!mailchimp_is_configured()) {
-            mailchimp_debug(get_called_class(), 'Mailchimp is not configured properly');
+        if (!squalomail_is_configured()) {
+            squalomail_debug(get_called_class(), 'Mailchimp is not configured properly');
             static::$handling_for = null;
             return false;
         }
 
         if ($this->should_ignore) {
-            mailchimp_debug(get_called_class(), "{$this->id} is currently in motion - skipping this one.");
+            squalomail_debug(get_called_class(), "{$this->id} is currently in motion - skipping this one.");
             static::$handling_for = null;
             return false;
         }
 
         $options = get_option('mailchimp-woocommerce', array());
-        $store_id = mailchimp_get_store_id();
+        $store_id = squalomail_get_store_id();
 
         // load up the user.
         $user = new WP_User($this->id);
@@ -90,13 +90,13 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
             sleep(1);
 
             $options = get_option('mailchimp-woocommerce', array());
-            $store_id = mailchimp_get_store_id();
+            $store_id = squalomail_get_store_id();
 
             // load up the user.
             $user = new WP_User($this->id);
 
             if ($user->ID <= 0 || empty($store_id) || !is_array($options)) {
-                mailchimp_log('member.sync', "Invalid Data For Submission :: {$user->ID}");
+                squalomail_log('member.sync', "Invalid Data For Submission :: {$user->ID}");
                 static::$handling_for = null;
                 return false;
             }
@@ -105,28 +105,28 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
         $email = $user->user_email;
 
         // make sure we don't need to skip this email
-        if (!mailchimp_email_is_allowed($email)) {
+        if (!squalomail_email_is_allowed($email)) {
             static::$handling_for = null;
             return false;
         }
 
         // if we have a null value, we need to grab the correct user meta for is_subscribed
         if (is_null($this->subscribed)) {
-            $user_subscribed = get_user_meta($this->id, 'mailchimp_woocommerce_is_subscribed', true);
+            $user_subscribed = get_user_meta($this->id, 'squalomail_woocommerce_is_subscribed', true);
             if ($user_subscribed === '' || $user_subscribed === null) {
-                mailchimp_log('member.sync', "Skipping sync for {$email} because no subscriber status has been set");
+                squalomail_log('member.sync', "Skipping sync for {$email} because no subscriber status has been set");
                 static::$handling_for = null;
                 return false;
             }
             $this->subscribed = (bool) $user_subscribed;
         }
 
-        $api_key = isset($options['mailchimp_api_key']) ? $options['mailchimp_api_key'] : false;
-        $list_id = isset($options['mailchimp_list']) ? $options['mailchimp_list'] : false;
+        $api_key = isset($options['squalomail_api_key']) ? $options['squalomail_api_key'] : false;
+        $list_id = isset($options['squalomail_list']) ? $options['squalomail_list'] : false;
 
         // we need a valid api key and list id to continue
         if (empty($api_key) || empty($list_id)) {
-            mailchimp_log('member.sync', "Invalid Api Key or ListID :: {$email}");
+            squalomail_log('member.sync', "Invalid Api Key or ListID :: {$email}");
             static::$handling_for = null;
             return false;
         }
@@ -149,11 +149,11 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
         if (!empty($ln)) $merge_fields_system['LNAME'] = $ln;
 
         // allow users to hook into the merge field submission
-        $merge_fields = apply_filters('mailchimp_sync_user_mergetags', $merge_fields_system, $user);
+        $merge_fields = apply_filters('squalomail_sync_user_mergetags', $merge_fields_system, $user);
 
         // for whatever reason if this isn't an array we need to skip it.
         if (!is_array($merge_fields)) {
-            mailchimp_error("custom.merge_fields", "The filter for mailchimp_sync_user_mergetags needs to return an array, using the default setup instead.");
+            squalomail_error("custom.merge_fields", "The filter for squalomail_sync_user_mergetags needs to return an array, using the default setup instead.");
             $merge_fields = $merge_fields_system;
         }
         // language
@@ -163,14 +163,14 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
         $gdpr_fields = $this->gdpr_fields;
 
         // pull the transient key for this job.
-        $transient_id = mailchimp_get_transient_email_key($email);
-        $status_meta = mailchimp_get_subscriber_status_options($this->subscribed);
+        $transient_id = squalomail_get_transient_email_key($email);
+        $status_meta = squalomail_get_subscriber_status_options($this->subscribed);
 
         try {
 
             // check to see if the status meta has changed when a false response is given
-            if (mailchimp_check_serialized_transient_changed($transient_id, $status_meta) === false) {
-                mailchimp_debug(get_called_class(), "Skipping sync for {$email} because it was just pushed less than a minute ago.");
+            if (squalomail_check_serialized_transient_changed($transient_id, $status_meta) === false) {
+                squalomail_debug(get_called_class(), "Skipping sync for {$email} because it was just pushed less than a minute ago.");
                 static::$handling_for = null;
                 return false;
             }
@@ -187,17 +187,17 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
                     $api->subscribe($list_id, $email, $status_meta['created'], $merge_fields, null, $language, $gdpr_fields);
 
                     // update the member tags but fail silently just in case.
-                    $api->updateMemberTags(mailchimp_get_list_id(), $email, true);
+                    $api->updateMemberTags(squalomail_get_list_id(), $email, true);
 
-                    mailchimp_tell_system_about_user_submit($email, $status_meta, 60);
+                    squalomail_tell_system_about_user_submit($email, $status_meta, 60);
 
                     if ($status_meta['created']) {
-                        mailchimp_log('member.sync', 'Subscriber Swap '.$this->updated_data['user_email'].' to '.$email, array(
+                        squalomail_log('member.sync', 'Subscriber Swap '.$this->updated_data['user_email'].' to '.$email, array(
                             'status' => $status_meta['created'],
                             'merge_fields' => $merge_fields
                         ));
                     } else {
-                        mailchimp_log('member.sync', 'Subscriber Swap '.$this->updated_data['user_email'].' to '.$email.' Pending Double OptIn', array(
+                        squalomail_log('member.sync', 'Subscriber Swap '.$this->updated_data['user_email'].' to '.$email.' Pending Double OptIn', array(
                             'status' => $status_meta['created'],
                             'merge_fields' => $merge_fields
                         ));
@@ -209,7 +209,7 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
 
             // if the member is unsubscribed or pending, we really can't do anything here.
             if (isset($member_data['status']) && in_array($member_data['status'], array('unsubscribed', 'pending'))) {
-                mailchimp_log('member.sync', "Skipped Member Sync For {$email} because the current status is {$member_data['status']}", $merge_fields);
+                squalomail_log('member.sync', "Skipped Member Sync For {$email} because the current status is {$member_data['status']}", $merge_fields);
                 static::$handling_for = null;
                 return false;
             }
@@ -220,10 +220,10 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
                 $api->update($list_id, $email, $status_meta['updated'], $merge_fields, null, $language, $gdpr_fields);
                 
                 // update the member tags but fail silently just in case.
-                $api->updateMemberTags(mailchimp_get_list_id(), $email, true);
+                $api->updateMemberTags(squalomail_get_list_id(), $email, true);
 
-                mailchimp_tell_system_about_user_submit($email, $status_meta, 60);
-                mailchimp_log('member.sync', "Updated Member {$email}", array(
+                squalomail_tell_system_about_user_submit($email, $status_meta, 60);
+                squalomail_log('member.sync', "Updated Member {$email}", array(
                     'previous_status' => $member_data['status'],
                     'status' => $status_meta['updated'],
                     'merge_fields' => $merge_fields
@@ -237,10 +237,10 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
                 $api->update($list_id, $email, $member_data['status'], $merge_fields, null, $language, $gdpr_fields);
 
                 // update the member tags but fail silently just in case.
-                $api->updateMemberTags(mailchimp_get_list_id(), $email, true);
+                $api->updateMemberTags(squalomail_get_list_id(), $email, true);
 
-                mailchimp_tell_system_about_user_submit($email, $status_meta, 60);
-                mailchimp_log('member.sync', "Updated Member {$email} ( merge fields only )", array(
+                squalomail_tell_system_about_user_submit($email, $status_meta, 60);
+                squalomail_log('member.sync', "Updated Member {$email} ( merge fields only )", array(
                     'merge_fields' => $merge_fields
                 ));
                 static::$handling_for = null;
@@ -250,7 +250,7 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
             static::$handling_for = null;
         } catch (SqualoMail_WooCommerce_RateLimitError $e) {
             sleep(3);
-            mailchimp_error('member.sync.error', mailchimp_error_trace($e, "RateLimited :: user #{$this->id}"));
+            squalomail_error('member.sync.error', squalomail_error_trace($e, "RateLimited :: user #{$this->id}"));
             $this->retry();
         } catch (\Exception $e) {
             // if we have a 404 not found, we can create the member
@@ -263,21 +263,21 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
                     $api->subscribe($list_id, $user->user_email, $status_if_new, $merge_fields, null, $language, $gdpr_fields);
                     
                     // update the member tags but fail silently just in case.
-                    $api->updateMemberTags(mailchimp_get_list_id(), $email, true);
+                    $api->updateMemberTags(squalomail_get_list_id(), $email, true);
 
-                    mailchimp_tell_system_about_user_submit($email, $status_meta, 60);
+                    squalomail_tell_system_about_user_submit($email, $status_meta, 60);
                     if ($status_meta['created']) {
-                        mailchimp_log('member.sync', "Subscribed Member {$user->user_email}", array('status_if_new' => $status_if_new, 'merge_fields' => $merge_fields));
+                        squalomail_log('member.sync', "Subscribed Member {$user->user_email}", array('status_if_new' => $status_if_new, 'merge_fields' => $merge_fields));
                     } else {
-                        mailchimp_log('member.sync', "{$user->user_email} is Pending Double OptIn");
+                        squalomail_log('member.sync', "{$user->user_email} is Pending Double OptIn");
                     }
                 } catch (\Exception $e) {
-                    mailchimp_log('member.sync', $e->getMessage());
+                    squalomail_log('member.sync', $e->getMessage());
                 }
                 static::$handling_for = null;
                 return false;
             }
-            mailchimp_error('member.sync', mailchimp_error_trace($e, $user->user_email));
+            squalomail_error('member.sync', squalomail_error_trace($e, $user->user_email));
         }
 
         static::$handling_for = null;

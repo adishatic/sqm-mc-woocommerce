@@ -199,7 +199,7 @@ class SqualoMail_WooCommerce_PromoCode
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty([
+        return squalomail_array_remove_empty([
             'id' => (string) $this->getId(),
             'code' => (string) $this->getCode(),
             'redemption_url' => (string) $this->getRedemptionURL(),

@@ -26,7 +26,7 @@ if ( ! class_exists( 'Squalomail_Woocommerce_Job' ) ) {
 			$job = $this;
 			if (null == $job->attempts) $job->set_attempts(0);
 			$job->set_attempts($job->get_attempts() + 1);
-			mailchimp_as_push($job, $delay);
+			squalomail_as_push($job, $delay);
 		}
 
 		/**
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Squalomail_Woocommerce_Job' ) ) {
 		 */
 		protected function applyRateLimitedScenario()
 		{
-			mailchimp_set_transient('api-rate-limited', true, 60);
+			squalomail_set_transient('api-rate-limited', true, 60);
 
 			$this->retry();
 

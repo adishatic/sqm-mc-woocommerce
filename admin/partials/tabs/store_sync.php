@@ -1,84 +1,84 @@
 <?php
 
-$store_id = mailchimp_get_store_id();
+$store_id = squalomail_get_store_id();
 
-$product_count = mailchimp_get_product_count();
-$order_count = mailchimp_get_order_count();
-$promo_rules_count = mailchimp_count_posts('shop_coupon');
+$product_count = squalomail_get_product_count();
+$order_count = squalomail_get_order_count();
+$promo_rules_count = squalomail_count_posts('shop_coupon');
 
-$mailchimp_total_products = $mailchimp_total_orders = $mailchimp_total_promo_rules = 0;
-$mailchimp_total_subscribers = $mailchimp_total_unsubscribed = $mailchimp_total_transactional = 0;
+$squalomail_total_products = $squalomail_total_orders = $squalomail_total_promo_rules = 0;
+$squalomail_total_subscribers = $squalomail_total_unsubscribed = $squalomail_total_transactional = 0;
 
 $store_syncing = false;
 $last_updated_time = get_option('mailchimp-woocommerce-resource-last-updated');
 $sync_started_at = get_option('mailchimp-woocommerce-sync.started_at');
 if (!empty($sync_started_at)) {
-    $sync_started_at = mailchimp_date_local($sync_started_at);
+    $sync_started_at = squalomail_date_local($sync_started_at);
 } else {
     $sync_started_at = new \DateTime();
 }
 
 $sync_completed_at = get_option('mailchimp-woocommerce-sync.completed_at');
 if (!empty($sync_completed_at)) {
-    $sync_completed_at = mailchimp_date_local($sync_completed_at);
+    $sync_completed_at = squalomail_date_local($sync_completed_at);
 } else {
     $sync_completed_at = false;
 }
 
 $account_name = 'n/a';
-$mailchimp_list_name = 'n/a';
+$squalomail_list_name = 'n/a';
 if (!empty($last_updated_time)) {
-    $last_updated_time = mailchimp_date_local($last_updated_time);
+    $last_updated_time = squalomail_date_local($last_updated_time);
 }
 
 // if we have a transient set to start the sync on this page view, initiate it now that the values have been saved.
-if ((bool) get_site_transient('mailchimp_woocommerce_start_sync', false)) {
+if ((bool) get_site_transient('squalomail_woocommerce_start_sync', false)) {
     SqualoMail_WooCommerce_Admin::connect()->startSync();
 }
 
-if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore($store_id))) {
+if (($squalomail_api = squalomail_get_api()) && ($store = $squalomail_api->getStore($store_id))) {
     $store_syncing = $store->isSyncing();
     if (($account_details = $handler->getAccountDetails())) {
         $account_name = $account_details['account_name'];
     }
     try {
-        $promo_rules = $mailchimp_api->getPromoRules($store_id, 1, 1, 1);
-        $mailchimp_total_promo_rules = $promo_rules['total_items'];
-        if (isset($promo_rules_count['publish']) && $mailchimp_total_promo_rules > $promo_rules_count['publish']) $mailchimp_total_promo_rules = $promo_rules_count['publish'];
-    } catch (\Exception $e) { $mailchimp_total_promo_rules = 0; }
+        $promo_rules = $squalomail_api->getPromoRules($store_id, 1, 1, 1);
+        $squalomail_total_promo_rules = $promo_rules['total_items'];
+        if (isset($promo_rules_count['publish']) && $squalomail_total_promo_rules > $promo_rules_count['publish']) $squalomail_total_promo_rules = $promo_rules_count['publish'];
+    } catch (\Exception $e) { $squalomail_total_promo_rules = 0; }
     try {
-        $products = $mailchimp_api->products($store_id, 1, 1);
-        $mailchimp_total_products = $products['total_items'];
-        if ($mailchimp_total_products > $product_count) $mailchimp_total_products = $product_count;
-    } catch (\Exception $e) { $mailchimp_total_products = 0; }
+        $products = $squalomail_api->products($store_id, 1, 1);
+        $squalomail_total_products = $products['total_items'];
+        if ($squalomail_total_products > $product_count) $squalomail_total_products = $product_count;
+    } catch (\Exception $e) { $squalomail_total_products = 0; }
     try {
-        $orders = $mailchimp_api->orders($store_id, 1, 1);
-        $mailchimp_total_orders = $orders['total_items'];
-        if ($mailchimp_total_orders > $order_count) $mailchimp_total_orders = $order_count;
-    } catch (\Exception $e) { $mailchimp_total_orders = 0; }
+        $orders = $squalomail_api->orders($store_id, 1, 1);
+        $squalomail_total_orders = $orders['total_items'];
+        if ($squalomail_total_orders > $order_count) $squalomail_total_orders = $order_count;
+    } catch (\Exception $e) { $squalomail_total_orders = 0; }
     try {
-        $mailchimp_total_subscribers = $mailchimp_api->getSubscribedCount($store->getListId());
-    } catch (\Exception $e) { $mailchimp_total_subscribers = 0; }
+        $squalomail_total_subscribers = $squalomail_api->getSubscribedCount($store->getListId());
+    } catch (\Exception $e) { $squalomail_total_subscribers = 0; }
     try {
-        $mailchimp_total_transactional = $mailchimp_api->getTransactionalCount($store->getListId());
-    } catch (\Exception $e) { $mailchimp_total_transactional = 0; }
+        $squalomail_total_transactional = $squalomail_api->getTransactionalCount($store->getListId());
+    } catch (\Exception $e) { $squalomail_total_transactional = 0; }
     try {
-        $mailchimp_total_unsubscribed = $mailchimp_api->getUnsubscribedCount($store->getListId());
-    } catch (\Exception $e) { $mailchimp_total_unsubscribed = 0; }
+        $squalomail_total_unsubscribed = $squalomail_api->getUnsubscribedCount($store->getListId());
+    } catch (\Exception $e) { $squalomail_total_unsubscribed = 0; }
     
-    $mailchimp_list_name = $handler->getListName();
+    $squalomail_list_name = $handler->getListName();
 }
 ?>
-<input type="hidden" name="mailchimp_active_settings_tab" value="store_sync"/>
+<input type="hidden" name="squalomail_active_settings_tab" value="store_sync"/>
 
 <div class="sync-content-wrapper">
     <div class="sync-stats-wrapper sync-stats-store">
         <div class="box sync-stats-card promo_rules" >
             <div class="sync-stats-card-content">
                 <span class="card_label"><strong><?php esc_html_e('Coupons', 'squalomail-for-woocommerce');?></strong></span>
-                <span class="card_count" id="mailchimp_promo_rules_count"><?php echo number_format($mailchimp_total_promo_rules); ?></span>
+                <span class="card_count" id="squalomail_promo_rules_count"><?php echo number_format($squalomail_total_promo_rules); ?></span>
                 <div class="progress-bar-wrapper">
-                    <span class="card_count_label mailchimp_promo_rules_count_partial"></span>
+                    <span class="card_count_label squalomail_promo_rules_count_partial"></span>
                     <div class="progress-bar"></div>
                 </div>
             </div>
@@ -86,9 +86,9 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
         <div class="box sync-stats-card products" >
             <div class="sync-stats-card-content">
                 <span class="card_label"><strong><?php esc_html_e('Products', 'squalomail-for-woocommerce');?></strong></span>
-                <span class="card_count" id="mailchimp_product_count"><?php echo number_format($mailchimp_total_products ); ?></span>
+                <span class="card_count" id="squalomail_product_count"><?php echo number_format($squalomail_total_products ); ?></span>
                 <div class="progress-bar-wrapper">
-                    <span class="card_count_label mailchimp_product_count_partial"></span>
+                    <span class="card_count_label squalomail_product_count_partial"></span>
                     <div class="progress-bar"></div>
                 </div>
             </div>
@@ -96,10 +96,10 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
         <div class="box sync-stats-card orders" >
             <div class="sync-stats-card-content">
                 <span class="card_label"><strong><?php esc_html_e('Orders', 'squalomail-for-woocommerce');?></strong></span>
-                <span class="card_count" id="mailchimp_order_count"><?php echo number_format($mailchimp_total_orders); ?></span>
+                <span class="card_count" id="squalomail_order_count"><?php echo number_format($squalomail_total_orders); ?></span>
                 <div class="progress-bar-wrapper">
                     <div class="progress-bar"></div>
-                    <span class="card_count_label mailchimp_order_count_partial"></span>
+                    <span class="card_count_label squalomail_order_count_partial"></span>
                 </div>
             </div>
         </div>
@@ -109,21 +109,21 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
         <div class="box sync-stats-card subscribers" >
             <div class="sync-stats-card-content">
                 <span class="card_label"><strong><?php esc_html_e('Subscribers', 'squalomail-for-woocommerce');?></strong></span>
-                <span class="card_count" id="mailchimp_subscriber_count"><?php echo number_format($mailchimp_total_subscribers); ?></span>
+                <span class="card_count" id="squalomail_subscriber_count"><?php echo number_format($squalomail_total_subscribers); ?></span>
                 <img class="sync-loader" src="<?php echo plugin_dir_url( __FILE__ ) . "images/3dotpurple.gif"; ?>"/>
             </div>
         </div>
         <div class="box sync-stats-card transactional" >
             <div class="sync-stats-card-content">
                 <span class="card_label"><strong><?php esc_html_e('Transactional', 'squalomail-for-woocommerce');?></strong></span>
-                <span class="card_count" id="mailchimp_transactional_count"><?php echo number_format($mailchimp_total_transactional); ?></span>
+                <span class="card_count" id="squalomail_transactional_count"><?php echo number_format($squalomail_total_transactional); ?></span>
                 <img class="sync-loader" src="<?php echo plugin_dir_url( __FILE__ ) . "images/3dotpurple.gif"; ?>"/>
             </div>
         </div>
         <div class="box sync-stats-card unsubscribed" >
             <div class="sync-stats-card-content">
                 <span class="card_label"><strong><?php esc_html_e('Unsubscribed', 'squalomail-for-woocommerce');?></strong></span>
-                <span class="card_count" id="mailchimp_unsubscribed_count"><?php echo number_format($mailchimp_total_unsubscribed); ?></span>
+                <span class="card_count" id="squalomail_unsubscribed_count"><?php echo number_format($squalomail_total_unsubscribed); ?></span>
                 <img class="sync-loader" src="<?php echo plugin_dir_url( __FILE__ ) . "images/3dotpurple.gif"; ?>"/>
             </div>
         </div>
@@ -134,29 +134,29 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
             <?php wp_nonce_field( '_disconnect-nonce-'.$store_id, '_disconnect-nonce' ); ?>
             <?php wp_nonce_field( '_resync-nonce-'.$store_id, '_resync-nonce' ); ?>
 
-            <a id="mailchimp_woocommerce_disconnect" class="sqm-mc-woocommerce-disconnect-button">
+            <a id="squalomail_woocommerce_disconnect" class="sqm-mc-woocommerce-disconnect-button">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#3C3C3C"/>
                     </svg>
                     <?php esc_html_e('DISCONNECT STORE', 'squalomail-for-woocommerce');?>
             </a>
-            <p><strong><?php esc_html_e('Account Connected', 'squalomail-for-woocommerce');?></strong></p> <p id="mailchimp_account_connected"><?php echo $account_name; ?></p>
+            <p><strong><?php esc_html_e('Account Connected', 'squalomail-for-woocommerce');?></strong></p> <p id="squalomail_account_connected"><?php echo $account_name; ?></p>
             <br/>
             <p><strong><?php esc_html_e('Audience Connected', 'squalomail-for-woocommerce');?></strong></p>
-            <p id="mailchimp_list_name"><?php echo $mailchimp_list_name; ?></p>
+            <p id="squalomail_list_name"><?php echo $squalomail_list_name; ?></p>
 
             <div class="sqm-mc-woocommerce-last-sync">
                 <p>
                     <?php if ($last_updated_time): ?>
                         <?php esc_html_e('Status:', 'squalomail-for-woocommerce');?>
-                        <?= mailchimp_is_done_syncing() ? esc_html_e('Sync Completed', 'squalomail-for-woocommerce') : esc_html_e('Syncing...', 'squalomail-for-woocommerce'); ?>
+                        <?= squalomail_is_done_syncing() ? esc_html_e('Sync Completed', 'squalomail-for-woocommerce') : esc_html_e('Syncing...', 'squalomail-for-woocommerce'); ?>
                     <?php elseif ($sync_started_at && !$sync_completed_at): ?>
                         <?php esc_html_e('Initial sync in progress', 'squalomail-for-woocommerce');?>
                     <?php endif;?>
                 </p>
                 <p>
                     <?php esc_html_e('Last Updated:', 'squalomail-for-woocommerce');?>
-                    <i id="mailchimp_last_updated">
+                    <i id="squalomail_last_updated">
                         <?php if ($last_updated_time): ?>
                             <?php echo $last_updated_time->format( __('D, M j, Y g:i A', 'squalomail-for-woocommerce')); ?>
                         <?php else : ?>
@@ -173,7 +173,7 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
 <div class="sync-content-wrapper sync-comm-wrapper">
 <?php
 $opt = get_option('mailchimp-woocommerce-comm.opt');
-$admin_email = mailchimp_get_option('admin_email', get_option('admin_email'));
+$admin_email = squalomail_get_option('admin_email', get_option('admin_email'));
 $comm_enabled = $opt != null ? $opt : '0';
 ?>
 <h3>Communication</h3>
@@ -202,7 +202,7 @@ $comm_enabled = $opt != null ? $opt : '0';
 </div>
 
 
-<?php $show_resync = $mailchimp_api && (!$store_syncing || isset($_GET['resync']) && $_GET['resync'] === '1'); ?>
+<?php $show_resync = $squalomail_api && (!$store_syncing || isset($_GET['resync']) && $_GET['resync'] === '1'); ?>
 <div class="sync-content-wrapper sync-more-wrapper">
     <div class="box box-half">
         <div class="content">
@@ -259,7 +259,7 @@ $comm_enabled = $opt != null ? $opt : '0';
             <fieldset >
                 <?php $user_id = get_current_user_id(); ?>
 
-                <input id="store_id" name="store_id" type="hidden" value="<?= mailchimp_get_store_id(); ?>">
+                <input id="store_id" name="store_id" type="hidden" value="<?= squalomail_get_store_id(); ?>">
                 <input id="account_id" name="account_id" type="hidden" value="<?= $account_details['account_id']?>">
                 <input id="org" name="org" type="hidden" value="<?= get_bloginfo( 'name' );?>">
                 

@@ -30,17 +30,17 @@ if (!defined( 'WP_UNINSTALL_PLUGIN')) {
 	exit;
 }
 
-if (!isset($mailchimp_woocommerce_spl_autoloader) || $mailchimp_woocommerce_spl_autoloader === false) {
+if (!isset($squalomail_woocommerce_spl_autoloader) || $squalomail_woocommerce_spl_autoloader === false) {
     include_once "bootstrap.php";
 }
 
-function mailchimp_woocommerce_uninstall() {
+function squalomail_woocommerce_uninstall() {
     try {
         if (($options = get_option('mailchimp-woocommerce', false)) && is_array($options)) {
-            if (isset($options['mailchimp_api_key'])) {
+            if (isset($options['squalomail_api_key'])) {
                 $store_id = get_option('mailchimp-woocommerce-store_id', false);
                 if (!empty($store_id)) {
-                    $api = new SqualoMail_WooCommerce_SqualoMailApi($options['mailchimp_api_key']);
+                    $api = new SqualoMail_WooCommerce_SqualoMailApi($options['squalomail_api_key']);
                     $result = $api->deleteStore($store_id) ? 'has been deleted' : 'did not delete';
                     error_log("store id {$store_id} {$result} MailChimp");
                 }
@@ -49,19 +49,19 @@ function mailchimp_woocommerce_uninstall() {
     } catch (\Exception $e) {
         error_log($e->getMessage().' on '.$e->getLine().' in '.$e->getFile());
     }
-    mailchimp_remove_communication_status();
-    mailchimp_clean_database();
-    mailchimp_remove_activity_panel_inbox_notes();
+    squalomail_remove_communication_status();
+    squalomail_clean_database();
+    squalomail_remove_activity_panel_inbox_notes();
 }
 
 if (!is_multisite()) {
-    mailchimp_woocommerce_uninstall();
+    squalomail_woocommerce_uninstall();
 } else {
     global $wpdb;
     try {
-        foreach ($wpdb->get_col("SELECT blog_id FROM $wpdb->blogs") as $mailchimp_current_blog_id) {
-            switch_to_blog($mailchimp_current_blog_id);
-            mailchimp_woocommerce_uninstall();
+        foreach ($wpdb->get_col("SELECT blog_id FROM $wpdb->blogs") as $squalomail_current_blog_id) {
+            switch_to_blog($squalomail_current_blog_id);
+            squalomail_woocommerce_uninstall();
         }
         restore_current_blog();
     } catch (\Exception $e) {}

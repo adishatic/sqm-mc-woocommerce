@@ -11,7 +11,7 @@ $logs = array();
 if (!empty($files)) {
     foreach (array_reverse($files) as $key => $value) {
         if (!in_array( $value, array( '.', '..' ))) {
-            if (!is_dir($value) && mailchimp_string_contains($value, 'mailchimp_woocommerce')) {
+            if (!is_dir($value) && squalomail_string_contains($value, 'squalomail_woocommerce')) {
                 $logs[sanitize_title($value)] = $value;
             }
         }
@@ -53,8 +53,8 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
     </div>
     <div class="box box-half">
         <div class="log-select mailchimp-select-wrapper">
-            <select id="mailchimp-log-pref" name="<?php echo $this->plugin_name; ?>[mailchimp_logging]" required>
-                <?php $logging_preference = mailchimp_environment_variables()->logging; ?>
+            <select id="mailchimp-log-pref" name="<?php echo $this->plugin_name; ?>[squalomail_logging]" required>
+                <?php $logging_preference = squalomail_environment_variables()->logging; ?>
                 <?php
                 foreach(array('none' => esc_html__('None', 'squalomail-for-woocommerce'), 'debug' => esc_html__('Debug', 'squalomail-for-woocommerce'), 'standard' => esc_html__('Standard', 'squalomail-for-woocommerce')) as $log_value => $log_label) {
                     echo '<option value="'.esc_attr($log_value).'" '.selected($log_value === $logging_preference, true, false ) . '>' . esc_html($log_label) . '</option>';
@@ -74,7 +74,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
     </div>
     
     <div class="box log-file-actions">
-        <input type="hidden" name="<?php echo $this->plugin_name; ?>[mailchimp_active_tab]" value="logs"/>
+        <input type="hidden" name="<?php echo $this->plugin_name; ?>[squalomail_active_tab]" value="logs"/>
         <div class="mailchimp-select-wrapper view-log-select">
             <select id="log_file" name="log_file">
                 <?php foreach ( $logs as $log_key => $log_file ) : ?>

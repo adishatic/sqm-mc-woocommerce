@@ -560,7 +560,7 @@ class SqualoMail_WooCommerce_Order
     {
         $campaign_id = (string) $this->getCampaignId();
 
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'id' => (string) $this->getId(),
             'landing_site' => (string) $this->getLandingSite(),
             'customer' => $this->getCustomer()->toArray(),

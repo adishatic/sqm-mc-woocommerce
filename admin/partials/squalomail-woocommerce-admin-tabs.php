@@ -6,18 +6,18 @@ $handler = SqualoMail_WooCommerce_Admin::connect();
 $options = get_option($this->plugin_name, array());
 
 $active_tab = isset($_GET['tab']) ? $_GET['tab'] : (isset($options['active_tab']) ? $options['active_tab'] : 'api_key');
-$sqm_configured = mailchimp_is_configured();
+$sqm_configured = squalomail_is_configured();
 
 if (!$sqm_configured) {
     if ($active_tab == 'sync' || $active_tab == 'logs' ) isset($options['active_tab']) ? $options['active_tab'] : 'api_key';
 }
 
-$is_mailchimp_post = isset($_POST['mailchimp_woocommerce_settings_hidden']) && $_POST['mailchimp_woocommerce_settings_hidden'] === 'Y';
+$is_squalomail_post = isset($_POST['squalomail_woocommerce_settings_hidden']) && $_POST['squalomail_woocommerce_settings_hidden'] === 'Y';
 
 $show_sync_tab = isset($_GET['resync']) ? $_GET['resync'] === '1' : false;
 
 // if we have a transient set to start the sync on this page view, initiate it now that the values have been saved.
-if ($sqm_configured && !$show_sync_tab && (bool) get_site_transient('mailchimp_woocommerce_start_sync', false)) {
+if ($sqm_configured && !$show_sync_tab && (bool) get_site_transient('squalomail_woocommerce_start_sync', false)) {
     $show_sync_tab = true;
     $active_tab = 'sync';
 }
@@ -27,19 +27,19 @@ $has_valid_api_key = false;
 $allow_new_list = true;
 $only_one_list = false;
 $show_wizard = true;
-$clicked_sync_button = $sqm_configured && $is_mailchimp_post && $active_tab == 'sync';
+$clicked_sync_button = $sqm_configured && $is_squalomail_post && $active_tab == 'sync';
 $has_api_error = isset($options['api_ping_error']) && !empty($options['api_ping_error']) ? $options['api_ping_error'] : null;
 
-if (isset($options['mailchimp_api_key'])) {
+if (isset($options['squalomail_api_key'])) {
     try {
         if ($handler->hasValidApiKey(null, true)) {
             $has_valid_api_key = true;
 
             // if we don't have a valid api key we need to redirect back to the 'api_key' tab.
-            if (($mailchimp_lists = $handler->getMailChimpLists()) && is_array($mailchimp_lists)) {
+            if (($squalomail_lists = $handler->getMailChimpLists()) && is_array($squalomail_lists)) {
                 $show_campaign_defaults = true;
                 $allow_new_list = false;
-                $only_one_list = count($mailchimp_lists) === 1;
+                $only_one_list = count($squalomail_lists) === 1;
 
             }
 
@@ -63,7 +63,7 @@ else {
 }
 
 
-//var_dump(array('jordan' => array('active' => $active_tab, 'configured' => $sqm_configured, 'api_key' => mailchimp_get_api_key()))); die();
+//var_dump(array('jordan' => array('active' => $active_tab, 'configured' => $sqm_configured, 'api_key' => squalomail_get_api_key()))); die();
 
 ?>
 
@@ -121,7 +121,7 @@ else {
             }
         }
         if ($active_tab == 'sync' && $show_sync_tab) {
-            if (mailchimp_is_done_syncing()) {
+            if (squalomail_is_done_syncing()) {
                 wp_kses(_e('Sweet! You\'re connected with<br/>Mailchimp and syncing data', 'squalomail-for-woocommerce'), $allowed_html);
             }
             else {
@@ -214,20 +214,20 @@ else {
     <?php
         $settings_errors = get_settings_errors();
         if (!$show_wizard || ($show_wizard && isset($settings_errors[0]) && $settings_errors[0]['type'] != 'success' )) {
-            echo mailchimp_settings_errors();
+            echo squalomail_settings_errors();
         }
     ?>
 
     <?php if ($active_tab != 'sync'): ?>
     <div class="tab-content-wrapper">
     <?php endif; ?>
-        <form id="mailchimp_woocommerce_options" method="post" name="cleanup_options" action="options.php">
+        <form id="squalomail_woocommerce_options" method="post" name="cleanup_options" action="options.php">
             <div class="box">
                 <?php if ($show_wizard) : ?>
-                    <input type="hidden" name="mailchimp_woocommerce_wizard_on" value=1>
+                    <input type="hidden" name="squalomail_woocommerce_wizard_on" value=1>
                 <?php endif; ?>
                 
-                <input type="hidden" name="mailchimp_woocommerce_settings_hidden" value="Y">
+                <input type="hidden" name="squalomail_woocommerce_settings_hidden" value="Y">
               
                 <?php
                     if (!$clicked_sync_button) {
@@ -239,7 +239,7 @@ else {
             </div>
             
 
-            <input type="hidden" name="<?php echo $this->plugin_name; ?>[mailchimp_active_tab]" value="<?php echo esc_attr($active_tab); ?>"/>
+            <input type="hidden" name="<?php echo $this->plugin_name; ?>[squalomail_active_tab]" value="<?php echo esc_attr($active_tab); ?>"/>
 
             <?php if ($active_tab == 'api_key' ): ?>
                 <?php include_once 'tabs/api_key.php'; ?>
@@ -266,11 +266,11 @@ else {
             <?php endif; ?>
             <?php 
                 if ($active_tab !== 'api_key' && $active_tab !== 'sync' && $active_tab !== 'logs') {
-                    if ($active_tab == 'newsletter_settings' && !mailchimp_is_configured()) {
+                    if ($active_tab == 'newsletter_settings' && !squalomail_is_configured()) {
                         $submit_button_label = __('Start sync','squalomail-for-woocommerce');
                     }
                     else $submit_button_label = !$show_wizard ? __('Save all changes') : __('Next');
-                    submit_button($submit_button_label, 'primary tab-content-submit','mailchimp_submit', TRUE);
+                    submit_button($submit_button_label, 'primary tab-content-submit','squalomail_submit', TRUE);
                 }
             ?>
         </form>

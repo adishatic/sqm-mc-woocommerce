@@ -55,19 +55,19 @@ class SqualoMail_WooCommerce_Transform_Orders
 
         // if the woo get order returns an empty value, we need to skip the whole thing.
         if (empty($woo)) {
-            mailchimp_error('sync', 'get woo post was not found for order '.$post->ID);
+            squalomail_error('sync', 'get woo post was not found for order '.$post->ID);
             return $order;
         }
 
         // if the woo object does not have a "get_billing_email" method, then we need to skip this until
         // we know how to resolve these types of things.
-        //mailchimp_log('get_billing_mail', method_exists($woo, 'get_billing_email'), array($order->toArray(), $woo));
+        //squalomail_log('get_billing_mail', method_exists($woo, 'get_billing_email'), array($order->toArray(), $woo));
         if (!method_exists($woo, 'get_billing_email')) {
             $message = "Post ID {$post->ID} was an order refund. Skipping this.";
             if ($this->is_syncing) {
                 throw new SqualoMail_WooCommerce_Error($message);
             }
-            mailchimp_error('initial_sync', $message, array('post' => $post, 'order_class' => get_class($woo)));
+            squalomail_error('initial_sync', $message, array('post' => $post, 'order_class' => get_class($woo)));
             return $order;
         }
 
@@ -76,9 +76,9 @@ class SqualoMail_WooCommerce_Transform_Orders
         $email = $woo->get_billing_email();
 
         // just skip these altogether because we can't submit any amazon orders anyway.
-        if (mailchimp_email_is_amazon($email)) {
+        if (squalomail_email_is_amazon($email)) {
             return $order->flagAsAmazonOrder(true);
-        } elseif (mailchimp_email_is_privacy_protected($email)) {
+        } elseif (squalomail_email_is_privacy_protected($email)) {
             return $order->flagAsPrivacyProtected(true);
         }
 
@@ -89,7 +89,7 @@ class SqualoMail_WooCommerce_Transform_Orders
             try {
                 $order->setCampaignId($this->campaign_id);
             } catch (\Exception $e) {
-                mailchimp_log('transform_order_set_campaign_id.error', 'No campaign added to order, with provided ID: '. $this->campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
+                squalomail_log('transform_order_set_campaign_id.error', 'No campaign added to order, with provided ID: '. $this->campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
             }
         }
 
@@ -194,7 +194,7 @@ class SqualoMail_WooCommerce_Transform_Orders
                 try {
                     $deleted_product = SqualoMail_WooCommerce_Transform_Products::deleted($pid, $title);
                 } catch (\Exception $e) {
-                    mailchimp_log('order.items.error', "Order #{$woo->get_id()} :: Product {$pid} does not exist!");
+                    squalomail_log('order.items.error', "Order #{$woo->get_id()} :: Product {$pid} does not exist!");
                     continue;
                 }
 
@@ -209,7 +209,7 @@ class SqualoMail_WooCommerce_Transform_Orders
                     continue;
                 }
 
-                mailchimp_log('order.items.error', "Order #{$woo->get_id()} :: Product {$pid} does not exist!");
+                squalomail_log('order.items.error', "Order #{$woo->get_id()} :: Product {$pid} does not exist!");
                 continue;
             }
 
@@ -217,7 +217,7 @@ class SqualoMail_WooCommerce_Transform_Orders
         }
 
         // let the store owner alter this if they need to use on-hold orders
-        return apply_filters('mailchimp_filter_ecommerce_order', $order, $woo);
+        return apply_filters('squalomail_filter_ecommerce_order', $order, $woo);
     }
 
     /**
@@ -232,7 +232,7 @@ class SqualoMail_WooCommerce_Transform_Orders
         // attach the wordpress user to the Mailchimp customer object.
         $customer->setWordpressUser($order->get_user());
 
-        $customer->setId(mailchimp_hash_trim_lower($order->get_billing_email()));
+        $customer->setId(squalomail_hash_trim_lower($order->get_billing_email()));
         $customer->setCompany($order->get_billing_company());
         $customer->setEmailAddress(trim($order->get_billing_email()));
         $customer->setFirstName($order->get_billing_first_name());
@@ -253,7 +253,7 @@ class SqualoMail_WooCommerce_Transform_Orders
         $customer->setOptInStatus($subscribed_on_order);
 
         try {
-            $doi = mailchimp_list_has_double_optin();
+            $doi = squalomail_list_has_double_optin();
         } catch (\Exception $e) {
             $doi = false;
         }
@@ -266,7 +266,7 @@ class SqualoMail_WooCommerce_Transform_Orders
         // if they are, we just need to make sure that we don't unsubscribe them just because they unchecked this box.
         if ($doi || !$subscribed_on_order) {
             try {
-                $subscriber = mailchimp_get_api()->member(mailchimp_get_list_id(), $customer->getEmailAddress());
+                $subscriber = squalomail_get_api()->member(squalomail_get_list_id(), $customer->getEmailAddress());
 
                 if ($subscriber['status'] === 'transactional') {
                     $customer->setOptInStatus(false);

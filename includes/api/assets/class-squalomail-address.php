@@ -296,7 +296,7 @@ class SqualoMail_WooCommerce_Address
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'name' => (string) $this->name,
             'address1' => (string) $this->address1,
             'address2' => (string) $this->address2,

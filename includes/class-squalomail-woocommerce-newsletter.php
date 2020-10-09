@@ -21,7 +21,7 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
         if (!empty(static::$_instance)) {
             return static::$_instance;
         }
-        $env = mailchimp_environment_variables();
+        $env = squalomail_environment_variables();
         static::$_instance = new SqualoMail_Newsletter();
         static::$_instance->setVersion($env->version);
         return static::$_instance;
@@ -33,13 +33,13 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
     public function applyNewsletterField($checkout)
     {
         if (!is_admin()) {
-            $api = mailchimp_get_api();
+            $api = squalomail_get_api();
 
             // get the gdpr fields from the cache - or call it again and save for 5 minutes.
-            $GDPRfields = $api->getCachedGDPRFields(mailchimp_get_list_id(), 5);
+            $GDPRfields = $api->getCachedGDPRFields(squalomail_get_list_id(), 5);
 
             // if the user has chosen to hide the checkbox, don't do anything.
-            if (($default_setting = $this->getOption('mailchimp_checkbox_defaults', 'check')) === 'hide') {
+            if (($default_setting = $this->getOption('squalomail_checkbox_defaults', 'check')) === 'hide') {
                 return;
             }
 
@@ -53,7 +53,7 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
             // if the user is logged in, we will pull the 'is_subscribed' property out of the meta for the value.
             // otherwise we use the default settings.
             if (is_user_logged_in()) {
-                $status = get_user_meta(get_current_user_id(), 'mailchimp_woocommerce_is_subscribed', true);
+                $status = get_user_meta(get_current_user_id(), 'squalomail_woocommerce_is_subscribed', true);
                 /// if the user is logged in - and is already subscribed - just ignore this checkbox.
                 if ((bool) $status) {
                     return;
@@ -65,8 +65,8 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
 
             // echo out the subscription checkbox.
             $checkbox = '<p class="form-row form-row-wide mailchimp-newsletter">';
-            $checkbox .= '<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="mailchimp_woocommerce_newsletter" type="checkbox" name="mailchimp_woocommerce_newsletter" value="1"'.($status ? ' checked="checked"' : '').'> ';
-            $checkbox .= '<label for="mailchimp_woocommerce_newsletter" class="woocommerce-form__label woocommerce-form__label-for-checkbox inline"><span>' . $label . '</span></label>';
+            $checkbox .= '<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="squalomail_woocommerce_newsletter" type="checkbox" name="squalomail_woocommerce_newsletter" value="1"'.($status ? ' checked="checked"' : '').'> ';
+            $checkbox .= '<label for="squalomail_woocommerce_newsletter" class="woocommerce-form__label woocommerce-form__label-for-checkbox inline"><span>' . $label . '</span></label>';
             $checkbox .= '</p>';
             $checkbox .= '<div class="clear"></div>';
 
@@ -81,15 +81,15 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
                         $text = $field['text'];
                         
                         // Add to the checkbox output
-                        $checkbox .= "<input type='hidden' value='0' name='mailchimp_woocommerce_gdpr[{$marketing_permission_id}]'>";
-                        $checkbox .= "<input class='woocommerce-form__input woocommerce-form__input-checkbox input-checkbox' id='mailchimp_woocommerce_gdpr[{$marketing_permission_id}]' type='checkbox' name='mailchimp_woocommerce_gdpr[{$marketing_permission_id}]' value='1'".($status ? ' checked="checked"' : '').">";
-                        $checkbox .= "<label for='mailchimp_woocommerce_gdpr[{$marketing_permission_id}]' class='woocommerce-form__label woocommerce-form__label-for-checkbox inline'><span>{$text}</span></label>";
+                        $checkbox .= "<input type='hidden' value='0' name='squalomail_woocommerce_gdpr[{$marketing_permission_id}]'>";
+                        $checkbox .= "<input class='woocommerce-form__input woocommerce-form__input-checkbox input-checkbox' id='squalomail_woocommerce_gdpr[{$marketing_permission_id}]' type='checkbox' name='squalomail_woocommerce_gdpr[{$marketing_permission_id}]' value='1'".($status ? ' checked="checked"' : '').">";
+                        $checkbox .= "<label for='squalomail_woocommerce_gdpr[{$marketing_permission_id}]' class='woocommerce-form__label woocommerce-form__label-for-checkbox inline'><span>{$text}</span></label>";
                         $checkbox .= "<div class='clear'></div>";
                     }
                 $checkbox .= "</p></div>";
             }
             
-            echo apply_filters( 'mailchimp_woocommerce_newsletter_field', $checkbox, $status, $label);
+            echo apply_filters( 'squalomail_woocommerce_newsletter_field', $checkbox, $status, $label);
         }
     }
 
@@ -130,8 +130,8 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
      */
     protected function handleStatus($order_id = null)
     {
-        $post_key = 'mailchimp_woocommerce_newsletter';
-        $meta_key = 'mailchimp_woocommerce_is_subscribed';
+        $post_key = 'squalomail_woocommerce_newsletter';
+        $meta_key = 'squalomail_woocommerce_is_subscribed';
         $logged_in = is_user_logged_in();
 
         // if the post key is available we use it - otherwise we null it out.

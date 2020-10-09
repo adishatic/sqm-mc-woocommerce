@@ -56,7 +56,7 @@ class SqualoMail_WooCommerce_Cart
     public function getStoreID()
     {
         if (empty($this->store_id)) {
-            $this->store_id = mailchimp_get_store_id();
+            $this->store_id = squalomail_get_store_id();
         }
 
         return $this->store_id;
@@ -225,7 +225,7 @@ class SqualoMail_WooCommerce_Cart
      */
     public function toArray()
     {
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'id' => (string) $this->getId(),
             'customer' => $this->getCustomer()->toArray(),
             'campaign_id' => (string) $this->getCampaignID(),
@@ -244,7 +244,7 @@ class SqualoMail_WooCommerce_Cart
      */
     public function toArrayForUpdate()
     {
-        return mailchimp_array_remove_empty(array(
+        return squalomail_array_remove_empty(array(
             'campaign_id' => (string) $this->getCampaignID(),
             'checkout_url' => (string) $this->getCheckoutURL(),
             'currency_code' => (string) $this->getCurrencyCode(),

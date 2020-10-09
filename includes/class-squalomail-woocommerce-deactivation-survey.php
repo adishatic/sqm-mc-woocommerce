@@ -185,7 +185,7 @@ if ( ! class_exists( 'Squalomail_Woocommerce_Deactivation_Survey', false ) ) {
 							url: "<?php echo $this->endpoint; ?>",
 							type: "POST",
 							data: {
-								id: '<?php echo mailchimp_get_store_id()?>',
+								id: '<?php echo squalomail_get_store_id()?>',
 								url: '<?php echo esc_url( home_url() ); ?>',
 								data: {
 									code: $form.find('.selected input[type=radio]').val(),
