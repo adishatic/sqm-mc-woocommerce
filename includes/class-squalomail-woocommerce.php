@@ -140,7 +140,7 @@ class SqualoMail_WooCommerce
     private function applyQueryStringOverrides()
     {
         // if we need to refresh the double opt in for any reason - just do it here.
-        if ($this->queryStringEquals('mc_doi_refresh', '1')) {
+        if ($this->queryStringEquals('sqm_doi_refresh', '1')) {
             try {
                 $enabled_doi = squalomail_list_has_double_optin(true);
             } catch (\Exception $e) {

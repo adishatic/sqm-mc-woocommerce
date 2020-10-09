@@ -628,7 +628,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
                     'squalomail_logging' => isset($input['squalomail_logging']) ? $input['squalomail_logging'] : 'none',
                 );
 
-                if (isset($_POST['mc_action']) && in_array($_POST['mc_action'], array('view_log', 'remove_log'))) {
+                if (isset($_POST['sqm_action']) && in_array($_POST['sqm_action'], array('view_log', 'remove_log'))) {
                     $path = 'admin.php?page=squalomail-woocommerce&tab=logs';
                     wp_redirect($path);
                     exit();

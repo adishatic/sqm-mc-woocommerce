@@ -104,9 +104,9 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
             $checkout_url = wc_get_checkout_url();
 
             if (squalomail_string_contains($checkout_url, '?')) {
-                $checkout_url .= '&mc_cart_id='.$this->id;
+                $checkout_url .= '&sqm_cart_id='.$this->id;
             } else {
-                $checkout_url .= '?mc_cart_id='.$this->id;
+                $checkout_url .= '?sqm_cart_id='.$this->id;
             }
 
             $customer = new SqualoMail_WooCommerce_Customer();

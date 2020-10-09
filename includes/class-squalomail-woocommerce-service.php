@@ -483,11 +483,11 @@ class SqualoMail_Service extends SqualoMail_WooCommerce_Options
 
         $cookie_duration = $this->getCookieDuration();
 
-        // if we have a query string of the mc_cart_id in the URL, that means we are sending a campaign from MC
-        if (isset($_GET['mc_cart_id']) && !isset($_GET['removed_item'])) {
+        // if we have a query string of the sqm_cart_id in the URL, that means we are sending a campaign from MC
+        if (isset($_GET['sqm_cart_id']) && !isset($_GET['removed_item'])) {
 
             // try to pull the cart from the database.
-            if (($cart = $this->getCart($_GET['mc_cart_id'])) && !empty($cart)) {
+            if (($cart = $this->getCart($_GET['sqm_cart_id'])) && !empty($cart)) {
 
                 // set the current user email
                 $this->user_email = trim(str_replace(' ','+', $cart->email));
@@ -507,19 +507,19 @@ class SqualoMail_Service extends SqualoMail_WooCommerce_Options
                     $this->setWooSession('cart', unserialize($cart->cart));
 
                     squalomail_debug('carts', "manually setting cart data for {$this->user_email}", array(
-                        'cart_id' => $_GET['mc_cart_id'],
+                        'cart_id' => $_GET['sqm_cart_id'],
                         'cart' => $cart->cart,
                     ));
                 }
             }
         }
 
-        if (isset($_GET['mc_cid'])) {
-            $this->setCampaignTrackingID($_GET['mc_cid'], $cookie_duration);
+        if (isset($_GET['sqm_cid'])) {
+            $this->setCampaignTrackingID($_GET['sqm_cid'], $cookie_duration);
         }
 
-        if (isset($_GET['mc_eid'])) {
-            @setcookie('squalomail_email_id', trim($_GET['mc_eid']), $cookie_duration, '/' );
+        if (isset($_GET['sqm_eid'])) {
+            @setcookie('squalomail_email_id', trim($_GET['sqm_eid']), $cookie_duration, '/' );
         }
     }
 
@@ -763,8 +763,8 @@ class SqualoMail_Service extends SqualoMail_WooCommerce_Options
 
             $this->getCartItems();
 
-            if (isset($_GET['mc_language'])) {
-                $this->user_language = $_GET['mc_language'];
+            if (isset($_GET['sqm_language'])) {
+                $this->user_language = $_GET['sqm_language'];
             }
 
             $this->handleCartUpdated();
