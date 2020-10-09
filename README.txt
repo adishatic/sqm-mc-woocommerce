@@ -1,4 +1,4 @@
-=== Mailchimp for WooCommerce ===
+=== SqualoMail for WooCommerce ===
 Contributors: ryanhungate, Mailchimp
 Tags: ecommerce,email,workflows,mailchimp
 Donate link: https://mailchimp.com
@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Connect your store to your Mailchimp audience to track sales, create targeted emails, send abandoned cart emails, and more.
 
 == Description ==
-Join the 17 million customers who use Mailchimp, the world's largest marketing automation platform, to develop their e-commerce marketing strategy. With the official Mailchimp for WooCommerce integration, your customers and their purchase data are automatically synced with your Mailchimp account, making it easy to send targeted campaigns, automatically follow up with customers post-purchase, recommend products, recover abandoned carts, and measure the ROI of your marketing efforts. And it's completely free.
+Join the 17 million customers who use Mailchimp, the world's largest marketing automation platform, to develop their e-commerce marketing strategy. With the official SqualoMail for WooCommerce integration, your customers and their purchase data are automatically synced with your Mailchimp account, making it easy to send targeted campaigns, automatically follow up with customers post-purchase, recommend products, recover abandoned carts, and measure the ROI of your marketing efforts. And it's completely free.
 ###What you can do with this plugin
 - Sync to your Audience in Mailchimp with purchase data.
 - Sync new subscribers to your Audience when they create an account and opt-in.
@@ -37,7 +37,7 @@ Here are some things to know before you begin this process.
 - Your hosting environment must meet [WooCommerce's minimum requirements](https://docs.woocommerce.com/document/server-requirements), including PHP 7.0 or greater.
 - `WP_CRON` must be activated with your hosting provider to sync data. Please verify that it is enabled.
 - We recommend you use this plugin in a staging environment before installing it on production servers. To learn more about staging environments, [check out these related Wordpress plugins](https://wordpress.org/plugins/search.php?q=staging).
-- Mailchimp for WooCommerce syncs the customer’s first name, last name, email address, and orders.
+- SqualoMail for WooCommerce syncs the customer’s first name, last name, email address, and orders.
 - WooCommerce customers who haven't signed up for marketing emails will appear in the **Transactional** portion of your audience, and cannot be exported.
 
 ###Getting Started

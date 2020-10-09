@@ -1,12 +1,12 @@
 # Mailchimp for Woocommerce Integration
 
-In this article, you’ll learn how to connect Mailchimp for WooCommerce.
+In this article, you’ll learn how to connect SqualoMail for WooCommerce.
 
 ## Before You Start
 
 **Here are some things to know before you begin this process.**
 
-- For the most up-to-date install instructions, read [Connect or Disconnect Mailchimp for WooCommerce](http://kb.mailchimp.com/integrations/e-commerce/connect-or-disconnect-squalomail-for-woocommerce). 
+- For the most up-to-date install instructions, read [Connect or Disconnect SqualoMail for WooCommerce](http://kb.mailchimp.com/integrations/e-commerce/connect-or-disconnect-squalomail-for-woocommerce). 
 
 - This plugin requires you to have the latest [WooCommerce plugin](https://wordpress.org/plugins/woocommerce) already installed and activated in WordPress. 
 
@@ -16,7 +16,7 @@ In this article, you’ll learn how to connect Mailchimp for WooCommerce.
 
 - We recommend you use this plugin in a staging environment before installing it on production servers. 
 
-- Mailchimp for WooCommerce syncs the customer’s first name, last name, email address, and orders.
+- SqualoMail for WooCommerce syncs the customer’s first name, last name, email address, and orders.
 
 - WooCommerce customers who haven't signed up for marketing emails will appear in the Transactional portion of your list, and cannot be exported.
 
@@ -91,8 +91,8 @@ After you connect, you can do a lot with the the data you collect, like build se
 Find out everything Mailchimp has to offer in our article, [How to Use Mailchimp for E-Commerce](http://kb.mailchimp.com/integrations/e-commerce/how-to-use-mailchimp-for-e-commerce).
 
 # Deactivate or Delete the Plugin
-When you deactivate Mailchimp for WooCommerce, it stops the sync but doesn’t remove the plugin. You can always re-activate the sync, which will backfill data at a later point in time.
-To deactivate Mailchimp for WooCommerce, follow these steps.
+When you deactivate SqualoMail for WooCommerce, it stops the sync but doesn’t remove the plugin. You can always re-activate the sync, which will backfill data at a later point in time.
+To deactivate SqualoMail for WooCommerce, follow these steps.
 
 1) Log in to your WordPress admin panel. 
 
@@ -100,7 +100,7 @@ To deactivate Mailchimp for WooCommerce, follow these steps.
 
 ![Installed Plugins](https://cloud.githubusercontent.com/assets/6547700/18677993/a76542ee-7f28-11e6-99dd-cfd6c1f5c24a.png)
 
-3) Click the box next to the Mailchimp for WooCommerce plugin, and click **Deactivate**.	
+3) Click the box next to the SqualoMail for WooCommerce plugin, and click **Deactivate**.	
 
 ![Deactivate](https://cloud.githubusercontent.com/assets/6547700/18677992/a762b844-7f28-11e6-9679-8d6c6a1d731d.png)
 

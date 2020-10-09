@@ -100,7 +100,7 @@ else {
         );
         
         if ($active_tab == 'api_key' ) {
-            wp_kses(_e('Add Mailchimp for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp', 'squalomail-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Add SqualoMail for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp', 'squalomail-for-woocommerce'), $allowed_html);
         }
  
         if ($active_tab == 'store_info' && $has_valid_api_key) {

@@ -1,8 +1,8 @@
 # Copyright (C) 2020 Mailchimp
-# This file is distributed under the same license as the Mailchimp for WooCommerce plugin.
+# This file is distributed under the same license as the SqualoMail for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Mailchimp for WooCommerce 2.4.6\n"
+"Project-Id-Version: SqualoMail for WooCommerce 2.4.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mailchimp-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: admin/class-mailchimp-woocommerce-admin.php:158
 #: admin/class-mailchimp-woocommerce-admin.php:175
-msgid "Mailchimp for WooCommerce"
+msgid "SqualoMail for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -198,7 +198,7 @@ msgid "As part of the Mailchimp Terms of Use, we require a valid phone number fo
 msgstr ""
 
 #: admin/class-mailchimp-woocommerce-admin.php:961
-msgid "Mailchimp for WooCommerce requires a Store Name to connect your store."
+msgid "SqualoMail for WooCommerce requires a Store Name to connect your store."
 msgstr ""
 
 #. translators: %s - plugin name.
@@ -833,7 +833,7 @@ msgid "Mailchimp says: API Request Error - "
 msgstr ""
 
 #: admin/partials/mailchimp-woocommerce-admin-tabs.php:103
-msgid "Add Mailchimp for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp"
+msgid "Add SqualoMail for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp"
 msgstr ""
 
 #: admin/partials/mailchimp-woocommerce-admin-tabs.php:107

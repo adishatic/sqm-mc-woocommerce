@@ -1,4 +1,4 @@
-# Mailchimp for WooCommerce Wordpress Plugin  
+# SqualoMail for WooCommerce Wordpress Plugin  
 
 Have a question or need help? Submit an [issue](https://github.com/mailchimp/mc-woocommerce/issues/new?assignees=&labels=investigating&template=bug_report.md&title=%5BBUG%5D+Description+of+Issue).
 

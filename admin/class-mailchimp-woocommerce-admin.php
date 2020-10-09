@@ -156,7 +156,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 		// Add woocommerce menu subitem
 		add_submenu_page( 
 			'woocommerce', 
-			__( 'Mailchimp for WooCommerce', 'squalomail-for-woocommerce'), 
+			__( 'SqualoMail for WooCommerce', 'squalomail-for-woocommerce'), 
 			__( 'Mailchimp', 'squalomail-for-woocommerce' ),
 			mailchimp_get_allowed_capability(),
 			$this->plugin_name,
@@ -173,7 +173,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 				array(
 					'id'        => $this->plugin_name,
 					'screen_id' => 'woocommerce_page_mailchimp-woocommerce',
-					'title'     => __( 'Mailchimp for WooCommerce', 'squalomail-for-woocommerce' ),
+					'title'     => __( 'SqualoMail for WooCommerce', 'squalomail-for-woocommerce' ),
 				)
 			);
 		}
@@ -1007,7 +1007,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
      */
     protected function addInvalidStoreNameAlert()
     {
-        add_settings_error('mailchimp_store_settings', '', __('Mailchimp for WooCommerce requires a Store Name to connect your store.', 'squalomail-for-woocommerce'));
+        add_settings_error('mailchimp_store_settings', '', __('SqualoMail for WooCommerce requires a Store Name to connect your store.', 'squalomail-for-woocommerce'));
     }
 
 	/**
