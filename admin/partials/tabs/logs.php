@@ -53,7 +53,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
     </div>
     <div class="box box-half">
         <div class="log-select mailchimp-select-wrapper">
-            <select id="mailchimp-log-pref" name="<?php echo $this->plugin_name; ?>[squalomail_logging]" required>
+            <select id="squalomail-log-pref" name="<?php echo $this->plugin_name; ?>[squalomail_logging]" required>
                 <?php $logging_preference = squalomail_environment_variables()->logging; ?>
                 <?php
                 foreach(array('none' => esc_html__('None', 'squalomail-for-woocommerce'), 'debug' => esc_html__('Debug', 'squalomail-for-woocommerce'), 'standard' => esc_html__('Standard', 'squalomail-for-woocommerce')) as $log_value => $log_label) {

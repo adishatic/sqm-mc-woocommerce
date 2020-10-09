@@ -3,7 +3,7 @@
 
 	$( document ).ready(function() {
 		var squalomail_woocommerce_newsletter = $('#squalomail_woocommerce_newsletter');
-		var gdprFields = $('#mailchimp-gdpr-fields');
+		var gdprFields = $('#squalomail-gdpr-fields');
 		if (gdprFields.length) {
 			showHideGDPR(squalomail_woocommerce_newsletter, gdprFields);
 			

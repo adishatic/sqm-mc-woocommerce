@@ -63,7 +63,7 @@
 			
 		});
 
-		$('#mailchimp-log-pref').change(function (e) {
+		$('#squalomail-log-pref').change(function (e) {
 			e.preventDefault();
 			// prevents Log Deleted notification to show up
 			removeLogDeletedParamFromFormHttpRef();
@@ -239,12 +239,12 @@
 		});
 
 		// Mailchimp OAuth connection (tab "connect")
-		$('#squalomail_woocommerce_options #mailchimp-oauth-connect').click(function(e){
+		$('#squalomail_woocommerce_options #squalomail-oauth-connect').click(function(e){
 			var token = '';
 			var startData = {action:'squalomail_woocommerce_oauth_start'};
-			$('#mailchimp-oauth-api-key-valid').hide();
-			$('#mailchimp-oauth-error').hide();
-			$('#mailchimp-oauth-waiting').show();
+			$('#squalomail-oauth-api-key-valid').hide();
+			$('#squalomail-oauth-error').hide();
+			$('#squalomail-oauth-waiting').show();
 			
 			$.post(ajaxurl, startData, function(startResponse) {
 				if (startResponse.success) {
@@ -310,9 +310,9 @@
 						window.clearInterval(oauthInterval);
 
 						// hide/show messages
-						$('#mailchimp-oauth-error').hide();
-						$('#mailchimp-oauth-waiting').hide();
-						$('#mailchimp-oauth-connecting').show();
+						$('#squalomail-oauth-error').hide();
+						$('#squalomail-oauth-waiting').hide();
+						$('#squalomail-oauth-connecting').show();
 
 						// grab a copy of the ajax settings default headers
 						var previous_default_headers = ($.ajaxSettings && $.ajaxSettings.headers) ?
@@ -338,9 +338,9 @@
 								$.post(ajaxurl, finishData, function(finishResponse) {
 									if (finishResponse.success) {
 										// hide/show messages
-										$('#mailchimp-oauth-error').hide();
-										$('#mailchimp-oauth-connecting').hide();
-										$('#mailchimp-oauth-connected').show();
+										$('#squalomail-oauth-error').hide();
+										$('#squalomail-oauth-connecting').hide();
+										$('#squalomail-oauth-connected').show();
 										
 										// get access_token from finishResponse and fill api-key field value including data_center
 										var accessToken = JSON.parse(finishResponse.data.body).access_token + '-' + JSON.parse(finishResponse.data.body).data_center 
@@ -363,8 +363,8 @@
 								});
 							}
 							else {
-								$('#mailchimp-oauth-connecting').hide();
-								$('#mailchimp-oauth-error').show();
+								$('#squalomail-oauth-connecting').hide();
+								$('#squalomail-oauth-error').show();
 								console.log('Error calling OAuth status endpoint. No credentials provided at login popup? Data:', statusData);
 							}
 						});

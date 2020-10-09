@@ -72,7 +72,7 @@ class SqualoMail_Newsletter extends SqualoMail_WooCommerce_Options
 
             // only render these fields if it's an array that has valid data.
             if (!empty($GDPRfields) && is_array($GDPRfields)) {
-                $checkbox .= "<div id='mailchimp-gdpr-fields'><p>";
+                $checkbox .= "<div id='squalomail-gdpr-fields'><p>";
                     $checkbox .= __('Please select all the ways you would like to hear from us', 'squalomail-for-woocommerce');
                     $checkbox .= "<div class='clear'></div>";
                     
