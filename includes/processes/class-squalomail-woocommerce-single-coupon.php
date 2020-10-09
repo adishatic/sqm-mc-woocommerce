@@ -8,7 +8,7 @@
  * Date: 10/6/17
  * Time: 11:14 AM
  */
-class SqualoMail_WooCommerce_SingleCoupon extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_SingleCoupon extends Squalomail_Woocommerce_Job
 {
     public $coupon_data;
     public $id;

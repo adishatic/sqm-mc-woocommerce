@@ -194,7 +194,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	public function setup_survey_form() {
 		if (is_admin()) {
             try {
-                new Mailchimp_Woocommerce_Deactivation_Survey($this->plugin_name, 'squalomail-for-woocommerce');
+                new Squalomail_Woocommerce_Deactivation_Survey($this->plugin_name, 'squalomail-for-woocommerce');
             } catch (\Throwable $e) {
                 mailchimp_error('admin@setup_survey_form', $e->getCode() . ' :: ' . $e->getMessage() . ' on ' . $e->getLine() . ' in ' . $e->getFile());
                 return false;

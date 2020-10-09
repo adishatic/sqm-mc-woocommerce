@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( 'Mailchimp_Woocommerce_Deactivation_Survey', false ) ) {
+if ( ! class_exists( 'Squalomail_Woocommerce_Deactivation_Survey', false ) ) {
 	/**
 	 * Awesome Motive Deactivation Survey.
 	 *
@@ -11,7 +11,7 @@ if ( ! class_exists( 'Mailchimp_Woocommerce_Deactivation_Survey', false ) ) {
 	 * @license    GPL-2.0+
 	 * @copyright  Copyright (c) 2018
 	 */
-	class Mailchimp_Woocommerce_Deactivation_Survey {
+	class Squalomail_Woocommerce_Deactivation_Survey {
 
 		/**
 		 * The API URL we are calling.

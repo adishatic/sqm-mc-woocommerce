@@ -5,7 +5,7 @@
  *
  * @package wp-cli
  */
-class Mailchimp_Wocoomerce_CLI extends WP_CLI_Command {
+class Squalomail_Wocoomerce_CLI extends WP_CLI_Command {
 
     /**
      * Timestamp of when this worker started processing the queue.
@@ -17,7 +17,7 @@ class Mailchimp_Wocoomerce_CLI extends WP_CLI_Command {
     protected $command_called;
 
     /**
-     * Mailchimp_Wocoomerce_CLI constructor.
+     * Squalomail_Wocoomerce_CLI constructor.
      */
     public function __construct()
     {

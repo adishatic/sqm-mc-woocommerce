@@ -8,7 +8,7 @@
  * Date: 11/14/16
  * Time: 9:38 AM
  */
-class SqualoMail_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
 {
     public static $handling_for = null;
 

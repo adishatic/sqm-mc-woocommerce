@@ -8,7 +8,7 @@
  * Date: 7/14/16
  * Time: 11:54 AM
  */
-abstract class SqualoMail_WooCommerce_Abstract_Sync extends Mailchimp_Woocommerce_Job
+abstract class SqualoMail_WooCommerce_Abstract_Sync extends Squalomail_Woocommerce_Job
 {
     /**
      * @var SqualoMail_WooCommerce_Api

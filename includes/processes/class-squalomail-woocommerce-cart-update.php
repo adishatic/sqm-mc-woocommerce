@@ -8,7 +8,7 @@
  * Date: 7/15/16
  * Time: 11:42 AM
  */
-class SqualoMail_WooCommerce_Cart_Update extends Mailchimp_Woocommerce_Job
+class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
 {
     public $id;
     public $email;
