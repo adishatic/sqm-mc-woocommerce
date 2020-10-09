@@ -1750,7 +1750,7 @@ class SqualoMail_WooCommerce_MailChimpApi
      */
     protected function url($extra = '', $params = null)
     {
-        $url = "https://{$this->data_center}.api.mailchimp.com/{$this->version}/";
+        $url = "https://api.squalomail.com/mc/{$this->version}/";
 
         if (!empty($extra)) {
             $url .= $extra;
