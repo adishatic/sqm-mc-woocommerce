@@ -276,7 +276,7 @@ function squalomail_get_store_id() {
     if (!empty($store_id)) {
         // see if we have a record of the last verification set for this job.
         $last_verification = squalomail_get_data('store-id-last-verified');
-        // if it's less than 300 seconds, we don't need to beat up on Mailchimp's API to do this so often.
+        // if it's less than 300 seconds, we don't need to beat up on Squalomail's API to do this so often.
         // just return the store ID that was in memory.
         if ((!empty($last_verification) && is_numeric($last_verification)) && ((time() - $last_verification) < 600)) {
             //squalomail_log('debug.performance', 'prevented store endpoint api call');
@@ -558,7 +558,7 @@ function activate_squalomail_woocommerce() {
     if (!squalomail_check_woocommerce_plugin_status()) {
         // Deactivate the plugin
         deactivate_plugins(__FILE__);
-        $error_message = __('The MailChimp For WooCommerce plugin requires the <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> plugin to be active!', 'woocommerce');
+        $error_message = __('The SqualoMail For WooCommerce plugin requires the <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> plugin to be active!', 'woocommerce');
         wp_die($error_message);
     }
     SqualoMail_WooCommerce_Activator::activate();
@@ -1086,7 +1086,7 @@ function squalomail_update_member_with_double_opt_in(SqualoMail_WooCommerce_Orde
 
     $api = squalomail_get_api();
 
-    // if the customer has a flag to double opt in - we need to push this data over to MailChimp as pending
+    // if the customer has a flag to double opt in - we need to push this data over to SqualoMail as pending
     // before the order is submitted.
     if ($subscribed) {
         if ($order->getCustomer()->requiresDoubleOptIn()) {
@@ -1239,7 +1239,7 @@ function squalomail_member_data_update($user_email = null, $language = null, $ca
 if (defined( 'WP_CLI' ) && WP_CLI) {
     try {
         /**
-         * Service push to MailChimp
+         * Service push to SqualoMail
          *
          * <type>
          * : product_sync order_sync order product

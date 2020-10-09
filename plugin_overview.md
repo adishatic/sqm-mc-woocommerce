@@ -1,4 +1,4 @@
-# Mailchimp for Woocommerce Integration
+# Squalomail for Woocommerce Integration
 
 In this article, you’ll learn how to connect SqualoMail for WooCommerce.
 
@@ -22,17 +22,17 @@ In this article, you’ll learn how to connect SqualoMail for WooCommerce.
 
 ## A Note for Current WooCommerce Integration Users
 
-This plugin supports our most powerful API 3.0 features, and is intended for users who have not yet integrated their WooCommerce stores with Mailchimp. If your WooCommerce store is already integrated with Mailchimp via an integration that runs on an older version of Mailchimp’s API, consider your current sales volume before you make any changes that might disrupt business.
+This plugin supports our most powerful API 3.0 features, and is intended for users who have not yet integrated their WooCommerce stores with Squalomail. If your WooCommerce store is already integrated with Squalomail via an integration that runs on an older version of Squalomail’s API, consider your current sales volume before you make any changes that might disrupt business.
 
-You can run this new integration at the same time as your current WooCommerce integration for Mailchimp. However, data from the older integration will display separately in subscriber profiles, and can’t be used with e-commerce features that require API 3.0.
+You can run this new integration at the same time as your current WooCommerce integration for Squalomail. However, data from the older integration will display separately in subscriber profiles, and can’t be used with e-commerce features that require API 3.0.
 
 ## Task Roadmap
 **Here’s a brief overview of this multi-step process.**
 
 - Install the plugin on your WordPress Admin site.
-- Connect the plugin with your Mailchimp API Key.
+- Connect the plugin with your Squalomail API Key.
 - Configure your list settings to complete the data sync process.
-- Troubleshoot any sync or data feed issues by sharing logs with Mailchimp support.
+- Troubleshoot any sync or data feed issues by sharing logs with Squalomail support.
 
 ## Install the Plugin
 **To install the plugin, follow these steps.**
@@ -57,9 +57,9 @@ You can run this new integration at the same time as your current WooCommerce in
 After you activate the plugin, you’ll be taken to the **Settings** page, where you will add your API key and configure your list settings.
 
 ## Configure and Sync
-**To configure your Mailchimp settings for WooCommerce customers and sync them to Mailchimp, follow these steps.**
+**To configure your Squalomail settings for WooCommerce customers and sync them to Squalomail, follow these steps.**
 
-1) On the **Connect** tab, paste your Mailchimp API key into the field, choose whether or not you want to send debugging logs to Mailchimp, and click **Save all changes**. To learn how to generate a Mailchimp API Key, read [About API Keys](http://kb.mailchimp.com/integrations/api-integrations/about-api-keys).
+1) On the **Connect** tab, paste your Squalomail API key into the field, choose whether or not you want to send debugging logs to Squalomail, and click **Save all changes**. To learn how to generate a Squalomail API Key, read [About API Keys](http://kb.mailchimp.com/integrations/api-integrations/about-api-keys).
 
 ![API key](https://cloud.githubusercontent.com/assets/19805049/18877771/3fca90e8-849c-11e6-9e3a-161a7b3936dd.png)
 
@@ -79,16 +79,16 @@ After you activate the plugin, you’ll be taken to the **Settings** page, where
 
 ![Save all changes](https://cloud.githubusercontent.com/assets/19805049/18877772/3fd24162-849c-11e6-8442-79ec4550b8ac.png)
 
-All set! When you click **Save all changes**, we’ll start syncing your WooCommerce customers to Mailchimp. To view progress, check the **Sync Status** tab. 
+All set! When you click **Save all changes**, we’ll start syncing your WooCommerce customers to Squalomail. To view progress, check the **Sync Status** tab. 
 
-If you have no audiences in your Mailchimp account, you will be given the option to create a new list on the **List Defaults** tab. To create a new list, set your list defaults, and click **Save all Changes** when you’re done. We’ll create a Mailchimp list for you, and begin the data sync.
+If you have no audiences in your Squalomail account, you will be given the option to create a new list on the **List Defaults** tab. To create a new list, set your list defaults, and click **Save all Changes** when you’re done. We’ll create a Squalomail list for you, and begin the data sync.
 
 ![List Defaults tab](https://cloud.githubusercontent.com/assets/19805049/18956260/cffd3926-8628-11e6-9c68-9fe3c964c75c.png)
 
 ## Next Steps
 After you connect, you can do a lot with the the data you collect, like build segments, send Automation workflows, track purchases, and view results.
 
-Find out everything Mailchimp has to offer in our article, [How to Use Mailchimp for E-Commerce](http://kb.mailchimp.com/integrations/e-commerce/how-to-use-squalomail-for-e-commerce).
+Find out everything Squalomail has to offer in our article, [How to Use Squalomail for E-Commerce](http://kb.mailchimp.com/integrations/e-commerce/how-to-use-squalomail-for-e-commerce).
 
 # Deactivate or Delete the Plugin
 When you deactivate SqualoMail for WooCommerce, it stops the sync but doesn’t remove the plugin. You can always re-activate the sync, which will backfill data at a later point in time.

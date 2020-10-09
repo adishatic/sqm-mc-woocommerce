@@ -3,17 +3,17 @@
 <!-- remove some meta and generators from the <head> -->
 <fieldset class="full">
     <legend class="screen-reader-text">
-        <span><?php esc_html_e('Connect your store to Mailchimp', 'squalomail-for-woocommerce');?></span>
+        <span><?php esc_html_e('Connect your store to Squalomail', 'squalomail-for-woocommerce');?></span>
     </legend>
     
     
     <a id="squalomail-oauth-connect" class="button button-primary tab-content-submit oauth-connect"><?php $has_valid_api_key ? esc_html_e('Reconnect', 'squalomail-for-woocommerce') : esc_html_e('Connect', 'squalomail-for-woocommerce');?></a>
-    <h4><?php esc_html_e('Connect your store to Mailchimp', 'squalomail-for-woocommerce'); ?></h4>
+    <h4><?php esc_html_e('Connect your store to Squalomail', 'squalomail-for-woocommerce'); ?></h4>
     <input type="hidden" id="<?php echo $this->plugin_name; ?>-squalomail-api-key" name="<?php echo $this->plugin_name; ?>[squalomail_api_key]" value="<?php echo isset($options['squalomail_api_key']) ? $options['squalomail_api_key'] : '' ?>" required/>
     <?php if ($has_valid_api_key) :?>
-        <p id="squalomail-oauth-api-key-valid"><?php esc_html_e('Already connected. You can reconnect with another Mailchimp account if you want.' , 'squalomail-for-woocommerce');?></p>
+        <p id="squalomail-oauth-api-key-valid"><?php esc_html_e('Already connected. You can reconnect with another Squalomail account if you want.' , 'squalomail-for-woocommerce');?></p>
     <?php endif;?>
-    <p id="squalomail-oauth-waiting" class="oauth-description"><?php esc_html_e('Connecting. A new window will open with Mailchimp\'s OAuth service. Please log-in an we will take care of the rest.' , 'squalomail-for-woocommerce');?></p>
+    <p id="squalomail-oauth-waiting" class="oauth-description"><?php esc_html_e('Connecting. A new window will open with Squalomail\'s OAuth service. Please log-in an we will take care of the rest.' , 'squalomail-for-woocommerce');?></p>
     <p id="squalomail-oauth-error" class="oauth-description"><?php esc_html_e('Error, can\'t login.' , 'squalomail-for-woocommerce');?></p>
     <p id="squalomail-oauth-connecting" class="oauth-description"><?php esc_html_e('Connection in progress' , 'squalomail-for-woocommerce');?></p>
     <p id="squalomail-oauth-connected" class="oauth-description "><?php esc_html_e('Connected! Please wait while loading next step', 'squalomail-for-woocommerce');?></p>

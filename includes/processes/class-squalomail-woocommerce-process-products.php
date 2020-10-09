@@ -32,7 +32,7 @@ class SqualoMail_WooCommerce_Process_Products extends SqualoMail_WooCommerce_Abs
     }
 
     /**
-     * Called after all the products have been iterated and processed into MailChimp
+     * Called after all the products have been iterated and processed into SqualoMail
      */
     protected function complete()
     {

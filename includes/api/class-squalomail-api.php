@@ -30,7 +30,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
     }
 
     /**
-     * MailChimpService constructor.
+     * SqualoMailService constructor.
      * @param null $api_key
      */
     public function __construct($api_key = null)
@@ -1263,7 +1263,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             // get the line item name from the order detail just in case we need that title for the product.
             $job = new SqualoMail_WooCommerce_Single_Product($order_item->getProductId(), $order_item->getFallbackTitle());
             if ($missing_products[$order_item->getId()] = $job->createModeOnly()->fromOrderItem($order_item)->handle()) {
-                squalomail_debug("missing_products.fallback", "Product {$order_item->getId()} had to be re-pushed into Mailchimp");
+                squalomail_debug("missing_products.fallback", "Product {$order_item->getId()} had to be re-pushed into Squalomail");
             }
         }
         return $missing_products;
@@ -1787,7 +1787,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             CURLOPT_HTTPHEADER => array_merge(array(
                 'content-type: application/json',
                 'accept: application/json',
-                "user-agent: MailChimp for WooCommerce/{$env->version}; PHP/{$env->php_version}; WordPress/{$env->wp_version}; Woo/{$env->wc_version};",
+                "user-agent: SqualoMail for WooCommerce/{$env->version}; PHP/{$env->php_version}; WordPress/{$env->wp_version}; Woo/{$env->wc_version};",
             ), $headers)
         );
 

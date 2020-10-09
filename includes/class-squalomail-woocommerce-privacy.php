@@ -8,12 +8,12 @@ class SqualoMail_WooCommerce_Privacy
     public function privacy_policy()
     {
         if (function_exists( 'wp_add_privacy_policy_content')) {
-            $content = sprintf(/* translators: %s - Mailchimp Privacy Policy URL. */
+            $content = sprintf(/* translators: %s - Squalomail Privacy Policy URL. */
                 __( 'When shopping, we keep a record of your email and the cart contents for up to 30 days on our server. This record is kept to repopulate the contents of your cart if you switch devices or needed to come back another day. Read our privacy policy <a href="%s">here</a>.', 'squalomail-for-woocommerce' ),
                 'https://mailchimp.com/legal/privacy/'
                 
             );
-            wp_add_privacy_policy_content('MailChimp for WooCommerce', wp_kses_post(wpautop($content, false)));
+            wp_add_privacy_policy_content('SqualoMail for WooCommerce', wp_kses_post(wpautop($content, false)));
         }
     }
 
@@ -24,7 +24,7 @@ class SqualoMail_WooCommerce_Privacy
     public function register_exporter($exporters)
     {
         $exporters['squalomail-woocommerce'] = array(
-            'exporter_friendly_name' => __('MailChimp for WooCommerce'),
+            'exporter_friendly_name' => __('SqualoMail for WooCommerce'),
             'callback'               => array($this, 'export'),
         );
         return $exporters;
@@ -37,7 +37,7 @@ class SqualoMail_WooCommerce_Privacy
     public function register_eraser($erasers)
     {
         $erasers['squalomail-woocommerce'] = array(
-            'eraser_friendly_name' => __('MailChimp for WooCommerce'),
+            'eraser_friendly_name' => __('SqualoMail for WooCommerce'),
             'callback'               => array($this, 'erase'),
         );
         return $erasers;
@@ -75,7 +75,7 @@ class SqualoMail_WooCommerce_Privacy
             'data' => array(
                 array(
                     'group_id'    => 'squalomail_cart',
-                    'group_label' => __( 'MailChimp Shopping Cart Data', 'squalomail-for-woocommerce' ),
+                    'group_label' => __( 'SqualoMail Shopping Cart Data', 'squalomail-for-woocommerce' ),
                     'item_id'     => 'mailing-shopping-cart-1',
                     'data'        => array(
                         array(

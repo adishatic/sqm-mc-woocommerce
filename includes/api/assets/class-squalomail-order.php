@@ -92,7 +92,7 @@ class SqualoMail_WooCommerce_Order
     /**
      * @return bool
      */
-    public function shouldIgnoreIfNotInMailchimp()
+    public function shouldIgnoreIfNotInSqualomail()
     {
         return (bool) $this->ignore_if_new;
     }
@@ -101,7 +101,7 @@ class SqualoMail_WooCommerce_Order
      * @param $bool
      * @return $this
      */
-    public function flagAsIgnoreIfNotInMailchimp($bool)
+    public function flagAsIgnoreIfNotInSqualomail($bool)
     {
         $this->ignore_if_new = (bool) $bool;
 

@@ -129,8 +129,8 @@ class SqualoMail_WooCommerce
         $this->define_public_hooks();
         $this->define_gdpr_hooks();
 
-        $this->activateMailChimpNewsletter();
-        $this->activateMailChimpService();
+        $this->activateSqualoMailNewsletter();
+        $this->activateSqualoMailService();
         $this->applyQueryStringOverrides();
     }
 
@@ -257,7 +257,7 @@ class SqualoMail_WooCommerce
             $this->loader->add_action('villatheme_support_woo-multi-currency', $plugin_admin, 'squalomail_update_woo_settings');
         }
 
-        // Mailchimp oAuth
+        // Squalomail oAuth
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_start', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_start' );
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_finish', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_finish' );
 
@@ -296,7 +296,7 @@ class SqualoMail_WooCommerce
 	/**
 	 * Handle the newsletter actions here.
 	 */
-	private function activateMailChimpNewsletter()
+	private function activateSqualoMailNewsletter()
 	{
 		$service = SqualoMail_Newsletter::instance();
 
@@ -322,7 +322,7 @@ class SqualoMail_WooCommerce
 	/**
 	 * Handle all the service hooks here.
 	 */
-	private function activateMailChimpService()
+	private function activateSqualoMailService()
 	{
 		$service = SqualoMail_Service::instance();
 

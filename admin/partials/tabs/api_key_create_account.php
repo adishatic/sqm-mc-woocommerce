@@ -1,4 +1,4 @@
-<p id="sqm-mc-woocommerce-create-account-link" class="create-account-link alignright">Don’t have a Mailchimp account yet? <a style="font-weight:bold !important;" href='#sqm-mc-woocommerce-create-account'>Create one here</a></p>
+<p id="sqm-mc-woocommerce-create-account-link" class="create-account-link alignright">Don’t have a Squalomail account yet? <a style="font-weight:bold !important;" href='#sqm-mc-woocommerce-create-account'>Create one here</a></p>
 <div id="sqm-mc-woocommerce-create-account" class="sqm-mc-woocommerce-modal">
     <div id="exampleModal" class="reveal-modal">
         <a href="#" class="close-modal"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,7 +158,7 @@
                                 'br' => array()
                             );
                         ?>
-                        <?= sprintf(/* translators: %s - Mailchimp legal pages */wp_kses( __( 'By clicking the "Get Started!" button, you are creating a Mailchimp account, and you agree to Mailchimp\'s <a href=%1$s target=_blank>Terms of Use</a> and <a href=%2$s target=_blank>Privacy Policy</a>.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://mailchimp.com/legal/terms' ), esc_url( 'https://mailchimp.com/legal/privacy' ) );?>
+                        <?= sprintf(/* translators: %s - Squalomail legal pages */wp_kses( __( 'By clicking the "Get Started!" button, you are creating a Squalomail account, and you agree to Squalomail\'s <a href=%1$s target=_blank>Terms of Use</a> and <a href=%2$s target=_blank>Privacy Policy</a>.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://mailchimp.com/legal/terms' ), esc_url( 'https://mailchimp.com/legal/privacy' ) );?>
                             
                     </p>
                 </div>
@@ -188,7 +188,7 @@
         
 
         <div class="modal-footer">
-            ©2001–<?= date('Y') ?> All Rights Reserved. Mailchimp® is a registered trademark of The Rocket Science Group. Cookie Preferences, Privacy, and Terms.
+            ©2001–<?= date('Y') ?> All Rights Reserved. Squalomail® is a registered trademark of The Rocket Science Group. Cookie Preferences, Privacy, and Terms.
         </div>
 
     </div>

@@ -103,11 +103,11 @@ class SqualoMail_WooCommerce_Transform_Orders
         // grab the order status and set it into the object for future comparison.
         $order->setOriginalWooStatus(($status = $woo->get_status()));
 
-        // if the order is "on-hold" status, and is not currently in Mailchimp, we need to ignore it
+        // if the order is "on-hold" status, and is not currently in Squalomail, we need to ignore it
         // because the payment gateways are putting this on hold while they navigate to the payment processor
         // and they technically haven't paid yet.
         if (in_array($status, array('on-hold', 'failed'))) {
-            $order->flagAsIgnoreIfNotInMailchimp(true);
+            $order->flagAsIgnoreIfNotInSqualomail(true);
         }
 
         // map the fulfillment and financial statuses based on the map above.
@@ -229,7 +229,7 @@ class SqualoMail_WooCommerce_Transform_Orders
     {
         $customer = new SqualoMail_WooCommerce_Customer();
 
-        // attach the wordpress user to the Mailchimp customer object.
+        // attach the wordpress user to the Squalomail customer object.
         $customer->setWordpressUser($order->get_user());
 
         $customer->setId(squalomail_hash_trim_lower($order->get_billing_email()));
@@ -460,8 +460,8 @@ class SqualoMail_WooCommerce_Transform_Orders
     }
 
     /**
-     * "Pending payment" in the UI fires the order confirmation email MailChimp
-     * "Completed” in the UI fires the MailChimp Order Invoice
+     * "Pending payment" in the UI fires the order confirmation email SqualoMail
+     * "Completed” in the UI fires the SqualoMail Order Invoice
      * "Cancelled" does what we think it does
      *
      * @return array

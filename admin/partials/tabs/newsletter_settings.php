@@ -11,7 +11,7 @@ if (!$handler->hasValidStoreInfo()) {
 }
 
 // if we don't have a valid api key we need to redirect back to the 'api_key' tab.
-if (!isset($squalomail_lists) && ($squalomail_lists = $handler->getMailChimpLists()) === false) {
+if (!isset($squalomail_lists) && ($squalomail_lists = $handler->getSqualoMailLists()) === false) {
     wp_redirect('admin.php?page=squalomail-woocommerce&tab=api_key&error_notice=missing_api_key');
 }
 
@@ -139,7 +139,7 @@ $list_is_configured = isset($options['squalomail_list']) && (!empty($options['sq
         <div class="box box-half" >
             <label for="<?php echo $this->plugin_name; ?>-user-tags">
                 <h4><?php esc_html_e('Tags', 'squalomail-for-woocommerce');?></h4>
-                <p><?= __( 'Add a comma-separated list of tags to apply to a subscriber in Mailchimp after a transaction occurs', 'squalomail-for-woocommerce' ); ?></p>
+                <p><?= __( 'Add a comma-separated list of tags to apply to a subscriber in Squalomail after a transaction occurs', 'squalomail-for-woocommerce' ); ?></p>
             </label>
         </div>
 
