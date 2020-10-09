@@ -1,0 +1,5 @@
+.DS_Store
+.idea/
+_test.php
+vendor/
+!includes/vendor/
