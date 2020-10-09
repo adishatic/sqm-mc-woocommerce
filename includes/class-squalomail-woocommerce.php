@@ -298,7 +298,7 @@ class SqualoMail_WooCommerce
 	 */
 	private function activateMailChimpNewsletter()
 	{
-		$service = MailChimp_Newsletter::instance();
+		$service = SqualoMail_Newsletter::instance();
 
 		if ($this->is_configured && $service->isConfigured()) {
 
@@ -324,7 +324,7 @@ class SqualoMail_WooCommerce
 	 */
 	private function activateMailChimpService()
 	{
-		$service = MailChimp_Service::instance();
+		$service = SqualoMail_Service::instance();
 
 		if ($service->isConfigured()) {
 

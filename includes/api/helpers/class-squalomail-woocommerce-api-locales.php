@@ -8,7 +8,7 @@
  * Date: 7/12/16
  * Time: 2:07 PM
  */
-class MailChimp_Api_Locales
+class SqualoMail_Api_Locales
 {
     /**
      * @return array

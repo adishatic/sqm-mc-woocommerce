@@ -8,7 +8,7 @@
  * Date: 2/17/16
  * Time: 12:03 PM
  */
-class MailChimp_Service extends SqualoMail_WooCommerce_Options
+class SqualoMail_Service extends SqualoMail_WooCommerce_Options
 {
     protected $user_email = null;
     protected $previous_email = null;
@@ -21,7 +21,7 @@ class MailChimp_Service extends SqualoMail_WooCommerce_Options
     protected static $_instance = null;
 
     /**
-     * @return MailChimp_Service
+     * @return SqualoMail_Service
      */
     public static function instance()
     {
@@ -29,7 +29,7 @@ class MailChimp_Service extends SqualoMail_WooCommerce_Options
             return static::$_instance;
         }
         $env = mailchimp_environment_variables();
-        static::$_instance = new MailChimp_Service();
+        static::$_instance = new SqualoMail_Service();
         static::$_instance->setVersion($env->version);
         return static::$_instance;
     }

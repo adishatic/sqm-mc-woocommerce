@@ -93,7 +93,7 @@ class SqualoMail_WooCommerce_Cart
      */
     public function setCampaignID($id, $throw_if_invalid = false)
     {   
-        $api = SqualoMail_WooCommerce_MailChimpApi::getInstance();
+        $api = SqualoMail_WooCommerce_SqualoMailApi::getInstance();
         $cid = trim($id);
         if (!empty($cid) && ($campaign = $api->getCampaign($cid, $throw_if_invalid))) {
             $this->campaign_id = $campaign['id'];

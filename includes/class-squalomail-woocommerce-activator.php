@@ -46,7 +46,7 @@ class SqualoMail_WooCommerce_Activator {
             update_option('mailchimp-woocommerce-store_id', uniqid(), 'yes');
         }
 
-        if (class_exists('SqualoMail_WooCommerce_MailChimpApi')) {
+        if (class_exists('SqualoMail_WooCommerce_SqualoMailApi')) {
             // try this now for existing stores on an update.
             mailchimp_update_connected_site_script();
 		}

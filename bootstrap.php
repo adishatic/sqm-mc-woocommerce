@@ -10,9 +10,9 @@ $mailchimp_woocommerce_spl_autoloader = true;
 spl_autoload_register(function($class) {
     $classes = array(
         // includes root
-        'MailChimp_Service' => 'includes/class-squalomail-woocommerce-service.php',
+        'SqualoMail_Service' => 'includes/class-squalomail-woocommerce-service.php',
         'SqualoMail_WooCommerce_Options' => 'includes/class-squalomail-woocommerce-options.php',
-        'MailChimp_Newsletter' => 'includes/class-squalomail-woocommerce-newsletter.php',
+        'SqualoMail_Newsletter' => 'includes/class-squalomail-woocommerce-newsletter.php',
         'SqualoMail_WooCommerce_Loader' => 'includes/class-squalomail-woocommerce-loader.php',
         'SqualoMail_WooCommerce_i18n' => 'includes/class-squalomail-woocommerce-i18n.php',
         'SqualoMail_WooCommerce_Deactivator' => 'includes/class-squalomail-woocommerce-deactivator.php',
@@ -42,10 +42,10 @@ spl_autoload_register(function($class) {
 
         // includes/api/helpers
         'SqualoMail_WooCommerce_CurrencyCodes' => 'includes/api/helpers/class-squalomail-woocommerce-api-currency-codes.php',
-        'MailChimp_Api_Locales' => 'includes/api/helpers/class-squalomail-woocommerce-api-locales.php',
+        'SqualoMail_Api_Locales' => 'includes/api/helpers/class-squalomail-woocommerce-api-locales.php',
 
         // includes/api
-        'SqualoMail_WooCommerce_MailChimpApi' => 'includes/api/class-squalomail-api.php',
+        'SqualoMail_WooCommerce_SqualoMailApi' => 'includes/api/class-squalomail-api.php',
         'SqualoMail_WooCommerce_Api' => 'includes/api/class-squalomail-woocommerce-api.php',
         'SqualoMail_WooCommerce_CreateListSubmission' => 'includes/api/class-squalomail-woocommerce-create-list-submission.php',
         'SqualoMail_WooCommerce_Transform_Coupons' => 'includes/api/class-squalomail-woocommerce-transform-coupons.php',
@@ -342,16 +342,16 @@ function mailchimp_get_user_tags_to_update($email = null) {
 }
 
 /**
- * @return bool|SqualoMail_WooCommerce_MailChimpApi
+ * @return bool|SqualoMail_WooCommerce_SqualoMailApi
  */
 function mailchimp_get_api() {
 
-    if (($api = SqualoMail_WooCommerce_MailChimpApi::getInstance())) {
+    if (($api = SqualoMail_WooCommerce_SqualoMailApi::getInstance())) {
         return $api;
     }
 
     if (($key = mailchimp_get_api_key())) {
-        return SqualoMail_WooCommerce_MailChimpApi::constructInstance($key);
+        return SqualoMail_WooCommerce_SqualoMailApi::constructInstance($key);
     }
 
     return false;

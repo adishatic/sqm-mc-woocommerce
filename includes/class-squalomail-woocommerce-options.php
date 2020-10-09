@@ -11,7 +11,7 @@
 abstract class SqualoMail_WooCommerce_Options
 {
     /**
-     * @var SqualoMail_WooCommerce_MailChimpApi
+     * @var SqualoMail_WooCommerce_SqualoMailApi
      */
     protected $api;
     protected $plugin_name = 'mailchimp-woocommerce';
@@ -245,12 +245,12 @@ abstract class SqualoMail_WooCommerce_Options
     }
 
     /**
-     * @return SqualoMail_WooCommerce_MailChimpApi
+     * @return SqualoMail_WooCommerce_SqualoMailApi
      */
     public function api()
     {
         if (empty($this->api)) {
-            $this->api = new SqualoMail_WooCommerce_MailChimpApi($this->getOption('mailchimp_api_key', false));
+            $this->api = new SqualoMail_WooCommerce_SqualoMailApi($this->getOption('mailchimp_api_key', false));
         }
 
         return $this->api;

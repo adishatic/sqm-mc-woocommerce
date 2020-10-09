@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class SqualoMail_WooCommerce_MailChimpApi
+ * Class SqualoMail_WooCommerce_SqualoMailApi
  */
-class SqualoMail_WooCommerce_MailChimpApi
+class SqualoMail_WooCommerce_SqualoMailApi
 {
     protected $version = '3.0';
     protected $data_center = 'us2';
@@ -13,7 +13,7 @@ class SqualoMail_WooCommerce_MailChimpApi
     protected static $instance = null;
 
     /**
-     * @return null|SqualoMail_WooCommerce_MailChimpApi
+     * @return null|SqualoMail_WooCommerce_SqualoMailApi
      */
     public static function getInstance()
     {
@@ -22,11 +22,11 @@ class SqualoMail_WooCommerce_MailChimpApi
 
     /**
      * @param $api_key
-     * @return SqualoMail_WooCommerce_MailChimpApi
+     * @return SqualoMail_WooCommerce_SqualoMailApi
      */
     public static function constructInstance($api_key)
     {
-        return static::$instance = new SqualoMail_WooCommerce_MailChimpApi($api_key);
+        return static::$instance = new SqualoMail_WooCommerce_SqualoMailApi($api_key);
     }
 
     /**

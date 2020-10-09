@@ -610,7 +610,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 				elseif ($this->is_resyncing()) {
 
 					// remove all the pointers to be sure
-					$service = new MailChimp_Service();
+					$service = new SqualoMail_Service();
 					$service->removePointers(true, true);
 					$this->startSync();
 					$this->showSyncStartedMessage();
@@ -668,7 +668,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			'mailchimp_account_info_username' => null,
 		);
 
-		$api = new SqualoMail_WooCommerce_MailChimpApi($data['mailchimp_api_key']);
+		$api = new SqualoMail_WooCommerce_SqualoMailApi($data['mailchimp_api_key']);
 
 		try {
 		    $profile = $api->ping(true, true);

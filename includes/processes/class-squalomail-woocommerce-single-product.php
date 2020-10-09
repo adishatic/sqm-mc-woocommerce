@@ -196,7 +196,7 @@ class SqualoMail_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
     }
 
     /**
-     * @return SqualoMail_WooCommerce_MailChimpApi
+     * @return SqualoMail_WooCommerce_SqualoMailApi
      */
     public function api()
     {
@@ -206,7 +206,7 @@ class SqualoMail_WooCommerce_Single_Product extends Mailchimp_Woocommerce_Job
             $options = get_option('mailchimp-woocommerce', array());
 
             if (!empty($this->store_id) && is_array($options) && isset($options['mailchimp_api_key'])) {
-                return $this->api = new SqualoMail_WooCommerce_MailChimpApi($options['mailchimp_api_key']);
+                return $this->api = new SqualoMail_WooCommerce_SqualoMailApi($options['mailchimp_api_key']);
             }
 
             throw new \RuntimeException('The MailChimp API is not currently configured!');

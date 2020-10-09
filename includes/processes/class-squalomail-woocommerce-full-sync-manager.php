@@ -32,7 +32,7 @@ if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
 		 * @return $this
 		 */
 		public function flag_start_sync() {
-			$job = new MailChimp_Service();
+			$job = new SqualoMail_Service();
 
 			$job->removeSyncPointers();
 

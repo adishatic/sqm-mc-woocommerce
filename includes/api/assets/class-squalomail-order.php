@@ -249,7 +249,7 @@ class SqualoMail_WooCommerce_Order
      */
     public function setCampaignId($id)
     {
-        $api = SqualoMail_WooCommerce_MailChimpApi::getInstance();
+        $api = SqualoMail_WooCommerce_SqualoMailApi::getInstance();
         $cid = trim($id);
         if (!empty($cid) && $campaign = $api->getCampaign($cid, false)) {
             $this->campaign_id = $campaign['id'];

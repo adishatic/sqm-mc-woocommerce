@@ -138,7 +138,7 @@ class SqualoMail_WooCommerce_User_Submit extends Mailchimp_Woocommerce_Job
             return false;
         }
 
-        $api = new SqualoMail_WooCommerce_MailChimpApi($api_key);
+        $api = new SqualoMail_WooCommerce_SqualoMailApi($api_key);
 
         $merge_fields_system = array();
 
