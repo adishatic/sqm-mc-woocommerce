@@ -2,7 +2,7 @@
 
 class MailChimp_WooCommerce_Rest_Api
 {
-    protected static $namespace = 'mailchimp-for-woocommerce/v1';
+    protected static $namespace = 'squalomail-for-woocommerce/v1';
 
     /**
      * @param $path
@@ -148,7 +148,7 @@ class MailChimp_WooCommerce_Rest_Api
             // 'products_page' => get_option('mailchimp-woocommerce-sync.products.current_page'),
             // 'orders_page' => get_option('mailchimp-woocommerce-sync.orders.current_page'),
             
-            'date' => $date->format( __('D, M j, Y g:i A', 'mailchimp-for-woocommerce')),
+            'date' => $date->format( __('D, M j, Y g:i A', 'squalomail-for-woocommerce')),
             'has_started' => mailchimp_has_started_syncing() || ($order_count != $mailchimp_total_orders),
             'has_finished' => mailchimp_is_done_syncing() && ($order_count == $mailchimp_total_orders),
         ));

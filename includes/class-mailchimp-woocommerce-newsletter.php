@@ -44,7 +44,7 @@ class MailChimp_Newsletter extends MailChimp_WooCommerce_Options
             }
 
             // allow the user to specify the text in the newsletter label.
-            $label = $this->getOption('newsletter_label', __('Subscribe to our newsletter', 'mailchimp-for-woocommerce'));
+            $label = $this->getOption('newsletter_label', __('Subscribe to our newsletter', 'squalomail-for-woocommerce'));
 
             // if the user chose 'check' or nothing at all, we default to true.
             $default_checked = $default_setting === 'check';
@@ -73,7 +73,7 @@ class MailChimp_Newsletter extends MailChimp_WooCommerce_Options
             // only render these fields if it's an array that has valid data.
             if (!empty($GDPRfields) && is_array($GDPRfields)) {
                 $checkbox .= "<div id='mailchimp-gdpr-fields'><p>";
-                    $checkbox .= __('Please select all the ways you would like to hear from us', 'mailchimp-for-woocommerce');
+                    $checkbox .= __('Please select all the ways you would like to hear from us', 'squalomail-for-woocommerce');
                     $checkbox .= "<div class='clear'></div>";
                     
                     foreach ($GDPRfields as $key => $field) {

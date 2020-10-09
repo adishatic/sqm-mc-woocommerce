@@ -16,12 +16,12 @@ if (!$handler->hasValidStoreInfo()) {
 <fieldset class="">
     <legend>
     <legend class="screen-reader-text">
-        <span><?php esc_html_e('Audience Defaults', 'mailchimp-for-woocommerce');?></span>
+        <span><?php esc_html_e('Audience Defaults', 'squalomail-for-woocommerce');?></span>
     </legend>
     </legend>
     <div class="box box-half">
         <label for="<?php echo $this->plugin_name; ?>-campaign-from-name-label"> 
-            <?php esc_html_e('From Name', 'mailchimp-for-woocommerce'); ?>
+            <?php esc_html_e('From Name', 'squalomail-for-woocommerce'); ?>
             <span class="required-field-mark">*</span>
         </label>
         <input type="text" id="<?php echo $this->plugin_name; ?>-campaign-from-name-label" name="<?php echo $this->plugin_name; ?>[campaign_from_name]" value="<?php echo isset($options['campaign_from_name']) ? $options['campaign_from_name'] : get_option('blogname') ?>" required/>
@@ -29,7 +29,7 @@ if (!$handler->hasValidStoreInfo()) {
 
     <div class="box box-half">
         <label for="<?php echo $this->plugin_name; ?>-campaign-from-email-label">
-            <?php esc_html_e('From Email', 'mailchimp-for-woocommerce'); ?>
+            <?php esc_html_e('From Email', 'squalomail-for-woocommerce'); ?>
             <span class="required-field-mark">*</span>
         </label>
         <input type="email" id="<?php echo $this->plugin_name; ?>-campaign-from-email-label" name="<?php echo $this->plugin_name; ?>[campaign_from_email]" value="<?php echo isset($options['campaign_from_email']) ? $options['campaign_from_email'] : get_option('admin_email') ?>" required/>
@@ -37,15 +37,15 @@ if (!$handler->hasValidStoreInfo()) {
 
     <div class="box box-half">
         <label for="<?php echo $this->plugin_name; ?>-campaign-subject-label">
-            <?php esc_html_e('Subject', 'mailchimp-for-woocommerce'); ?>
+            <?php esc_html_e('Subject', 'squalomail-for-woocommerce'); ?>
             <span class="required-field-mark">*</span>
         </label>
-        <input type="text" id="<?php echo $this->plugin_name; ?>-campaign-subject-label" name="<?php echo $this->plugin_name; ?>[campaign_subject]" value="<?php echo isset($options['campaign_subject']) ? $options['campaign_subject'] : esc_html__('Store Newsletter', 'mailchimp-for-woocommerce'); ?>" required/>
+        <input type="text" id="<?php echo $this->plugin_name; ?>-campaign-subject-label" name="<?php echo $this->plugin_name; ?>[campaign_subject]" value="<?php echo isset($options['campaign_subject']) ? $options['campaign_subject'] : esc_html__('Store Newsletter', 'squalomail-for-woocommerce'); ?>" required/>
     </div>
 
     <div class="box box-half">
         <label for="<?php echo $this->plugin_name; ?>-campaign-language-label">
-            <?php esc_html_e('Language', 'mailchimp-for-woocommerce'); ?>
+            <?php esc_html_e('Language', 'squalomail-for-woocommerce'); ?>
             <span class="required-field-mark">*</span>
         </label>
         
@@ -63,14 +63,14 @@ if (!$handler->hasValidStoreInfo()) {
 
     <div class="box">
         <label for="<?php echo $this->plugin_name; ?>-campaign-permission-reminder-label">
-            <?php esc_html_e('Permission reminder message', 'mailchimp-for-woocommerce'); ?>
+            <?php esc_html_e('Permission reminder message', 'squalomail-for-woocommerce'); ?>
             <span class="required-field-mark">*</span>
         </label>
         <textarea
             rows="4"
             id="<?php echo $this->plugin_name; ?>-campaign-permission-reminder-label"
             name="<?php echo $this->plugin_name; ?>[campaign_permission_reminder]"
-            required><?php echo isset($options['campaign_permission_reminder']) ? $options['campaign_permission_reminder'] : sprintf(/* translators: %s - plugin name. */esc_html__( 'You were subscribed to the newsletter from %s', 'mailchimp-for-woocommerce' ),get_option('blogname'));?>
+            required><?php echo isset($options['campaign_permission_reminder']) ? $options['campaign_permission_reminder'] : sprintf(/* translators: %s - plugin name. */esc_html__( 'You were subscribed to the newsletter from %s', 'squalomail-for-woocommerce' ),get_option('blogname'));?>
         </textarea>
     </div>
 

@@ -237,7 +237,7 @@ function mailchimp_list_has_double_optin($force = false) {
         mailchimp_set_transient($key, $double_optin, 600);
         return $double_optin === 'yes';
     } catch (\Exception $e) {
-        mailchimp_error('api.list', __('Error retrieving list for double_optin check', 'mailchimp-for-woocommerce'));
+        mailchimp_error('api.list', __('Error retrieving list for double_optin check', 'squalomail-for-woocommerce'));
         throw $e;
     }
 
@@ -1154,7 +1154,7 @@ function mailchimp_remove_activity_panel_inbox_notes() {
         return;
     }
 
-    \Automattic\WooCommerce\Admin\Notes\WC_Admin_Notes::delete_notes_with_name( 'mailchimp-for-woocommerce-incomplete-install' );
+    \Automattic\WooCommerce\Admin\Notes\WC_Admin_Notes::delete_notes_with_name( 'squalomail-for-woocommerce-incomplete-install' );
 }
 
 // Print notices outside woocommerce admin bar

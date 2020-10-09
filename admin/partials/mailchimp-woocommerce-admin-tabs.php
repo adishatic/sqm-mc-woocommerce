@@ -69,13 +69,13 @@ else {
 
 <?php if (!defined('PHP_VERSION_ID') || (PHP_VERSION_ID < 70000)): ?>
     <div data-dismissible="notice-php-version" class="error notice notice-error">
-        <p><?php esc_html_e('Mailchimp says: Please upgrade your PHP version to a minimum of 7.0', 'mailchimp-for-woocommerce'); ?></p>
+        <p><?php esc_html_e('Mailchimp says: Please upgrade your PHP version to a minimum of 7.0', 'squalomail-for-woocommerce'); ?></p>
     </div>
 <?php endif; ?>
 
 <?php if (!empty($has_api_error)): ?>
     <div data-dismissible="notice-api-error" class="error notice notice-error is-dismissible">
-        <p><?php esc_html_e("Mailchimp says: API Request Error - ".$has_api_error, 'mailchimp-for-woocommerce'); ?></p>
+        <p><?php esc_html_e("Mailchimp says: API Request Error - ".$has_api_error, 'squalomail-for-woocommerce'); ?></p>
     </div>
 <?php endif; ?>
 
@@ -100,37 +100,37 @@ else {
         );
         
         if ($active_tab == 'api_key' ) {
-            wp_kses(_e('Add Mailchimp for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp', 'mailchimp-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Add Mailchimp for WooCommerce to build custom segments,<br/>send automations, and track purchase activity in Mailchimp', 'squalomail-for-woocommerce'), $allowed_html);
         }
  
         if ($active_tab == 'store_info' && $has_valid_api_key) {
-            wp_kses(_e('Please provide a bit of information<br/>about your WooCommerce store', 'mailchimp-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Please provide a bit of information<br/>about your WooCommerce store', 'squalomail-for-woocommerce'), $allowed_html);
         }
  
         if ($active_tab == 'campaign_defaults' ) {
-            wp_kses(_e('Please review the audience default<br/>campaign information', 'mailchimp-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Please review the audience default<br/>campaign information', 'squalomail-for-woocommerce'), $allowed_html);
         }
  
         if ($active_tab == 'newsletter_settings' ) {
             if ($only_one_list) {
-                wp_kses(_e('Please apply your <br/>audience settings.', 'mailchimp-for-woocommerce'), $allowed_html);
+                wp_kses(_e('Please apply your <br/>audience settings.', 'squalomail-for-woocommerce'), $allowed_html);
             }
             else {
-                wp_kses(_e('Please apply your audience settings. ', 'mailchimp-for-woocommerce'), $allowed_html);
-                wp_kses(_e('If you don’t<br/>have an audience, you can choose to create one', 'mailchimp-for-woocommerce'), $allowed_html);    
+                wp_kses(_e('Please apply your audience settings. ', 'squalomail-for-woocommerce'), $allowed_html);
+                wp_kses(_e('If you don’t<br/>have an audience, you can choose to create one', 'squalomail-for-woocommerce'), $allowed_html);    
             }
         }
         if ($active_tab == 'sync' && $show_sync_tab) {
             if (mailchimp_is_done_syncing()) {
-                wp_kses(_e('Sweet! You\'re connected with<br/>Mailchimp and syncing data', 'mailchimp-for-woocommerce'), $allowed_html);
+                wp_kses(_e('Sweet! You\'re connected with<br/>Mailchimp and syncing data', 'squalomail-for-woocommerce'), $allowed_html);
             }
             else {
-                wp_kses(_e('Connect your WooCommerce store to a<br/>Mailchimp audience in less than 60 seconds', 'mailchimp-for-woocommerce'), $allowed_html);
+                wp_kses(_e('Connect your WooCommerce store to a<br/>Mailchimp audience in less than 60 seconds', 'squalomail-for-woocommerce'), $allowed_html);
             }
         }
  
         if ($active_tab == 'logs' && $show_sync_tab) {
-            wp_kses(_e('Log events from the <br/>Mailchimp plugin', 'mailchimp-for-woocommerce'), $allowed_html);
+            wp_kses(_e('Log events from the <br/>Mailchimp plugin', 'squalomail-for-woocommerce'), $allowed_html);
         }
         ?>
     </p>
@@ -138,7 +138,7 @@ else {
         <div class="nav-wizard-wrapper">
             <div class="wizard-tab <?php echo $active_tab == 'api_key' ? 'wizard-tab-active' : ''; ?>" >
                 <a href="?page=mailchimp-woocommerce&tab=api_key" class="marker"></a>
-                <div class="wizard-tab-tooltip wizard-tab-tooltip-api-key "><?= esc_html_e('Connect', 'mailchimp-for-woocommerce');?>
+                <div class="wizard-tab-tooltip wizard-tab-tooltip-api-key "><?= esc_html_e('Connect', 'squalomail-for-woocommerce');?>
                     <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
                     </svg>
@@ -148,7 +148,7 @@ else {
             <?php if ($has_valid_api_key) : ?>    
                 <div class="wizard-tab <?php echo $active_tab == 'store_info' ? 'wizard-tab-active' : ''; ?>">
                     <a href="?page=mailchimp-woocommerce&tab=store_info" class="marker"></a>
-                    <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Store Settings', 'mailchimp-for-woocommerce');?>
+                    <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Store Settings', 'squalomail-for-woocommerce');?>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
                         </svg>
@@ -163,7 +163,7 @@ else {
             <?php if ($handler->hasValidStoreInfo() && $show_campaign_defaults && $this->getData('validation.store_info', false)) : ?>  
                 <div class="wizard-tab <?php echo $active_tab == 'campaign_defaults' ? 'wizard-tab-active' : ''; ?>">
                     <a href="?page=mailchimp-woocommerce&tab=campaign_defaults" class="marker"></a>
-                    <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Audience Defaults', 'mailchimp-for-woocommerce');?>
+                    <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Audience Defaults', 'squalomail-for-woocommerce');?>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
                         </svg>
@@ -178,7 +178,7 @@ else {
             <?php if ($handler->hasValidCampaignDefaults() && $this->getData('validation.campaign_defaults', false)) : ?>  
                 <div class="wizard-tab <?php echo $active_tab == 'newsletter_settings' ? 'wizard-tab-active' : ''; ?>">
                     <a href="?page=mailchimp-woocommerce&tab=newsletter_settings" class="marker"></a>
-                    <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Audience Settings', 'mailchimp-for-woocommerce');?>
+                    <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Audience Settings', 'squalomail-for-woocommerce');?>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
                         </svg>
@@ -194,19 +194,19 @@ else {
         <div class="nav-tab-wrapper">
             <?php if($has_valid_api_key): ?>
                 <?php if ($active_tab == 'api_key'): ?>
-                    <a href="?page=mailchimp-woocommerce&tab=api_key" class="nav-tab <?php echo $active_tab == 'api_key' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Connect', 'mailchimp-for-woocommerce');?></a>
+                    <a href="?page=mailchimp-woocommerce&tab=api_key" class="nav-tab <?php echo $active_tab == 'api_key' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Connect', 'squalomail-for-woocommerce');?></a>
                 <?php endif ;?>
-                <a href="?page=mailchimp-woocommerce&tab=sync" class="nav-tab <?php echo $active_tab == 'sync' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Overview', 'mailchimp-for-woocommerce');?></a>
-                <a href="?page=mailchimp-woocommerce&tab=store_info" class="nav-tab <?php echo $active_tab == 'store_info' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Store Settings', 'mailchimp-for-woocommerce');?></a>
+                <a href="?page=mailchimp-woocommerce&tab=sync" class="nav-tab <?php echo $active_tab == 'sync' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Overview', 'squalomail-for-woocommerce');?></a>
+                <a href="?page=mailchimp-woocommerce&tab=store_info" class="nav-tab <?php echo $active_tab == 'store_info' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Store Settings', 'squalomail-for-woocommerce');?></a>
                 <?php if ($handler->hasValidStoreInfo()) : ?>
                     <?php if($show_campaign_defaults): ?>
-                        <a href="?page=mailchimp-woocommerce&tab=campaign_defaults" class="nav-tab <?php echo $active_tab == 'campaign_defaults' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Defaults', 'mailchimp-for-woocommerce');?></a>
+                        <a href="?page=mailchimp-woocommerce&tab=campaign_defaults" class="nav-tab <?php echo $active_tab == 'campaign_defaults' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Defaults', 'squalomail-for-woocommerce');?></a>
                     <?php endif; ?>
                     <?php if($handler->hasValidCampaignDefaults()): ?>
-                        <a href="?page=mailchimp-woocommerce&tab=newsletter_settings" class="nav-tab <?php echo $active_tab == 'newsletter_settings' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Settings', 'mailchimp-for-woocommerce');?></a>
+                        <a href="?page=mailchimp-woocommerce&tab=newsletter_settings" class="nav-tab <?php echo $active_tab == 'newsletter_settings' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Settings', 'squalomail-for-woocommerce');?></a>
                     <?php endif; ?>
                 <?php endif;?>
-                <a href="?page=mailchimp-woocommerce&tab=logs" class="nav-tab <?php echo $active_tab == 'logs' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Logs', 'mailchimp-for-woocommerce');?></a>
+                <a href="?page=mailchimp-woocommerce&tab=logs" class="nav-tab <?php echo $active_tab == 'logs' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Logs', 'squalomail-for-woocommerce');?></a>
             <?php endif; ?>
         </div> 
     <?php endif; ?>
@@ -267,7 +267,7 @@ else {
             <?php 
                 if ($active_tab !== 'api_key' && $active_tab !== 'sync' && $active_tab !== 'logs') {
                     if ($active_tab == 'newsletter_settings' && !mailchimp_is_configured()) {
-                        $submit_button_label = __('Start sync','mailchimp-for-woocommerce');
+                        $submit_button_label = __('Start sync','squalomail-for-woocommerce');
                     }
                     else $submit_button_label = !$show_wizard ? __('Save all changes') : __('Next');
                     submit_button($submit_button_label, 'primary tab-content-submit','mailchimp_submit', TRUE);

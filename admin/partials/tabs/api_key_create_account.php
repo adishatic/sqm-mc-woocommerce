@@ -30,27 +30,27 @@
 
                 <div class="box" >
                         <label for="email">
-                            <span> <?php esc_html_e('Email', 'mailchimp-for-woocommerce'); ?></span>
+                            <span> <?php esc_html_e('Email', 'squalomail-for-woocommerce'); ?></span>
                         </label>
                         <input required type="email" id="email" name="email"/>
                     </div>
 
                     <div class="box" >
                         <label for="username">
-                            <span> <?php esc_html_e('Username', 'mailchimp-for-woocommerce'); ?></span>
+                            <span> <?php esc_html_e('Username', 'squalomail-for-woocommerce'); ?></span>
                         </label>
                         <input required type="text" id="username" name="username"/>
-                        <p class="description" id ="username_suggestion"><?= esc_html__( 'Suggested username: ', 'mailchimp-for-woocommerce' ); ?><span></span></p>
+                        <p class="description" id ="username_suggestion"><?= esc_html__( 'Suggested username: ', 'squalomail-for-woocommerce' ); ?><span></span></p>
                     </div>
                     
 
                     <div class="box " >
-                        <a id="sqm-mc-woocommerce-create-account-next" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Next Step', 'mailchimp-for-woocommerce'); ?></a>
+                        <a id="sqm-mc-woocommerce-create-account-next" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Next Step', 'squalomail-for-woocommerce'); ?></a>
                         <span class="spinner"></span>
                     </div>
 
                     <div class="box sqm-mc-woocommerce-create-account-step-error alignright" >
-                        <p id ="email_error"><?= esc_html__( 'Invalid Email. Please double check.', 'mailchimp-for-woocommerce' ); ?></p>
+                        <p id ="email_error"><?= esc_html__( 'Invalid Email. Please double check.', 'squalomail-for-woocommerce' ); ?></p>
                         <p id ="username_invalid_error">Username Invalid or already exists</p>
                         <p id ="username_exists_error">Username already exists</p>
                     </div>
@@ -64,14 +64,14 @@
             <fieldset>
                 <div class="box" >
                     <label for="address">
-                        <span> <?php esc_html_e('Address Line 1', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('Address Line 1', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <input required type="text" id="address" name="address"/>
                 </div>
 
                 <div class="box" >
                     <label for="address2">
-                        <span> <?php esc_html_e('Address Line 2', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('Address Line 2', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <input type="text" id="address2" name="address2"/>
                 </div>
@@ -79,28 +79,28 @@
                 
                 <div class="box" >
                     <label for="city">
-                        <span> <?php esc_html_e('City', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('City', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <input required type="text" id="city" name="city"/>
                 </div>
                 
                 <div class="box box-half" >
                     <label for="state">
-                        <span> <?php esc_html_e('State', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('State', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <input required type="text" id="state" name="state"/>
                 </div>
                 
                 <div class="box box-half" >                    
                     <label for="zip">
-                        <span> <?php esc_html_e('Zip', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('Zip', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <input required type="text" id="zip" name="zip"/>
                 </div>
                 
                 <div class="box box-half" >                    
                     <label for="<?= $this->plugin_name ?>[store_country]">
-                        <span> <?php esc_html_e('Country', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('Country', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <?php global $woocommerce;
                         $countries_obj   = new WC_Countries();
@@ -125,14 +125,14 @@
                 
                 <div class="box box-half" >                    
                     <label for="phone">
-                        <span> <?php esc_html_e('Phone', 'mailchimp-for-woocommerce'); ?></span>
+                        <span> <?php esc_html_e('Phone', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <input required type="text" id="phone" name="phone"/>
                 </div>
 
                 <div class="box" >                    
                     <label for="<?php echo $this->plugin_name; ?>-store-timezone-label">
-                        <span><?php esc_html_e('Timezone', 'mailchimp-for-woocommerce'); ?></span>
+                        <span><?php esc_html_e('Timezone', 'squalomail-for-woocommerce'); ?></span>
                     </label>
                     <div class="mailchimp-select-wrapper">
                         <select id="timezone" name="timezone" required>
@@ -158,29 +158,29 @@
                                 'br' => array()
                             );
                         ?>
-                        <?= sprintf(/* translators: %s - Mailchimp legal pages */wp_kses( __( 'By clicking the "Get Started!" button, you are creating a Mailchimp account, and you agree to Mailchimp\'s <a href=%1$s target=_blank>Terms of Use</a> and <a href=%2$s target=_blank>Privacy Policy</a>.', 'mailchimp-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://mailchimp.com/legal/terms' ), esc_url( 'https://mailchimp.com/legal/privacy' ) );?>
+                        <?= sprintf(/* translators: %s - Mailchimp legal pages */wp_kses( __( 'By clicking the "Get Started!" button, you are creating a Mailchimp account, and you agree to Mailchimp\'s <a href=%1$s target=_blank>Terms of Use</a> and <a href=%2$s target=_blank>Privacy Policy</a>.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://mailchimp.com/legal/terms' ), esc_url( 'https://mailchimp.com/legal/privacy' ) );?>
                             
                     </p>
                 </div>
 
                 <div class="box box-half" >
-                    <a id="sqm-mc-woocommerce-create-account-prev" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Go Back', 'mailchimp-for-woocommerce'); ?></a>
+                    <a id="sqm-mc-woocommerce-create-account-prev" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Go Back', 'squalomail-for-woocommerce'); ?></a>
                 </div>
                 
                 <div class="box box-half" >
-                    <a id="sqm-mc-woocommerce-create-account-go" class="button button-primary tab-content-submit"><?php esc_html_e('Get Started!', 'mailchimp-for-woocommerce'); ?></a>
+                    <a id="sqm-mc-woocommerce-create-account-go" class="button button-primary tab-content-submit"><?php esc_html_e('Get Started!', 'squalomail-for-woocommerce'); ?></a>
                     <span class="spinner"></span>
                 </div>
                 
                 <div class="box sqm-mc-woocommerce-create-account-step-error alignright" >
-                    <p id ="address_error"><?= esc_html__( 'Invalid Address', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="city_error"><?= esc_html__( 'Invalid City', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="state_error"><?= esc_html__( 'Invalid State', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="zip_error"><?= esc_html__( 'Invalid Zip', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="country_error"><?= esc_html__( 'Invalid Country', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="phone_error"><?= esc_html__( 'Invalid Phone', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="timezone_error"><?= esc_html__( 'Invalid Timezone', 'mailchimp-for-woocommerce' ); ?></p>
-                    <p id ="connecting"><?= esc_html__( 'Connecting...', 'mailchimp-for-woocommerce' ); ?></p>
+                    <p id ="address_error"><?= esc_html__( 'Invalid Address', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="city_error"><?= esc_html__( 'Invalid City', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="state_error"><?= esc_html__( 'Invalid State', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="zip_error"><?= esc_html__( 'Invalid Zip', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="country_error"><?= esc_html__( 'Invalid Country', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="phone_error"><?= esc_html__( 'Invalid Phone', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="timezone_error"><?= esc_html__( 'Invalid Timezone', 'squalomail-for-woocommerce' ); ?></p>
+                    <p id ="connecting"><?= esc_html__( 'Connecting...', 'squalomail-for-woocommerce' ); ?></p>
                 </div>
             </fieldset>
 

@@ -35,11 +35,11 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
 
 <fieldset>
     <legend class="screen-reader-text">
-        <span><?php esc_html_e('Logging Preferences', 'mailchimp-for-woocommerce');?></span>
+        <span><?php esc_html_e('Logging Preferences', 'squalomail-for-woocommerce');?></span>
     </legend>
     
     <div class="box" >
-        <label for="<?php echo $this->plugin_name; ?>-logging"><h3><?php esc_html_e('Logging Preferences', 'mailchimp-for-woocommerce');?></h3></label>
+        <label for="<?php echo $this->plugin_name; ?>-logging"><h3><?php esc_html_e('Logging Preferences', 'squalomail-for-woocommerce');?></h3></label>
     </div>
 
     <div class="box box-half">
@@ -47,7 +47,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
             <?php esc_html_e('Advanced troubleshooting can be conducted with the logging capability turned on.
             By default, it’s set to “standard” and you may toggle to either “debug” or “none” as needed.
             With standard logging, you can see basic information about the data submission to Mailchimp including any errors.
-            “Debug” gives a much deeper insight that is useful to share with support if problems arise.', 'mailchimp-for-woocommerce');
+            “Debug” gives a much deeper insight that is useful to share with support if problems arise.', 'squalomail-for-woocommerce');
             ?>
         </p>
     </div>
@@ -56,7 +56,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
             <select id="mailchimp-log-pref" name="<?php echo $this->plugin_name; ?>[mailchimp_logging]" required>
                 <?php $logging_preference = mailchimp_environment_variables()->logging; ?>
                 <?php
-                foreach(array('none' => esc_html__('None', 'mailchimp-for-woocommerce'), 'debug' => esc_html__('Debug', 'mailchimp-for-woocommerce'), 'standard' => esc_html__('Standard', 'mailchimp-for-woocommerce')) as $log_value => $log_label) {
+                foreach(array('none' => esc_html__('None', 'squalomail-for-woocommerce'), 'debug' => esc_html__('Debug', 'squalomail-for-woocommerce'), 'standard' => esc_html__('Standard', 'squalomail-for-woocommerce')) as $log_value => $log_label) {
                     echo '<option value="'.esc_attr($log_value).'" '.selected($log_value === $logging_preference, true, false ) . '>' . esc_html($log_label) . '</option>';
                 }
                 ?>
@@ -69,7 +69,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
 <fieldset>
     <div class="box fieldset-header" >
         <h3>
-            <?php esc_html_e('Recent Logs', 'mailchimp-for-woocommerce'); ?>
+            <?php esc_html_e('Recent Logs', 'squalomail-for-woocommerce'); ?>
         </h3>
     </div>
     
@@ -84,11 +84,11 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
         </div>
         <div id="log-actions">
             <?php if ( ! empty( $handle ) ) : ?>
-                <a class="sqm-mc-woocommerce-log-button sqm-mc-woocommerce-copy-log-button" title="<?= __('Copy Log to clipboard', 'mailchimp-for-woocommerce');?>" href="#">
+                <a class="sqm-mc-woocommerce-log-button sqm-mc-woocommerce-copy-log-button" title="<?= __('Copy Log to clipboard', 'squalomail-for-woocommerce');?>" href="#">
                     <span class="dashicons dashicons-clipboard clipboard" style="transform: rotate(-45deg) translateY(2px) translateX(-2px);"></span>
                     <span class="dashicons dashicons-yes yes"></span>
                 </a>
-                <a class="sqm-mc-woocommerce-log-button delete-log-button" title="<?= __('Delete Log', 'mailchimp-for-woocommerce');?>" href="<?php echo esc_url( wp_nonce_url( add_query_arg( array( 'handle' => sanitize_title($viewed_log) ), admin_url( 'admin.php?page=mailchimp-woocommerce&tab=logs&mc_action=remove_log' ) ), 'remove_log' ) ); ?>">
+                <a class="sqm-mc-woocommerce-log-button delete-log-button" title="<?= __('Delete Log', 'squalomail-for-woocommerce');?>" href="<?php echo esc_url( wp_nonce_url( add_query_arg( array( 'handle' => sanitize_title($viewed_log) ), admin_url( 'admin.php?page=mailchimp-woocommerce&tab=logs&mc_action=remove_log' ) ), 'remove_log' ) ); ?>">
                     <span class="dashicons dashicons-trash"></span>
                 </a>
             <?php endif; ?>

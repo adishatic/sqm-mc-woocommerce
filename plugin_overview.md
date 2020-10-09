@@ -6,7 +6,7 @@ In this article, you’ll learn how to connect Mailchimp for WooCommerce.
 
 **Here are some things to know before you begin this process.**
 
-- For the most up-to-date install instructions, read [Connect or Disconnect Mailchimp for WooCommerce](http://kb.mailchimp.com/integrations/e-commerce/connect-or-disconnect-mailchimp-for-woocommerce). 
+- For the most up-to-date install instructions, read [Connect or Disconnect Mailchimp for WooCommerce](http://kb.mailchimp.com/integrations/e-commerce/connect-or-disconnect-squalomail-for-woocommerce). 
 
 - This plugin requires you to have the latest [WooCommerce plugin](https://wordpress.org/plugins/woocommerce) already installed and activated in WordPress. 
 

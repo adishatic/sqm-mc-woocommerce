@@ -39,7 +39,7 @@ abstract class MailChimp_WooCommerce_Options
             // if the onboarding profile has business extensions
             if (is_array($onboarding_profile) && array_key_exists('business_extensions', $onboarding_profile)) {
                 // if the business extensions contains our plugin, we just skip this.
-                if (is_array($onboarding_profile['business_extensions']) && in_array('mailchimp-for-woocommerce', $onboarding_profile['business_extensions'])) {
+                if (is_array($onboarding_profile['business_extensions']) && in_array('squalomail-for-woocommerce', $onboarding_profile['business_extensions'])) {
                     return;
                 }
             }
