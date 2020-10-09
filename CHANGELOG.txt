@@ -49,7 +49,7 @@
 = 2.4.1 =
 * adds scrolling frame for logs
 * fix for Coupon Deletion via WooCommerce API
-* removes all non-Mailchimp notices
+* removes all non-Squalomail notices
 * update for latest version of Action Scheduler v3.1.4
 * documentation updates
 * fix for errors on activation following deactivation
