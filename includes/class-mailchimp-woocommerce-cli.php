@@ -78,7 +78,7 @@ class Mailchimp_Wocoomerce_CLI extends WP_CLI_Command {
      */
 	public function listen( $args, $assoc_args = array() ) {
         mailchimp_debug('cli.queue.listen.process','Starting command `action-scheduler run`'); 
-        WP_CLI::warning(WP_CLI::colorize('%Wqueue listen%n').' command is deprecated since Mailchimp for Woocommerce version 2.3. Please use '.WP_CLI::colorize('%ywp action-scheduler run --group="mc-woocommerce%n"').' instead'); 
+        WP_CLI::warning(WP_CLI::colorize('%Wqueue listen%n').' command is deprecated since Mailchimp for Woocommerce version 2.3. Please use '.WP_CLI::colorize('%ywp action-scheduler run --group="sqm-mc-woocommerce%n"').' instead'); 
         WP_CLI::log('Starting sync'); 
         
         $force_arg = '';
@@ -95,7 +95,7 @@ class Mailchimp_Wocoomerce_CLI extends WP_CLI_Command {
             'exit_error' => true,   // Halt script execution on error.
           );
 
-        $command = 'action-scheduler run --group=mc-woocommerce'.$force_arg;
+        $command = 'action-scheduler run --group=sqm-mc-woocommerce'.$force_arg;
         $output = WP_CLI::runcommand( $command, $options );
         WP_CLI::log($output);  
         exit;
@@ -105,7 +105,7 @@ class Mailchimp_Wocoomerce_CLI extends WP_CLI_Command {
 	 * Deprecated commands
 	 */
 	public function work( $args, $assoc_args = array() ) {
-        WP_CLI::warning(WP_CLI::colorize('%Wqueue work%n').' command is deprecated since Mailchimp for Woocommerce version 2.3. Please use '.WP_CLI::colorize('%ywp action-scheduler run --group="mc-woocommerce%n"').' instead'); 
+        WP_CLI::warning(WP_CLI::colorize('%Wqueue work%n').' command is deprecated since Mailchimp for Woocommerce version 2.3. Please use '.WP_CLI::colorize('%ywp action-scheduler run --group="sqm-mc-woocommerce%n"').' instead'); 
         exit;
     }
     

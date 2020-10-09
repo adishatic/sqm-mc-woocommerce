@@ -134,7 +134,7 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
             <?php wp_nonce_field( '_disconnect-nonce-'.$store_id, '_disconnect-nonce' ); ?>
             <?php wp_nonce_field( '_resync-nonce-'.$store_id, '_resync-nonce' ); ?>
 
-            <a id="mailchimp_woocommerce_disconnect" class="mc-woocommerce-disconnect-button">
+            <a id="mailchimp_woocommerce_disconnect" class="sqm-mc-woocommerce-disconnect-button">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#3C3C3C"/>
                     </svg>
@@ -145,7 +145,7 @@ if (($mailchimp_api = mailchimp_get_api()) && ($store = $mailchimp_api->getStore
             <p><strong><?php esc_html_e('Audience Connected', 'mailchimp-for-woocommerce');?></strong></p>
             <p id="mailchimp_list_name"><?php echo $mailchimp_list_name; ?></p>
 
-            <div class="mc-woocommerce-last-sync">
+            <div class="sqm-mc-woocommerce-last-sync">
                 <p>
                     <?php if ($last_updated_time): ?>
                         <?php esc_html_e('Status:', 'mailchimp-for-woocommerce');?>
@@ -211,9 +211,9 @@ $comm_enabled = $opt != null ? $opt : '0';
                 <?php esc_html_e('You can resync your audience at any time without losing any of your e-commerce data.', 'mailchimp-for-woocommerce');?>
             </p>
             <?php if ($show_resync) : ?>
-                <?php submit_button(__('Resync now', 'mailchimp-for-woocommerce'), 'primary mc-woocommerce-resync-button','submit', TRUE); ?>
+                <?php submit_button(__('Resync now', 'mailchimp-for-woocommerce'), 'primary sqm-mc-woocommerce-resync-button','submit', TRUE); ?>
             <?php else : ?>
-                <?php submit_button(__('Resync now', 'mailchimp-for-woocommerce'), 'mc-woocommerce-resync-button','submit', TRUE, ['disabled' => true]); ?>
+                <?php submit_button(__('Resync now', 'mailchimp-for-woocommerce'), 'sqm-mc-woocommerce-resync-button','submit', TRUE, ['disabled' => true]); ?>
                 <p class="description"><?php _e('Sync is running. Please wait until it finishes.', 'mailchimp-for-woocommerce') ?></p>
             <?php endif;?>
         </div>
@@ -226,7 +226,7 @@ $comm_enabled = $opt != null ? $opt : '0';
                 <li><?= sprintf(/* translators: %s - Plugin review URL. */wp_kses( __( 'Is this plugin helping your e-commerce business? <a href=%s target=_blank>Please leave us a ★★★★★ review!</a>.', 'mailchimp-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://wordpress.org/support/plugin/mailchimp-for-woocommerce/reviews/' ) );?></li>
                 <li><?= sprintf(/* translators: %s - WP-CLI URL. */wp_kses( __( 'Have a larger store or having issues syncing? Consider using <a href=%s target=_blank>WP-CLI</a> or browse documentation around common <a href=%s target=_blank>caching problems</a>.', 'mailchimp-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://github.com/mailchimp/mc-woocommerce/wiki/Advanced-Queue-Setup-In-CLI-mode' ), esc_url( 'https://github.com/mailchimp/mc-woocommerce/wiki/Using-Caches' ) );?></li>
                 <li><?= esc_html__('Order and customer information will not sync if they contain an Amazon or generic email address.', 'mailchimp-for-woocommerce');?></li>
-                <li><?= sprintf(/* translators: %s - Mailchimp Support URL. */wp_kses( __( 'Need help? Visit <a href=%s target=_blank>Mailchimp support</a> or <a id=%s href=%s>send us an email.</a> ', 'mailchimp-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'id' => array(),  'target'=> '_blank' ) ) ), esc_url( 'https://us1.admin.mailchimp.com/support?support_key=woo_forum' ), 'mc-woocommerce-support-form-button', '#mc-woocommerce-support-form' );?></li>
+                <li><?= sprintf(/* translators: %s - Mailchimp Support URL. */wp_kses( __( 'Need help? Visit <a href=%s target=_blank>Mailchimp support</a> or <a id=%s href=%s>send us an email.</a> ', 'mailchimp-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'id' => array(),  'target'=> '_blank' ) ) ), esc_url( 'https://us1.admin.mailchimp.com/support?support_key=woo_forum' ), 'sqm-mc-woocommerce-support-form-button', '#sqm-mc-woocommerce-support-form' );?></li>
                 <li><?= sprintf(/* translators: %s - Mailchimp Privacy Policy URL. */wp_kses( __( 'By using this plugin, Mailchimp will process customer information in accordance with their <a href=%s target=_blank>Privacy Policy</a>.', 'mailchimp-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://mailchimp.com/legal/privacy/' ) );?></li>
             </ul>
         </div>
@@ -234,9 +234,9 @@ $comm_enabled = $opt != null ? $opt : '0';
 
 </div>
 
-<div id="mc-woocommerce-support-form" class="mc-woocommerce-modal">
+<div id="sqm-mc-woocommerce-support-form" class="sqm-mc-woocommerce-modal">
     <div id="exampleModal" class="reveal-modal">
-        <a href="#mc-woocommerce-support-form-button" class="close-modal"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="#sqm-mc-woocommerce-support-form-button" class="close-modal"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="black"/>
             </svg>
         </a>    
@@ -255,7 +255,7 @@ $comm_enabled = $opt != null ? $opt : '0';
             
         </div>
 
-        <div id="mc-woocommerce-create-account-step-1" class="mc-woocommerce-create-account-step tab-content-wrapper" >
+        <div id="sqm-mc-woocommerce-create-account-step-1" class="sqm-mc-woocommerce-create-account-step tab-content-wrapper" >
             <fieldset >
                 <?php $user_id = get_current_user_id(); ?>
 
@@ -299,11 +299,11 @@ $comm_enabled = $opt != null ? $opt : '0';
                 </div>
                 
                 <div class="box">
-                    <a id="mc-woocommerce-support-form-submit" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Send', 'mailchimp-for-woocommerce'); ?></a>
+                    <a id="sqm-mc-woocommerce-support-form-submit" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Send', 'mailchimp-for-woocommerce'); ?></a>
                     <span class="spinner"></span>
                 </div>
 
-                <div class="box mc-woocommerce-create-account-step-error alignright" >
+                <div class="box sqm-mc-woocommerce-create-account-step-error alignright" >
                     <p id ="email_error"><?= esc_html__( 'Invalid Email. Please double check.', 'mailchimp-for-woocommerce' ); ?></p>
                     <p id ="first_name_error"><?= esc_html__( 'Invalid First Name. Please double check.', 'mailchimp-for-woocommerce' ); ?></p>
                     <p id ="last_name_error"><?= esc_html__( 'Invalid Last Name. Please double check.', 'mailchimp-for-woocommerce' ); ?></p>

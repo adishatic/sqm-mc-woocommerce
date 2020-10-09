@@ -78,7 +78,7 @@
 		}
 
 		// copy log button
-		$('.mc-woocommerce-copy-log-button').click(function (e) {
+		$('.sqm-mc-woocommerce-copy-log-button').click(function (e) {
 			e.preventDefault();
 			var copyText = $('#log-content');
 			var $temp = $("<textarea>");
@@ -87,13 +87,13 @@
 			/* Copy the text inside the text field */
 			document.execCommand("copy");
 			$temp.remove();
-			$('.mc-woocommerce-copy-log-button span.clipboard').hide();
-			$('.mc-woocommerce-copy-log-button span.yes').show();
+			$('.sqm-mc-woocommerce-copy-log-button span.clipboard').hide();
+			$('.sqm-mc-woocommerce-copy-log-button span.yes').show();
 		});
 
-		$('.mc-woocommerce-copy-log-button').mouseleave(function (e) {
-			$('.mc-woocommerce-copy-log-button span.clipboard').show();
-			$('.mc-woocommerce-copy-log-button span.yes').hide();
+		$('.sqm-mc-woocommerce-copy-log-button').mouseleave(function (e) {
+			$('.sqm-mc-woocommerce-copy-log-button span.clipboard').show();
+			$('.sqm-mc-woocommerce-copy-log-button span.yes').hide();
 		});
 
 		// delete log button
@@ -117,7 +117,7 @@
 				cancelButtonText: phpVars.l10n.no_cancel,
 				customClass: {
 					confirmButton: 'button button-primary tab-content-submit disconnect-button',
-					cancelButton: 'button button-default mc-woocommerce-resync-button disconnect-button'
+					cancelButton: 'button button-default sqm-mc-woocommerce-resync-button disconnect-button'
 				},
 				buttonsStyling: false,
 				reverseButtons: true,
@@ -130,7 +130,7 @@
 			})
 		});
 
-		$('.mc-woocommerce-resync-button').click(function(e) {
+		$('.sqm-mc-woocommerce-resync-button').click(function(e) {
 			e.preventDefault();
 			Swal.fire({
 				title: 'Resync Request In Progress',
@@ -168,7 +168,7 @@
 			const swalWithBootstrapButtons = Swal.mixin({
 				customClass: {
 				  confirmButton: 'button button-primary tab-content-submit disconnect-button',
-				  cancelButton: 'button button-default mc-woocommerce-resync-button disconnect-button'
+				  cancelButton: 'button button-default sqm-mc-woocommerce-resync-button disconnect-button'
 				},
 				buttonsStyling: false,
 			})
@@ -218,7 +218,7 @@
 		* Change wp_http_referer URL in case of in-wizard tab change
 		*/ 
 		var mailchimp_woocommerce_submit_done = false;
-		$('#mailchimp_woocommerce_options .tab-content-submit:not(.oauth-connect):not(#mc-woocommerce-support-form-submit)').click(function(e){
+		$('#mailchimp_woocommerce_options .tab-content-submit:not(.oauth-connect):not(#sqm-mc-woocommerce-support-form-submit)').click(function(e){
 			// this is to trigger the event even after preventDefault() is issued.
 			if (mailchimp_woocommerce_submit_done) {
 				mailchimp_woocommerce_submit_done = false; // reset flag
@@ -281,7 +281,7 @@
 				const swalWithBootstrapButtons = Swal.mixin({
 					customClass: {
 					  confirmButton: 'button button-primary tab-content-submit disconnect-button',
-					  cancelButton: 'button button-default mc-woocommerce-resync-button disconnect-button'
+					  cancelButton: 'button button-default sqm-mc-woocommerce-resync-button disconnect-button'
 					},
 					buttonsStyling: false,
 				})
@@ -432,12 +432,12 @@
 		});
 
 		// Account create functionality
-		$('#mc-woocommerce-create-account-next').click(function () {
+		$('#sqm-mc-woocommerce-create-account-next').click(function () {
 			var next_button = $(this);
 			var spinner = $(this).next('.spinner');
 			spinner.css('visibility', 'visible')
 			
-			$('.mc-woocommerce-create-account-step-error > p').hide();
+			$('.sqm-mc-woocommerce-create-account-step-error > p').hide();
 			$('#username_suggestion').css('visibility', 'hidden');
 			var email = $('input#email');
 			var username = $('input#username');
@@ -468,9 +468,9 @@
 						$('#username_exists_error').hide();
 						if ( isValid == true) {
 							spinner.css('visibility', 'hidden');
-							$('.mc-woocommerce-settings').css('height', '900px');
-							$('#mc-woocommerce-create-account-step-1').hide();
-							$('#mc-woocommerce-create-account-step-2').show();
+							$('.sqm-mc-woocommerce-settings').css('height', '900px');
+							$('#sqm-mc-woocommerce-create-account-step-1').hide();
+							$('#sqm-mc-woocommerce-create-account-step-2').show();
 							$('#step_count').html('2');
 						}
 					}
@@ -484,14 +484,14 @@
 			}
 		});
 
-		$('#mc-woocommerce-create-account-prev').click(function () {
-			$('#mc-woocommerce-create-account-step-1').show();
-			$('#mc-woocommerce-create-account-step-2').hide();
+		$('#sqm-mc-woocommerce-create-account-prev').click(function () {
+			$('#sqm-mc-woocommerce-create-account-step-1').show();
+			$('#sqm-mc-woocommerce-create-account-step-2').hide();
 			$('#step_count').html('1');
 			
 		});
 
-		$('#mc-woocommerce-create-account-go').click(function () {
+		$('#sqm-mc-woocommerce-create-account-go').click(function () {
 			var email = $('input#email');
 			var firstName = $('input#first_name');
 			var lastName = $('input#last_name');
@@ -628,23 +628,23 @@
 			$('input#username').val($(this).html());
 		});
 
-		$('#mc-woocommerce-create-account-step-1').keypress(function(event){
+		$('#sqm-mc-woocommerce-create-account-step-1').keypress(function(event){
 			event.stopPropagation();
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if ( keycode == '13' ){
-				$("#mc-woocommerce-create-account-next").click(); 				
+				$("#sqm-mc-woocommerce-create-account-next").click(); 				
 			}
 		});
 
-		$('#mc-woocommerce-create-account-step-2').keypress(function(event){
+		$('#sqm-mc-woocommerce-create-account-step-2').keypress(function(event){
 			event.stopPropagation();
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if ( keycode == '13' ){
-				$("#mc-woocommerce-create-account-go").click(); 				
+				$("#sqm-mc-woocommerce-create-account-go").click(); 				
 			}
 		});
 
-		$('a#mc-woocommerce-support-form-submit').click(function (e) {
+		$('a#sqm-mc-woocommerce-support-form-submit').click(function (e) {
 			var accountId = $('input#account_id');
 			var storeId = $('input#store_id');
 			var email = $('input#email');
@@ -722,7 +722,7 @@
 						$.post(ajaxurl, data, function(response) {
 							Swal.hideLoading();
 							if (response.success) {
-								location.hash = '#mc-woocommerce-support-form-button';
+								location.hash = '#sqm-mc-woocommerce-support-form-button';
 								$('#success').show();
 								subject.val('');
 								message.val('');

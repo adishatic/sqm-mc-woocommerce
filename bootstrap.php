@@ -126,12 +126,12 @@ function mailchimp_as_push( Mailchimp_Woocommerce_Job $job, $delay = 0 ) {
             'status' => ActionScheduler_Store::STATUS_PENDING,  
             'args' => array(
                 'obj_id' => isset($job->id) ? $job->id : null), 
-                'group' => 'mc-woocommerce'
+                'group' => 'sqm-mc-woocommerce'
             )
         ) : null;
         
         if (!empty($existing_actions)) {
-            as_unschedule_action(get_class($job), array('obj_id' => $job->id), 'mc-woocommerce');
+            as_unschedule_action(get_class($job), array('obj_id' => $job->id), 'sqm-mc-woocommerce');
         }
         else {
             $inserted = $wpdb->insert($wpdb->prefix."mailchimp_jobs", $args);
@@ -159,7 +159,7 @@ function mailchimp_as_push( Mailchimp_Woocommerce_Job $job, $delay = 0 ) {
             $action_args['page'] = $current_page;
         }
 
-        $action = as_schedule_single_action( strtotime( '+'.$delay.' seconds' ), get_class($job), $action_args, "mc-woocommerce");
+        $action = as_schedule_single_action( strtotime( '+'.$delay.' seconds' ), get_class($job), $action_args, "sqm-mc-woocommerce");
       
         if (!empty($existing_actions)) {
             mailchimp_debug('action_scheduler.reschedule_job', get_class($job) . ($delay > 0 ? ' restarts in '.$delay. ' seconds' : ' re-queued' ) . $message . $attempts);
@@ -206,7 +206,7 @@ function mailchimp_get_remaining_jobs_count($job_hook) {
         array(
             'hook' => $job_hook, 
             'status' => ActionScheduler_Store::STATUS_PENDING,  
-            'group' => 'mc-woocommerce', 
+            'group' => 'sqm-mc-woocommerce', 
             'per_page' => -1,
         ), 'ids'
     ) : null;
@@ -994,14 +994,14 @@ function mailchimp_delete_as_jobs() {
     $existing_as_actions = function_exists('as_get_scheduled_actions') ? as_get_scheduled_actions(
         array(
             'status' => ActionScheduler_Store::STATUS_PENDING,  
-            'group' => 'mc-woocommerce',
+            'group' => 'sqm-mc-woocommerce',
             'per_page' => -1,
         )
     ) : null;
     
     if (!empty($existing_as_actions)) {
         foreach ($existing_as_actions as $as_action) {
-            as_unschedule_action($as_action->get_hook(), $as_action->get_args(), 'mc-woocommerce');    # code...
+            as_unschedule_action($as_action->get_hook(), $as_action->get_args(), 'sqm-mc-woocommerce');    # code...
         }
         return true;
     }

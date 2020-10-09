@@ -84,11 +84,11 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
         </div>
         <div id="log-actions">
             <?php if ( ! empty( $handle ) ) : ?>
-                <a class="mc-woocommerce-log-button mc-woocommerce-copy-log-button" title="<?= __('Copy Log to clipboard', 'mailchimp-for-woocommerce');?>" href="#">
+                <a class="sqm-mc-woocommerce-log-button sqm-mc-woocommerce-copy-log-button" title="<?= __('Copy Log to clipboard', 'mailchimp-for-woocommerce');?>" href="#">
                     <span class="dashicons dashicons-clipboard clipboard" style="transform: rotate(-45deg) translateY(2px) translateX(-2px);"></span>
                     <span class="dashicons dashicons-yes yes"></span>
                 </a>
-                <a class="mc-woocommerce-log-button delete-log-button" title="<?= __('Delete Log', 'mailchimp-for-woocommerce');?>" href="<?php echo esc_url( wp_nonce_url( add_query_arg( array( 'handle' => sanitize_title($viewed_log) ), admin_url( 'admin.php?page=mailchimp-woocommerce&tab=logs&mc_action=remove_log' ) ), 'remove_log' ) ); ?>">
+                <a class="sqm-mc-woocommerce-log-button delete-log-button" title="<?= __('Delete Log', 'mailchimp-for-woocommerce');?>" href="<?php echo esc_url( wp_nonce_url( add_query_arg( array( 'handle' => sanitize_title($viewed_log) ), admin_url( 'admin.php?page=mailchimp-woocommerce&tab=logs&mc_action=remove_log' ) ), 'remove_log' ) ); ?>">
                     <span class="dashicons dashicons-trash"></span>
                 </a>
             <?php endif; ?>

@@ -1672,7 +1672,7 @@ class MailChimp_WooCommerce_Admin extends MailChimp_WooCommerce_Options {
 		$full_sync->start_sync();
 		
         // enqueue sync manager
-		as_enqueue_async_action( 'MailChimp_WooCommerce_Process_Full_Sync_Manager', array(), 'mc-woocommerce' );
+		as_enqueue_async_action( 'MailChimp_WooCommerce_Process_Full_Sync_Manager', array(), 'sqm-mc-woocommerce' );
 	}
 
 	/**

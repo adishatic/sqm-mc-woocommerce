@@ -1,5 +1,5 @@
-<p id="mc-woocommerce-create-account-link" class="create-account-link alignright">Don’t have a Mailchimp account yet? <a style="font-weight:bold !important;" href='#mc-woocommerce-create-account'>Create one here</a></p>
-<div id="mc-woocommerce-create-account" class="mc-woocommerce-modal">
+<p id="sqm-mc-woocommerce-create-account-link" class="create-account-link alignright">Don’t have a Mailchimp account yet? <a style="font-weight:bold !important;" href='#sqm-mc-woocommerce-create-account'>Create one here</a></p>
+<div id="sqm-mc-woocommerce-create-account" class="sqm-mc-woocommerce-modal">
     <div id="exampleModal" class="reveal-modal">
         <a href="#" class="close-modal"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="black"/>
@@ -20,7 +20,7 @@
         </div>
 
         
-        <div id="mc-woocommerce-create-account-step-1" class="mc-woocommerce-create-account-step">
+        <div id="sqm-mc-woocommerce-create-account-step-1" class="sqm-mc-woocommerce-create-account-step">
                 <fieldset>
                 <?php $user_id = get_current_user_id(); ?>
 
@@ -45,11 +45,11 @@
                     
 
                     <div class="box " >
-                        <a id="mc-woocommerce-create-account-next" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Next Step', 'mailchimp-for-woocommerce'); ?></a>
+                        <a id="sqm-mc-woocommerce-create-account-next" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Next Step', 'mailchimp-for-woocommerce'); ?></a>
                         <span class="spinner"></span>
                     </div>
 
-                    <div class="box mc-woocommerce-create-account-step-error alignright" >
+                    <div class="box sqm-mc-woocommerce-create-account-step-error alignright" >
                         <p id ="email_error"><?= esc_html__( 'Invalid Email. Please double check.', 'mailchimp-for-woocommerce' ); ?></p>
                         <p id ="username_invalid_error">Username Invalid or already exists</p>
                         <p id ="username_exists_error">Username already exists</p>
@@ -60,7 +60,7 @@
                 </fieldset>
         </div>
 
-        <div id="mc-woocommerce-create-account-step-2" class="mc-woocommerce-create-account-step">
+        <div id="sqm-mc-woocommerce-create-account-step-2" class="sqm-mc-woocommerce-create-account-step">
             <fieldset>
                 <div class="box" >
                     <label for="address">
@@ -164,15 +164,15 @@
                 </div>
 
                 <div class="box box-half" >
-                    <a id="mc-woocommerce-create-account-prev" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Go Back', 'mailchimp-for-woocommerce'); ?></a>
+                    <a id="sqm-mc-woocommerce-create-account-prev" class="button button-primary whitebtn tab-content-submit"><?php esc_html_e('Go Back', 'mailchimp-for-woocommerce'); ?></a>
                 </div>
                 
                 <div class="box box-half" >
-                    <a id="mc-woocommerce-create-account-go" class="button button-primary tab-content-submit"><?php esc_html_e('Get Started!', 'mailchimp-for-woocommerce'); ?></a>
+                    <a id="sqm-mc-woocommerce-create-account-go" class="button button-primary tab-content-submit"><?php esc_html_e('Get Started!', 'mailchimp-for-woocommerce'); ?></a>
                     <span class="spinner"></span>
                 </div>
                 
-                <div class="box mc-woocommerce-create-account-step-error alignright" >
+                <div class="box sqm-mc-woocommerce-create-account-step-error alignright" >
                     <p id ="address_error"><?= esc_html__( 'Invalid Address', 'mailchimp-for-woocommerce' ); ?></p>
                     <p id ="city_error"><?= esc_html__( 'Invalid City', 'mailchimp-for-woocommerce' ); ?></p>
                     <p id ="state_error"><?= esc_html__( 'Invalid State', 'mailchimp-for-woocommerce' ); ?></p>
