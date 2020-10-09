@@ -27,12 +27,12 @@ class SqualoMail_WooCommerce_Activator {
 		//static::migrate_jobs();
 
 		// update the settings so we have them for use.
-        $saved_options = get_option('mailchimp-woocommerce', false);
+        $saved_options = get_option('squalomail-woocommerce', false);
 
         // if we haven't saved options previously, we will need to create the site id and update base options
         if (empty($saved_options)) {
             squalomail_clean_database();
-            update_option('mailchimp-woocommerce', array());
+            update_option('squalomail-woocommerce', array());
             // only do this if the option has never been set before.
             if (!is_multisite()) {
                 add_option('squalomail_woocommerce_plugin_do_activation_redirect', true);
@@ -40,10 +40,10 @@ class SqualoMail_WooCommerce_Activator {
         }
 
         // if we haven't saved the store id yet.
-        $saved_store_id = get_option('mailchimp-woocommerce-store_id', false);
+        $saved_store_id = get_option('squalomail-woocommerce-store_id', false);
         if (empty($saved_store_id)) {
             // add a store id flag which will be a random hash
-            update_option('mailchimp-woocommerce-store_id', uniqid(), 'yes');
+            update_option('squalomail-woocommerce-store_id', uniqid(), 'yes');
         }
 
         if (class_exists('SqualoMail_WooCommerce_SqualoMailApi')) {

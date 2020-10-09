@@ -240,10 +240,10 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 		register_setting($this->plugin_name, $this->plugin_name, array($this, 'validate'));
 
 		// tammullen found this.
-        if ($pagenow == 'admin.php' && isset($_GET) && isset($_GET['page']) && 'mailchimp-woocommerce' === $_GET['page']) {
+        if ($pagenow == 'admin.php' && isset($_GET) && isset($_GET['page']) && 'squalomail-woocommerce' === $_GET['page']) {
             $this->handle_abandoned_cart_table();
             $this->update_db_check();
-            if (get_option('mailchimp-woocommerce-sync.initial_sync') == 1 && get_option('mailchimp-woocommerce-sync.completed_at') > 0 ) {
+            if (get_option('squalomail-woocommerce-sync.initial_sync') == 1 && get_option('squalomail-woocommerce-sync.completed_at') > 0 ) {
                 $this->squalomail_show_initial_sync_message();
             }
 			if (isset($_GET['log_removed']) && $_GET['log_removed'] == "1") {
@@ -354,7 +354,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			if (!empty($options['admin_email'])) {
 				try {
 					// send the post to the mailchimp server
-					$comm_opt = get_option('mailchimp-woocommerce-comm.opt', 0);
+					$comm_opt = get_option('squalomail-woocommerce-comm.opt', 0);
 					$this->squalomail_set_communications_status_on_server($comm_opt, $options['admin_email']);
 				} catch (\Exception $e) {
 					squalomail_error("marketing_status_update", $e->getMessage());
@@ -421,8 +421,8 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			__('These constants are deprecated since Mailchimp for Woocommerce version 2.3. Please refer to the <a href="https://github.com/mailchimp/mc-woocommerce/wiki/">plugin official wiki</a> for further details.' ,'squalomail-for-woocommerce').'</p>';
 			
 			// only print notice for deprecated constants, on mailchimp woocoomerce pages
-			if ($pagenow == 'admin.php' && 'mailchimp-woocommerce' === $_GET['page']) {
-				add_settings_error('mailchimp-woocommerce_notice', $this->plugin_name, $text, 'info');
+			if ($pagenow == 'admin.php' && 'squalomail-woocommerce' === $_GET['page']) {
+				add_settings_error('squalomail-woocommerce_notice', $this->plugin_name, $text, 'info');
 			}
 		}
 		
@@ -621,7 +621,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
             case 'logs':
 
                 if (isset($_POST['log_file']) && !empty($_POST['log_file'])) {
-                    set_site_transient('mailchimp-woocommerce-view-log-file', $_POST['log_file'], 30);
+                    set_site_transient('squalomail-woocommerce-view-log-file', $_POST['log_file'], 30);
                 }
                 
                 $data = array(
@@ -629,7 +629,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
                 );
 
                 if (isset($_POST['mc_action']) && in_array($_POST['mc_action'], array('view_log', 'remove_log'))) {
-                    $path = 'admin.php?page=mailchimp-woocommerce&tab=logs';
+                    $path = 'admin.php?page=squalomail-woocommerce&tab=logs';
                     wp_redirect($path);
                     exit();
                 }
@@ -712,7 +712,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
         $response = wp_remote_post( 'https://woocommerce.mailchimpapp.com/api/start', $pload);
         if ($response['response']['code'] == 201 ){
-			set_site_transient('mailchimp-woocommerce-oauth-secret', $secret, 60*60);
+			set_site_transient('squalomail-woocommerce-oauth-secret', $secret, 60*60);
 			wp_send_json_success($response);
         }
         else wp_send_json_error( $response );
@@ -726,7 +726,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
     {   
         $args = array(
             'domain' => site_url(),
-            'secret' => get_site_transient('mailchimp-woocommerce-oauth-secret'),
+            'secret' => get_site_transient('squalomail-woocommerce-oauth-secret'),
             'token' => $_POST['token']
         );
 
@@ -739,7 +739,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
         $response = wp_remote_post( 'https://woocommerce.mailchimpapp.com/api/finish', $pload);
         if ($response['response']['code'] == 200 ){
-			delete_site_transient('mailchimp-woocommerce-oauth-secret');
+			delete_site_transient('squalomail-woocommerce-oauth-secret');
             // save api_key? If yes, we can skip api key validation for validatePostApiKey();
             wp_send_json_success($response);
         }
@@ -884,7 +884,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 		}
 
 		// change communication status options
-		$comm_opt = get_option('mailchimp-woocommerce-comm.opt', 0);
+		$comm_opt = get_option('squalomail-woocommerce-comm.opt', 0);
 		$this->squalomail_set_communications_status_on_server($comm_opt, $data['admin_email']);
 
 		$this->setData('validation.store_info', true);
@@ -1564,7 +1564,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 				//iterate thru stores, find correct store ID and save it to db
 				foreach ($stores as $sqm_store) {
 					if ($sqm_store->getDomain() === $store->getDomain() && $store->getPlatform() == "woocommerce") {
-						update_option('mailchimp-woocommerce-store_id', $sqm_store->getId(), 'yes');
+						update_option('squalomail-woocommerce-store_id', $sqm_store->getId(), 'yes');
 						
 						// update the store with the previous listID
 						$store->setListId($sqm_store->getListId());
@@ -1686,7 +1686,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			' ' .
             __('Sometimes the sync can take a while, especially on sites with lots of orders and/or products. It is safe to navigate away from this screen while it is running.', 'squalomail-for-woocommerce') .
             '</p>';
-		add_settings_error('mailchimp-woocommerce_notice', $this->plugin_name, $text, 'success');
+		add_settings_error('squalomail-woocommerce_notice', $this->plugin_name, $text, 'success');
 	}
 
 	/**
@@ -1717,7 +1717,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			esc_html__('Leave a Review', 'squalomail-for-woocommerce').
         '</a>';
 		
-		add_settings_error('mailchimp-woocommerce_notice', $this->plugin_name.'-initial-sync-end', $text, 'success');
+		add_settings_error('squalomail-woocommerce_notice', $this->plugin_name.'-initial-sync-end', $text, 'success');
 	}
 
 	/**
@@ -1756,7 +1756,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	public function squalomail_set_communications_status_on_server($opt, $admin_email, $remove = false) {
 		$env = squalomail_environment_variables();
 		$audience = !empty(squalomail_get_list_id()) ? 1 : 0;
-		$synced = get_option('mailchimp-woocommerce-sync.completed_at') > 0 ? 1 : 0;
+		$synced = get_option('squalomail-woocommerce-sync.completed_at') > 0 ? 1 : 0;
 		
 		$post_data = array(
 			'store_id' => squalomail_get_store_id(),

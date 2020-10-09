@@ -88,7 +88,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
                 return false;
             }
 
-            $options = get_option('mailchimp-woocommerce', array());
+            $options = get_option('squalomail-woocommerce', array());
             $store_id = squalomail_get_store_id();
 
             $this->cart_data = json_decode($this->cart_data, true);
@@ -199,7 +199,7 @@ class SqualoMail_WooCommerce_Cart_Update extends Squalomail_Woocommerce_Job
             squalomail_error('cart.error', squalomail_error_trace($e, "RateLimited :: email {$this->email}"));
             $this->retry();
         } catch (\Exception $e) {
-            update_option('mailchimp-woocommerce-cart-error', $e->getMessage());
+            update_option('squalomail-woocommerce-cart-error', $e->getMessage());
             squalomail_error('abandoned_cart.error', $e);
         }
 

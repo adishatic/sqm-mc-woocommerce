@@ -168,7 +168,7 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
 
             squalomail_log('product_submit.success', "{$method} :: #{$product->getId()}");
 
-            update_option('mailchimp-woocommerce-last_product_updated', $product->getId());
+            update_option('squalomail-woocommerce-last_product_updated', $product->getId());
 
             return $product;
 
@@ -203,7 +203,7 @@ class SqualoMail_WooCommerce_Single_Product extends Squalomail_Woocommerce_Job
         if (is_null($this->api)) {
 
             $this->store_id = squalomail_get_store_id();
-            $options = get_option('mailchimp-woocommerce', array());
+            $options = get_option('squalomail-woocommerce', array());
 
             if (!empty($this->store_id) && is_array($options) && isset($options['squalomail_api_key'])) {
                 return $this->api = new SqualoMail_WooCommerce_SqualoMailApi($options['squalomail_api_key']);

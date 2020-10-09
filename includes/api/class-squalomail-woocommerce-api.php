@@ -21,8 +21,8 @@ class SqualoMail_WooCommerce_Api
      */
     public static function filter($default_page = null, $default_per = null)
     {
-        if (isset($_GET['mailchimp-woocommerce']) && isset($_GET['mailchimp-woocommerce']['action'])) {
-            if (in_array($_GET['mailchimp-woocommerce']['action'], static::$filterable_actions)) {
+        if (isset($_GET['squalomail-woocommerce']) && isset($_GET['squalomail-woocommerce']['action'])) {
+            if (in_array($_GET['squalomail-woocommerce']['action'], static::$filterable_actions)) {
                 if (empty($default_page)) {
                     $page = isset($_GET['page']) ? (int) $_GET['page'] : null;
                 }

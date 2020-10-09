@@ -76,7 +76,7 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
             return false;
         }
 
-        $options = get_option('mailchimp-woocommerce', array());
+        $options = get_option('squalomail-woocommerce', array());
         $store_id = squalomail_get_store_id();
 
         // load up the user.
@@ -89,7 +89,7 @@ class SqualoMail_WooCommerce_User_Submit extends Squalomail_Woocommerce_Job
             // just a precautionary to make sure it's available during
             sleep(1);
 
-            $options = get_option('mailchimp-woocommerce', array());
+            $options = get_option('squalomail-woocommerce', array());
             $store_id = squalomail_get_store_id();
 
             // load up the user.

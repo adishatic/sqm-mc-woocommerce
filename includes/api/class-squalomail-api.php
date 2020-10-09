@@ -667,20 +667,20 @@ class SqualoMail_WooCommerce_SqualoMailApi
         if (empty($campaign_id)) return false;
 
         // if we found the campaign ID already and it's been stored in the cache, return it from the cache instead.
-        if (($data = get_site_transient('mailchimp-woocommerce-has-campaign-id-'.$campaign_id)) && !empty($data)) {
+        if (($data = get_site_transient('squalomail-woocommerce-has-campaign-id-'.$campaign_id)) && !empty($data)) {
             return $data;
         }
-        if (get_site_transient('mailchimp-woocommerce-no-campaign-id-'.$campaign_id)) {
+        if (get_site_transient('squalomail-woocommerce-no-campaign-id-'.$campaign_id)) {
             return false;
         }
         try {
             $data = $this->get("campaigns/$campaign_id");
-            delete_site_transient('mailchimp-woocommerce-no-campaign-id-'.$campaign_id);
-            set_site_transient('mailchimp-woocommerce-has-campaign-id-'.$campaign_id, $data, 60 * 30);
+            delete_site_transient('squalomail-woocommerce-no-campaign-id-'.$campaign_id);
+            set_site_transient('squalomail-woocommerce-has-campaign-id-'.$campaign_id, $data, 60 * 30);
             return $data;
         } catch (\Exception $e) {
             squalomail_debug('campaign_get.error', 'No campaign with provided ID: '. $campaign_id. ' :: '. $e->getMessage(). ' :: in '.$e->getFile().' :: on '.$e->getLine());
-            set_site_transient('mailchimp-woocommerce-no-campaign-id-'.$campaign_id, true, 60 * 30);
+            set_site_transient('squalomail-woocommerce-no-campaign-id-'.$campaign_id, true, 60 * 30);
 
             if (!$throw_if_invalid) {
                 return false;
@@ -1052,7 +1052,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
             // update the member tags but fail silently just in case.
             $this->updateMemberTags(squalomail_get_list_id(), $email_address, true);
 
-            update_option('mailchimp-woocommerce-resource-last-updated', time());
+            update_option('squalomail-woocommerce-resource-last-updated', time());
             $order = new SqualoMail_WooCommerce_Order();
             return $order->fromArray($data);
         } catch (\Exception $e) {
@@ -1217,7 +1217,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
                 return false;
             }
             $data = $this->post("ecommerce/stores/$store_id/products", $product->toArray());
-            update_option('mailchimp-woocommerce-resource-last-updated', time());
+            update_option('squalomail-woocommerce-resource-last-updated', time());
             $product = new SqualoMail_WooCommerce_Product();
             return $product->fromArray($data);
         } catch (\Exception $e) {
@@ -1241,7 +1241,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
                 return false;
             }
             $data = $this->patch("ecommerce/stores/$store_id/products/{$product->getId()}", $product->toArray());
-            update_option('mailchimp-woocommerce-resource-last-updated', time());
+            update_option('squalomail-woocommerce-resource-last-updated', time());
             $product = new SqualoMail_WooCommerce_Product();
             return $product->fromArray($data);
         } catch (\Exception $e) {
@@ -1592,7 +1592,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
      */
     public function getCachedGDPRFields($list_id, $minutes = 5)
     {
-        $transient = "mailchimp-woocommerce-gdpr-fields.{$list_id}";
+        $transient = "squalomail-woocommerce-gdpr-fields.{$list_id}";
         $GDPRfields = get_site_transient($transient);
 
         // only return the values if it's a false - or an array

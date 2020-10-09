@@ -10,15 +10,15 @@ $squalomail_total_products = $squalomail_total_orders = $squalomail_total_promo_
 $squalomail_total_subscribers = $squalomail_total_unsubscribed = $squalomail_total_transactional = 0;
 
 $store_syncing = false;
-$last_updated_time = get_option('mailchimp-woocommerce-resource-last-updated');
-$sync_started_at = get_option('mailchimp-woocommerce-sync.started_at');
+$last_updated_time = get_option('squalomail-woocommerce-resource-last-updated');
+$sync_started_at = get_option('squalomail-woocommerce-sync.started_at');
 if (!empty($sync_started_at)) {
     $sync_started_at = squalomail_date_local($sync_started_at);
 } else {
     $sync_started_at = new \DateTime();
 }
 
-$sync_completed_at = get_option('mailchimp-woocommerce-sync.completed_at');
+$sync_completed_at = get_option('squalomail-woocommerce-sync.completed_at');
 if (!empty($sync_completed_at)) {
     $sync_completed_at = squalomail_date_local($sync_completed_at);
 } else {
@@ -172,7 +172,7 @@ if (($squalomail_api = squalomail_get_api()) && ($store = $squalomail_api->getSt
 
 <div class="sync-content-wrapper sync-comm-wrapper">
 <?php
-$opt = get_option('mailchimp-woocommerce-comm.opt');
+$opt = get_option('squalomail-woocommerce-comm.opt');
 $admin_email = squalomail_get_option('admin_email', get_option('admin_email'));
 $comm_enabled = $opt != null ? $opt : '0';
 ?>

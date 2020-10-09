@@ -82,7 +82,7 @@ spl_autoload_register(function($class) {
 function squalomail_environment_variables() {
     global $wp_version;
 
-    $o = get_option('mailchimp-woocommerce', false);
+    $o = get_option('squalomail-woocommerce', false);
 
     return (object) array(
         'repo' => 'master',
@@ -297,7 +297,7 @@ function squalomail_get_store_id() {
                 //iterate thru stores, find correct store ID and save it to db
                 foreach ($stores as $sqm_store) {
                     if ($sqm_store->getDomain() === get_option('siteurl')) {
-                        update_option('mailchimp-woocommerce-store_id', $sqm_store->getId(), 'yes');
+                        update_option('squalomail-woocommerce-store_id', $sqm_store->getId(), 'yes');
                         $store_id = $sqm_store->getId();
                     }
                 }
@@ -363,7 +363,7 @@ function squalomail_get_api() {
  * @return null
  */
 function squalomail_get_option($key, $default = null) {
-    $options = get_option('mailchimp-woocommerce');
+    $options = get_option('squalomail-woocommerce');
     if (!is_array($options)) {
         return $default;
     }
@@ -379,7 +379,7 @@ function squalomail_get_option($key, $default = null) {
  * @return mixed
  */
 function squalomail_get_data($key, $default = null) {
-    return get_option('mailchimp-woocommerce-'.$key, $default);
+    return get_option('squalomail-woocommerce-'.$key, $default);
 }
 
 /**
@@ -389,7 +389,7 @@ function squalomail_get_data($key, $default = null) {
  * @return bool
  */
 function squalomail_set_data($key, $value, $autoload = 'yes') {
-    return update_option('mailchimp-woocommerce-'.$key, $value, $autoload);
+    return update_option('squalomail-woocommerce-'.$key, $value, $autoload);
 }
 
 /**
@@ -733,7 +733,7 @@ function squalomail_update_connected_site_script() {
  * @return bool|DateTime
  */
 function squalomail_get_updated_connected_site_since_as_date_string() {
-    $updated_at = get_option('mailchimp-woocommerce-script_updated_at', false);
+    $updated_at = get_option('squalomail-woocommerce-script_updated_at', false);
     if (empty($updated_at)) return '';
     try {
         $date = new \DateTime();
@@ -748,7 +748,7 @@ function squalomail_get_updated_connected_site_since_as_date_string() {
  * @return int
  */
 function squalomail_get_updated_connected_site_since() {
-    $updated_at = get_option('mailchimp-woocommerce-script_updated_at', false);
+    $updated_at = get_option('squalomail-woocommerce-script_updated_at', false);
     return empty($updated_at) ? 1000000 : (time() - $updated_at);
 }
 
@@ -789,9 +789,9 @@ function mailchimpi_refresh_connected_site_script(SqualoMail_WooCommerce_Store $
     if ($url && $fragment) {
 
         // update the options for script_url and script_fragment
-        update_option('mailchimp-woocommerce-script_url', $url);
-        update_option('mailchimp-woocommerce-script_fragment', $fragment);
-        update_option('mailchimp-woocommerce-script_updated_at', time());
+        update_option('squalomail-woocommerce-script_url', $url);
+        update_option('squalomail-woocommerce-script_fragment', $fragment);
+        update_option('squalomail-woocommerce-script_updated_at', time());
 
         // check to see if the site is connected
         if (!$api->checkConnectedSite($store->getId())) {
@@ -809,14 +809,14 @@ function mailchimpi_refresh_connected_site_script(SqualoMail_WooCommerce_Store $
  * @return string|false
  */
 function squalomail_get_connected_site_script_url() {
-    return get_option('mailchimp-woocommerce-script_url', false);
+    return get_option('squalomail-woocommerce-script_url', false);
 }
 
 /**
  * @return string|false
  */
 function squalomail_get_connected_site_script_fragment() {
-    return get_option('mailchimp-woocommerce-script_fragment', false);
+    return get_option('squalomail-woocommerce-script_fragment', false);
 }
 
 /**
@@ -860,7 +860,7 @@ function squalomail_hash_trim_lower($str) {
  * @return mixed|null
  */
 function squalomail_get_transient($key, $default = null) {
-    $transient = get_site_transient("mailchimp-woocommerce.{$key}");
+    $transient = get_site_transient("squalomail-woocommerce.{$key}");
     return empty($transient) ? $default : $transient;
 }
 
@@ -872,7 +872,7 @@ function squalomail_get_transient($key, $default = null) {
  */
 function squalomail_set_transient($key, $value, $seconds = 60) {
     squalomail_delete_transient($key);
-    return set_site_transient("mailchimp-woocommerce.{$key}", array(
+    return set_site_transient("squalomail-woocommerce.{$key}", array(
         'value' => $value,
         'expires' => time()+$seconds,
     ), $seconds);
@@ -883,7 +883,7 @@ function squalomail_set_transient($key, $value, $seconds = 60) {
  * @return bool
  */
 function squalomail_delete_transient($key) {
-    return delete_site_transient("mailchimp-woocommerce.{$key}");
+    return delete_site_transient("squalomail-woocommerce.{$key}");
 }
 
 /**
@@ -951,8 +951,8 @@ function squalomail_get_subscriber_status_options($subscribed) {
 }
 
 function squalomail_check_if_on_sync_tab() {
-    if ((isset($_GET['page']) && $_GET['page'] === 'mailchimp-woocommerce')) {
-        $options = get_option('mailchimp-woocommerce', array());
+    if ((isset($_GET['page']) && $_GET['page'] === 'squalomail-woocommerce')) {
+        $options = get_option('squalomail-woocommerce', array());
         if (isset($_GET['tab'])) {
             if ($_GET['tab'] === 'sync') {
                 return true;
@@ -1011,10 +1011,10 @@ function squalomail_delete_as_jobs() {
 function squalomail_flush_sync_pointers() {
     // clean up the initial sync pointers
     foreach (array('orders', 'products', 'coupons') as $resource_type) {
-        delete_option("mailchimp-woocommerce-sync.{$resource_type}.started_at");
-        delete_option("mailchimp-woocommerce-sync.{$resource_type}.completed_at");
-        delete_option("mailchimp-woocommerce-sync.{$resource_type}.started_at");
-        delete_option("mailchimp-woocommerce-sync.{$resource_type}.current_page");
+        delete_option("squalomail-woocommerce-sync.{$resource_type}.started_at");
+        delete_option("squalomail-woocommerce-sync.{$resource_type}.completed_at");
+        delete_option("squalomail-woocommerce-sync.{$resource_type}.started_at");
+        delete_option("squalomail-woocommerce-sync.{$resource_type}.current_page");
     }
 }
 
@@ -1039,8 +1039,8 @@ function squalomail_clean_database() {
  * @return bool
  */
 function squalomail_has_started_syncing() {
-    $sync_started_at = get_option('mailchimp-woocommerce-sync.started_at');
-    $sync_completed_at = get_option('mailchimp-woocommerce-sync.completed_at');
+    $sync_started_at = get_option('squalomail-woocommerce-sync.started_at');
+    $sync_completed_at = get_option('squalomail-woocommerce-sync.completed_at');
     return ($sync_completed_at < $sync_started_at);
 }
 
@@ -1048,8 +1048,8 @@ function squalomail_has_started_syncing() {
  * @return bool
  */
 function squalomail_is_done_syncing() {
-    $sync_started_at = get_option('mailchimp-woocommerce-sync.started_at');
-    $sync_completed_at = get_option('mailchimp-woocommerce-sync.completed_at');
+    $sync_started_at = get_option('squalomail-woocommerce-sync.started_at');
+    $sync_completed_at = get_option('squalomail-woocommerce-sync.completed_at');
     return ($sync_completed_at >= $sync_started_at);
 }
 

@@ -31,7 +31,7 @@
 		
 		// re-enable disable select input on audience settings submit
 		$('#squalomail_woocommerce_options').on('submit', function() {
-			$('select[name="mailchimp-woocommerce[squalomail_list]"]').prop('disabled', false);
+			$('select[name="squalomail-woocommerce[squalomail_list]"]').prop('disabled', false);
 		});
 
 		// load new log file on log select change
@@ -344,7 +344,7 @@
 										
 										// get access_token from finishResponse and fill api-key field value including data_center
 										var accessToken = JSON.parse(finishResponse.data.body).access_token + '-' + JSON.parse(finishResponse.data.body).data_center 
-										$('#mailchimp-woocommerce-squalomail-api-key').val(accessToken);
+										$('#squalomail-woocommerce-squalomail-api-key').val(accessToken);
 
 										// always go to next step on success, so change url of wp_http_referer
 										if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {
@@ -602,7 +602,7 @@
 						// get access_token and fill api-key field value including data_center
 						var accessToken = response.data.data.oauth_token + '-' + response.data.data.dc
 						
-						$('#mailchimp-woocommerce-squalomail-api-key').val(accessToken);
+						$('#squalomail-woocommerce-squalomail-api-key').val(accessToken);
 
 						// always go to next step on success, so change url of wp_http_referer
 						if ($('input[name=squalomail_woocommerce_wizard_on]').val() == 1) {

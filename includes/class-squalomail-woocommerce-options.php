@@ -14,7 +14,7 @@ abstract class SqualoMail_WooCommerce_Options
      * @var SqualoMail_WooCommerce_SqualoMailApi
      */
     protected $api;
-    protected $plugin_name = 'mailchimp-woocommerce';
+    protected $plugin_name = 'squalomail-woocommerce';
     protected $environment = 'production';
     protected $version = '1.0.0';
     protected $plugin_options = null;
@@ -45,7 +45,7 @@ abstract class SqualoMail_WooCommerce_Options
             }
 
             if (!isset($_GET['activate-multi'])) {
-                wp_redirect("admin.php?page=mailchimp-woocommerce");
+                wp_redirect("admin.php?page=squalomail-woocommerce");
             }
         }
     }
@@ -295,15 +295,15 @@ abstract class SqualoMail_WooCommerce_Options
 
     public function removeProductPointers()
     {
-        delete_option('mailchimp-woocommerce-sync.products.completed_at');
-        delete_option('mailchimp-woocommerce-sync.products.current_page');
+        delete_option('squalomail-woocommerce-sync.products.completed_at');
+        delete_option('squalomail-woocommerce-sync.products.current_page');
     }
 
     public function removeOrderPointers()
     {
-        delete_option('mailchimp-woocommerce-sync.orders.prevent');
-        delete_option('mailchimp-woocommerce-sync.orders.completed_at');
-        delete_option('mailchimp-woocommerce-sync.orders.current_page');
+        delete_option('squalomail-woocommerce-sync.orders.prevent');
+        delete_option('squalomail-woocommerce-sync.orders.completed_at');
+        delete_option('squalomail-woocommerce-sync.orders.current_page');
     }
 
     public function removeSyncPointers()
@@ -313,9 +313,9 @@ abstract class SqualoMail_WooCommerce_Options
 
     public function removeMiscPointers()
     {
-        delete_option('mailchimp-woocommerce-errors.store_info');
-        delete_option('mailchimp-woocommerce-validation.api.ping');
-        delete_option('mailchimp-woocommerce-cached-api-lists');
-        delete_option('mailchimp-woocommerce-cached-api-ping-check');
+        delete_option('squalomail-woocommerce-errors.store_info');
+        delete_option('squalomail-woocommerce-validation.api.ping');
+        delete_option('squalomail-woocommerce-cached-api-lists');
+        delete_option('squalomail-woocommerce-cached-api-ping-check');
     }
 }

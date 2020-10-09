@@ -143,7 +143,7 @@ class SqualoMail_WooCommerce_Single_Order extends Squalomail_Woocommerce_Job
 
             if ($this->is_full_sync) {
                 // see if this store has the auto subscribe setting enabled on initial sync
-                $plugin_options = get_option('mailchimp-woocommerce');
+                $plugin_options = get_option('squalomail-woocommerce');
                 $should_auto_subscribe = (bool) $plugin_options['squalomail_auto_subscribe'];
 
                 // since we're syncing the customer for the first time, this is where we need to add the override

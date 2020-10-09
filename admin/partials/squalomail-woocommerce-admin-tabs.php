@@ -137,7 +137,7 @@ else {
     <?php if($show_wizard): ?>  
         <div class="nav-wizard-wrapper">
             <div class="wizard-tab <?php echo $active_tab == 'api_key' ? 'wizard-tab-active' : ''; ?>" >
-                <a href="?page=mailchimp-woocommerce&tab=api_key" class="marker"></a>
+                <a href="?page=squalomail-woocommerce&tab=api_key" class="marker"></a>
                 <div class="wizard-tab-tooltip wizard-tab-tooltip-api-key "><?= esc_html_e('Connect', 'squalomail-for-woocommerce');?>
                     <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
@@ -147,7 +147,7 @@ else {
 
             <?php if ($has_valid_api_key) : ?>    
                 <div class="wizard-tab <?php echo $active_tab == 'store_info' ? 'wizard-tab-active' : ''; ?>">
-                    <a href="?page=mailchimp-woocommerce&tab=store_info" class="marker"></a>
+                    <a href="?page=squalomail-woocommerce&tab=store_info" class="marker"></a>
                     <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Store Settings', 'squalomail-for-woocommerce');?>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
@@ -162,7 +162,7 @@ else {
 
             <?php if ($handler->hasValidStoreInfo() && $show_campaign_defaults && $this->getData('validation.store_info', false)) : ?>  
                 <div class="wizard-tab <?php echo $active_tab == 'campaign_defaults' ? 'wizard-tab-active' : ''; ?>">
-                    <a href="?page=mailchimp-woocommerce&tab=campaign_defaults" class="marker"></a>
+                    <a href="?page=squalomail-woocommerce&tab=campaign_defaults" class="marker"></a>
                     <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Audience Defaults', 'squalomail-for-woocommerce');?>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
@@ -177,7 +177,7 @@ else {
 
             <?php if ($handler->hasValidCampaignDefaults() && $this->getData('validation.campaign_defaults', false)) : ?>  
                 <div class="wizard-tab <?php echo $active_tab == 'newsletter_settings' ? 'wizard-tab-active' : ''; ?>">
-                    <a href="?page=mailchimp-woocommerce&tab=newsletter_settings" class="marker"></a>
+                    <a href="?page=squalomail-woocommerce&tab=newsletter_settings" class="marker"></a>
                     <div class="wizard-tab-tooltip wizard-tab-tooltip-store-info "><?= esc_html_e('Audience Settings', 'squalomail-for-woocommerce');?>
                         <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="14.498" width="20" height="20" transform="rotate(45 14.498 0)" fill="white"/>
@@ -194,19 +194,19 @@ else {
         <div class="nav-tab-wrapper">
             <?php if($has_valid_api_key): ?>
                 <?php if ($active_tab == 'api_key'): ?>
-                    <a href="?page=mailchimp-woocommerce&tab=api_key" class="nav-tab <?php echo $active_tab == 'api_key' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Connect', 'squalomail-for-woocommerce');?></a>
+                    <a href="?page=squalomail-woocommerce&tab=api_key" class="nav-tab <?php echo $active_tab == 'api_key' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Connect', 'squalomail-for-woocommerce');?></a>
                 <?php endif ;?>
-                <a href="?page=mailchimp-woocommerce&tab=sync" class="nav-tab <?php echo $active_tab == 'sync' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Overview', 'squalomail-for-woocommerce');?></a>
-                <a href="?page=mailchimp-woocommerce&tab=store_info" class="nav-tab <?php echo $active_tab == 'store_info' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Store Settings', 'squalomail-for-woocommerce');?></a>
+                <a href="?page=squalomail-woocommerce&tab=sync" class="nav-tab <?php echo $active_tab == 'sync' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Overview', 'squalomail-for-woocommerce');?></a>
+                <a href="?page=squalomail-woocommerce&tab=store_info" class="nav-tab <?php echo $active_tab == 'store_info' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Store Settings', 'squalomail-for-woocommerce');?></a>
                 <?php if ($handler->hasValidStoreInfo()) : ?>
                     <?php if($show_campaign_defaults): ?>
-                        <a href="?page=mailchimp-woocommerce&tab=campaign_defaults" class="nav-tab <?php echo $active_tab == 'campaign_defaults' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Defaults', 'squalomail-for-woocommerce');?></a>
+                        <a href="?page=squalomail-woocommerce&tab=campaign_defaults" class="nav-tab <?php echo $active_tab == 'campaign_defaults' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Defaults', 'squalomail-for-woocommerce');?></a>
                     <?php endif; ?>
                     <?php if($handler->hasValidCampaignDefaults()): ?>
-                        <a href="?page=mailchimp-woocommerce&tab=newsletter_settings" class="nav-tab <?php echo $active_tab == 'newsletter_settings' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Settings', 'squalomail-for-woocommerce');?></a>
+                        <a href="?page=squalomail-woocommerce&tab=newsletter_settings" class="nav-tab <?php echo $active_tab == 'newsletter_settings' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Audience Settings', 'squalomail-for-woocommerce');?></a>
                     <?php endif; ?>
                 <?php endif;?>
-                <a href="?page=mailchimp-woocommerce&tab=logs" class="nav-tab <?php echo $active_tab == 'logs' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Logs', 'squalomail-for-woocommerce');?></a>
+                <a href="?page=squalomail-woocommerce&tab=logs" class="nav-tab <?php echo $active_tab == 'logs' ? 'nav-tab-active' : ''; ?>"><?= esc_html_e('Logs', 'squalomail-for-woocommerce');?></a>
             <?php endif; ?>
         </div> 
     <?php endif; ?>

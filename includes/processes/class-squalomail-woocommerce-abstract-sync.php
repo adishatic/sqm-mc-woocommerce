@@ -23,7 +23,7 @@ abstract class SqualoMail_WooCommerce_Abstract_Sync extends Squalomail_Woocommer
     /**
      * @var string
      */
-    private $plugin_name = 'mailchimp-woocommerce';
+    private $plugin_name = 'squalomail-woocommerce';
 
     /**
      * @var string

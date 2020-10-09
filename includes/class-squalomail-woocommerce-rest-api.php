@@ -102,9 +102,9 @@ class SqualoMail_WooCommerce_Rest_Api
         $store_id = squalomail_get_store_id();
         
         $complete = array(
-            'coupons' => get_option('mailchimp-woocommerce-sync.coupons.completed_at'),
-            'products' => get_option('mailchimp-woocommerce-sync.products.completed_at'),
-            'orders' => get_option('mailchimp-woocommerce-sync.orders.completed_at')
+            'coupons' => get_option('squalomail-woocommerce-sync.coupons.completed_at'),
+            'products' => get_option('squalomail-woocommerce-sync.products.completed_at'),
+            'orders' => get_option('squalomail-woocommerce-sync.orders.completed_at')
         );
 
         $promo_rules_count = squalomail_get_coupons_count();
@@ -144,9 +144,9 @@ class SqualoMail_WooCommerce_Rest_Api
             'orders_in_store' => $order_count,
             'orders_in_squalomail' => $squalomail_total_orders,
             
-            // 'promo_rules_page' => get_option('mailchimp-woocommerce-sync.coupons.current_page'),
-            // 'products_page' => get_option('mailchimp-woocommerce-sync.products.current_page'),
-            // 'orders_page' => get_option('mailchimp-woocommerce-sync.orders.current_page'),
+            // 'promo_rules_page' => get_option('squalomail-woocommerce-sync.coupons.current_page'),
+            // 'products_page' => get_option('squalomail-woocommerce-sync.products.current_page'),
+            // 'orders_page' => get_option('squalomail-woocommerce-sync.orders.current_page'),
             
             'date' => $date->format( __('D, M j, Y g:i A', 'squalomail-for-woocommerce')),
             'has_started' => squalomail_has_started_syncing() || ($order_count != $squalomail_total_orders),
@@ -160,7 +160,7 @@ class SqualoMail_WooCommerce_Rest_Api
      */
     public function dismiss_review_banner(WP_REST_Request $request)
     {
-        return $this->squalomail_rest_response(array('success' => delete_option('mailchimp-woocommerce-sync.initial_sync')));
+        return $this->squalomail_rest_response(array('success' => delete_option('squalomail-woocommerce-sync.initial_sync')));
     }
 
 

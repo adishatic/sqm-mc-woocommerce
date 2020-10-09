@@ -421,7 +421,7 @@ class SqualoMail_Service extends SqualoMail_WooCommerce_Options
     {
         if (!$this->isAdmin()) return false;
         $this->removePointers(true, ($only_products ? false : true));
-        update_option('mailchimp-woocommerce-sync.orders.prevent', $only_products);
+        update_option('squalomail-woocommerce-sync.orders.prevent', $only_products);
         SqualoMail_WooCommerce_Process_Products::push();
         return true;
     }
@@ -804,10 +804,10 @@ class SqualoMail_Service extends SqualoMail_WooCommerce_Options
      */
     protected function get($key, $default = false)
     {
-        if (!isset($_REQUEST['mailchimp-woocommerce']) || !isset($_REQUEST['mailchimp-woocommerce'][$key])) {
+        if (!isset($_REQUEST['squalomail-woocommerce']) || !isset($_REQUEST['squalomail-woocommerce'][$key])) {
             return $default;
         }
-        return $_REQUEST['mailchimp-woocommerce'][$key];
+        return $_REQUEST['squalomail-woocommerce'][$key];
     }
 
     /**

@@ -12,7 +12,7 @@ if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
 		/**
 		 * @var string
 		 */
-		private $plugin_name = 'mailchimp-woocommerce';
+		private $plugin_name = 'squalomail-woocommerce';
 		
 		/**
 		 * Start the full sync process
@@ -78,8 +78,8 @@ if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
 			squalomail_set_data('sync.products.current_page', 1);
 			squalomail_set_data('sync.coupons.current_page', 1);
 
-			$sync_started_at = get_option('mailchimp-woocommerce-sync.started_at');
-			$sync_completed_at = get_option('mailchimp-woocommerce-sync.completed_at');
+			$sync_started_at = get_option('squalomail-woocommerce-sync.started_at');
+			$sync_completed_at = get_option('squalomail-woocommerce-sync.completed_at');
 
 			$sync_total_time = $sync_completed_at - $sync_started_at;
 			$time = gmdate("H:i:s",$sync_total_time);
@@ -99,16 +99,16 @@ if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
 			
 			// get started queueing processes
 			$started = array(
-				'coupons' => get_option('mailchimp-woocommerce-sync.coupons.started_at'),
-				'products' => get_option('mailchimp-woocommerce-sync.products.started_at'),
-				'orders' => get_option('mailchimp-woocommerce-sync.orders.started_at')
+				'coupons' => get_option('squalomail-woocommerce-sync.coupons.started_at'),
+				'products' => get_option('squalomail-woocommerce-sync.products.started_at'),
+				'orders' => get_option('squalomail-woocommerce-sync.orders.started_at')
 			);
 
 			// get completed queueing processes
 			$completed = array(
-				'coupons' => get_option('mailchimp-woocommerce-sync.coupons.completed_at'),
-				'products' => get_option('mailchimp-woocommerce-sync.products.completed_at'),
-				'orders' => get_option('mailchimp-woocommerce-sync.orders.completed_at')
+				'coupons' => get_option('squalomail-woocommerce-sync.coupons.completed_at'),
+				'products' => get_option('squalomail-woocommerce-sync.products.completed_at'),
+				'orders' => get_option('squalomail-woocommerce-sync.orders.completed_at')
 			);
 
 			// allow products and coupons to be synced simultaneously
@@ -129,7 +129,7 @@ if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
 				// check if we have products still to be synced
 				if (squalomail_get_remaining_jobs_count('SqualoMail_WooCommerce_Single_Product') == 0 && squalomail_get_remaining_jobs_count('SqualoMail_WooCommerce_Process_Products') <= 0) {
 					
-					$prevent_order_sync = get_option('mailchimp-woocommerce-sync.orders.prevent', false);
+					$prevent_order_sync = get_option('squalomail-woocommerce-sync.orders.prevent', false);
 
 					// only do this if we're not strictly syncing products ( which is the default ).
 					if (!$prevent_order_sync) {
@@ -142,7 +142,7 @@ if ( ! class_exists( 'SqualoMail_WooCommerce_Process_Full_Sync_Manager' ) ) {
 					}
 
 					// since we skipped the orders feed we can delete this option.
-					delete_option('mailchimp-woocommerce-sync.orders.prevent');	
+					delete_option('squalomail-woocommerce-sync.orders.prevent');	
 				}
 				
 			}

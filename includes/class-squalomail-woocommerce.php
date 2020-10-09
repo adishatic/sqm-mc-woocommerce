@@ -76,7 +76,7 @@ class SqualoMail_WooCommerce
             return static::$logging_config;
         }
 
-        $plugin_options = get_option('mailchimp-woocommerce');
+        $plugin_options = get_option('squalomail-woocommerce');
         $is_options = is_array($plugin_options);
 
         $api_key = $is_options && array_key_exists('squalomail_api_key', $plugin_options) ?
@@ -118,7 +118,7 @@ class SqualoMail_WooCommerce
      */
     public function __construct($environment = 'production', $version = '1.0.0')
     {
-        $this->plugin_name = 'mailchimp-woocommerce';
+        $this->plugin_name = 'squalomail-woocommerce';
         $this->version = $version;
         $this->environment = $environment;
         $this->is_configured = squalomail_is_configured();

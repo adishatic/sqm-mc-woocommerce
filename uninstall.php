@@ -36,9 +36,9 @@ if (!isset($squalomail_woocommerce_spl_autoloader) || $squalomail_woocommerce_sp
 
 function squalomail_woocommerce_uninstall() {
     try {
-        if (($options = get_option('mailchimp-woocommerce', false)) && is_array($options)) {
+        if (($options = get_option('squalomail-woocommerce', false)) && is_array($options)) {
             if (isset($options['squalomail_api_key'])) {
-                $store_id = get_option('mailchimp-woocommerce-store_id', false);
+                $store_id = get_option('squalomail-woocommerce-store_id', false);
                 if (!empty($store_id)) {
                     $api = new SqualoMail_WooCommerce_SqualoMailApi($options['squalomail_api_key']);
                     $result = $api->deleteStore($store_id) ? 'has been deleted' : 'did not delete';

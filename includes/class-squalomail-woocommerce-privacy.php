@@ -23,7 +23,7 @@ class SqualoMail_WooCommerce_Privacy
      */
     public function register_exporter($exporters)
     {
-        $exporters['mailchimp-woocommerce'] = array(
+        $exporters['squalomail-woocommerce'] = array(
             'exporter_friendly_name' => __('MailChimp for WooCommerce'),
             'callback'               => array($this, 'export'),
         );
@@ -36,7 +36,7 @@ class SqualoMail_WooCommerce_Privacy
      */
     public function register_eraser($erasers)
     {
-        $erasers['mailchimp-woocommerce'] = array(
+        $erasers['squalomail-woocommerce'] = array(
             'eraser_friendly_name' => __('MailChimp for WooCommerce'),
             'callback'               => array($this, 'erase'),
         );

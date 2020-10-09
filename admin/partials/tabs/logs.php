@@ -3,7 +3,7 @@ if (!empty( $_REQUEST['handle'])) {
     if (!empty($_REQUEST['_wpnonce']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'remove_log')) {
         $log_handler = new WC_Log_Handler_File();
         $log_handler->remove($_REQUEST['handle']);
-        wp_redirect('admin.php?page=mailchimp-woocommerce&tab=logs&log_removed=1');
+        wp_redirect('admin.php?page=squalomail-woocommerce&tab=logs&log_removed=1');
     }
 }
 $files  = defined('WC_LOG_DIR') ? @scandir( WC_LOG_DIR ) : array();
@@ -18,8 +18,8 @@ if (!empty($files)) {
     }
 }
 
-$requested_log_file = get_site_transient('mailchimp-woocommerce-view-log-file');
-delete_site_transient('mailchimp-woocommerce-view-log-file');
+$requested_log_file = get_site_transient('squalomail-woocommerce-view-log-file');
+delete_site_transient('squalomail-woocommerce-view-log-file');
 
 if (empty($requested_log_file)) {
     $requested_log_file = !empty($_REQUEST['log_file']) ? $_REQUEST['log_file'] : false;
@@ -88,7 +88,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
                     <span class="dashicons dashicons-clipboard clipboard" style="transform: rotate(-45deg) translateY(2px) translateX(-2px);"></span>
                     <span class="dashicons dashicons-yes yes"></span>
                 </a>
-                <a class="sqm-mc-woocommerce-log-button delete-log-button" title="<?= __('Delete Log', 'squalomail-for-woocommerce');?>" href="<?php echo esc_url( wp_nonce_url( add_query_arg( array( 'handle' => sanitize_title($viewed_log) ), admin_url( 'admin.php?page=mailchimp-woocommerce&tab=logs&mc_action=remove_log' ) ), 'remove_log' ) ); ?>">
+                <a class="sqm-mc-woocommerce-log-button delete-log-button" title="<?= __('Delete Log', 'squalomail-for-woocommerce');?>" href="<?php echo esc_url( wp_nonce_url( add_query_arg( array( 'handle' => sanitize_title($viewed_log) ), admin_url( 'admin.php?page=squalomail-woocommerce&tab=logs&mc_action=remove_log' ) ), 'remove_log' ) ); ?>">
                     <span class="dashicons dashicons-trash"></span>
                 </a>
             <?php endif; ?>
