@@ -60,9 +60,9 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
             mailchimp_remove_communication_status();
         } catch (\Exception $e) {}
 
-		if (($store_id = mailchimp_get_store_id()) && ($mc = mailchimp_get_api()))  {
+		if (($store_id = mailchimp_get_store_id()) && ($sqm = mailchimp_get_api()))  {
 		    set_site_transient('mailchimp_disconnecting_store', true, 15);
-            if ($mc->deleteStore($store_id)) {
+            if ($sqm->deleteStore($store_id)) {
                 mailchimp_log('store.disconnected', 'Store id ' . mailchimp_get_store_id() . ' has been disconnected');
             } else {
                 mailchimp_log('store.NOT DISCONNECTED', 'Store id ' . mailchimp_get_store_id() . ' has NOT been disconnected');
@@ -1562,16 +1562,16 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			    // retrieve Mailchimp store using domain
 				$stores = $this->api()->stores();
 				//iterate thru stores, find correct store ID and save it to db
-				foreach ($stores as $mc_store) {
-					if ($mc_store->getDomain() === $store->getDomain() && $store->getPlatform() == "woocommerce") {
-						update_option('mailchimp-woocommerce-store_id', $mc_store->getId(), 'yes');
+				foreach ($stores as $sqm_store) {
+					if ($sqm_store->getDomain() === $store->getDomain() && $store->getPlatform() == "woocommerce") {
+						update_option('mailchimp-woocommerce-store_id', $sqm_store->getId(), 'yes');
 						
 						// update the store with the previous listID
-						$store->setListId($mc_store->getListId());
-						$store->setId($mc_store->getId());
+						$store->setListId($sqm_store->getListId());
+						$store->setId($sqm_store->getId());
 
-						$this->swapped_list_id = $mc_store->getListId();
-						$this->swapped_store_id = $mc_store->getId();
+						$this->swapped_list_id = $sqm_store->getListId();
+						$this->swapped_store_id = $sqm_store->getId();
 
 						// check if list id is the same, if not, throw error saying that there's already a store synched to a list, so we can't proceed.
 						

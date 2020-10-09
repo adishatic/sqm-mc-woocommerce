@@ -295,10 +295,10 @@ function mailchimp_get_store_id() {
             $stores = $api->stores();
             if (!empty($stores)) {
                 //iterate thru stores, find correct store ID and save it to db
-                foreach ($stores as $mc_store) {
-                    if ($mc_store->getDomain() === get_option('siteurl')) {
-                        update_option('mailchimp-woocommerce-store_id', $mc_store->getId(), 'yes');
-                        $store_id = $mc_store->getId();
+                foreach ($stores as $sqm_store) {
+                    if ($sqm_store->getDomain() === get_option('siteurl')) {
+                        update_option('mailchimp-woocommerce-store_id', $sqm_store->getId(), 'yes');
+                        $store_id = $sqm_store->getId();
                     }
                 }
             }

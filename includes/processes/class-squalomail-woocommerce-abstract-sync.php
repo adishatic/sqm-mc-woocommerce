@@ -18,7 +18,7 @@ abstract class SqualoMail_WooCommerce_Abstract_Sync extends Mailchimp_Woocommerc
     /**
      * @var SqualoMail_WooCommerce_MailChimpApi
      */
-    private $mc;
+    private $sqm;
 
     /**
      * @var string
@@ -382,10 +382,10 @@ abstract class SqualoMail_WooCommerce_Abstract_Sync extends Mailchimp_Woocommerc
      */
     protected function mailchimp()
     {
-        if (empty($this->mc)) {
-            $this->mc = new SqualoMail_WooCommerce_MailChimpApi($this->getOption('mailchimp_api_key'));
+        if (empty($this->sqm)) {
+            $this->sqm = new SqualoMail_WooCommerce_MailChimpApi($this->getOption('mailchimp_api_key'));
         }
-        return $this->mc;
+        return $this->sqm;
     }
 
     /**
