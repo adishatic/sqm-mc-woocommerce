@@ -1775,7 +1775,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
         $env = squalomail_environment_variables();
 
         $curl_options = array(
-            CURLOPT_USERPWD => "mailchimp:{$this->api_key}",
+            CURLOPT_USERPWD => "squalomail:{$this->api_key}",
             CURLOPT_CUSTOMREQUEST => strtoupper($method),
             CURLOPT_URL => $this->url($url, $params),
             CURLOPT_RETURNTRANSFER => true,

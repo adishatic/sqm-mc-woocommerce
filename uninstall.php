@@ -19,7 +19,7 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
- * @link       https://mailchimp.com
+ * @link       https://squalomail.com
  * @since      1.0.1
  *
  * @package    SqualoMail_WooCommerce

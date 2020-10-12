@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://mailchimp.com
+ * @link       https://squalomail.com
  * @since      1.0.1
  *
  * @package    SqualoMail_WooCommerce

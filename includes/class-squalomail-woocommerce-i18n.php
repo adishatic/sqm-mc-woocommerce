@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://mailchimp.com
+ * @link       https://squalomail.com
  * @since      1.0.1
  *
  * @package    SqualoMail_WooCommerce

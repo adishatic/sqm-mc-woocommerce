@@ -79,7 +79,7 @@ if (!$handler->hasValidApiKey()) {
             $countries   = $countries_obj->__get('countries');
         ?>
 
-        <div class="mailchimp-select-wrapper">
+        <div class="squalomail-select-wrapper">
             <?php 
             woocommerce_form_field($this->plugin_name.'[store_country]', array(
                 'type'          => 'select',
@@ -134,7 +134,7 @@ if (!$handler->hasValidApiKey()) {
         
     </div>
     <div class="box box-half" >
-        <div class="mailchimp-select-wrapper">
+        <div class="squalomail-select-wrapper">
             <select name="<?php echo $this->plugin_name; ?>[store_locale]" required>
                 <option disabled selected value="<?= __('','squalomail-for-woocommerce')?>"><?= __("Select store's locale",'squalomail-for-woocommerce')?></option>
                 <?php 

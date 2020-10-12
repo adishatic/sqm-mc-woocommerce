@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://mailchimp.com
+ * @link       https://squalomail.com
  * @since      1.0.1
  *
  * @package    SqualoMail_WooCommerce
@@ -261,7 +261,7 @@ class SqualoMail_WooCommerce
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_start', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_start' );
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_finish', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_finish' );
 
-        // Create new mailchimp Account methods
+        // Create new squalomail Account methods
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_create_account_check_username', $plugin_admin, 'squalomail_woocommerce_ajax_create_account_check_username' );
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_create_account_signup', $plugin_admin, 'squalomail_woocommerce_ajax_create_account_signup' );
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_support_form', $plugin_admin, 'squalomail_woocommerce_ajax_support_form' );

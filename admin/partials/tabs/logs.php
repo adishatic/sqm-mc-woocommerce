@@ -52,7 +52,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
         </p>
     </div>
     <div class="box box-half">
-        <div class="log-select mailchimp-select-wrapper">
+        <div class="log-select squalomail-select-wrapper">
             <select id="squalomail-log-pref" name="<?php echo $this->plugin_name; ?>[squalomail_logging]" required>
                 <?php $logging_preference = squalomail_environment_variables()->logging; ?>
                 <?php
@@ -75,7 +75,7 @@ $handle = !empty($viewed_log) ? substr($viewed_log, 0, strlen($viewed_log) > 37 
     
     <div class="box log-file-actions">
         <input type="hidden" name="<?php echo $this->plugin_name; ?>[squalomail_active_tab]" value="logs"/>
-        <div class="mailchimp-select-wrapper view-log-select">
+        <div class="squalomail-select-wrapper view-log-select">
             <select id="log_file" name="log_file">
                 <?php foreach ( $logs as $log_key => $log_file ) : ?>
                     <option value="<?php echo esc_attr( $log_key ); ?>" <?php selected( sanitize_title( $viewed_log ), $log_key ); ?>><?php echo date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), filemtime( WC_LOG_DIR . $log_file ) ); ?> - <?php echo esc_html( $log_file ); ?></option>

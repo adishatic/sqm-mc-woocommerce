@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://mailchimp.com
+ * @link       https://squalomail.com
  * @since      1.0.1
  *
  * @package    SqualoMail_WooCommerce
@@ -353,7 +353,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			// resend marketing status to update latest changes
 			if (!empty($options['admin_email'])) {
 				try {
-					// send the post to the mailchimp server
+					// send the post to the squalomail server
 					$comm_opt = get_option('squalomail-woocommerce-comm.opt', 0);
 					$this->squalomail_set_communications_status_on_server($comm_opt, $options['admin_email']);
 				} catch (\Exception $e) {
@@ -418,9 +418,9 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			$text = __('SqualoMail for Woocommerce','squalomail-for-woocommerce').'<br/>'.
 			'<p id="http-worker-deprecated-message">'.__('We dectected that this site has the following constants defined, likely at wp-config.php file' ,'squalomail-for-woocommerce').': '.
 			implode(' | ', $constants_used).'<br/>'.
-			__('These constants are deprecated since SqualoMail for Woocommerce version 2.3. Please refer to the <a href="https://github.com/mailchimp/mc-woocommerce/wiki/">plugin official wiki</a> for further details.' ,'squalomail-for-woocommerce').'</p>';
+			__('These constants are deprecated since SqualoMail for Woocommerce version 2.3.' ,'squalomail-for-woocommerce').'</p>';
 			
-			// only print notice for deprecated constants, on mailchimp woocoomerce pages
+			// only print notice for deprecated constants, on squalomail woocoomerce pages
 			if ($pagenow == 'admin.php' && 'squalomail-woocommerce' === $_GET['page']) {
 				add_settings_error('squalomail-woocommerce_notice', $this->plugin_name, $text, 'info');
 			}
@@ -507,7 +507,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
         update_site_option($site_option, true);
 
         try {
-            // send the post to the mailchimp server
+            // send the post to the squalomail server
             return $this->squalomail_set_communications_status_on_server(true, $admin_email);
         } catch (\Exception $e) {
             squalomail_error("initial_marketing_status", $e->getMessage());
@@ -1425,7 +1425,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 		foreach ($required as $requirement) {
 			if (!isset($data[$requirement]) || empty($data[$requirement])) {
-			    squalomail_log('admin', 'does not have enough data to update the mailchimp list.');
+			    squalomail_log('admin', 'does not have enough data to update the squalomail list.');
 				return false;
 			}
 		}

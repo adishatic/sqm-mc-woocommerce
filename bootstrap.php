@@ -1028,7 +1028,7 @@ function squalomail_clean_database() {
     squalomail_flush_database_tables();
 
     // delete plugin options
-    $plugin_options = $wpdb->get_results( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE 'mailchimp%woocommerce%'" );
+    $plugin_options = $wpdb->get_results( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE 'squalomail%woocommerce%'" );
 
     foreach( $plugin_options as $option ) {
         delete_option( $option->option_name );

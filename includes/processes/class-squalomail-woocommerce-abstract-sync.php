@@ -380,7 +380,7 @@ abstract class SqualoMail_WooCommerce_Abstract_Sync extends SqualoMail_Woocommer
     /**
      * @return SqualoMail_WooCommerce_SqualoMailApi
      */
-    protected function mailchimp()
+    protected function squalomail()
     {
         if (empty($this->sqm)) {
             $this->sqm = new SqualoMail_WooCommerce_SqualoMailApi($this->getOption('squalomail_api_key'));

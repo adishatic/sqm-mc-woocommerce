@@ -258,7 +258,7 @@ class SqualoMail_WooCommerce_Single_Order extends SqualoMail_Woocommerce_Job
             if ($this->is_full_sync) {
                 $line_items = $order->items();
                 
-                // if we don't have any line items, we need to create the mailchimp product
+                // if we don't have any line items, we need to create the squalomail product
                 // with a price of 1.00 and we'll use the inventory quantity to adjust correctly.
                 if (empty($line_items) || !count($line_items)) {
                     

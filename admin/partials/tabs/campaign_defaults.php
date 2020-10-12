@@ -49,7 +49,7 @@ if (!$handler->hasValidStoreInfo()) {
             <span class="required-field-mark">*</span>
         </label>
         
-        <div class="mailchimp-select-wrapper">
+        <div class="squalomail-select-wrapper">
             <select id="<?php echo $this->plugin_name; ?>-campaign-language-label" name="<?php echo $this->plugin_name; ?>[campaign_language]" required>
                 <?php $selected_locale = isset($options['store_locale']) && !empty($options['store_locale']) ? $options['store_locale'] : get_locale(); ?> ?>
                 <?php

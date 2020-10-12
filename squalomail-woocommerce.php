@@ -8,7 +8,7 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://mailchimp.com
+ * @link              https://www.squalomail.com
  * @since             1.0.0
  * @package           SqualoMail_WooCommerce
  *

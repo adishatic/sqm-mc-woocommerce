@@ -40,7 +40,7 @@ $list_is_configured = isset($options['squalomail_list']) && (!empty($options['sq
         <label for="<?php echo $this->plugin_name; ?>-squalomail-list-label">
             <strong><?php esc_html_e('Sync audience with your store', 'squalomail-for-woocommerce'); ?></strong>
         </label>
-        <div class="mailchimp-select-wrapper">
+        <div class="squalomail-select-wrapper">
             <select name="<?php echo $this->plugin_name; ?>[squalomail_list]" required <?php echo ($list_is_configured || $only_one_list) ? 'disabled' : '' ?>>
 
                 <?php if(!isset($allow_new_list) || $allow_new_list === true): ?>
@@ -160,7 +160,7 @@ $list_is_configured = isset($options['squalomail_list']) && (!empty($options['sq
         </div>
 
         <div class="box box-half" >
-            <div class="mailchimp-select-wrapper">
+            <div class="squalomail-select-wrapper">
                 <select name="<?php echo $this->plugin_name; ?>[squalomail_product_image_key]">
                     <?php
                     $enable_auto_subscribe = (array_key_exists('squalomail_product_image_key', $options) && !is_null($options['squalomail_product_image_key'])) ? $options['squalomail_product_image_key'] : 'medium';

@@ -290,7 +290,6 @@
 					type : 'error',
 					title: 'Login Popup is blocked!',
 					text: 'Please allow your browser to show popups for this page',
-					footer: '<a href="https://mailchimp.com/help/enable-pop-ups-in-your-browser/">How to Enable Pop-ups in Your Browser</a>',
 					showCancelButton: true,
 					cancelButtonColor: '#d33',
 					confirmButtonColor: '#7fad45',
