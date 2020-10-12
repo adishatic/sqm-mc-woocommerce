@@ -246,7 +246,7 @@
 			$('#squalomail-oauth-connecting').hide();
 
 			// check that api key field is filled
-			var tokenValue = $('squalomail-woocommerce-squalomail-api-key').val().trim();
+			var tokenValue = $('#squalomail-woocommerce-squalomail-api-key').val().trim();
 			if (!tokenValue) {
 				alert("Error: API key is required!");
 				return;

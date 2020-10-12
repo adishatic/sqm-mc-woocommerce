@@ -699,8 +699,12 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
     {   
 		$token = $_POST['token'];
 		$api = new SqualoMail_WooCommerce_SqualoMailApi($token);
-		$result = $api->ping();
-		return $result ? wp_send_json_success([]) : wp_send_json_error([]);
+		try {
+			$result = $api->ping(false, true);
+			return wp_send_json_success([]);
+		} catch (SqualoMail_WooCommerce_Error $e) {
+			return wp_send_json_error(['error' => $e->getMessage()]);
+		}
     }
 	
 	public function squalomail_woocommerce_ajax_support_form() {
