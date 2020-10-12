@@ -1,4 +1,3 @@
-<p id="sqm-mc-woocommerce-create-account-link" class="create-account-link alignright">Don’t have a SqualoMail account yet? <a style="font-weight:bold !important;" href='#sqm-mc-woocommerce-create-account'>Create one here</a></p>
 <div id="sqm-mc-woocommerce-create-account" class="sqm-mc-woocommerce-modal">
     <div id="exampleModal" class="reveal-modal">
         <a href="#" class="close-modal"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

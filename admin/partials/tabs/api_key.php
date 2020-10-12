@@ -7,9 +7,9 @@
     </legend>
     
     
+    <h4 style="margin-bottom: 10px;"><?php esc_html_e('Connect your store to SqualoMail', 'squalomail-for-woocommerce'); ?></h4>
+    <input style="width: 300px; max-width: calc(100% - 160px);" placeholder="<?php esc_html_e('API key', 'squalomail-for-woocommerce');?>" type="text" id="<?php echo $this->plugin_name; ?>-squalomail-api-key" name="<?php echo $this->plugin_name; ?>[squalomail_api_key]" value="<?php echo isset($options['squalomail_api_key']) ? $options['squalomail_api_key'] : '' ?>" required/>
     <a id="squalomail-oauth-connect" class="button button-primary tab-content-submit oauth-connect"><?php $has_valid_api_key ? esc_html_e('Reconnect', 'squalomail-for-woocommerce') : esc_html_e('Connect', 'squalomail-for-woocommerce');?></a>
-    <h4><?php esc_html_e('Connect your store to SqualoMail', 'squalomail-for-woocommerce'); ?></h4>
-    <input type="hidden" id="<?php echo $this->plugin_name; ?>-squalomail-api-key" name="<?php echo $this->plugin_name; ?>[squalomail_api_key]" value="<?php echo isset($options['squalomail_api_key']) ? $options['squalomail_api_key'] : '' ?>" required/>
     <?php if ($has_valid_api_key) :?>
         <p id="squalomail-oauth-api-key-valid"><?php esc_html_e('Already connected. You can reconnect with another SqualoMail account if you want.' , 'squalomail-for-woocommerce');?></p>
     <?php endif;?>

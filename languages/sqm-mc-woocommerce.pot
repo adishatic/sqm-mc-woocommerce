@@ -741,6 +741,10 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+#: admin/partials/tabs/api_key.php:12
+msgid "API key"
+msgstr ""
+
 #: admin/partials/tabs/api_key.php:14
 msgid "Already connected. You can reconnect with another SqualoMail account if you want."
 msgstr ""
