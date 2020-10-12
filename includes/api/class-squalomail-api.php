@@ -46,7 +46,9 @@ class SqualoMail_WooCommerce_SqualoMailApi
      */
     public function setApiKey($key)
     {
-        $parts = str_getcsv($key, '-');
+        // we don't have a data center associated with the key, so there is no need to split
+        //$parts = str_getcsv($key, '-');
+        $parts = [$key]; 
 
         if (count($parts) == 2) {
             $this->data_center = $parts[1];

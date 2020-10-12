@@ -693,84 +693,15 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 	}
 
 	/**
-     * SqualoMail OAuth connection start
-     */
-    public function squalomail_woocommerce_ajax_oauth_start()
-    {   
-		$secret = uniqid();
-        $args = array(
-            'domain' => site_url(),
-            'secret' => $secret,
-        );
-
-        $pload = array(
-            'headers' => array( 
-                'Content-type' => 'application/json',
-            ),
-            'body' => json_encode($args)
-        );
-
-        $response = wp_remote_post( 'https://woocommerce.mailchimpapp.com/api/start', $pload);
-        if ($response['response']['code'] == 201 ){
-			set_site_transient('squalomail-woocommerce-oauth-secret', $secret, 60*60);
-			wp_send_json_success($response);
-        }
-        else wp_send_json_error( $response );
-        
-    }
-
-	/**
      * SqualoMail OAuth connection finish
      */
     public function squalomail_woocommerce_ajax_oauth_finish()
     {   
-        $args = array(
-            'domain' => site_url(),
-            'secret' => get_site_transient('squalomail-woocommerce-oauth-secret'),
-            'token' => $_POST['token']
-        );
-
-        $pload = array(
-            'headers' => array( 
-                'Content-type' => 'application/json',
-            ),
-            'body' => json_encode($args)
-        );
-
-        $response = wp_remote_post( 'https://woocommerce.mailchimpapp.com/api/finish', $pload);
-        if ($response['response']['code'] == 200 ){
-			delete_site_transient('squalomail-woocommerce-oauth-secret');
-            // save api_key? If yes, we can skip api key validation for validatePostApiKey();
-            wp_send_json_success($response);
-        }
-        else wp_send_json_error( $response );
-        
+		$token = $_POST['token'];
+		$api = new SqualoMail_WooCommerce_SqualoMailApi($token);
+		$result = $api->ping();
+		return $result ? wp_send_json_success([]) : wp_send_json_error([]);
     }
-
-
-	public function squalomail_woocommerce_ajax_create_account_check_username () {
-		$user = $_POST['username'];
-		$response = wp_remote_get( 'https://woocommerce.mailchimpapp.com/api/usernames/available/' . $_POST['username']);
-		$response_body = json_decode($response['body']);
-		if ($response['response']['code'] == 200 && $response_body->success == true ){
-			wp_send_json_success($response);
-		}
-		
-		else if ($response['response']['code'] == 404 ){
-			wp_send_json_error(array(
-				'success' => false,
-			));
-		}
-
-        else {
-			$suggestion = wp_remote_get( 'https://woocommerce.mailchimpapp.com/api/usernames/suggestions/' . preg_replace('/[^A-Za-z0-9\-\@\.]/', '', $_POST['username']));
-			$suggested_username = json_decode($suggestion['body'])->data;
-			wp_send_json_error( array(
-				'success' => false,
-				'suggestion' => $suggested_username[0]
-			));
-		}
-	}
 	
 	public function squalomail_woocommerce_ajax_support_form() {
 		$data = $_POST['data'];

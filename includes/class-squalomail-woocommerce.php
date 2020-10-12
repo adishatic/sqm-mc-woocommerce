@@ -258,7 +258,6 @@ class SqualoMail_WooCommerce
         }
 
         // SqualoMail oAuth
-        $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_start', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_start' );
         $this->loader->add_action( 'wp_ajax_squalomail_woocommerce_oauth_finish', $plugin_admin, 'squalomail_woocommerce_ajax_oauth_finish' );
 
         // Create new squalomail Account methods
