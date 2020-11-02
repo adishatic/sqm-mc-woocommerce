@@ -1752,7 +1752,7 @@ class SqualoMail_WooCommerce_SqualoMailApi
      */
     protected function url($extra = '', $params = null)
     {
-        $url = "https://api.squalomail.com/mc/{$this->version}/";
+        $url = "https://api.squalomail.com/mc/v3/";
 
         if (!empty($extra)) {
             $url .= $extra;
