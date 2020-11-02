@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: SqualoMail for WooCommerce 2.4.6\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mailchimp-for-woocommerce\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/squalomail-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgid "SqualoMail for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://mailchimp.com/connect-your-store/"
+msgid "https://squalomail.com/connect-your-store/"
 msgstr ""
 
 #. Description of the plugin
@@ -34,7 +34,7 @@ msgid "SqualoMail"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://mailchimp.com"
+msgid "https://squalomail.com"
 msgstr ""
 
 #: includes/class-squalomail-woocommerce-deactivation-survey.php:179
@@ -172,7 +172,7 @@ msgid "We dectected that this site has the following constants defined, likely a
 msgstr ""
 
 #: admin/class-squalomail-woocommerce-admin.php:372
-msgid "These constants are deprecated since SqualoMail for Woocommerce version 2.3. Please refer to the <a href=\"https://github.com/mailchimp/mc-woocommerce/wiki/\">plugin official wiki</a> for further details."
+msgid "These constants are deprecated since SqualoMail for Woocommerce version 2.3. Please refer to the <a href=\"https://github.com/squalomail/mc-woocommerce/wiki/\">plugin official wiki</a> for further details."
 msgstr ""
 
 #: admin/class-squalomail-woocommerce-admin.php:554

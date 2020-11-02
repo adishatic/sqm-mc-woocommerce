@@ -157,7 +157,7 @@
                                 'br' => array()
                             );
                         ?>
-                        <?= sprintf(/* translators: %s - SqualoMail legal pages */wp_kses( __( 'By clicking the "Get Started!" button, you are creating a SqualoMail account, and you agree to SqualoMail\'s <a href=%1$s target=_blank>Terms of Use</a> and <a href=%2$s target=_blank>Privacy Policy</a>.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://mailchimp.com/legal/terms' ), esc_url( 'https://mailchimp.com/legal/privacy' ) );?>
+                        <?= sprintf(/* translators: %s - SqualoMail legal pages */wp_kses( __( 'By clicking the "Get Started!" button, you are creating a SqualoMail account, and you agree to SqualoMail\'s <a href=%1$s target=_blank>Terms of Use</a> and <a href=%2$s target=_blank>Privacy Policy</a>.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target'=> '_blank' ) ) ), esc_url( 'https://squalomail.com/legal/terms' ), esc_url( 'https://squalomail.com/legal/privacy' ) );?>
                             
                     </p>
                 </div>

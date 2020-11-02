@@ -10,7 +10,7 @@ class SqualoMail_WooCommerce_Privacy
         if (function_exists( 'wp_add_privacy_policy_content')) {
             $content = sprintf(/* translators: %s - SqualoMail Privacy Policy URL. */
                 __( 'When shopping, we keep a record of your email and the cart contents for up to 30 days on our server. This record is kept to repopulate the contents of your cart if you switch devices or needed to come back another day. Read our privacy policy <a href="%s">here</a>.', 'squalomail-for-woocommerce' ),
-                'https://mailchimp.com/legal/privacy/'
+                'https://squalomail.com/legal/privacy/'
                 
             );
             wp_add_privacy_policy_content('SqualoMail for WooCommerce', wp_kses_post(wpautop($content, false)));

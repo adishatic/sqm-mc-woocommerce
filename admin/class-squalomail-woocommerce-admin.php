@@ -726,7 +726,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			'timeout'     => 30,
         );
 
-		$response = wp_remote_post( 'https://woocommerce.mailchimpapp.com/api/support', $pload);
+		$response = wp_remote_post( 'https://woocommerce.squalomailapp.com/api/support', $pload);
 		$response_body = json_decode($response['body']);
 		if ($response['response']['code'] == 200 && $response_body->success == true ){
 			
@@ -762,7 +762,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
         );
 		
 
-		$response = wp_remote_post( 'https://woocommerce.mailchimpapp.com/api/signup/', $pload);
+		$response = wp_remote_post( 'https://woocommerce.squalomailapp.com/api/signup/', $pload);
 		$response_body = json_decode($response['body']);
 		if ($response['response']['code'] == 200 && $response_body->success == true ){
 			
@@ -776,7 +776,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 		}
 
         else {
-			$suggestion = wp_remote_get( 'https://woocommerce.mailchimpapp.com/api/usernames/suggestions/' . $_POST['username']);
+			$suggestion = wp_remote_get( 'https://woocommerce.squalomailapp.com/api/usernames/suggestions/' . $_POST['username']);
 			$suggested_username = json_decode($suggestion['body'])->data;
 			wp_send_json_error( array(
 				'success' => false,
@@ -1646,9 +1646,9 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 
 		'<p id="sync-status-message">'.
 			/* translators: %s - Wordpress.org plugin review URL. */	
-			sprintf(wp_kses( __( 'Could you please do us a favor and leave the plugin a 5-star <a href=%s target=\'_blank\'>rating on Wordpress.org</a>? It helps our community know that we\'re working hard to make it better each day.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target' => '_blank' ) ) ), esc_url( 'https://wordpress.org/support/plugin/mailchimp-for-woocommerce/reviews/' ) ).
+			sprintf(wp_kses( __( 'Could you please do us a favor and leave the plugin a 5-star <a href=%s target=\'_blank\'>rating on Wordpress.org</a>? It helps our community know that we\'re working hard to make it better each day.', 'squalomail-for-woocommerce' ), array(  'a' => array( 'href' => array(), 'target' => '_blank' ) ) ), esc_url( 'https://wordpress.org/support/plugin/squalomail-for-woocommerce/reviews/' ) ).
 		'</p>'.
-		'<a style="display:inline align-right" class="button" href="https://wordpress.org/support/plugin/mailchimp-for-woocommerce/reviews/" target=_blank>'.
+		'<a style="display:inline align-right" class="button" href="https://wordpress.org/support/plugin/squalomail-for-woocommerce/reviews/" target=_blank>'.
 			esc_html__('Leave a Review', 'squalomail-for-woocommerce').
         '</a>';
 		
@@ -1707,7 +1707,7 @@ class SqualoMail_WooCommerce_Admin extends SqualoMail_WooCommerce_Options {
 			$post_data['remove_email'] = true;
 		}
 
-		$route = "https://woocommerce.mailchimpapp.com/api/opt_in_status";
+		$route = "https://woocommerce.squalomailapp.com/api/opt_in_status";
 		
 		return wp_remote_post(esc_url_raw($route), array(
 			'timeout'   => 12,

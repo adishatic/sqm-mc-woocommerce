@@ -72,7 +72,7 @@ class SqualoMail_WooCommerce_Rest_Api
     {
         // need to send a post request to
         $host = squalomail_environment_variables()->environment === 'staging' ?
-            'https://staging.conduit.vextras.com' : 'https://conduit.mailchimpapp.com';
+            'https://staging.conduit.vextras.com' : 'https://conduit.squalomailapp.com';
 
         $route = "{$host}/survey/woocommerce";
 

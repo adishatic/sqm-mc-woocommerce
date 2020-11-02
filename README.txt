@@ -1,7 +1,7 @@
 === SqualoMail for WooCommerce ===
 Contributors: ryanhungate, Mailchimp
 Tags: ecommerce,email,workflows,squalomail
-Donate link: https://mailchimp.com
+Donate link: https://squalomail.com
 Requires at least: 4.9
 Tested up to: 5.5
 Stable tag: 2.4.7
@@ -21,7 +21,7 @@ Join the 17 million customers who use SqualoMail, the world's largest marketing 
 - Showcase product recommendations.
 - Track and segment customers based on purchase history and purchase frequency.
 - View detailed data on your marketing performance in your SqualoMail Dashboard.
-- Find new customers, connect with current ones, and drive them all to your website with [Facebook](https://mailchimp.com/features/facebook-ads/) and [Instagram](https://mailchimp.com/features/instagram-ads/) ads. Then, set up [Google remarketing](https://mailchimp.com/features/google-remarketing-ads/) ads to turn your site visitors into shoppers.
+- Find new customers, connect with current ones, and drive them all to your website with [Facebook](https://squalomail.com/features/facebook-ads/) and [Instagram](https://squalomail.com/features/instagram-ads/) ads. Then, set up [Google remarketing](https://squalomail.com/features/google-remarketing-ads/) ads to turn your site visitors into shoppers.
 - Automatically embed a pop-up form that converts your website visitors to subscribers.
 - Add discount codes created in WooCommerce to your emails and automations with a Promo Code content block
 - Create beautiful landing pages that make it easy to highlight your products, promote a sale or giveaway, and grow your audience.
@@ -46,23 +46,23 @@ You’ll need to do a few things to connect your WooCommerce store to SqualoMail
 - Install the plugin on your WordPress Admin site.
 - Connect securely to your SqualoMail account via secure OAuth pop-up window.
 - Configure your Audience settings to complete the data sync process.
-- If you have more advanced configuration needs, please refer to our [GitHub wiki](https://github.com/mailchimp/mc-woocommerce/wiki)
+- If you have more advanced configuration needs, please refer to our [GitHub wiki](https://github.com/squalomail/mc-woocommerce/wiki)
 
 == Frequently Asked Questions ==
 
 = Who is subscribed to my Audience with this plugin? =
 
 - Customers are subscribed to your Audience when they opt-in at checkout or when an account is created. If an account is created through the standard WooCommerce `My Account` page, they must opt-in to be added.
-- Customers are sent to your Audience as `Transactional` if they do not opt-in. This is done so you can send [abandoned carts](https://mailchimp.com/help/create-an-abandoned-cart-email/) or [order notifications](https://mailchimp.com/help/create-order-notifications/).
+- Customers are sent to your Audience as `Transactional` if they do not opt-in. This is done so you can send [abandoned carts](https://squalomail.com/help/create-an-abandoned-cart-email/) or [order notifications](https://squalomail.com/help/create-order-notifications/).
 - If double opt-in is enabled, customers will only be subscribed to your Audience if they approve the subscription from the confirmation email that is sent.
 
 = What is the recommended way to sync larger stores? =
 
-To optimize the performance of your SqualoMail integration we recommend running the queue in CLI mode. Please refer to [this guide](https://github.com/mailchimp/mc-woocommerce/wiki/Advanced-Queue-Setup-In-CLI-mode) in our Wiki.
+To optimize the performance of your SqualoMail integration we recommend running the queue in CLI mode. Please refer to [this guide](https://github.com/squalomail/mc-woocommerce/wiki/Advanced-Queue-Setup-In-CLI-mode) in our Wiki.
 
 = Are multisite configurations supported?
 
-Multisites are supported, with a few caveats. Please refer to our [Wiki page](https://github.com/mailchimp/mc-woocommerce/wiki/Multisite-Setups) on this topic for more information.
+Multisites are supported, with a few caveats. Please refer to our [Wiki page](https://github.com/squalomail/mc-woocommerce/wiki/Multisite-Setups) on this topic for more information.
 
 = Why aren't product categories being sent to SqualoMail? =
 At this time, the synchronization of product categories from WooCommerce to SqualoMail is not supported by the SqualoMail API.
@@ -70,16 +70,16 @@ At this time, the synchronization of product categories from WooCommerce to Squa
 = My sync is slow, or has stalled =
 - If you're using the current version of the plugin, it utilizes a queue system powered by [Action Scheduler](https://actionscheduler.org/). It depends on `WP_CRON` to be activated with your hosting provider. Please verify that it is enabled.
 - If you're using a host that makes use of CPU throttling, please check to see if you've hit your limit after initiating the sync.
-- If you're using Redis, Nginx or MemCache, check to see if you or your hosting provider can exclude certain paths to the `REST API` and `/wp-json/mailchimp-for-woocommerce`.
+- If you're using Redis, Nginx or MemCache, check to see if you or your hosting provider can exclude certain paths to the `REST API` and `/wp-json/squalomail-for-woocommerce`.
 - If you have a large number of plugins being used, you may need to bump up your memory limit on your server (1GB for example) to accommodate the initial sync.
 
 = My question is not listed =
-If you are unable to sync or connect with SqualoMail, you can open a ticket on our [Github plugin page](https://github.com/mailchimp/mc-woocommerce/issues). Please provide the version of the plugin and PHP you're using, any fatal errors in the WooCommerce logs (WooCommerce -> Status -> Logs) you're seeing, along with relevant information to the problem you're experiencing.
+If you are unable to sync or connect with SqualoMail, you can open a ticket on our [Github plugin page](https://github.com/squalomail/mc-woocommerce/issues). Please provide the version of the plugin and PHP you're using, any fatal errors in the WooCommerce logs (WooCommerce -> Status -> Logs) you're seeing, along with relevant information to the problem you're experiencing.
 
 == Changelog ==
 = 2.4.7 =
 * fix cart items with no price on product
 * fix admin note issue on login
 
-[Historical Changelog](https://raw.githubusercontent.com/mailchimp/mc-woocommerce/master/CHANGELOG.txt)
+[Historical Changelog](https://raw.githubusercontent.com/squalomail/mc-woocommerce/master/CHANGELOG.txt)
 
