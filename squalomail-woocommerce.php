@@ -17,7 +17,7 @@
  * Plugin URI:        https://squalomail.com/connect-your-store/
  * Description:       Connects WooCommerce to SqualoMail to sync your store data, send targeted campaigns to your customers, and sell more stuff. 
  * Version:           2.4.7
- * Author:            Mailchimp
+ * Author:            SqualoMail
  * Author URI:        https://squalomail.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

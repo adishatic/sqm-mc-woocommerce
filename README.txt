@@ -1,5 +1,5 @@
 === SqualoMail for WooCommerce ===
-Contributors: ryanhungate, Mailchimp
+Contributors: ryanhungate, SqualoMail
 Tags: ecommerce,email,workflows,squalomail
 Donate link: https://squalomail.com
 Requires at least: 4.9
